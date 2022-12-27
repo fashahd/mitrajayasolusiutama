@@ -1,0 +1,44 @@
+<?php
+/******************************************
+ *  Author : fashahd@gmail.com.com
+ *  Created On : Wed Jan 15 2020
+ *  File : farmers.php
+ *******************************************/
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Group extends MJ_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function index()
+    {
+        $data['js'] 	= 'admin/group';
+		// $data['titlet']	= 'Order Book';
+        $api = $this->config->item('api');
+
+        $data['action'] = array(
+            'api_base_url' => $this->config->item('api_base_url'),
+            'base_url' => base_url(),
+            'crud' => $api . 'v1/system/group/list',
+            'unit' => $api . '/system/cmb_grouprole',
+            'aksi' => $api . 'v1/system/group/groupaksi',
+            'aksi_list' => $api . 'v1/system/group/groupaksilist',
+            'report' => $api . '/system/groupreport',
+            'report_list' => $api . '/system/groupreportlist',
+            'url_awss3' => $this->config->item('CTCDN'),
+            'partner_id' => (int) $_SESSION['PartnerID'],
+            'PartnerAsParent' => $_SESSION['PartnerAsParent'],
+            'year' => date("Y"),
+            'month' => date("m"),
+            'act_add' => !$this->system->CekAksi('add'),
+            'act_update' => !$this->system->CekAksi('update'),
+            'act_delete' => !$this->system->CekAksi('delete'),
+            'act_export_excel' => !$this->system->CekAksi('export_excel')
+        );
+
+        $this->LoadView($data,'template/content_without_header');
+    }
+}

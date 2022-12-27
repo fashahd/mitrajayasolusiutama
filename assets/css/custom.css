@@ -1,0 +1,211 @@
+.Sfr_GridNew .x-column-header {
+	background-color: #ffffff;
+	font-weight: 400;
+	font-family: 'Roboto';
+	color: #000000;
+	font-size: 12px;
+	border: none;
+}
+
+.x-grid-cell-inner-row-numberer {
+	margin-top: 4px;
+	text-align: center;
+}
+
+.Sfr_BtnGridNewWhite {
+	font-size: 11px !important;
+	font-weight: normal !important;
+	background-color: #ffffff !important;
+	background-image: none !important;
+	border: 1px solid #0264ba !important;
+	padding: 8px 8px !important;
+	color: #0264ba !important;
+}
+
+.Sfr_BtnGridNewWhite .x-btn-inner {
+	color: #0264ba !important;
+	font-size: 11px !important;
+}
+
+.x-Sfr_BtnGridNewWhite-Hover {
+	background: #acd1f2 !important;
+}
+
+.Sfr_BoxInfoDataGrid {
+	background-color: #ffffff;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	float: right;
+}
+
+.Sfr_BoxInfoDataGrid_Title strong {
+	font-size: 15pt;
+}
+
+.Sft_UlListInfoDataGrid {
+	margin: 0px;
+	padding: 0px;
+	height: 30px !important;
+}
+
+.Sft_UlListInfoDataGrid li {
+	list-style: none;
+}
+
+.Sfr_FormBrowseBtn .x-form-file-btn {
+	border-style: none !important;
+	background: #0264ba !important;
+	font-weight: normal !important;
+}
+
+.Sfr_BtnFormBlue {
+	font-size: 12px !important;
+	font-weight: normal !important;
+	background-color: #fff !important;
+	background-image: none !important;
+	border: 1px solid #0264ba !important;
+	padding: 6px 14px !important;
+	color: #0264ba !important;
+}
+
+.Sfr_BtnFormBlue .x-btn-inner {
+	color: #000000 !important;
+	font-size: 12px !important;
+}
+
+.x-Sfr_BtnFormBlue-Hover {
+	background: #acd1f2 !important;
+}
+
+.Sfr_BtnFormCyan {
+	font-size: 12px !important;
+	font-weight: normal !important;
+	background-color: #0264ba !important;
+	background-image: none !important;
+	border: 1px solid #0264ba !important;
+	padding: 6px 14px !important;
+	color: #fff !important;
+}
+
+.Sfr_BtnFormCyan .x-btn-inner {
+	color: #fff !important;
+	font-size: 12px !important;
+}
+
+.x-Sfr_BtnFormCyan-Hover {
+	background: #888 !important;
+}
+
+.Sfr_FormInputMandatory .x-form-item-label:after {
+	content: " *";
+	color: red;
+}
+
+.x-hide-clip {
+	display: none;
+}
+
+.Sfr_ContDataNotFound {
+	height: 80px;
+	width: '100%';
+	margin: auto;
+	text-align: center;
+	padding-top: 6px;
+
+	font-weight: bold;
+	font-size: 16px;
+	letter-spacing: 2px;
+	color: #DBDBDB;
+}
+
+.nav-treeview {
+	padding-left: 20px;
+}
+
+.Sfr_BtnGridPaleBlueNew {
+	font-size: 11px !important;
+	font-weight: normal !important;
+	background-color: #CAEAFF !important;
+	background-image: none !important;
+	border: 1px solid #CAEAFF !important;
+	padding: 8px 8px !important;
+	color: #18A0FB !important;
+}
+
+.Sfr_BtnGridPaleBlueNew .x-btn-inner {
+	color: #18A0FB !important;
+	font-size: 11px !important;
+}
+
+.x-Sfr_BtnGridPaleBlueNew-Hover {
+	background: #FFFFFF !important;
+	border: 1px solid #CAEAFF;
+}
+
+.ext-mb-error {
+	background-image: url("icon-error.gif");
+	background-repeat: no-repeat;
+}
+
+.ext-mb-info {
+	background-image: url("icon-info.gif");
+	background-repeat: no-repeat;
+}
+
+.ext-mb-success {
+	background-image: url("icon-success.png");
+	background-repeat: no-repeat;
+}
+
+.ext-mb-warning {
+	background-image: url("icon-warning.gif");
+	background-repeat: no-repeat;
+}
+
+.hvr-fade {
+	/*display: inline-block;*/
+	vertical-align: middle;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
+	overflow: hidden;
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-property: color, background-color;
+	transition-property: color, background-color;
+	border-radius: 0.8em;
+}
+
+.hvr-fade:hover,
+.hvr-fade:focus,
+.hvr-fade:active {
+	background-color: #0c8dc9;
+	color: white;
+}
+
+.svg-icon {
+	fill: gray;
+}
+
+.hvr-fade:hover .svg-icon {
+	fill: white;
+}
+
+#ContentDash {
+	padding: 0px 20px 0px 20px;
+}
+
+.DashCombo {
+	border-width: 2px;
+	box-shadow: none;
+	padding: 2px 4px !important;
+	height: 38px;
+	font-size: 12px;
+	border-radius: 5px;
+}
+.main-header .navbar-nav .nav-item {
+    margin-right: 10px;
+}
