@@ -83,7 +83,7 @@ if(count($invoice_history["data"]) > 0){
 			<tr>
 				<td>Amount Contract</td>
 				<td>:</td>
-				<td>Rp <?=number_format($invoicedata["ContractAmount"])?> (Excld Tax)</td>
+				<td>Rp <?=number_format($invoicedata["ContractAmount"])?> (Excld. Tax)</td>
 			</tr>
 			<tr>
 				<td>Terms</td>
