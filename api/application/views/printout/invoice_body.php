@@ -8,7 +8,7 @@ $baseurlnya = base_url();
 
 // echo "<pre>";print_r((int)$invoicedata["InvoiceTotal"]);
 $history = "";
-if(is_array($invoice_history["data"])){
+if(count($invoice_history["data"]) > 0){
 	$history .= "<tr>
 	<td style='border:none; border-right:1px solid #000'></td>
 	<td style='border:none; border-right:1px solid #000'><b>Dikurangi :</b></td>
@@ -78,12 +78,12 @@ if(is_array($invoice_history["data"])){
 			<tr>
 				<td>Project Name </td>
 				<td>:</td>
-				<td>(<?=$invoicedata["ProjectName"]?>) <?=$invoicedata["Description"]?></td>
+				<td>(<?=$invoicedata["ProjectName"]?>) <?=$invoicedata["PODescription"]?></td>
 			</tr>
 			<tr>
 				<td>Amount Contract</td>
 				<td>:</td>
-				<td>Rp <?=number_format($invoicedata["ContractAmount"])?> (Excl Tax)</td>
+				<td>Rp <?=number_format($invoicedata["ContractAmount"])?> (Excld Tax)</td>
 			</tr>
 			<tr>
 				<td>Terms</td>

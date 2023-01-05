@@ -364,6 +364,8 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                             change: function () {
                                                 if (this.checked == true) {
 
+                                                    var receivedDate = Ext.getCmp('MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceReceived').getValue();
+													
 													if(receivedDate == null){
 														Swal.fire({
 															icon: 'warning',
