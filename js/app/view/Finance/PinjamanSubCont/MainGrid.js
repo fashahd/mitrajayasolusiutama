@@ -400,15 +400,14 @@
                     text: lang('Import'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
-                    hidden: true,
                     id: 'MitraJaya.view.Finance.PinjamanSubCont.MainGrid-BtnImport',
                     handler: function() {
-                        var winImportFarmers = Ext.create('MitraJaya.view.Finance.PinjamanSubCont.WinImportFarmers');
-                        if (!winImportFarmers.isVisible()) {
-                            winImportFarmers.center();
-                            winImportFarmers.show();
+                        var WinFormImportLoan = Ext.create('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan');
+                        if (!WinFormImportLoan.isVisible()) {
+                            WinFormImportLoan.center();
+                            WinFormImportLoan.show();
                         } else {
-                            winImportFarmers.close();
+                            WinFormImportLoan.close();
                         }
                     }
                 },{
