@@ -275,14 +275,14 @@ class Loan extends REST_Controller {
 
 		if(count($dataList)){
 
-            //Kolom Header order book
+            //Kolom Header Project Loan
             $dataHeader = array('No');
             foreach($dataList[0] as $key => $value){
                 array_push($dataHeader,$key);
             }
-            //Kolom Header order book
+            //Kolom Header Project Loan
 
-			//Kolom Body order book
+			//Kolom Body Project Loan
             $dataListExcel = array();
             $no = 1;
             foreach ($dataList as $key => $value) {
@@ -294,7 +294,7 @@ class Loan extends REST_Controller {
                 $dataListExcel[$key] = $data;
                 $no++;
             }
-            //Kolom Body order book
+            //Kolom Body Project Loan
 
             $writer = WriterEntityFactory::createXLSXWriter(); // for XLSX files// 
             $namaFile = date('Y-m-d_H-i-s') . '_export_excel_project_loan.xlsx';
@@ -395,6 +395,94 @@ class Loan extends REST_Controller {
     private function validateDate($date, $format = 'Y-m-d') {
         $d = DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) === $date;
+    }
+
+	// Import Project Loan 
+    public function generate_template_post(){
+        $data = $this->post();
+        try{
+            include APPPATH.'third_party/PHPExcel18/PHPExcel.php';        
+            $excel = new PHPExcel();
+
+            $excel->getProperties()->setCreator('PT. Mitrajaya Solusi Utama')
+                ->setLastModifiedBy('PT. Mitrajaya Solusi Utama')
+                ->setTitle("Project Loan")
+                ->setSubject("Project Loan")
+                ->setDescription("Project Loan template")
+                ->setKeywords("Project Loan");
+            
+            $styleFontBoldHeader = array(
+                'font' => array(
+                    'name' => 'Arial',
+                    'size' => '9',
+                    'bold' => true,
+                ),
+                'fill' => array(
+                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => '8DB4E3'),
+                ),
+            );
+
+            $styleBorderFull = array(
+                'borders' => array(
+                    'left' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN,
+                    ),
+                    'right' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN,
+                    ),
+                    'bottom' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN,
+                    ),
+                    'top' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN,
+                    ),
+                ),
+            );
+
+            /*
+             * farmer get data
+            */
+
+            // set header 
+            // Sheet 1
+            $excel->getActiveSheet()->setTitle("Project Loan Template");
+            $excel->getActiveSheet()->setCellValue('A1', 'TEMPLATE GENERATOR PROJECT LOAN');
+            $excel->getActiveSheet()->setCellValue('A2', 'No');
+            $excel->getActiveSheet()->setCellValue('B2', 'Loan Date');
+            $excel->getActiveSheet()->setCellValue('C2', 'Loan Amount');
+            $excel->getActiveSheet()->setCellValue('D2', 'Loan Transfer Date');
+            $excel->getActiveSheet()->setCellValue('E2', 'Type');
+            $excel->getActiveSheet()->setCellValue('F2', 'Name');
+            $excel->getActiveSheet()->setCellValue('G2', 'PO Number');
+            $excel->getActiveSheet()->setCellValue('H2', 'Loan Amount Description');
+            $excel->getActiveSheet()->setCellValue('I2', 'Loan Description');
+
+            $excel->getActiveSheet()->setCellValue('A3', '1');
+            $excel->getActiveSheet()->setCellValue('B3', PHPExcel_Shared_Date::PHPToExcel('2022-12-01'));
+            $excel->getActiveSheet()->getStyle('B3:B2000')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD2);
+            $excel->getActiveSheet()->setCellValue('C3', '500000000');
+            $excel->getActiveSheet()->setCellValue('D3', PHPExcel_Shared_Date::PHPToExcel('2022-12-01'));
+            $excel->getActiveSheet()->getStyle('D3:D2000')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD2);
+            $excel->getActiveSheet()->setCellValue('E3', 'Subcont');
+            $excel->getActiveSheet()->setCellValue('F3', 'Zuhurul');
+            $excel->getActiveSheet()->setCellValue('G3', '4540595400');
+            $excel->getActiveSheet()->setCellValue('H3', 'Description');
+            $excel->getActiveSheet()->setCellValue('I3', 'Description');
+
+            $columnSet = 'A2:I2';
+            $excel->getActiveSheet()->mergeCells('A1:D1');
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
+            // End Sheet 5
+
+            $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+            $namaFile = 'template_project_loan.xlsx';
+            $objWriter->save('files/tmp/'.$namaFile);
+            $this->response(array('success' => true, 'url' => 'files/tmp/'.$namaFile), 200);
+        }catch(Exception $exc) {
+            $this->response(array('success' => false, 'message' => $exc), 400);
+        }
     }
 }
 ?>
