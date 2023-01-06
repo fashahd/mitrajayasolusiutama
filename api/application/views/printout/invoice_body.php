@@ -6,8 +6,10 @@
 $baseurlnya = base_url();
 // $baseurlnya = str_replace('http://','https://',$baseurlnya);
 
-// echo "<pre>";print_r((int)$invoicedata["InvoiceTotal"]);
+//echo "<pre>";print_r($invoice_history["data"]);die;
 $history = "";
+$total_history = 0;
+$percentage_current = ($invoicedata["InvoiceAmount"]/$invoicedata["ContractAmount"]) * 100;
 if(count($invoice_history["data"]) > 0){
 	$history .= "<tr>
 	<td style='border:none; border-right:1px solid #000'></td>
@@ -17,15 +19,20 @@ if(count($invoice_history["data"]) > 0){
 	<td style='border:none; border-right:1px solid #000'></td>
 	</tr>";
 	foreach($invoice_history["data"] as $row){
+		$percentage = number_format(($row["InvoiceAmount"]/$row["ContractAmount"]) * 100);
 		$history .= "<tr>
 		<td style='border:none; border-right:1px solid #000'></td>
 		<td style='border:none; border-right:1px solid #000'>- $row[Description]</td>
-		<td style='border:none; border-right:1px solid #000'></td>
+		<td style='border:none; border-right:1px solid #000'>".$percentage."%</td>
 		<td style='border:none; border-right:1px solid #000'><span style='float:left'>Rp</span> <span style='float:right'>".number_format($row["InvoiceAmount"])."</span></td>
 		<td style='border:none;'><span style='float:left'>Rp</span> <span style='float:right'>".number_format($row["InvoiceAmount"])."</span></td>
 		</tr>";
+		
+		$total_history += $percentage;
 	}
 }
+
+$percentage_total = $percentage_current+$total_history;
 ?>
 
 <style type="text/css">
@@ -78,7 +85,7 @@ if(count($invoice_history["data"]) > 0){
 			<tr>
 				<td>Project Name </td>
 				<td>:</td>
-				<td>(<?=$invoicedata["ProjectName"]?>) <?=$invoicedata["PODescription"]?></td>
+				<td><?=($invoicedata["ProjectName"] != "") ? "(".$invoicedata["ProjectName"].")" : ""?> <?=$invoicedata["PODescription"]?></td>
 			</tr>
 			<tr>
 				<td>Amount Contract</td>
@@ -110,16 +117,16 @@ if(count($invoice_history["data"]) > 0){
 			<tr>
 				<td style="width:5%">No</td>
 				<td style="width:50%">Description</td>
-				<td style="width:5%">Qty</td>
+				<td style="width:5%">Bobot</td>
 				<td style="width:20%">Price/Unit</td>
 				<td style="width:20%">Total Amount</td>
 			</tr>
 			<tr>
 				<td style="border:none; border-right:1px solid #000">001</td>
 				<td style="border:none; border-right:1px solid #000"><b><?=$invoicedata["Description"]?></b></td>
+				<td style="border:none; border-right:1px solid #000"><?=$percentage_total?>%</td>
 				<td style="border:none; border-right:1px solid #000"></td>
-				<td style="border:none; border-right:1px solid #000"></td>
-				<td style="border:none; border-right:1px solid #000"></td>
+				<td style="border:none; border-right:1px solid #000">Rp <span style="float:right"><?=number_format(($invoicedata["ContractAmount"] * $percentage_total / 100))?></span></td>
 			</tr>
 			<tr>
 				<td style="border:none; border-right:1px solid #000"></td>
@@ -148,7 +155,7 @@ if(count($invoice_history["data"]) > 0){
 		<tr>
 				<td style="width:5%">No</td>
 				<td style="width:50%">Description</td>
-				<td style="width:5%">Qty</td>
+				<td style="width:5%">Bobot</td>
 				<td style="width:20%">Price/Unit</td>
 				<td style="width:20%">Total Amount</td>
 			</tr>
@@ -159,7 +166,7 @@ if(count($invoice_history["data"]) > 0){
 				<td style="border:none; border-right:1px solid #000"><b><u>Tagihan Saat Ini :</u></b> 
 					<br><?=$invoicedata["Description"]?></span>
 				</td>
-				<td style="border:none; border-right:1px solid #000"></td>
+				<td style="border:none; border-right:1px solid #000"><?=number_format($percentage_current)?>%</td>
 				<td style="border:none; border-right:1px solid #000"></td>
 				<td style="border:none"><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceAmount"])?></span></td>
 			</tr>

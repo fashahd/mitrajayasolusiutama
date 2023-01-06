@@ -262,7 +262,7 @@ class Minvoice extends CI_Model {
 		$sql = "SELECT
 			InvoicePeriodMonth,
 			InvoicePeriodYear,
-			DueDate
+			InvoiceGR
 		FROM
 			mj_invoice 
 		WHERE
@@ -274,6 +274,7 @@ class Minvoice extends CI_Model {
 			a.ContractNumber
 			, a.Description
 			, a.InvoiceAmount
+			, b.ContractAmount
 		FROM
 			mj_invoice a
 		JOIN
@@ -283,14 +284,10 @@ class Minvoice extends CI_Model {
 		AND
 			a.InvoiceID != ?
 		AND
-			a.Paid IS NOT NULL
-		AND
-			( a.InvoicePeriodMonth <= ? AND a.InvoicePeriodYear = ?)
-		AND
-			a.DueDate <= ?
+			a.InvoiceGR <= ?
 		ORDER BY a.InvoiceGR, a.CreatedDate ASC";
 		
-		$query = $this->db->query($sql, array($ContractNumber, $InvoiceID, $query["InvoicePeriodMonth"], $query["InvoicePeriodYear"], $query["DueDate"]));
+		$query = $this->db->query($sql, array($ContractNumber, $InvoiceID, $query["InvoiceGR"]));
 
 		// echo "<pre>";print_r($this->db->last_query());die;
 

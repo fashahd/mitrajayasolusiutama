@@ -262,11 +262,20 @@ class Morder extends CI_Model {
 		$insert = $this->db->update("mj_order_book", $post);
 
 		if($insert){
-			$postProject["ProjectName"]	= $ProjectName;
-			$postProject["UpdatedDate"] = date("Y-m-d H:i:s");
-			$postProject["UpdatedBy"]	= $_SESSION["user_id"];
-			$this->db->where("OrderBookID", $OrderBookID);
-			$insert = $this->db->update("mj_project", $postProject);
+			$sql = "SELECT * FROM mj_project WHERE OrderBookID = ? ";
+			$query = $this->db->query($sql, array($OrderBookID));
+
+			if($query->num_rows() > 0){
+				$postProject["ProjectName"]	= $ProjectName;
+				$postProject["UpdatedDate"] = date("Y-m-d H:i:s");
+				$postProject["UpdatedBy"]	= $_SESSION["user_id"];
+				$this->db->where("OrderBookID", $OrderBookID);
+				$insert = $this->db->update("mj_project", $postProject);
+			}else{
+				$postProject["ProjectName"]	= $ProjectName;
+				$postProject["OrderBookID"] = $OrderBookID;
+				$insert = $this->db->insert("mj_project", $postProject);
+			}
 			
 			$response["success"] = true;
 			$response["message"] = "Data Saved";
