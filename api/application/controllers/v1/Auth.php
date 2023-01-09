@@ -189,6 +189,43 @@
 				$this->response($result, 400);
 			}
 		}
+
+		public function change_password_post(){
+
+			$varPost = $_POST;
+			$paramPost = array();
+
+			foreach ($varPost as $key => $value) {
+				$keyNew = str_replace("MitraJaya_view_Admin_Vendor_MainForm-FormBasicData-", '', $key);
+				if ($value == "") {
+					$value = null;
+				}
+				$paramPost[$keyNew] = $value;
+			}
+			
+			$auth = $this->MAuth->CheckOldPassword($paramPost["OldPassword"]);
+			if(!$auth){
+				$result['success'] = false;
+				$result['message'] = 'Old Password Not Valid';
+				$this->response($result, 400);
+				return;
+			}
+			
+			$change = $this->MAuth->UpdatePassword($paramPost["NewPassword"]);
+
+			if($change){
+				$result['success'] = true;
+				$result['message'] = 'Password Changed';
+				$this->response($result, 200);
+				return;
+			}else{
+				$result['success'] = false;
+				$result['message'] = 'Failed to Change Password';
+				$this->response($result, 400);
+				return;
+			}
+
+		}
     }
 
 ?>
