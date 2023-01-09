@@ -141,7 +141,7 @@ Ext.define('MitraJaya.view.Admin.ChangePassword.MainForm', {
 										},
 										success: function (fp, o) {
 											Swal.fire({
-												text: "Data saved",
+												text: "Password Changed",
 												icon: 'success',
 												confirmButtonColor: '#3085d6',
 											}).then((result) => {
