@@ -1,5 +1,29 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	class MAuth extends CI_Model {
+
+		public function UpdatePassword($NewPassword){
+			$sql 	= "UPDATE mj_user SET password = ?, updatedAt = NOW() WHERE username = ?";
+			$query 	= $this->db->query($sql, array(md5($NewPassword), $_SESSION["username"]));
+
+			if($query){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		public function CheckOldPassword($OldPassword){
+			$sql = "select username from mj_user where username = ? AND password = ?";
+			$query = $this->db->query($sql, array($_SESSION["username"], md5($OldPassword)));
+			if ($query->num_rows() > 0) {
+				$rows	= $query->row();
+				$username  	= $rows->username;
+				return $username;
+			} else {
+				return false;
+			}
+		}
+
 		public function getUsername($username) {
 			$sql = "select username from mj_user where username = '".$username."'";
 			$query = $this->db->query($sql);
