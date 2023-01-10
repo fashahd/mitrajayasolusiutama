@@ -3,7 +3,7 @@
  *  Created On : Thu Jan 16 2020
  *  File : MainGrid.js
  *******************************************/
- Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid' ,{
+Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid' ,{
     extend: 'Ext.panel.Panel',
     id: 'MitraJaya.view.Finance.PinjamanSubCont.MainGrid',
     renderTo: 'ext-content',
@@ -402,7 +402,7 @@
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     id: 'MitraJaya.view.Finance.PinjamanSubCont.MainGrid-BtnImport',
                     handler: function() {
-                        var WinFormImportLoan = Ext.create('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan');
+                        var WinFormImportLoan = Ext.create('MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan');
                         if (!WinFormImportLoan.isVisible()) {
                             WinFormImportLoan.center();
                             WinFormImportLoan.show();

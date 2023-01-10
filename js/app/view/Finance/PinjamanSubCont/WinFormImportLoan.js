@@ -1,6 +1,6 @@
-Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
+Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan', {
     extend: 'Ext.window.Window',
-    id: 'MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan',
+    id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan',
     title: lang('Import Form'),
     closable: true,
     modal: true,
@@ -31,7 +31,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
                     height: 55,
                     items: [{
                         xtype: 'button',
-                        id: 'MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-DownloadTemplate',
+                        id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan-DownloadTemplate',
                         style: 'margin-top:15px;',
                         text: lang('Download Template Excel'),
                         handler: function () {
@@ -73,7 +73,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
                     height: 55,
                     items: [{
                         xtype: 'form',
-                        id: 'MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-Form',
+                        id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan-Form',
                         fileUpload: true,
                         items: [{
                             layout: 'column',
@@ -82,13 +82,13 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
                                 style: 'margin-top:15px;',
                                 xtype: 'fileuploadfield',
                                 name: 'loan_ImportFile',
-                                id: 'MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-Form-ImportFile',
+                                id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan-Form-ImportFile',
                                 fieldLabel: 'Upload File',
                                 alowBlank: false,
                                 baseCls: 'Sfr_FormInputMandatory',
                                 listeners: {
                                     'change': function (fb, v) {
-                                        var form = Ext.getCmp('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-Form').getForm();
+                                        var form = Ext.getCmp('MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan-Form').getForm();
                                         if (form.isValid()) {
                                             form.submit({
                                                 url: m_api + '/v1/finance/loan/import_loan',
@@ -118,7 +118,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
                                                     } else {
                                                         msg = lang('Connection error');
                                                     }
-                                                    Ext.getCmp('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-Form-FileName').setValue(null)
+                                                    Ext.getCmp('MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan-Form-FileName').setValue(null)
                                                     Ext.MessageBox.show({
                                                         title: 'Error',
                                                         msg: msg,
@@ -142,13 +142,13 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
                                 }
                             }, {
                                 xtype: 'hiddenfield',
-                                id: 'MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-Form-FileName',
-                                name: 'MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-Form-FileName',
+                                id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan-Form-FileName',
+                                name: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan-Form-FileName',
                             }, {
                                 columnWidth: 0.5,
                                 items: [{
                                     xtype: 'button',
-                                    id: 'MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-ClearData',
+                                    id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan-ClearData',
                                     style: 'margin-top:18px;margin-left:20px',
                                     text: lang('Clear'),
                                     handler: function () {
@@ -174,7 +174,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
                     html: '<div></div>',
                 }, {
                     xtype: 'grid',
-                    id: 'MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-FailedData',
+                    id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan-FailedData',
                     style: 'border:1px solid #CCC;margin-top:4px;margin-left:10px;margin-right:10px',
                     loadMask: true,
                     overflowX: 'scroll',
@@ -260,7 +260,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
         ui: 's-button',
         cls: 's-grey',
         handler: function () {
-            Ext.getCmp('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan').close();
+            Ext.getCmp('MitraJaya.view.Finance.PinjamanSubCont.WinFormImportLoan').close();
         }
     }],
     listeners: {
