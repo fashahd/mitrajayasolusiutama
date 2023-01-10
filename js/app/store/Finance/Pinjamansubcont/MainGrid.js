@@ -3,7 +3,7 @@
  *  Created On : Fri Jan 17 2020
  *  File : MainGrid.js
  *******************************************/
- Ext.define('MitraJaya.store.Finance.PinjamanSubCont.MainGrid', {
+Ext.define('MitraJaya.store.Finance.PinjamanSubCont.MainGrid', {
     extend: 'Ext.data.Store',
     id: 'MitraJaya.store.Finance.PinjamanSubCont.MainGrid',
     storeId: 'MitraJaya.store.Finance.PinjamanSubCont.MainGrid',
