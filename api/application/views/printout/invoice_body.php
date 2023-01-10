@@ -145,22 +145,41 @@ $percentage_total = $percentage_current+$total_history;
 				<td style="border:none; border-right:1px solid #000">Rp <?=number_format($invoicedata["ContractAmount"])?></td>
 			</tr> -->
 			<?=$history?>
-			<?php if(count($invoice_history["data"]) > 3){?>
-			</table>
-		</div>
-	</div>
-<div class="page">
-	<div id="mainContainer">
-		<table class="table-border" width="100%" border="0" cellpadding="2" style="margin-top:10px">
-		<tr>
-				<td style="width:5%">No</td>
-				<td style="width:50%">Description</td>
-				<td style="width:5%">Bobot</td>
-				<td style="width:20%">Price/Unit</td>
-				<td style="width:20%">Total Amount</td>
-			</tr>
-			<?php }
-			?>
+			
+			<?php if(count($invoice_history["data"]) <= 3){?>
+				<tr>
+					<td style="border:none; border-right:1px solid #000"></td>
+					<td style="border:none; border-right:1px solid #000"><b><u>Tagihan Saat Ini :</u></b> 
+						<br><?=$invoicedata["Description"]?></span>
+					</td>
+					<td style="border:none; border-right:1px solid #000"><?=number_format($percentage_current)?>%</td>
+					<td style="border:none; border-right:1px solid #000"></td>
+					<td style="border:none"><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceAmount"])?></span></td>
+				</tr>
+				<tr>
+					<td colspan="4"><span style="float:right">Sub Total</span></td>
+					<td><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceAmount"])?></span></td>
+				</tr>
+				<tr>
+					<td colspan="4"><span style="float:right">PPN <?=$invoicedata["VATPercent"]?>%</span></td>
+					<td><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceVAT"])?></span></td>
+				</tr>
+				<?php if($invoicedata["pph"] == "yes"){ 
+					$invoicedata["InvoiceTotal"] = ($invoicedata["InvoiceTotal"] - $invoicedata["PPH23Value"]);
+					?>
+				<tr>
+					<td colspan="4"><span style="float:right">PPh 23</span></td>
+					<td><span style="float:left">- Rp</span><span style="float:right"> <?=number_format($invoicedata["PPH23Value"])?></span></td>
+				</tr>
+				<?php } ?>
+				<tr>
+					<td colspan="4"><span style="float:right">Grand Total</span></td>
+					<td><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceTotal"])?></span></td>
+				</tr>
+			
+			<?php } ?>
+			<?php if(count($invoice_history["data"]) > 3 AND count($invoice_history["data"]) <= 7){ ?>
+			
 			<tr>
 				<td style="border:none; border-right:1px solid #000"></td>
 				<td style="border:none; border-right:1px solid #000"><b><u>Tagihan Saat Ini :</u></b> 
@@ -190,6 +209,61 @@ $percentage_total = $percentage_current+$total_history;
 				<td colspan="4"><span style="float:right">Grand Total</span></td>
 				<td><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceTotal"])?></span></td>
 			</tr>
+			</table>
+		</div>
+	</div>
+<div class="page">
+	<div id="mainContainer">
+		<table class="table-border" width="100%" border="0" cellpadding="2" style="margin-top:10px">
+		<tr>
+				<td style="width:5%"></td>
+				<td style="width:50%"></td>
+				<td style="width:5%"></td>
+				<td style="width:20%"></td>
+				<td style="width:20%"></td>
+			</tr>
+			<?php }
+			?>
+			<?php if(count($invoice_history["data"]) > 7){?>
+			</table>
+		</div>
+	</div>
+<div class="page">
+	<div id="mainContainer">
+		<table class="table-border" width="100%" border="0" cellpadding="2" style="margin-top:10px">
+		<tr>
+				<td style="width:5%">No</td>
+				<td style="width:50%">Description</td>
+				<td style="width:5%">Bobot</td>
+				<td style="width:20%">Price/Unit</td>
+				<td style="width:20%">Total Amount</td>
+			</tr>
+			<tr>
+				<td style="border:none; border-right:1px solid #000"></td>
+				<td style="border:none; border-right:1px solid #000"><b><u>Tagihan Saat Ini :</u></b> 
+					<br><?=$invoicedata["Description"]?></span>
+				</td>
+				<td style="border:none; border-right:1px solid #000"><?=number_format($percentage_current)?>%</td>
+				<td style="border:none; border-right:1px solid #000"></td>
+				<td style="border:none"><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceAmount"])?></span></td>
+			</tr>
+			<tr>
+				<td colspan="4"><span style="float:right">Sub Total</span></td>
+				<td><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceAmount"])?></span></td>
+			</tr>
+			<tr>
+				<td colspan="4"><span style="float:right">PPN <?=$invoicedata["VATPercent"]?>%</span></td>
+				<td><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceVAT"])?></span></td>
+			</tr>
+			<?php if($invoicedata["pph"] == "yes"){ 
+				$invoicedata["InvoiceTotal"] = ($invoicedata["InvoiceTotal"] - $invoicedata["PPH23Value"]);
+				?>
+			<tr>
+				<td colspan="4"><span style="float:right">PPh 23</span></td>
+				<td><span style="float:left">- Rp</span><span style="float:right"> <?=number_format($invoicedata["PPH23Value"])?></span></td>
+			</tr>
+			<?php }  }
+			?>
 			<tr>
 				<td colspan="5" style="padding:10px"><b>Terbilang : <i># <?=terbilang(round($invoicedata["InvoiceTotal"]))?> Rupiah #</i></b></td>
 			</tr>

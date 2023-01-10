@@ -15,8 +15,10 @@ use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Common\Entity\Style\Color;
 use Box\Spout\Common\Entity\Style\Border;
 use Box\Spout\Writer\Common\Creator\Style\BorderBuilder;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\ErrorCorrectionLevel;
+use PhpParser\Node\Stmt\Switch_;
 
 /**
  * This is an example of a few basic user interaction methods you could use
@@ -399,6 +401,7 @@ class Loan extends REST_Controller {
 
 	// Import Project Loan 
     public function generate_template_post(){
+		$this->load->model("mcombo");
         $data = $this->post();
         try{
             include APPPATH.'third_party/PHPExcel18/PHPExcel.php';        
@@ -462,19 +465,140 @@ class Loan extends REST_Controller {
             $excel->getActiveSheet()->setCellValue('B3', PHPExcel_Shared_Date::PHPToExcel('2022-12-01'));
             $excel->getActiveSheet()->getStyle('B3:B2000')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD2);
             $excel->getActiveSheet()->setCellValue('C3', '500000000');
+            $excel->getActiveSheet()->getStyle('C3:C2000')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_IDR_SIMPLE);
             $excel->getActiveSheet()->setCellValue('D3', PHPExcel_Shared_Date::PHPToExcel('2022-12-01'));
             $excel->getActiveSheet()->getStyle('D3:D2000')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD2);
-            $excel->getActiveSheet()->setCellValue('E3', 'Subcont');
+            $excel->getActiveSheet()->setCellValue('E3', '1 = Vendor, 2 = Subcont, 3 = Employee');
             $excel->getActiveSheet()->setCellValue('F3', 'Zuhurul');
             $excel->getActiveSheet()->setCellValue('G3', '4540595400');
             $excel->getActiveSheet()->setCellValue('H3', 'Description');
-            $excel->getActiveSheet()->setCellValue('I3', 'Description');
+            $excel->getActiveSheet()->setCellValue('I3', 'Loan Description');
 
             $columnSet = 'A2:I2';
             $excel->getActiveSheet()->mergeCells('A1:D1');
             $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
             $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
-            // End Sheet 5
+            // End Sheet 1
+
+			$objValidation = $excel->getActiveSheet()->getDataValidation('G3:G2000');
+            $objValidation->setType( PHPExcel_Cell_DataValidation::TYPE_LIST );
+            $objValidation->setErrorStyle( PHPExcel_Cell_DataValidation::STYLE_INFORMATION );
+            $objValidation->setAllowBlank(false);
+            $objValidation->setShowInputMessage(true);
+            $objValidation->setShowErrorMessage(true);
+            $objValidation->setShowDropDown(true);
+            $objValidation->setErrorTitle('Input error');
+            $objValidation->setError('Value is not in list.');
+            $objValidation->setPromptTitle('Pick from list');
+            $objValidation->setPrompt('Please pick a value from the drop-down list.');
+            $objValidation->setFormula1("=ponumber");
+
+			// Sheet 2
+            // Reference PO Number
+            $excel->createSheet(1)->setTitle("PO Number Reference");
+            $excel->setActiveSheetIndex(1);
+            $excel->getActiveSheet()->setCellValue('A1', 'REFERENCE PO NUMBER');
+            $excel->getActiveSheet()->setCellValue('A2', 'No');
+            $excel->getActiveSheet()->setCellValue('B2', 'PO Number');
+            $excel->getActiveSheet()->setCellValue('C2', 'Project Name');
+
+            $PoNumber = $this->mcombo->GetContractNumber();
+
+            $number = 1;
+            $idx = 3;
+            foreach($PoNumber AS $data_ponumber){
+                $excel->getActiveSheet()->setCellValue('A'.$idx, $number);
+                $excel->getActiveSheet()->setCellValue('B'.$idx, $data_ponumber['label']);
+                $excel->getActiveSheet()->setCellValue('C'.$idx, $data_ponumber['ProjectName']);
+                $excel->getActiveSheet()->getStyle('A'.$idx.':C'.$idx)->applyFromArray($styleBorderFull, false);  
+
+                $excel->addNamedRange( 
+                    new PHPExcel_NamedRange(
+                        'ponumber', 
+                        $excel->getSheetByName('PO Number Reference'), 
+                        'B3:B2500'
+                    ) 
+                );
+
+                $idx++;
+                $number++;
+            }
+
+            $columnSet = 'A2:C2';
+            $excel->getActiveSheet()->mergeCells('A1:C1');
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
+            // End Sheet 2
+			
+			// Sheet 3
+            // Reference Vendor Name
+            $excel->createSheet(1)->setTitle("Vendor Name Reference");
+            $excel->setActiveSheetIndex(1);
+            $excel->getActiveSheet()->setCellValue('A1', 'REFERENCE VENDOR NAME');
+            $excel->getActiveSheet()->setCellValue('A2', 'No');
+            $excel->getActiveSheet()->setCellValue('B2', 'Vendor Name');
+
+            $vendor = $this->mcombo->GetVendorList();
+
+            $number = 1;
+            $idx = 3;
+            foreach($vendor AS $data_vendor){
+                $excel->getActiveSheet()->setCellValue('A'.$idx, $number);
+                $excel->getActiveSheet()->setCellValue('B'.$idx, $data_vendor['label']);
+                $excel->getActiveSheet()->getStyle('A'.$idx.':C'.$idx)->applyFromArray($styleBorderFull, false);  
+
+                $excel->addNamedRange( 
+                    new PHPExcel_NamedRange(
+                        'vendor', 
+                        $excel->getSheetByName('Vendor Name Reference'), 
+                        'B3:B2500'
+                    ) 
+                );
+
+                $idx++;
+                $number++;
+            }
+
+            $columnSet = 'A2:C2';
+            $excel->getActiveSheet()->mergeCells('A1:C1');
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
+            // End Sheet 3
+			
+			// Sheet 4
+            // Reference Subcont
+            $excel->createSheet(1)->setTitle("Subcont Reference");
+            $excel->setActiveSheetIndex(1);
+            $excel->getActiveSheet()->setCellValue('A1', 'REFERENCE SUBCONT');
+            $excel->getActiveSheet()->setCellValue('A2', 'No');
+            $excel->getActiveSheet()->setCellValue('B2', 'Subcont');
+
+            $subcont = $this->mcombo->GetSubContList();
+
+            $number = 1;
+            $idx = 3;
+            foreach($subcont AS $data_subcont){
+                $excel->getActiveSheet()->setCellValue('A'.$idx, $number);
+                $excel->getActiveSheet()->setCellValue('B'.$idx, $data_subcont['label']);
+                $excel->getActiveSheet()->getStyle('A'.$idx.':C'.$idx)->applyFromArray($styleBorderFull, false);  
+
+                $excel->addNamedRange( 
+                    new PHPExcel_NamedRange(
+                        'subcont', 
+                        $excel->getSheetByName('Subcont Reference'), 
+                        'B3:B2500'
+                    ) 
+                );
+
+                $idx++;
+                $number++;
+            }
+
+            $columnSet = 'A2:C2';
+            $excel->getActiveSheet()->mergeCells('A1:C1');
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
+            // End Sheet 4
 
             $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
             $namaFile = 'template_project_loan.xlsx';
@@ -484,5 +608,168 @@ class Loan extends REST_Controller {
             $this->response(array('success' => false, 'message' => $exc), 400);
         }
     }
+
+	function list_import_failed_get(){
+		$pSearch["keySearch"] = $this->get("keySearch");
+		$pSearch["StartDate"] = $this->get("StartDate");
+		$pSearch["EndDate"] = $this->get("EndDate");
+		$pSearch["CustomerID"] = $this->get("CustomerID");
+		
+		//sort
+        $sorting = json_decode($this->get('sort'));
+        if (isset($sorting[0]->property)) {
+            $sortingField = $sorting[0]->property;
+        } else {
+            $sortingField = null;
+        }
+
+        if (isset($sorting[0]->direction)) {
+            $sortingDir = $sorting[0]->direction;
+        } else {
+            $sortingDir = null;
+        }
+
+        $start = (int) $this->get('start');
+        $limit = (int) $this->get('limit');
+
+        // echo '<pre>'; print_r($pSearch); exit;
+        $data = $this->mloan->list_import_failed($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
+        $this->response($data, 200);
+	}
+
+	public function import_loan_post(){
+		$this->load->model("morder");
+		$this->load->model("mcombo");
+		$this->load->helper('string');
+
+        // buat folder jika blm ada
+        if (!is_dir('files/tmp/import'))
+            mkdir('files/tmp/import', 0777, TRUE);
+        
+        $config['upload_path']      = './files/tmp/import';
+        $config['allowed_types']    = 'xlsx|xls';
+        $config['file_name']        = 'import-' . random_string('alnum', 12) . time();
+
+        $this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('loan_ImportFile')) {
+            $file   = $this->upload->data();
+            $reader = ReaderEntityFactory::createXLSXReader();
+            $reader->open($_FILES['loan_ImportFile']['tmp_name']);
+
+            // untuk validasi        
+            foreach ($reader->getSheetIterator() as $sheet) {
+                $numRow = 1;
+				$success = 0;
+				$err	 = 0;
+				$dataError = array();
+
+                //looping pembacaan row dalam sheet
+                foreach ($sheet->getRowIterator() as $row) {
+
+                    if ($numRow >= 4) {
+						$StatusData = true;
+						$Error		= array();
+
+                        //ambil cell
+                        $cells = $row->getCells();
+
+						$ContractNumber = $this->morder->CheckExistContractNumber($cells[6]->getValue());
+
+						if(!$ContractNumber){
+							$StatusData = false;
+							
+							array_push($Error, "Contract Number Not Exist");
+						}
+						
+						switch($cells[4]->getValue()){
+							case "1":
+								$Label = "Vendor";
+								$loanType = "vendor";
+								$Name = $this->mcombo->GetVendorList($cells[5]->getValue());
+								$data['VendorName']         = $Name[0]["id"];
+								break;
+							case "2":
+								$Label = "Subcont";
+								$loanType = "subcont";
+								$Name = $this->mcombo->GetSubContList($cells[5]->getValue());
+								$data['SubcontName']        = $Name[0]["id"];
+								break;
+							case "3":
+								$Label = "Employee";
+								$loanType = "employee";
+								$Name = $this->mcombo->GetEmployeeList($cells[5]->getValue());
+								$data['EmployeeName']       = $Name[0]["id"];
+								break;
+							default :
+								$StatusData = false;
+								$Name = [];
+								$Label = "Type";
+								$loanType = null;
+						}
+						
+						if(count($Name) == 0){
+							$StatusData = false;
+							
+							array_push($Error, $Label." Not Found");
+						}
+
+						$project = $this->morder->getProjectIDByContractNumber($cells[6]->getValue());
+                        $data['ProjectID']          = $project["OrderBookID"];
+                        $data['LoanType']           = $loanType;
+                        $data['LoanDate']           = @date_format($cells[1]->getValue(), 'Y-m-d');
+                        $data['LoanTransferDate']   = @date_format($cells[3]->getValue(), 'Y-m-d');
+                        $data['LoanAmount']         = $cells[2]->getValue();
+                        $data['LoanDescription']    = $cells[8]->getValue();
+                        $data['LoanAmountDescription']  = $cells[7]->getValue();
+                        $data['CreatedDate']        = date("Y-m-d H:i:s");
+                        $data['CreatedBy']          = $_SESSION["user_id"];
+
+                        if (!$StatusData) {
+							
+							$dataError[$err] = $data;
+							$dataError[$err]["ErrorMessages"] = implode(", ", $Error);
+							$err++;
+                        }
+
+						if($StatusData){
+							$this->db->insert("mj_loan", $data);
+							$success++;
+						}
+                    }
+
+                    $numRow++;
+                }
+				
+				if(count($dataError) > 0){
+					$this->db->truncate("mj_loan_tmp");
+					$this->db->insert_batch("mj_loan_tmp", $dataError);
+				}
+                break;
+            }
+            //tutup spout reader
+            $reader->close();
+
+            $this->response(array(
+                'success' => true,
+                'message' => array("Success"=> $success, "Failed"=> $err),
+            ), 200);
+        } else {
+            $error = array('error' => $this->upload->display_errors());
+            $this->response(array(
+                'success' => false,
+                'message' => 'Bad request',
+                'error' => $error
+            ), 400);
+        }
+	}
+
+	public function clear_data_get(){
+		$this->db->truncate("mj_loan_tmp");
+
+		$this->response(array(
+			'success' => true
+		));
+	}
 }
 ?>

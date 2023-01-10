@@ -404,4 +404,43 @@ class Mloan extends CI_Model {
         return $return;
 	}
 
+	public function list_import_failed($pSearch, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
+
+        if ($sortingField == "") $sortingField = 'a.LoanDate';
+        if ($sortingDir == "") $sortingDir = 'DESC';
+
+		$sql = "SELECT SQL_CALC_FOUND_ROWS
+				a.ProjectID
+				, a.LoanType
+				, a.LoanDate
+				, a.LoanTransferDate
+				, a.VendorName
+				, a.SubcontName
+				, a.EmployeeName
+				, a.LoanAmount
+				, a.LoanDescription
+				, a.LoanAmountDescription
+			FROM
+				`mj_loan_tmp` `a`
+			ORDER BY
+				$sortingField $sortingDir ";
+		$query = $this->db->query($sql);
+
+		$data = $query->result_array();
+        $result['sql'] = $this->db->last_query();
+        $result['data'] = $data;
+        // echo '<pre>'; print_r($this->db->last_query()); echo '</pre>'; exit;
+
+        $query = $this->db->query('SELECT FOUND_ROWS() AS total');
+        $result['total'] = $query->row()->total;
+
+        if ($sortingDir == 'ASC') {
+            $sortingInfo = 'ascending';
+        }
+        if ($sortingDir == 'DESC') {
+            $sortingInfo = 'descending';
+        }
+
+        return $result;
+	}
 }
