@@ -156,7 +156,8 @@ class Mcombo extends CI_Model {
 		$this->db->where("status", "active");
 		$this->db->select('
 			people_id id,
-			CONCAT(IFNULL(people_ext_id, "EMPTY"), " - ", people_name) label
+			CONCAT(IFNULL(people_ext_id, "EMPTY"), " - ", people_name) label,
+			people_name
 		');
 
 		$query = $this->db->get('mj_people')->result_array();	

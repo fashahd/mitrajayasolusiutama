@@ -347,6 +347,7 @@ class Order extends REST_Controller {
 
 	// Import Order Book 
     public function generate_template_post(){
+		$this->load->model("mcombo");
         $data = $this->post();
         try{
             include APPPATH.'third_party/PHPExcel18/PHPExcel.php';        
@@ -423,8 +424,152 @@ class Order extends REST_Controller {
             $columnSet = 'A2:J2';
             $excel->getActiveSheet()->mergeCells('A1:C1');
             $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);
+            // End Sheet 1
+
+			$objValidation = $excel->getActiveSheet()->getDataValidation('C3:C2000');
+            $objValidation->setType( PHPExcel_Cell_DataValidation::TYPE_LIST );
+            $objValidation->setErrorStyle( PHPExcel_Cell_DataValidation::STYLE_INFORMATION );
+            $objValidation->setAllowBlank(false);
+            $objValidation->setShowInputMessage(true);
+            $objValidation->setShowErrorMessage(true);
+            $objValidation->setShowDropDown(true);
+            $objValidation->setErrorTitle('Input error');
+            $objValidation->setError('Value is not in list.');
+            $objValidation->setPromptTitle('Pick from list');
+            $objValidation->setPrompt('Please pick a value from the drop-down list.');
+            $objValidation->setFormula1("=customer");
+
+			$objValidation = $excel->getActiveSheet()->getDataValidation('G3:G2000');
+            $objValidation->setType( PHPExcel_Cell_DataValidation::TYPE_LIST );
+            $objValidation->setErrorStyle( PHPExcel_Cell_DataValidation::STYLE_INFORMATION );
+            $objValidation->setAllowBlank(false);
+            $objValidation->setShowInputMessage(true);
+            $objValidation->setShowErrorMessage(true);
+            $objValidation->setShowDropDown(true);
+            $objValidation->setErrorTitle('Input error');
+            $objValidation->setError('Value is not in list.');
+            $objValidation->setPromptTitle('Pick from list');
+            $objValidation->setPrompt('Please pick a value from the drop-down list.');
+            $objValidation->setFormula1("=dept");
+
+			$objValidation = $excel->getActiveSheet()->getDataValidation('H3:H2000');
+            $objValidation->setType( PHPExcel_Cell_DataValidation::TYPE_LIST );
+            $objValidation->setErrorStyle( PHPExcel_Cell_DataValidation::STYLE_INFORMATION );
+            $objValidation->setAllowBlank(false);
+            $objValidation->setShowInputMessage(true);
+            $objValidation->setShowErrorMessage(true);
+            $objValidation->setShowDropDown(true);
+            $objValidation->setErrorTitle('Input error');
+            $objValidation->setError('Value is not in list.');
+            $objValidation->setPromptTitle('Pick from list');
+            $objValidation->setPrompt('Please pick a value from the drop-down list.');
+            $objValidation->setFormula1("=employee");
+
+			// Sheet 2
+            // Reference Customer
+            $excel->createSheet(1)->setTitle("Customer Reference");
+            $excel->setActiveSheetIndex(1);
+            $excel->getActiveSheet()->setCellValue('A1', 'REFERENCE CUSTOMER');
+            $excel->getActiveSheet()->setCellValue('A2', 'No');
+            $excel->getActiveSheet()->setCellValue('B2', 'Customer');
+
+            $customer = $this->mcombo->GetCompanyList();
+
+            $number = 1;
+            $idx = 3;
+            foreach($customer AS $data_customer){
+                $excel->getActiveSheet()->setCellValue('A'.$idx, $number);
+                $excel->getActiveSheet()->setCellValue('B'.$idx, $data_customer['label']);
+                $excel->getActiveSheet()->getStyle('A'.$idx.':C'.$idx)->applyFromArray($styleBorderFull, false);  
+
+                $excel->addNamedRange( 
+                    new PHPExcel_NamedRange(
+                        'customer', 
+                        $excel->getSheetByName('Customer Reference'), 
+                        'B3:B2500'
+                    ) 
+                );
+
+                $idx++;
+                $number++;
+            }
+
+            $columnSet = 'A2:C2';
+            $excel->getActiveSheet()->mergeCells('A1:C1');
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
             $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
-            // End Sheet 5
+            // End Sheet 2
+
+			// Sheet 3
+            // Reference Dept
+            $excel->createSheet(1)->setTitle("Dept Reference");
+            $excel->setActiveSheetIndex(1);
+            $excel->getActiveSheet()->setCellValue('A1', 'REFERENCE DEPT');
+            $excel->getActiveSheet()->setCellValue('A2', 'No');
+            $excel->getActiveSheet()->setCellValue('B2', 'Dept');
+
+            $dept = $this->mcombo->GetDepartmentList();
+
+            $number = 1;
+            $idx = 3;
+            foreach($dept AS $data_dept){
+                $excel->getActiveSheet()->setCellValue('A'.$idx, $number);
+                $excel->getActiveSheet()->setCellValue('B'.$idx, $data_dept['label']);
+                $excel->getActiveSheet()->getStyle('A'.$idx.':C'.$idx)->applyFromArray($styleBorderFull, false);  
+
+                $excel->addNamedRange( 
+                    new PHPExcel_NamedRange(
+                        'dept', 
+                        $excel->getSheetByName('Dept Reference'), 
+                        'B3:B2500'
+                    ) 
+                );
+
+                $idx++;
+                $number++;
+            }
+
+            $columnSet = 'A2:C2';
+            $excel->getActiveSheet()->mergeCells('A1:C1');
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
+            // End Sheet 3
+
+			// Sheet 4
+            // Reference Employee
+            $excel->createSheet(1)->setTitle("Employee Reference");
+            $excel->setActiveSheetIndex(1);
+            $excel->getActiveSheet()->setCellValue('A1', 'REFERENCE EMPLOYEE');
+            $excel->getActiveSheet()->setCellValue('A2', 'No');
+            $excel->getActiveSheet()->setCellValue('B2', 'Employee');
+
+            $employee = $this->mcombo->GetEmployeeList();
+
+            $number = 1;
+            $idx = 3;
+            foreach($employee AS $data_employee){
+                $excel->getActiveSheet()->setCellValue('A'.$idx, $number);
+                $excel->getActiveSheet()->setCellValue('B'.$idx, $data_employee['people_name']);
+                $excel->getActiveSheet()->getStyle('A'.$idx.':C'.$idx)->applyFromArray($styleBorderFull, false);  
+
+                $excel->addNamedRange( 
+                    new PHPExcel_NamedRange(
+                        'employee', 
+                        $excel->getSheetByName('Employee Reference'), 
+                        'B3:B2500'
+                    ) 
+                );
+
+                $idx++;
+                $number++;
+            }
+
+            $columnSet = 'A2:C2';
+            $excel->getActiveSheet()->mergeCells('A1:C1');
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
+            // End Sheet 4
 
             $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
             $namaFile = 'template_order_book.xlsx';
