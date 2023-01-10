@@ -392,4 +392,27 @@ class Morder extends CI_Model {
 			return false;
 		}
 	}
+
+	public function getProjectIDByContractNumber($ContractNumber){
+		$sql 	= "SELECT 
+						a.ContractNumber 
+						, b.ProjectID
+						, b.ProjectName
+						, a.OrderBookID
+					FROM 
+						mj_order_book a
+					LEFT JOIN
+						mj_project b on b.OrderBookID = a.OrderBookID
+					WHERE a.ContractNumber = ?";
+		$query	= $this->db->query($sql, array($ContractNumber));
+
+		if($query->num_rows()>0){
+			$data["ProjectID"] = $query->row()->ProjectID;
+			$data["ProjectName"] = $query->row()->ProjectName;
+			$data["OrderBookID"] = $query->row()->OrderBookID;
+			return $data;
+		}else{
+			return false;
+		}
+	}
 }

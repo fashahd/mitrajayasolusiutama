@@ -11,7 +11,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
     initComponent: function () {
         var thisObj = this;
 
-        var storeGridFailed = Ext.create('MitraJaya.store.Finance.OrderBook.MainGridImportFailed');
+        var storeGridFailed = Ext.create('MitraJaya.store.Finance.PinjamanSubCont.MainGridImportFailed');
 
         thisObj.items = [{
             layout: 'column',
@@ -81,7 +81,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
                                 columnWidth: 0.5,
                                 style: 'margin-top:15px;',
                                 xtype: 'fileuploadfield',
-                                name: 'order_ImportFile',
+                                name: 'loan_ImportFile',
                                 id: 'MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-Form-ImportFile',
                                 fieldLabel: 'Upload File',
                                 alowBlank: false,
@@ -91,7 +91,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
                                         var form = Ext.getCmp('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan-Form').getForm();
                                         if (form.isValid()) {
                                             form.submit({
-                                                url: m_api + '/v1/finance/order/import_order',
+                                                url: m_api + '/v1/finance/loan/import_loan',
                                                 method: 'POST',
                                                 clientValidation: false,
                                                 waitMsg: 'Importing Data...',
@@ -153,7 +153,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
                                     text: lang('Clear'),
                                     handler: function () {
                                         Ext.Ajax.request({
-                                            url: m_api + '/v1/finance/order/clear_data',
+                                            url: m_api + '/v1/finance/loan/clear_data',
                                             method: 'GET',
                                             success: function(response){
 												// refresh grid store
@@ -198,42 +198,55 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubcont.WinFormImportLoan', {
                         flex: 0.2,
                         xtype: 'rownumberer'
                     }, {
-                        text: lang('OrderBookID'),
-                        dataIndex: 'OrderBookID',
+                        text: lang('ProjectID'),
+                        dataIndex: 'ProjectID',
                         hidden: true
-                    }, {
-                        text: lang('PO Number'),
-                        dataIndex: 'ContractNumber',
-                        flex: 1.5
-                    }, {
-                        text: lang('PO Date'),
-                        dataIndex: 'ContractDate',
-                        flex: 1.5
-                    }, {
-                        text: lang('Description'),
-                        dataIndex: 'Description',
-                        flex: 2
-                    }, {
-                        text: lang('Project'),
-                        dataIndex: 'ProjectName',
-                        flex: 2
-                    }, {
-                        text: lang('Customer'),
-                        dataIndex: 'CustomerName',
-                        flex: 2
-                    }, {
-                        text: lang('Dept'),
-                        dataIndex: 'DeptName',
-                        flex: 1
-                    }, {
-                        text: lang('Total Amount'),
-                        dataIndex: 'TotalContactAmount',
-                        flex: 2
-                    }, {
-                        text: 'Error',
-                        dataIndex: 'ErrorMessages',
-                        flex: 2
-                    }]
+                    }					
+					,{
+						text: 'LoanType',
+						dataIndex: 'LoanType',
+						flex: 1,
+					}
+					,{
+						text: 'LoanDate',
+						dataIndex: 'LoanDate',
+						flex: 1,
+					}
+					,{
+						text: 'LoanTransferDate',
+						dataIndex: 'LoanTransferDate',
+						flex: 1,
+					}
+					,{
+						text: 'VendorName',
+						dataIndex: 'VendorName',
+						flex: 1,
+					}
+					,{
+						text: 'SubcontName',
+						dataIndex: 'SubcontName',
+						flex: 1,
+					}
+					,{
+						text: 'EmployeeName',
+						dataIndex: 'EmployeeName',
+						flex: 1,
+					}
+					,{
+						text: 'LoanAmount',
+						dataIndex: 'LoanAmount',
+						flex: 1,
+					}
+					,{
+						text: 'LoanDescription',
+						dataIndex: 'LoanDescription',
+						flex: 1,
+					}
+					,{
+						text: 'LoanAmountDescription',
+						dataIndex: 'LoanAmountDescription',
+						flex: 1,
+					}]
                 }]
             }]
         }]
