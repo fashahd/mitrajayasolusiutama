@@ -1,6 +1,6 @@
 /******************************************
  *  Author : fashahd@gmail.com.com   
- *  Created On : Fri Jan 17 2020
+ *  Created On : Fri Jan 17 2020 
  *  File : MainGridImportFailed.js
  *******************************************/
  Ext.define('MitraJaya.store.Finance.PinjamanSubCont.MainGridImportFailed', {
