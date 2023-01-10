@@ -292,6 +292,7 @@ class Invoice extends REST_Controller {
 
 	// Import INVOICE 
     public function generate_template_post(){
+		$this->load->model("mcombo");
         $data = $this->post();
         try{
             include APPPATH.'third_party/PHPExcel18/PHPExcel.php';        
@@ -378,11 +379,62 @@ class Invoice extends REST_Controller {
             $excel->getActiveSheet()->getStyle('O3:O2000')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD2);
             $excel->getActiveSheet()->setCellValue('P3', "11");
 
+			$objValidation = $excel->getActiveSheet()->getDataValidation('E3:E2000');
+            $objValidation->setType( PHPExcel_Cell_DataValidation::TYPE_LIST );
+            $objValidation->setErrorStyle( PHPExcel_Cell_DataValidation::STYLE_INFORMATION );
+            $objValidation->setAllowBlank(false);
+            $objValidation->setShowInputMessage(true);
+            $objValidation->setShowErrorMessage(true);
+            $objValidation->setShowDropDown(true);
+            $objValidation->setErrorTitle('Input error');
+            $objValidation->setError('Value is not in list.');
+            $objValidation->setPromptTitle('Pick from list');
+            $objValidation->setPrompt('Please pick a value from the drop-down list.');
+            $objValidation->setFormula1("=ponumber");
+
             $columnSet = 'A2:P2';
             $excel->getActiveSheet()->mergeCells('A1:C1');
             $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
             $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
-            // End Sheet 5
+            // End Sheet 1
+
+
+			// Sheet 2
+            // Reference PO Number
+            $excel->createSheet(1)->setTitle("PO Number Reference");
+            $excel->setActiveSheetIndex(1);
+            $excel->getActiveSheet()->setCellValue('A1', 'REFERENCE PO NUMBER');
+            $excel->getActiveSheet()->setCellValue('A2', 'No');
+            $excel->getActiveSheet()->setCellValue('B2', 'PO Number');
+            $excel->getActiveSheet()->setCellValue('C2', 'Project Name');
+
+            $PoNumber = $this->mcombo->GetContractNumber();
+
+            $number = 1;
+            $idx = 3;
+            foreach($PoNumber AS $data_ponumber){
+                $excel->getActiveSheet()->setCellValue('A'.$idx, $number);
+                $excel->getActiveSheet()->setCellValue('B'.$idx, $data_ponumber['label']);
+                $excel->getActiveSheet()->setCellValue('C'.$idx, $data_ponumber['ProjectName']);
+                $excel->getActiveSheet()->getStyle('A'.$idx.':C'.$idx)->applyFromArray($styleBorderFull, false);  
+
+                $excel->addNamedRange( 
+                    new PHPExcel_NamedRange(
+                        'ponumber', 
+                        $excel->getSheetByName('PO Number Reference'), 
+                        'B3:B2500'
+                    ) 
+                );
+
+                $idx++;
+                $number++;
+            }
+
+            $columnSet = 'A2:C2';
+            $excel->getActiveSheet()->mergeCells('A1:C1');
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
+            // End Sheet 2
 
             $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
             $namaFile = 'template_invoice.xlsx';
