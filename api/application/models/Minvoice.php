@@ -262,7 +262,8 @@ class Minvoice extends CI_Model {
 		$sql = "SELECT
 			InvoicePeriodMonth,
 			InvoicePeriodYear,
-			InvoiceGR
+			InvoiceGR,
+			InvoiceReceived
 		FROM
 			mj_invoice 
 		WHERE
@@ -284,10 +285,12 @@ class Minvoice extends CI_Model {
 		AND
 			a.InvoiceID != ?
 		AND
-			a.InvoiceGR <= ?
+			(a.InvoiceGR <= ? OR a.InvoiceReceived <= ?)
+		AND
+			a.StatusCode = 'active'
 		ORDER BY a.InvoiceGR, a.CreatedDate ASC";
 		
-		$query = $this->db->query($sql, array($ContractNumber, $InvoiceID, $query["InvoiceGR"]));
+		$query = $this->db->query($sql, array($ContractNumber, $InvoiceID, $query["InvoiceGR"], $query["InvoiceReceived"]));
 
 		// echo "<pre>";print_r($this->db->last_query());die;
 

@@ -67,7 +67,11 @@ class Mcombo extends CI_Model {
         return $query;
 	}
 
-	public function GetVendorList(){
+	public function GetVendorList($VendorName = null){
+		if($VendorName != ""){
+			$this->db->where("VendorName", $VendorName);
+		}
+
 		$this->db->where("StatusCode", "active");
 		$this->db->where("VendorType", "vendor");
 		$this->db->select('
@@ -80,7 +84,11 @@ class Mcombo extends CI_Model {
         return $query;
 	}
 
-	public function GetSubContList(){
+	public function GetSubContList($SubcontName = null){
+		if($SubcontName != ""){
+			$this->db->where("VendorName", $SubcontName);
+		}
+
 		$this->db->where("StatusCode", "active");
 		$this->db->where("VendorType", "subcont");
 		$this->db->select('
@@ -140,7 +148,11 @@ class Mcombo extends CI_Model {
         return $query;
 	}
 
-	public function GetEmployeeList(){
+	public function GetEmployeeList($EmployeeName = null){
+		if($EmployeeName != ""){
+			$this->db->where("people_name", $EmployeeName);
+		}
+
 		$this->db->where("status", "active");
 		$this->db->select('
 			people_id id,
@@ -152,15 +164,17 @@ class Mcombo extends CI_Model {
         return $query;
 	}
 
-	public function GetContractNumber($CustomerID){
-		$this->db->where("CustomerID", $CustomerID);
-		$this->db->where("StatusCode", "active");
+	public function GetContractNumber($CustomerID = null){
+		($CustomerID != "") ? $this->db->where("a.CustomerID", $CustomerID) : "";
+		$this->db->where("a.StatusCode", "active");
+		$this->db->join("mj_project b", "b.OrderBookID = a.OrderBookID" , "left");
 		$this->db->select('
-			OrderBookID id,
-			ContractNumber label
+			a.OrderBookID id,
+			a.ContractNumber label,
+			b.ProjectName
 		');
 
-		$query = $this->db->get('mj_order_book')->result_array();	
+		$query = $this->db->get('mj_order_book a')->result_array();	
 
         return $query;
 	}

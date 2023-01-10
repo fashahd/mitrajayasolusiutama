@@ -63,6 +63,7 @@ class PHPExcel_Style_NumberFormat extends PHPExcel_Style_Supervisor implements P
     const FORMAT_DATE_TIME8              = 'h:mm:ss;@';
     const FORMAT_DATE_YYYYMMDDSLASH      = 'yy/mm/dd;@';
 
+    const FORMAT_CURRENCY_IDR_SIMPLE     = '"Rp "#,##0.00_-';
     const FORMAT_CURRENCY_USD_SIMPLE     = '"$"#,##0.00_-';
     const FORMAT_CURRENCY_USD            = '$#,##0_-';
     const FORMAT_CURRENCY_EUR_SIMPLE     = '[$EUR ]#,##0.00_-';
