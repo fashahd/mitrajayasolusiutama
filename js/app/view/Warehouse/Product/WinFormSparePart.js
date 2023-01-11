@@ -59,19 +59,19 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormSparePart' ,{
     
                         if(r.data.FilePath != ''){
                             
-                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/files/sparepart/' + r.data.FilePath + '\')"><img src="' + m_api_base_url + '/files/sparepart/' + r.data.FilePath + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + r.data.FilePath + '\')"><img src="' + m_api_base_url + '/' + r.data.FilePath + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
                             Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld').setValue(r.data.FilePath);
                         }
     
                         if(r.data.FilePath2 != ''){
                             
-                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo2').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/files/sparepart/' + r.data.FilePath2 + '\')"><img src="' + m_api_base_url + '/files/sparepart/' + r.data.FilePath2 + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo2').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + r.data.FilePath2 + '\')"><img src="' + m_api_base_url + '/' + r.data.FilePath2 + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
                             Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld2').setValue(r.data.FilePath2);
                         }
     
                         if(r.data.FilePath3 != ''){
                             
-                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo3').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/files/sparepart/' + r.data.FilePath3 + '\')"><img src="' + m_api_base_url + '/files/sparepart/' + r.data.FilePath3 + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo3').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + r.data.FilePath3 + '\')"><img src="' + m_api_base_url + '/' + r.data.FilePath3 + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
                             Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld3').setValue(r.data.FilePath3);
                         }
                     },
@@ -298,7 +298,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormSparePart' ,{
                                                         },
                                                         waitMsg: 'Sending Photo...',
                                                         success: function (fp, o) {
-                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo2').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/files/sparepart/' + o.result.file + '\')"><img src="' + m_api_base_url + '/files/sparepart/' + o.result.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo2').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + o.result.file + '\')"><img src="' + m_api_base_url + '/' + o.result.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
                                                             Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld2').setValue(o.result.file);
                                                         },
                                                         failure: function (fp, o) {
@@ -356,7 +356,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormSparePart' ,{
                                                         },
                                                         waitMsg: 'Sending Photo...',
                                                         success: function (fp, o) {
-                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/files/sparepart/' + o.result.file + '\')"><img src="' + m_api_base_url + '/files/sparepart/' + o.result.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + o.result.file + '\')"><img src="' + m_api_base_url + '/' + o.result.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
                                                             Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld').setValue(o.result.file);
                                                         },
                                                         failure: function (fp, o) {
@@ -414,7 +414,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormSparePart' ,{
                                                         },
                                                         waitMsg: 'Sending Photo...',
                                                         success: function (fp, o) {
-                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo3').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/files/sparepart/' + o.result.file + '\')"><img src="' + m_api_base_url + '/files/sparepart/' + o.result.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo3').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + o.result.file + '\')"><img src="' + m_api_base_url + '/' + o.result.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
                                                             Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld3').setValue(o.result.file);
                                                         },
                                                         failure: function (fp, o) {

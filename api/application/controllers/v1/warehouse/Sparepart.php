@@ -90,6 +90,24 @@ class Sparepart extends REST_Controller {
 			$fiePath = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld"];
 			$fiePath2 = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld2"];
 			$filePath3 = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld3"];
+
+			if($fiePath != "") {
+				$newpath = "files/sparepart/".time()."_photo_1.".$ext;
+				rename($fiePath, $newpath);
+				$fiePath = $newpath;
+			}
+	
+			if($fiePath2 != "") {
+				$newpath = "files/sparepart/".time()."_photo_2.".$ext;
+				rename($fiePath2, $newpath);
+				$fiePath2 = $newpath;
+			}
+	
+			if($filePath3 != "") {
+				$newpath = "files/sparepart/".time()."_photo_3.".$ext;
+				rename($filePath3, $newpath);
+				$filePath3 = $newpath;
+			}
 			
 			$data["ProductID"] = $ProductID;
 			$data["SparepartID"] = $SparepartID;
@@ -131,6 +149,24 @@ class Sparepart extends REST_Controller {
 			$fiePath = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld"];
 			$fiePath2 = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld2"];
 			$filePath3 = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld3"];
+
+			if($fiePath != "") {
+				$newpath = "files/sparepart/".time()."_photo_1.".$ext;
+				rename($fiePath, $newpath);
+				$fiePath = $newpath;
+			}
+	
+			if($fiePath2 != "") {
+				$newpath = "files/sparepart/".time()."_photo_2.".$ext;
+				rename($fiePath2, $newpath);
+				$fiePath2 = $newpath;
+			}
+	
+			if($filePath3 != "") {
+				$newpath = "files/sparepart/".time()."_photo_3.".$ext;
+				rename($filePath3, $newpath);
+				$filePath3 = $newpath;
+			}
 			
 			$data["SparepartCode"] = $SparepartCode;
 			$data["SparepartNumberCode"] = $SparepartNumberCode;
@@ -171,10 +207,10 @@ class Sparepart extends REST_Controller {
 				$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput']['name'];
 				$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput'];
 
-				$upload = move_upload($fileupload, 'files/sparepart/' . $gambar);
+				$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
 				if (isset($upload['upload_data'])) {
 					$result['success'] = true;
-					$result['file'] = $upload['upload_data']['file_name'];
+					$result['file'] = 'files/tmp/' . $gambar;
 					$this->response($result, 200);
 				} else {
 					$result['success'] = false;
@@ -197,10 +233,10 @@ class Sparepart extends REST_Controller {
 				$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2']['name'];
 				$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2'];
 
-				$upload = move_upload($fileupload, 'files/sparepart/' . $gambar);
+				$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
 				if (isset($upload['upload_data'])) {
 					$result['success'] = true;
-					$result['file'] = $upload['upload_data']['file_name'];
+					$result['file'] = 'files/tmp/' . $gambar;
 					$this->response($result, 200);
 				} else {
 					$result['success'] = false;
@@ -223,10 +259,10 @@ class Sparepart extends REST_Controller {
 				$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3']['name'];
 				$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3'];
 
-				$upload = move_upload($fileupload, 'files/sparepart/' . $gambar);
+				$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
 				if (isset($upload['upload_data'])) {
 					$result['success'] = true;
-					$result['file'] = $upload['upload_data']['file_name'];
+					$result['file'] = 'files/tmp/' . $gambar;
 					$this->response($result, 200);
 				} else {
 					$result['success'] = false;
@@ -254,6 +290,24 @@ class Sparepart extends REST_Controller {
 			$response["message"] = "Failed to Deleted Data";
 			$this->response($response, 400);
 		}
+	}
+
+	function submit_sparepart_post(){
+		$varPost = $this->post();
+		
+        $paramPost = array();
+
+		foreach ($varPost as $key => $value) {
+			$keyNew = str_replace("MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-", '', $key);
+			if ($value == "") {
+				$value = null;
+			}
+			$paramPost[$keyNew] = $value;
+		}
+		
+		$submit = $this->msparepart->submit_sparepart($paramPost);
+		
+		$this->response($submit, 200);
 	}
 }
 ?>

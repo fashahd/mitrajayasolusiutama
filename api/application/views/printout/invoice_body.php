@@ -19,7 +19,7 @@ if(count($invoice_history["data"]) > 0){
 	<td style='border:none; border-right:1px solid #000'></td>
 	</tr>";
 	foreach($invoice_history["data"] as $row){
-		$percentage = number_format(($row["InvoiceAmount"]/$row["ContractAmount"]) * 100);
+		$percentage = number_format(($row["InvoiceAmount"]/$row["ContractAmount"]) * 100, 2);
 		$history .= "<tr>
 		<td style='border:none; border-right:1px solid #000'></td>
 		<td style='border:none; border-right:1px solid #000'>- $row[Description]</td>

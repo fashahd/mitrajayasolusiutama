@@ -196,6 +196,7 @@ class Msparepart extends CI_Model {
             SparepartSellingPrice,
             SparepartStatus,
             SparepartRemark,
+			ProductID,
             FilePath,
             FilePath2,
             FilePath3
@@ -235,6 +236,82 @@ class Msparepart extends CI_Model {
 		}
 
         return $return;
+	}
+
+	public function getProductCode($ProductID){
+		$sql 	= "SELECT ProductCode FROM mj_product WHERE ProductID = ?";
+		$query	= $this->db->query($sql, array($ProductID))->row_array();
+
+		return $query["ProductCode"];
+	}
+
+	public function submit_sparepart($post){
+		$SparepartID = $post["SparepartID"];
+
+		$post["SparepartBasicPrice"] 	= str_replace(",","", $post["SparepartBasicPrice"]);
+		$post["SparepartSellingPrice"] 	= str_replace(",","", $post["SparepartSellingPrice"]);
+		$post["FilePath"] 	= $post["PhotoOld"];
+		$post["FilePath2"] 	= $post["PhotoOld2"];
+		$post["FilePath3"] 	= $post["PhotoOld3"];
+		$post["SparePartCode"] = $this->getProductCode($post["ProductID"]);
+
+		unset($post["OpsiDisplay"]);
+		unset($post["SparepartID"]);
+		unset($post["PhotoOld"]);
+		unset($post["PhotoOld2"]);
+		unset($post["PhotoOld3"]);
+
+		$path = $post["FilePath"];
+		$ext = pathinfo($path, PATHINFO_EXTENSION);
+
+		
+
+		if($post["FilePath"] != "") {
+			$newpath = "files/sparepart/".time()."_photo_1.".$ext;
+			if (strpos($post["FilePath"], 'files/tmp/') !== false) {
+				rename($post["FilePath"], $newpath);
+			}
+			$post["FilePath"] = $newpath;
+		}
+
+		if($post["FilePath2"] != "") {
+			$newpath = "files/sparepart/".time()."_photo_2.".$ext;
+			
+			if (strpos($post["FilePath2"], 'files/tmp/') !== false) {
+				rename($post["FilePath2"], $newpath);
+			}
+			$post["FilePath2"] = $newpath;
+		}
+
+		if($post["FilePath3"] != "") {
+			$newpath = "files/sparepart/".time()."_photo_3.".$ext;
+			
+			if (strpos($post["FilePath3"], 'files/tmp/') !== false) {
+				rename($post["FilePath3"], $newpath);
+			}
+			$post["FilePath3"] = $newpath;
+		}
+		
+		if($SparepartID == ""){
+			$SparepartID = getUUID();
+			$post["SparepartID"] = $SparepartID;
+			$query = $this->db->insert("mj_sparepart", $post);
+		}else{
+			$this->db->where("SparepartID", $SparepartID);
+			$query = $this->db->update("mj_sparepart", $post);
+		}
+
+		if($query){
+			$return["success"]  = true;
+			$return["message"]	= "Data Saved";
+			$return["SparepartID"] = $SparepartID;
+		}else{
+			$return["success"]  = false;
+			$return["message"]	= "Failed to Saved Data"; 
+			$return["SparepartID"] = $SparepartID;
+		}
+
+		return $return;
 	}
 
 }

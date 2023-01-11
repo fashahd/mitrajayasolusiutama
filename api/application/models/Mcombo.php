@@ -112,6 +112,18 @@ class Mcombo extends CI_Model {
         return $query;
 	}
 
+	public function GetProductList(){
+		$this->db->select('
+			ProductID id,
+			CONCAT(ProductCode, " - ", ProductName) label
+		');
+
+		$this->db->where("StatusCode", "active");
+		$query = $this->db->get('mj_product')->result_array();	
+
+        return $query;
+	}
+
 	public function GetRackList(){
 		$this->db->where("StatusCode", "active");
 		$this->db->select('
