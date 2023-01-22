@@ -73,126 +73,21 @@ class Sparepart extends REST_Controller {
 	}
 
 	function submit_post(){
-		if ($_POST['OpsiDisplay'] == 'insert') {
-			$SparepartID = getUUID();
-			$ProductID = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-ProductID"];
-			$SparepartCode = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartCode"];
-			$SparepartNumberCode = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartNumberCode"];
-			$SparepartName = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartName"];
-			$SparepartNo = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartNo"];
-			$SparepartType = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartType"];
-			$SparepartCategory = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartCategory"];
-			$SparepartQty = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartQty"];
-			$SparepartBasicPrice = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartBasicPrice"];
-			$SparepartSellingPrice = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartSellingPrice"];
-			$SparepartStatus = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartStatus"];
-			$SparepartRemark = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartRemark"];
-			$fiePath = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld"];
-			$fiePath2 = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld2"];
-			$filePath3 = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld3"];
+		$varPost = $this->post();
+		
+        $paramPost = array();
 
-			if($fiePath != "") {
-				$newpath = "files/sparepart/".time()."_photo_1.".$ext;
-				rename($fiePath, $newpath);
-				$fiePath = $newpath;
+		foreach ($varPost as $key => $value) {
+			$keyNew = str_replace("MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-", '', $key);
+			if ($value == "") {
+				$value = null;
 			}
-	
-			if($fiePath2 != "") {
-				$newpath = "files/sparepart/".time()."_photo_2.".$ext;
-				rename($fiePath2, $newpath);
-				$fiePath2 = $newpath;
-			}
-	
-			if($filePath3 != "") {
-				$newpath = "files/sparepart/".time()."_photo_3.".$ext;
-				rename($filePath3, $newpath);
-				$filePath3 = $newpath;
-			}
-			
-			$data["ProductID"] = $ProductID;
-			$data["SparepartID"] = $SparepartID;
-			$data["SparepartCode"] = $SparepartCode;
-			$data["SparepartNumberCode"] = $SparepartNumberCode;
-			$data["SparepartName"] = $SparepartName;
-			$data["SparepartNo"] = $SparepartNo;
-			$data["SparepartType"] = $SparepartType;
-			$data["SparepartCategory"] = $SparepartCategory;
-			$data["SparepartQty"] = $SparepartQty;
-			$data["SparepartBasicPrice"] = str_replace(",","",$SparepartBasicPrice);
-			$data["SparepartSellingPrice"] = str_replace(",","",$SparepartSellingPrice);
-			$data["SparepartStatus"] = $SparepartStatus;
-			$data["SparepartRemark"] = $SparepartRemark;
-			$data["FilePath"] = $fiePath;
-			$data["FilePath2"] = $fiePath2;
-			$data["FilePath3"] = $filePath3;
-			$data["CreatedDate"] = date("Y-m-d H:i:s");
-			$data["CreatedBy"] = $_SESSION["user_id"];
-			$insert = $this->db->insert("mj_sparepart", $data);
-	
-			$data["success"] = true;
-			$data["message"] = "Data Saved";
-			$data["SparepartID"] = $SparepartID;
-			$this->response($data, 200);
-		} else {
-			$SparepartID = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartID"];
-			$SparepartCode = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartCode"];
-			$SparepartNumberCode = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartNumberCode"];
-			$SparepartName = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartName"];
-			$SparepartNo = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartNo"];
-			$SparepartType = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartType"];
-			$SparepartCategory = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartCategory"];
-			$SparepartQty = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartQty"];
-			$SparepartBasicPrice = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartBasicPrice"];
-			$SparepartSellingPrice = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartSellingPrice"];
-			$SparepartStatus = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartStatus"];
-			$SparepartRemark = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartRemark"];
-			$fiePath = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld"];
-			$fiePath2 = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld2"];
-			$filePath3 = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoOld3"];
-
-			if($fiePath != "") {
-				$newpath = "files/sparepart/".time()."_photo_1.".$ext;
-				rename($fiePath, $newpath);
-				$fiePath = $newpath;
-			}
-	
-			if($fiePath2 != "") {
-				$newpath = "files/sparepart/".time()."_photo_2.".$ext;
-				rename($fiePath2, $newpath);
-				$fiePath2 = $newpath;
-			}
-	
-			if($filePath3 != "") {
-				$newpath = "files/sparepart/".time()."_photo_3.".$ext;
-				rename($filePath3, $newpath);
-				$filePath3 = $newpath;
-			}
-			
-			$data["SparepartCode"] = $SparepartCode;
-			$data["SparepartNumberCode"] = $SparepartNumberCode;
-			$data["SparepartName"] = $SparepartName;
-			$data["SparepartNo"] = $SparepartNo;
-			$data["SparepartType"] = $SparepartType;
-			$data["SparepartCategory"] = $SparepartCategory;
-			$data["SparepartQty"] = $SparepartQty;
-			$data["SparepartBasicPrice"] = str_replace(",","",$SparepartBasicPrice);
-			$data["SparepartSellingPrice"] = str_replace(",","",$SparepartSellingPrice);
-			$data["SparepartStatus"] = $SparepartStatus;
-			$data["SparepartRemark"] = $SparepartRemark;
-			$data["FilePath"] = $fiePath;
-			$data["FilePath2"] = $fiePath2;
-			$data["FilePath3"] = $filePath3;
-			$data["UpdatedDate"] = date("Y-m-d H:i:s");
-			$data["UpdatedBy"] = $_SESSION["user_id"];
-
-			$this->db->where("SparepartID", $SparepartID);
-			$this->db->update("mj_sparepart", $data);
-	
-			$data["success"] = true;
-			$data["message"] = "Data Saved";
-			$data["SparepartID"] = $SparepartID;
-			$this->response($data, 200);
+			$paramPost[$keyNew] = $value;
 		}
+		
+		$submit = $this->msparepart->submit_sparepart($paramPost);
+		
+		$this->response($submit, 200);
 	}
 
 	function upload_post(){
@@ -203,19 +98,43 @@ class Sparepart extends REST_Controller {
             $result['message'] = lang('File types not allowed');
             $this->response($result, 400);
         } else {
-			if ($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput']['name'] != '') {
-				$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput']['name'];
-				$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput'];
+			if($_POST["OpsiDisplay"] == "insert"){
+				if ($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput']['name'];
+					$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput'];
+	
+					$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$result['success'] = true;
+						$result['file'] = 'files/tmp/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			}else{
+				if ($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput']['name'];
+					$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput'];
+	
+					$upload = move_upload($fileupload, 'files/sparepart/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$SparepartID = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartID"];
+						
+						$datapost["FilePath"] = 'files/sparepart/' . $gambar;
+						$this->db->where("SparepartID", $SparepartID);
+						$this->db->update("mj_sparepart", $datapost);
 
-				$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
-				if (isset($upload['upload_data'])) {
-					$result['success'] = true;
-					$result['file'] = 'files/tmp/' . $gambar;
-					$this->response($result, 200);
-				} else {
-					$result['success'] = false;
-					$result['message'] = 'Upload failed';
-					$this->response($result, 400);
+						$result['success'] = true;
+						$result['file'] = 'files/sparepart/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
 				}
 			}
         }
@@ -229,19 +148,43 @@ class Sparepart extends REST_Controller {
             $result['message'] = lang('File types not allowed');
             $this->response($result, 400);
         } else {
-			if ($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2']['name'] != '') {
-				$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2']['name'];
-				$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2'];
+			if($_POST["OpsiDisplay"] == "insert"){
+				if ($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2']['name'];
+					$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2'];
 
-				$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
-				if (isset($upload['upload_data'])) {
-					$result['success'] = true;
-					$result['file'] = 'files/tmp/' . $gambar;
-					$this->response($result, 200);
-				} else {
-					$result['success'] = false;
-					$result['message'] = 'Upload failed';
-					$this->response($result, 400);
+					$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$result['success'] = true;
+						$result['file'] = 'files/tmp/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			}else{
+				if ($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2']['name'];
+					$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2'];
+
+					$upload = move_upload($fileupload, 'files/sparepart/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$SparepartID = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartID"];
+						
+						$datapost["FilePath2"] = 'files/sparepart/' . $gambar;
+						$this->db->where("SparepartID", $SparepartID);
+						$this->db->update("mj_sparepart", $datapost);
+
+						$result['success'] = true;
+						$result['file'] = 'files/sparepart/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
 				}
 			}
         }
@@ -255,19 +198,44 @@ class Sparepart extends REST_Controller {
             $result['message'] = lang('File types not allowed');
             $this->response($result, 400);
         } else {
-			if ($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3']['name'] != '') {
-				$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3']['name'];
-				$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3'];
+			if($_POST["OpsiDisplay"] == "insert"){
+				if ($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3']['name'];
+					$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3'];
 
-				$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
-				if (isset($upload['upload_data'])) {
-					$result['success'] = true;
-					$result['file'] = 'files/tmp/' . $gambar;
-					$this->response($result, 200);
-				} else {
-					$result['success'] = false;
-					$result['message'] = 'Upload failed';
-					$this->response($result, 400);
+					$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$result['success'] = true;
+						$result['file'] = 'files/tmp/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			}else{
+				if ($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3']['name'];
+					$fileupload['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3'] = $_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3'];
+
+					$upload = move_upload($fileupload, 'files/sparepart/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						
+						$SparepartID = $_POST["MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-SparepartID"];
+						
+						$datapost["FilePath3"] = 'files/sparepart/' . $gambar;
+						$this->db->where("SparepartID", $SparepartID);
+						$this->db->update("mj_sparepart", $datapost);
+
+						$result['success'] = true;
+						$result['file'] = 'files/sparepart/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
 				}
 			}
         }
@@ -276,7 +244,8 @@ class Sparepart extends REST_Controller {
 	function delete_sparepart_delete(){
 		$SparepartID = $this->delete("SparepartID");
 
-		$data["StatusCode"] = "nullified";
+		$data["StatusCode"] 			= "nullified";
+		$data["SparepartNumberCode"]	= $this->delete("SparepartCode")." - nullified";
 
 		$this->db->where("SparepartID", $SparepartID);
 		$query = $this->db->update("mj_sparepart", $data);

@@ -56,6 +56,13 @@ if (!defined('BASEPATH'))
 		}
 	}
 
+	if (! function_exists('getExtension'))
+	{
+		function getExtension($path) {
+			return pathinfo($path, PATHINFO_EXTENSION);
+		}
+	}
+
     if (! function_exists('getListDateWeek'))
 	{
 		function getListDateWeek($week, $startdate, $firstdate) {

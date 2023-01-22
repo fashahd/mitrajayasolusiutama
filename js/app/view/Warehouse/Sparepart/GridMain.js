@@ -133,7 +133,8 @@
 								url: m_api + '/v1/warehouse/sparepart/delete_sparepart',
 								method: 'DELETE',
 								params: {
-									SparepartID: sm.get('SparepartID')
+									SparepartID: sm.get('SparepartID'),
+									SparepartCode: sm.get('SparepartCode')
 								},
 								success: function(response, opts) {
 									Swal.fire(
@@ -353,10 +354,6 @@
             },{
                 text: lang('Category'),
                 dataIndex: 'SparepartCategory',
-                flex: 5
-            },{
-                text: lang('Location'),
-                dataIndex: 'ActualLocation',
                 flex: 5
             },{
                 text: lang('Qty'),
