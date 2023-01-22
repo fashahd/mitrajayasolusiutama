@@ -49,18 +49,18 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                         var r = Ext.decode(action.response.responseText);
 
                         if (r.data.FilePath != '') {
-                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/files/sparepart/' + r.data.FilePath + '\')"><img src="' + m_api_base_url + '/files/sparepart/' + r.data.FilePath + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + r.data.FilePath + '\')"><img src="' + m_api_base_url + '/' + r.data.FilePath + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
 						    Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld').setValue(r.data.FilePath);
                         }
 
                         if (r.data.FilePath2 != '') {
-                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo2').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/files/sparepart/' + r.data.FilePath + '\')"><img src="' + m_api_base_url + '/files/sparepart/' + r.data.FilePath + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
-						    Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld2').setValue(r.data.FilePath);
+                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo2').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + r.data.FilePath2 + '\')"><img src="' + m_api_base_url + '/' + r.data.FilePath2 + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+						    Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld2').setValue(r.data.FilePath2);
                         }
 
                         if (r.data.FilePath3 != '') {
-                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo3').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/files/sparepart/' + r.data.FilePath + '\')"><img src="' + m_api_base_url + '/files/sparepart/' + r.data.FilePath + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
-						    Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld3').setValue(r.data.FilePath);
+                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo3').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + r.data.FilePath3 + '\')"><img src="' + m_api_base_url + '/' + r.data.FilePath3 + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+						    Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld3').setValue(r.data.FilePath3);
                         }
                     },
                     failure: function (form, action) {
@@ -94,9 +94,8 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
     initComponent: function () {
         var thisObj = this;
 
-        thisObj.combo_part_code = Ext.create('MitraJaya.store.General.PartCodeList');
-        thisObj.combo_employee = Ext.create('MitraJaya.store.General.EmployeeList');
-        thisObj.combo_rack_list = Ext.create('MitraJaya.store.General.RackList');
+        
+        thisObj.combo_product = Ext.create('MitraJaya.store.General.ProductList');
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
@@ -110,7 +109,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                 border: false,
                 padding: 10,
                 items: [{
-                    columnWidth: 0.3,
+                    columnWidth: 1,
                     layout: 'form',
                     cls: 'Sfr_PanelLayoutFormContainer',
                     items: [{
@@ -123,7 +122,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                             layout: 'column',
                             border: false,
                             items: [{
-                                columnWidth: 1,
+                                columnWidth: 0.2,
                                 layout: 'form',
                                 style: 'padding:10px 0px 10px 5px;',
                                 items: [{
@@ -133,106 +132,316 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartID'
                                 }, {
                                     xtype: 'combobox',
-									id:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PartCode',
-									name:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PartCode',
-									labelAlign:'top',
-									fieldLabel:'Part Code',
-									allowBlank:false,
-									baseCls: 'Sfr_FormInputMandatory',
-                                    store:thisObj.combo_part_code,
+                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-ProductID',
+                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-ProductID',
+                                    labelAlign:'top',
+                                    fieldLabel:'Sparepart Code',
+                                    store:thisObj.combo_product,
                                     queryMode:'local',
                                     displayField:'label',
                                     valueField:'id',
+                                    allowBlank: false,
+                                    baseCls: 'Sfr_FormInputMandatory',
+                                }, {
+                                    xtype: 'numberfield',
+                                    labelAlign:'top',
+                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartNumberCode',
+                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartNumberCode',
+                                    fieldLabel: lang('Sparepart Number Code'),
+                                    allowBlank: false,
+                                    baseCls: 'Sfr_FormInputMandatory',
+                                }, {
+                                    xtype: 'textfield',
+                                    labelAlign:'top',
+                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartName',
+                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartName',
+                                    fieldLabel: lang('Sparepart Name'),
+                                    allowBlank: false,
+                                    baseCls: 'Sfr_FormInputMandatory',
+                                }, {
+                                    xtype: 'textfield',
+                                    labelAlign:'top',
+                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartNo',
+                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartNo',
+                                    fieldLabel: lang('Sparepart No'),
+                                    allowBlank: false,
+                                    baseCls: 'Sfr_FormInputMandatory',
+                                }, {
+                                    xtype: 'radiogroup',
+                                    labelAlign:'top',
+                                    fieldLabel: lang('Sparepart Type'),
+                                    msgTarget: 'side',
+                                    allowBlank: false,
+                                    baseCls: 'Sfr_FormInputMandatory',
+                                    columns: 3,
+                                    items: [{
+                                        boxLabel: lang('Mech.'),
+                                        name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartType',
+                                        inputValue: 'mech',
+                                        id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartTypeMech',
+                                    }, {
+                                        boxLabel: lang('Elect.'),
+                                        name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartType',
+                                        inputValue: 'elect',
+                                        id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartTypeElect',
+                                    }, {
+                                        boxLabel: lang('PCBs'),
+                                        name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartType',
+                                        inputValue: 'pcbs',
+                                        id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartTypePCBs',
+                                    }]
                                 }, {
                                     xtype: 'radiogroup',
                                     labelAlign:'top',
                                     fieldLabel: lang('Category'),
                                     msgTarget: 'side',
-                                    allowBlank:false,
-									baseCls: 'Sfr_FormInputMandatory',
+                                    allowBlank: false,
+                                    baseCls: 'Sfr_FormInputMandatory',
                                     columns: 2,
                                     items: [{
-                                        boxLabel: lang('Pembelian'),
-                                        name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PartCategory',
-                                        inputValue: 'pembelian',
-                                        id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PartCategoryPembelian',
-                                        listeners: {
-                                            
-                                        }
+                                        boxLabel: lang('C'),
+                                        name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategory',
+                                        inputValue: 'c',
+                                        id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategoryCritical',
                                     }, {
-                                        boxLabel: lang('Pengembalian'),
-                                        name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PartCategory',
-                                        inputValue: 'pengembalian',
-                                        id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PartCategoryPengembalian',
-                                        listeners: {
-                                            
-                                        }
+                                        boxLabel: lang('F'),
+                                        name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategory',
+                                        inputValue: 'f',
+                                        id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategoryFastMoving',
+                                    }, {
+                                        boxLabel: lang('S'),
+                                        name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategory',
+                                        inputValue: 's',
+                                        id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategoryStandard',
                                     }]
-                                }, {
-                                    xtype: 'datefield',
-                                    labelAlign:'top',
-                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-TanggalPenerimaan',
-                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-TanggalPenerimaan',
-                                    fieldLabel: lang('Tanggal Penerimaan'),
-                                    allowBlank:false,
-									baseCls: 'Sfr_FormInputMandatory',
-                                    format: 'Y-m-d',
-                                },  {
-                                    xtype: 'combobox',
-									id:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PjCode',
-									name:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PjCode',
-									labelAlign:'top',
-									fieldLabel:'Penanggung Jawab',
-									allowBlank:false,
-									baseCls: 'Sfr_FormInputMandatory',
-                                    store:thisObj.combo_employee,
-                                    queryMode:'local',
-                                    displayField:'label',
-                                    valueField:'id',
-                                }, {
-                                    xtype: 'textfield',
-                                    labelAlign:'top',
-                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-DocNo',
-                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-DocNo',
-                                    fieldLabel: lang('Document No'),
-                                    allowBlank:false,
-									baseCls: 'Sfr_FormInputMandatory'
-                                }, {
+                                }]
+                            }, {
+                                columnWidth: 0.2,
+                                layout: 'form',
+                                style: 'padding:10px 0px 10px 5px;',
+                                items: [{
                                     xtype: 'numberfield',
                                     labelAlign:'top',
-                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Qty',
-                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Qty',
+                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartQty',
+                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartQty',
                                     fieldLabel: lang('Qty'),
-                                    allowBlank:false,
-									baseCls: 'Sfr_FormInputMandatory'
+                                    allowBlank: false,
+                                    baseCls: 'Sfr_FormInputMandatory',
                                 }, {
-                                    xtype: 'combobox',
-									id:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-RakNumber',
-									name:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-RakNumber',
-									labelAlign:'top',
-									fieldLabel:'Rak No',
-									allowBlank:false,
-									baseCls: 'Sfr_FormInputMandatory',
-                                    store:thisObj.combo_rack_list,
-                                    queryMode:'local',
-                                    displayField:'label',
-                                    valueField:'id',
-                                }, {
-                                    xtype: 'textfield',
+                                    xtype: 'numericfield',
                                     labelAlign:'top',
-                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-RowNumber',
-                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-RowNumber',
-                                    fieldLabel: lang('Baris No'),
-                                    allowBlank:false,
-									baseCls: 'Sfr_FormInputMandatory'
+                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartBasicPrice',
+                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartBasicPrice',
+                                    fieldLabel: lang('Basic Price'),
+                                    allowBlank: false,
+                                    baseCls: 'Sfr_FormInputMandatory',
                                 }, {
-                                    xtype: 'textfield',
+                                    xtype: 'numericfield',
                                     labelAlign:'top',
-                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-ColumnNumber',
-                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-ColumnNumber',
-                                    fieldLabel: lang('Kolom No'),
-                                    allowBlank:false,
-									baseCls: 'Sfr_FormInputMandatory'
+                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartSellingPrice',
+                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartSellingPrice',
+                                    fieldLabel: lang('Selling Price'),
+                                    allowBlank: false,
+                                    baseCls: 'Sfr_FormInputMandatory',
+                                }, {
+                                    xtype: 'radiogroup',
+                                    labelAlign:'top',
+                                    fieldLabel: lang('Sparepart Status'),
+                                    msgTarget: 'side',
+                                    allowBlank: false,
+                                    baseCls: 'Sfr_FormInputMandatory',
+                                    columns: 2,
+                                    items: [{
+                                        boxLabel: lang('Ready'),
+                                        name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartStatus',
+                                        inputValue: 'ready',
+                                        id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartStatusReady',
+                                    }, {
+                                        boxLabel: lang('Indent'),
+                                        name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartStatus',
+                                        inputValue: 'indent',
+                                        id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartStatusIndent',
+                                    }]
+                                }, {
+                                    xtype: 'textareafield',
+                                    labelAlign:'top',
+                                    id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartRemark',
+                                    name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartRemark',
+                                    fieldLabel: lang('Remarks / Vendor')
+                                }]
+                            }, {
+                                columnWidth: 0.2,
+                                layout: 'form',
+                                style: 'padding:10px 5px 10px 20px;',
+                                defaults: {
+                                    labelAlign: 'left',
+                                    labelWidth: 150
+                                },
+                                items: [{
+                                    layout: 'column',
+                                    border: false,
+                                    items: [{
+                                        columnWidth: 1,
+                                        layout: 'form',
+                                        style: 'padding:10px 0px 10px 5px;',
+                                        items: [{
+                                            xtype: 'panel',
+                                            id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo2',
+                                            html: '<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/assets/images/no_data.png' +'\')"><img src="' + m_api_base_url + '/assets/images/no_data.png" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>'
+                                        }, {
+                                            xtype: 'fileuploadfield',
+                                            id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput2',
+                                            name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput2',
+                                            buttonText: lang('Browse'),
+                                            cls: 'Sfr_FormBrowseBtn',
+                                            listeners: {
+                                                'change': function (fb, v) {
+                                                    Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData').getForm().submit({
+                                                        url: m_api + '/v1/warehouse/sparepart/upload2',
+                                                        clientValidation: false,
+                                                        params: {
+                                                            OpsiDisplay: thisObj.viewVar.OpsiDisplay
+                                                        },
+                                                        waitMsg: 'Sending Photo...',
+                                                        success: function (fp, o) {
+                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo2').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + o.result.file + '\')"><img src="' + m_api_base_url + '/' + o.result.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld2').setValue(o.result.file);
+                                                        },
+                                                        failure: function (fp, o) {
+                                                            Ext.MessageBox.show({
+                                                                title: lang('Error'),
+                                                                msg: o.result.message,
+                                                                buttons: Ext.MessageBox.OK,
+                                                                animateTarget: 'mb9',
+                                                                icon: 'ext-mb-error'
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        }, {
+                                            xtype: 'textfield',
+                                            id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld2',
+                                            name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld2',
+                                            inputType: 'hidden'
+                                        }]
+                                    }]
+                                }]
+                            }, {
+                                columnWidth: 0.2,
+                                layout: 'form',
+                                style: 'padding:10px 5px 10px 20px;',
+                                defaults: {
+                                    labelAlign: 'left',
+                                    labelWidth: 150
+                                },
+                                items: [{
+                                    layout: 'column',
+                                    border: false,
+                                    items: [{
+                                        columnWidth: 1,
+                                        layout: 'form',
+                                        style: 'padding:10px 0px 10px 5px;',
+                                        items: [{
+                                            xtype: 'panel',
+                                            id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo',
+                                            html: '<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/assets/images/no_data.png' +'\')"><img src="' + m_api_base_url + '/assets/images/no_data.png" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>'
+                                        }, {
+                                            xtype: 'fileuploadfield',
+                                            id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput',
+                                            name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput',
+                                            buttonText: lang('Browse'),
+                                            cls: 'Sfr_FormBrowseBtn',
+                                            listeners: {
+                                                'change': function (fb, v) {
+                                                    Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData').getForm().submit({
+                                                        url: m_api + '/v1/warehouse/sparepart/upload',
+                                                        clientValidation: false,
+                                                        params: {
+                                                            OpsiDisplay: thisObj.viewVar.OpsiDisplay
+                                                        },
+                                                        waitMsg: 'Sending Photo...',
+                                                        success: function (fp, o) {
+                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + o.result.file + '\')"><img src="' + m_api_base_url + '/' + o.result.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld').setValue(o.result.file);
+                                                        },
+                                                        failure: function (fp, o) {
+                                                            Ext.MessageBox.show({
+                                                                title: lang('Error'),
+                                                                msg: o.result.message,
+                                                                buttons: Ext.MessageBox.OK,
+                                                                animateTarget: 'mb9',
+                                                                icon: 'ext-mb-error'
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        }, {
+                                            xtype: 'textfield',
+                                            id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld',
+                                            name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld',
+                                            inputType: 'hidden'
+                                        }]
+                                    }]
+                                }]
+                            }, {
+                                columnWidth: 0.2,
+                                layout: 'form',
+                                style: 'padding:10px 5px 10px 20px;',
+                                defaults: {
+                                    labelAlign: 'left',
+                                    labelWidth: 150
+                                },
+                                items: [{
+                                    layout: 'column',
+                                    border: false,
+                                    items: [{
+                                        columnWidth: 1,
+                                        layout: 'form',
+                                        style: 'padding:10px 0px 10px 5px;',
+                                        items: [{
+                                            xtype: 'panel',
+                                            id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo3',
+                                            html: '<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/assets/images/no_data.png' +'\')"><img src="' + m_api_base_url + '/assets/images/no_data.png" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>'
+                                        }, {
+                                            xtype: 'fileuploadfield',
+                                            id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput3',
+                                            name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput3',
+                                            buttonText: lang('Browse'),
+                                            cls: 'Sfr_FormBrowseBtn',
+                                            listeners: {
+                                                'change': function (fb, v) {
+                                                    Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData').getForm().submit({
+                                                        url: m_api + '/v1/warehouse/sparepart/upload3',
+                                                        clientValidation: false,
+                                                        params: {
+                                                            OpsiDisplay: thisObj.viewVar.OpsiDisplay
+                                                        },
+                                                        waitMsg: 'Sending Photo...',
+                                                        success: function (fp, o) {
+                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-Photo3').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + o.result.file + '\')"><img src="' + m_api_base_url + '/' + o.result.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+                                                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld3').setValue(o.result.file);
+                                                        },
+                                                        failure: function (fp, o) {
+                                                            Ext.MessageBox.show({
+                                                                title: lang('Error'),
+                                                                msg: o.result.message,
+                                                                buttons: Ext.MessageBox.OK,
+                                                                animateTarget: 'mb9',
+                                                                icon: 'ext-mb-error'
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        }, {
+                                            xtype: 'textfield',
+                                            id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld3',
+                                            name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoOld3',
+                                            inputType: 'hidden'
+                                        }]
+                                    }]
                                 }]
                             }]
                         }],
@@ -250,7 +459,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                     Formnya.submit({
                                         url: m_api + '/v1/warehouse/sparepart/submit_sparepart',
                                         method: 'POST',
-                                        waitMsg: 'Saving data invoice...',
+                                        waitMsg: 'Saving Data Sparepart...',
                                         params: {
                                             OpsiDisplay: thisObj.viewVar.OpsiDisplay
                                         },
@@ -352,12 +561,12 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
     BackToList: function () {
         Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm').destroy(); //destory current view
         var GridMainGrower = [];
-        if (Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid') == undefined) {
-            GridMainGrower = Ext.create('MitraJaya.view.Warehouse.Sparepart.MainGrid');
+        if (Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain') == undefined) {
+            GridMainGrower = Ext.create('MitraJaya.view.Warehouse.Sparepart.GridMain');
         } else {
             //destroy, create ulang
-            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid').destroy();
-            GridMainGrower = Ext.create('MitraJaya.view.Warehouse.Sparepart.MainGrid');
+            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain').destroy();
+            GridMainGrower = Ext.create('MitraJaya.view.Warehouse.Sparepart.GridMain');
         }
     }
 });

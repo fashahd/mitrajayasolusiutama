@@ -70,7 +70,7 @@ class Msparepart extends CI_Model {
 		$this->db->join("mj_part_category b", "SparepartNumberCode BETWEEN b.StartRangePartCode AND b. EndRangePartCode AND a.ProductID = b.ProductID", "left");
 		$this->db->select('SQL_CALC_FOUND_ROWS a.SparepartID', false);
 		$this->db->select('a.SparepartID,
-            CONCAT(a.SparepartCode," - ",a.SparepartNumberCode) SparepartCode,
+            CONCAT(a.SparepartCode," - ",LPAD(a.SparepartNumberCode, 4, 0)) SparepartCode,
             a.SparepartNumberCode,
 			a.ActualLocation,
             a.SparepartName,
@@ -196,6 +196,7 @@ class Msparepart extends CI_Model {
             SparepartSellingPrice,
             SparepartStatus,
             SparepartRemark,
+			ProductID,
             FilePath,
             FilePath2,
             FilePath3
@@ -235,6 +236,112 @@ class Msparepart extends CI_Model {
 		}
 
         return $return;
+	}
+
+	public function getProductCode($ProductID){
+		$sql 	= "SELECT ProductCode FROM mj_product WHERE ProductID = ?";
+		$query	= $this->db->query($sql, array($ProductID))->row_array();
+
+		return $query["ProductCode"];
+	}
+
+	public function CheckSparepartCode($ProductID, $SparepartNumberCode, $SparepartID){
+		if($SparepartID != ''){
+			$this->db->where("SparepartID <>", $SparepartID);
+		}
+		$this->db->where("ProductID", $ProductID);
+		$this->db->where("SparepartNumberCode", $SparepartNumberCode);
+		$this->db->select("SparepartID");
+		$query = $this->db->get('mj_sparepart');
+
+		if($query->num_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function submit_sparepart($post){
+		$SparepartID = $post["SparepartID"];
+
+		$post["SparepartBasicPrice"] 	= str_replace(",","", $post["SparepartBasicPrice"]);
+		$post["SparepartSellingPrice"] 	= str_replace(",","", $post["SparepartSellingPrice"]);
+		$post["FilePath"] 	= $post["PhotoOld"];
+		$post["FilePath2"] 	= $post["PhotoOld2"];
+		$post["FilePath3"] 	= $post["PhotoOld3"];
+		$post["SparePartCode"] = $this->getProductCode($post["ProductID"]);
+
+
+		$duplicate	= $this->CheckSparepartCode($post["ProductID"], $post["SparepartNumberCode"], $SparepartID);
+		
+		if($duplicate){			
+			$return["success"]  = false;
+			$return["message"]	= "Sparepart Number Code Already Exist !"; 
+			$return["SparepartID"] = $SparepartID;
+			return $return;
+		}
+
+		unset($post["OpsiDisplay"]);
+		unset($post["PartCategoryID"]);
+		unset($post["SparepartID"]);
+		unset($post["PhotoOld"]);
+		unset($post["PhotoOld2"]);
+		unset($post["PhotoOld3"]);
+
+		$path = $post["FilePath"];
+		$ext = pathinfo($path, PATHINFO_EXTENSION);
+		
+		if($SparepartID == ""){
+			if($post["FilePath"] != "") {
+				$newpath = "files/sparepart/".time()."_photo_1.".$ext;
+				if (strpos($post["FilePath"], 'files/tmp/') !== false) {
+					rename($post["FilePath"], $newpath);
+				}
+				$post["FilePath"] = $newpath;
+			}
+
+			if($post["FilePath2"] != "") {
+				$newpath = "files/sparepart/".time()."_photo_2.".$ext;
+				
+				if (strpos($post["FilePath2"], 'files/tmp/') !== false) {
+					rename($post["FilePath2"], $newpath);
+				}
+				$post["FilePath2"] = $newpath;
+			}
+
+			if($post["FilePath3"] != "") {
+				$newpath = "files/sparepart/".time()."_photo_3.".$ext;
+				
+				if (strpos($post["FilePath3"], 'files/tmp/') !== false) {
+					rename($post["FilePath3"], $newpath);
+				}
+				$post["FilePath3"] = $newpath;
+			}
+			
+			$SparepartID = getUUID();
+			$post["SparepartID"] = $SparepartID;
+			$post["CreatedDate"] 	= date("Y-m-d H:i:s");
+			$post["CreatedBy"] 		= $_SESSION["user_id"];
+			$query = $this->db->insert("mj_sparepart", $post);
+		}else{
+			$post["UpdatedDate"] 	= date("Y-m-d H:i:s");
+			$post["UpdatedBy"] 		= $_SESSION["user_id"];
+
+			$this->db->where("SparepartID", $SparepartID);
+			$query = $this->db->update("mj_sparepart", $post);
+		}
+
+		if($query){
+			$return["success"]  = true;
+			$return["message"]	= "Data Saved";
+			$return["SparepartID"] = $SparepartID;
+		}else{
+			$return["success"]  = false;
+			$return["message"]	= "Failed to Saved Data"; 
+			$return["SparepartID"] = $SparepartID;
+		}
+
+		return $return;
 	}
 
 }

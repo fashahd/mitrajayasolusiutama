@@ -19,7 +19,7 @@ if(count($invoice_history["data"]) > 0){
 	<td style='border:none; border-right:1px solid #000'></td>
 	</tr>";
 	foreach($invoice_history["data"] as $row){
-		$percentage = number_format(($row["InvoiceAmount"]/$row["ContractAmount"]) * 100);
+		$percentage = number_format(($row["InvoiceAmount"]/$row["ContractAmount"]) * 100, 2);
 		$history .= "<tr>
 		<td style='border:none; border-right:1px solid #000'></td>
 		<td style='border:none; border-right:1px solid #000'>- $row[Description]</td>
@@ -152,7 +152,7 @@ $percentage_total = $percentage_current+$total_history;
 					<td style="border:none; border-right:1px solid #000"><b><u>Tagihan Saat Ini :</u></b> 
 						<br><?=$invoicedata["Description"]?></span>
 					</td>
-					<td style="border:none; border-right:1px solid #000"><?=number_format($percentage_current)?>%</td>
+					<td style="border:none; border-right:1px solid #000"><?=number_format($percentage_current, 2)?>%</td>
 					<td style="border:none; border-right:1px solid #000"></td>
 					<td style="border:none"><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceAmount"])?></span></td>
 				</tr>
@@ -185,7 +185,7 @@ $percentage_total = $percentage_current+$total_history;
 				<td style="border:none; border-right:1px solid #000"><b><u>Tagihan Saat Ini :</u></b> 
 					<br><?=$invoicedata["Description"]?></span>
 				</td>
-				<td style="border:none; border-right:1px solid #000"><?=number_format($percentage_current)?>%</td>
+				<td style="border:none; border-right:1px solid #000"><?=number_format($percentage_current, 2)?>%</td>
 				<td style="border:none; border-right:1px solid #000"></td>
 				<td style="border:none"><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceAmount"])?></span></td>
 			</tr>
@@ -243,7 +243,7 @@ $percentage_total = $percentage_current+$total_history;
 				<td style="border:none; border-right:1px solid #000"><b><u>Tagihan Saat Ini :</u></b> 
 					<br><?=$invoicedata["Description"]?></span>
 				</td>
-				<td style="border:none; border-right:1px solid #000"><?=number_format($percentage_current)?>%</td>
+				<td style="border:none; border-right:1px solid #000"><?=number_format($percentage_current, 2)?>%</td>
 				<td style="border:none; border-right:1px solid #000"></td>
 				<td style="border:none"><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceAmount"])?></span></td>
 			</tr>
