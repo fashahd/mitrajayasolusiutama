@@ -131,6 +131,14 @@ class Combo extends REST_Controller {
 		$this->response($data);
 	}
 
+	function combo_product_get(){
+		
+		$data = $this->mcombo->GetProductList();
+
+		
+		$this->response($data);
+	}
+
 	function combo_rack_get(){
 		
 		$data = $this->mcombo->GetRackList();

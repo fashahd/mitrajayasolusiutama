@@ -3,10 +3,10 @@
  *  Created On : Thu Jan 16 2020
  *  File : MainGrid.js
  *******************************************/
- Ext.define('MitraJaya.view.Warehouse.Sparepart.MainGrid' ,{
+ Ext.define('MitraJaya.view.Warehouse.Sparepart.GridMain' ,{
     extend: 'Ext.panel.Panel',
-    id: 'MitraJaya.view.Warehouse.Sparepart.MainGrid',
-    title:'Sparepart',
+    id: 'MitraJaya.view.Warehouse.Sparepart.GridMain',
+    renderTo: 'ext-content',
     style:'margin-top:30px',
     listeners: {
         afterRender: function(component, eOpts){
@@ -16,19 +16,18 @@
             var sparepart_src = JSON.parse(localStorage.getItem('sparepart_src'));
 
             if(sparepart_src){
-                // Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-keySearch').setValue(sparepart_src.keySearch);	    			
-                // Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-keySearch2').setValue(sparepart_src.keySearch2);
+                // Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-keySearch').setValue(sparepart_src.keySearch);	    			
+                // Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-keySearch2').setValue(sparepart_src.keySearch2);
             }
         }
     },
     initComponent: function() {
         var thisObj = this;
-
-		// console.log(m_api);
+		
         //Store
         thisObj.StoreGridMain = Ext.create('MitraJaya.store.Warehouse.Sparepart.MainGrid',{
         	storeVar: {
-                ProductID: thisObj.viewVar.ProductID
+                ProductID: ''
             }
         });
 
@@ -53,59 +52,71 @@
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
                 text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
-                itemId: 'MitraJaya.view.Warehouse.Sparepart.MainGrid-ContextMenuView',
+                itemId: 'MitraJaya.view.Warehouse.Sparepart.GridMain-ContextMenuView',
 	            handler: function() {
-                    var sm = Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-Grid').getSelectionModel().getSelection()[0];
+                    var sm = Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-Grid').getSelectionModel().getSelection()[0];
 
-                    var Code = Ext.getCmp('MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-ProductCode').getValue();
-                    var WinFormSparePart = Ext.create('MitraJaya.view.Warehouse.Product.WinFormSparePart');
-                    WinFormSparePart.setViewVar({
-                        OpsiDisplay:'view',
-                        Code:Code,
-                        SparepartID: sm.get('SparepartID'),
-                        CallerStore: thisObj.StoreGridMain,
-                        ProductID:thisObj.viewVar.ProductID
-                    });
-                    if (!WinFormSparePart.isVisible()) {
-                        WinFormSparePart.center();
-                        WinFormSparePart.show();
-                    } else {
-                        WinFormSparePart.close();
-                    }
+                    Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain').destroy(); //destory current view
+					var FormMainFarmer = [];
+
+					//create object View untuk FormMainGrower
+					if(Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm') == undefined){
+						FormMainFarmer = Ext.create('MitraJaya.view.Warehouse.Sparepart.MainForm', {
+							viewVar: {
+								OpsiDisplay: 'view',
+								SparepartID: sm.get("SparepartID")
+							}
+						});
+					}else{
+						//destroy, create ulang
+						Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm').destroy();
+						FormMainFarmer = Ext.create('MitraJaya.view.Warehouse.Sparepart.MainForm', {
+							viewVar: {
+								OpsiDisplay: 'view',
+								SparepartID: sm.get("SparepartID")
+							}
+						});
+					}
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
                 text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
-                itemId: 'MitraJaya.view.Warehouse.Sparepart.MainGrid-ContextMenuUpdate',
-	            handler: function() {
-                    var sm = Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-Grid').getSelectionModel().getSelection()[0];
+                itemId: 'MitraJaya.view.Warehouse.Sparepart.GridMain-ContextMenuUpdate',
+	            handler: function() {					
+                    var sm = Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-Grid').getSelectionModel().getSelection()[0];
 
-                    var Code = Ext.getCmp('MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-ProductCode').getValue();
-                    var WinFormSparePart = Ext.create('MitraJaya.view.Warehouse.Product.WinFormSparePart');
-                    WinFormSparePart.setViewVar({
-                        OpsiDisplay:'update',
-                        Code:Code,
-                        SparepartID: sm.get('SparepartID'),
-                        CallerStore: thisObj.StoreGridMain,
-                        ProductID:thisObj.viewVar.ProductID
-                    });
-                    if (!WinFormSparePart.isVisible()) {
-                        WinFormSparePart.center();
-                        WinFormSparePart.show();
-                    } else {
-                        WinFormSparePart.close();
-                    }
+                    Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain').destroy(); //destory current view
+					var FormMainFarmer = [];
+
+					//create object View untuk FormMainGrower
+					if(Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm') == undefined){
+						FormMainFarmer = Ext.create('MitraJaya.view.Warehouse.Sparepart.MainForm', {
+							viewVar: {
+								OpsiDisplay: 'update',
+								SparepartID: sm.get("SparepartID")
+							}
+						});
+					}else{
+						//destroy, create ulang
+						Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm').destroy();
+						FormMainFarmer = Ext.create('MitraJaya.view.Warehouse.Sparepart.MainForm', {
+							viewVar: {
+								OpsiDisplay: 'update',
+								SparepartID: sm.get("SparepartID")
+							}
+						});
+					}
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
                 text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
-                itemId: 'MitraJaya.view.Warehouse.Sparepart.MainGrid-ContextMenuDelete',
+                itemId: 'MitraJaya.view.Warehouse.Sparepart.GridMain-ContextMenuDelete',
 	            handler: function(){
-                    var sm = Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-Grid').getSelectionModel().getSelection()[0];
+                    var sm = Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-Grid').getSelectionModel().getSelection()[0];
 
 					Swal.fire({
 						title: 'Do you want to delete this data ?',
@@ -161,7 +172,7 @@
 
         thisObj.items = [{
             xtype: 'grid',
-            id: 'MitraJaya.view.Warehouse.Sparepart.MainGrid-Grid',
+            id: 'MitraJaya.view.Warehouse.Sparepart.GridMain-Grid',
             style: 'border:1px solid #CCC;margin-top:4px;',
             cls:'Sfr_GridNew',
 			minHeight:600,
@@ -189,21 +200,28 @@
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
-                    id: 'MitraJaya.view.Warehouse.Sparepart.MainGrid-BtnAdd',
+                    id: 'MitraJaya.view.Warehouse.Sparepart.GridMain-BtnAdd',
                     handler: function() {
-                        var Code = Ext.getCmp('MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-ProductCode').getValue();
-                    	var WinFormSparePart = Ext.create('MitraJaya.view.Warehouse.Product.WinFormSparePart');
-                        WinFormSparePart.setViewVar({
-                            OpsiDisplay:'insert',
-                            Code:Code,
-                            CallerStore: thisObj.StoreGridMain,
-                            ProductID:thisObj.viewVar.ProductID
-                        });
-                        if (!WinFormSparePart.isVisible()) {
-                            WinFormSparePart.center();
-                            WinFormSparePart.show();
-                        } else {
-                            WinFormSparePart.close();
+                        Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain').destroy(); //destory current view
+                    	var FormMainFarmer = [];
+
+                        //create object View untuk FormMainGrower
+                        if(Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm') == undefined){
+                            FormMainFarmer = Ext.create('MitraJaya.view.Warehouse.Sparepart.MainForm', {
+                            	viewVar: {
+                                    OpsiDisplay: 'insert',
+                                    PanelDisplayID: null
+		                        }
+                            });
+                        }else{
+                            //destroy, create ulang
+                            Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainForm').destroy();
+                            FormMainFarmer = Ext.create('MitraJaya.view.Warehouse.Sparepart.MainForm', {
+                                viewVar: {
+                                    OpsiDisplay: 'insert',
+                                    PanelDisplayID: null
+		                        }
+                            });
                         }
                     }
                 },{
@@ -213,10 +231,10 @@
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
-                    id: 'MitraJaya.view.Warehouse.Sparepart.MainGrid-BtnExport',
+                    id: 'MitraJaya.view.Warehouse.Sparepart.GridMain-BtnExport',
                     handler: function() {
-						var keySearch	= Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-keySearch').getValue();
-						var keySearch2	= Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-keySearch2').getValue();
+						var keySearch	= Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-keySearch').getValue();
+						var keySearch2	= Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-keySearch2').getValue();
 
 						Swal.fire({
 							text: "Export data ?",
@@ -293,9 +311,9 @@
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/recycle.svg',
                     cls:'Sfr_BtnGridBlue',
                     overCls:'Sfr_BtnGridBlue-Hover',
-                    id: 'MitraJaya.view.Warehouse.Sparepart.MainGrid-BtnReload',
+                    id: 'MitraJaya.view.Warehouse.Sparepart.GridMain-BtnReload',
                     handler: function() {
-                        Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-Grid').getStore().loadPage(1);
+                        Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-Grid').getStore().loadPage(1);
                     }
                 }]
             }],
@@ -374,19 +392,19 @@
     }, 
     submitOnEnterGrid: function (field, event) {        
 		localStorage.setItem('sparepart_src', JSON.stringify({
-			// keySearch		: Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-keySearch').getValue(),
-			// keySearch2	    : Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-keySearch2').getValue()
+			// keySearch		: Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-keySearch').getValue(),
+			// keySearch2	    : Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-keySearch2').getValue()
 		}));
-		Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-Grid').getStore().loadPage(1);
+		Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-Grid').getStore().loadPage(1);
     }
 });
 
 function setFilterLs() {
 	localStorage.setItem('sparepart_src', JSON.stringify({
-		// keySearch		: Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-keySearch').getValue(),
-		// keySearch2	: Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-keySearch2').getValue()
+		// keySearch		: Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-keySearch').getValue(),
+		// keySearch2	: Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-keySearch2').getValue()
 	}));
-	Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.MainGrid-Grid').getStore().loadPage(1);
+	Ext.getCmp('MitraJaya.view.Warehouse.Sparepart.GridMain-Grid').getStore().loadPage(1);
 }   
 
 function fetchJSON(text){
