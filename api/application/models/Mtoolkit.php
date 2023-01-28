@@ -172,7 +172,9 @@ class Mtoolkit extends CI_Model {
 		$this->db->select('ToolkitID,
             ToolkitCode,
             ToolkitName,
-            ToolkitQty
+            ToolkitQty,
+			RackID,
+			Photo
 		');
 		$query = $this->db->get('mj_toolkit')->row_array();
 
@@ -180,6 +182,7 @@ class Mtoolkit extends CI_Model {
         foreach($query as $row => $value){
             $result["MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-".$row] = $value;
         }
+        $result["file"] = $query["Photo"];
 
         $return["success"]  = true;
         $return["data"]     = $result;
@@ -218,12 +221,25 @@ class Mtoolkit extends CI_Model {
 	public function insert_toolkit($post)
     {
 		$ToolkitID = getUUID();
+		$PhotoOld = $post["PhotoOld"];
         unset($post["OpsiDisplay"]);
         unset($post["ToolkitID"]);
+        unset($post["PhotoOld"]);
 
 		$post["ToolkitID"] = $ToolkitID;
 		$post["CreatedDate"] = date("Y-m-d H:i:s");
 		$post["CreatedBy"] = $_SESSION["user_id"];
+
+		if($PhotoOld != "") {
+			$path = $PhotoOld;
+			$ext = pathinfo($path, PATHINFO_EXTENSION);
+
+			$newpath = "files/toolkit/".time()."_toolkit.".$ext;
+			if (strpos($PhotoOld, 'files/tmp/') !== false) {
+				rename($PhotoOld, $newpath);
+			}
+			$post["Photo"] = $newpath;
+		}
 		
 		$update = $this->db->insert("mj_toolkit", $post);
 

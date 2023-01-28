@@ -47,6 +47,11 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
                     success: function (form, action) {
                         Ext.MessageBox.hide();
                         var r = Ext.decode(action.response.responseText);
+
+                        if (r.data.file != '') {
+                            Ext.getCmp('MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-Photo').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Toolkit.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + r.data.file + '\')"><img src="' + m_api_base_url + '/' + r.data.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+						    Ext.getCmp('MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-PhotoOld').setValue(r.data.file);
+                        }
                     },
                     failure: function (form, action) {
                         Swal.fire({
@@ -80,6 +85,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
         var thisObj = this;
 
         thisObj.combo_part_code = Ext.create('MitraJaya.store.General.PartCodeList');
+        thisObj.combo_rack_list = Ext.create('MitraJaya.store.General.RackList');
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
@@ -93,7 +99,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
                 border: false,
                 padding: 10,
                 items: [{
-                    columnWidth: 0.3,
+                    columnWidth: 1,
                     layout: 'form',
                     cls: 'Sfr_PanelLayoutFormContainer',
                     items: [{
@@ -106,7 +112,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
                             layout: 'column',
                             border: false,
                             items: [{
-                                columnWidth: 1,
+                                columnWidth: 0.5,
                                 layout: 'form',
                                 style: 'padding:10px 0px 10px 5px;',
                                 items: [{
@@ -135,11 +141,77 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-ToolkitQty',
                                     name: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-ToolkitQty',
-                                    fieldLabel: lang('Toolkit Qty'),
-                                    allowBlank:false,
-									baseCls: 'Sfr_FormInputMandatory'
+                                    fieldLabel: lang('Base Toolkit Qty')
+                                },{
+                                    xtype: 'combobox',
+									id:'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-RackID',
+									name:'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-RackID',
+									labelAlign:'top',
+									fieldLabel:'Rak No',
+                                    store:thisObj.combo_rack_list,
+                                    queryMode:'local',
+                                    displayField:'label',
+                                    valueField:'id',
                                 }]
-                            }]
+                            },{
+								columnWidth: 0.5,
+								layout: 'form',
+								style: 'padding:10px 5px 10px 20px;',
+								defaults: {
+									labelAlign: 'left',
+									labelWidth: 150
+								},
+								items: [{
+									layout: 'column',
+									border: false,
+									items: [{
+										columnWidth: 1,
+										layout: 'form',
+										style: 'padding:10px 0px 10px 5px;',
+										items: [{
+											xtype: 'panel',
+											id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-Photo',
+											html: '<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Toolkit.MainForm\').ZoomImage(\'' + m_api_base_url + '/assets/images/no_data.png' +'\')"><img src="' + m_api_base_url + '/assets/images/no_data.png" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>'
+										}, {
+											xtype: 'fileuploadfield',
+											id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-PhotoInput',
+											name: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-PhotoInput',
+											buttonText: lang('Browse'),
+											cls: 'Sfr_FormBrowseBtn',
+											listeners: {
+												'change': function (fb, v) {
+													Ext.getCmp('MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData').getForm().submit({
+														url: m_api + '/v1/warehouse/toolkit/upload',
+														clientValidation: false,
+														params: {
+															OpsiDisplay: thisObj.viewVar.OpsiDisplay
+														},
+														waitMsg: 'Sending Photo...',
+														success: function (fp, o) {
+															Ext.getCmp('MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-Photo').update('<a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Toolkit.MainForm\').ZoomImage(\'' + m_api_base_url + '/' + o.result.file + '\')"><img src="' + m_api_base_url + '/' + o.result.file + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" /></a>');
+															Ext.getCmp('MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-PhotoOld').setValue(o.result.file);
+														},
+														failure: function (fp, o) {
+															Ext.MessageBox.show({
+																title: lang('Error'),
+																msg: o.result.message,
+																buttons: Ext.MessageBox.OK,
+																animateTarget: 'mb9',
+																icon: 'ext-mb-error'
+															});
+														}
+													});
+												}
+											}
+										}, {
+											xtype: 'textfield',
+											id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-PhotoOld',
+											name: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-PhotoOld',
+											inputType: 'hidden'
+										}]
+									}]
+								}]
+							}]
                         }],
                         buttons: [{
                             xtype: 'button',
@@ -244,7 +316,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
             border: false,
             items: [{
                 //LEFT CONTENT
-                columnWidth: 1,
+                columnWidth: 0.7,
                 items: [
                     thisObj.ObjPanelBasicData
                 ]
