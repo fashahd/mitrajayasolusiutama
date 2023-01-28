@@ -56,7 +56,7 @@ class Mtoolkit extends CI_Model {
 
 	public function list_toolkit($pSearch, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
 
-        if ($sortingField == "") $sortingField = 'SparepartID';
+        if ($sortingField == "") $sortingField = 'ToolkitID';
         if ($sortingDir == "") $sortingDir = 'DESC';
 
 		($pSearch["ToolkitCode"] != '') ? $this->db->where("ToolkitCode", $pSearch["ToolkitCode"]): "";
@@ -214,4 +214,28 @@ class Mtoolkit extends CI_Model {
 		return $response;
     }
 
+
+	public function insert_toolkit($post)
+    {
+		$ToolkitID = getUUID();
+        unset($post["OpsiDisplay"]);
+        unset($post["ToolkitID"]);
+
+		$post["ToolkitID"] = $ToolkitID;
+		$post["CreatedDate"] = date("Y-m-d H:i:s");
+		$post["CreatedBy"] = $_SESSION["user_id"];
+		
+		$update = $this->db->insert("mj_toolkit", $post);
+
+		if($update){
+			$response["success"] = true;
+			$response["message"] = "Data Saved";
+			$response["ToolkitID"] = $ToolkitID;
+		}else{
+			$response["success"] = false;
+			$response["message"] = "Failed to saved data";
+		}
+
+		return $response;
+    }
 }

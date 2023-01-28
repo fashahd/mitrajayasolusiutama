@@ -125,8 +125,8 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
                                 }, {
                                     xtype: 'textfield',
                                     labelAlign:'top',
-                                    id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-TookitName',
-                                    name: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-TookitName',
+                                    id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-ToolkitName',
+                                    name: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-ToolkitName',
                                     fieldLabel: lang('Toolkit Name'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
@@ -228,7 +228,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + lang('Tookit Data') + '</div>'
+                html: '<div id="header_title_farmer">' + lang('Toolkit Data') + '</div>'
             }]
         }, {
             items: [{
