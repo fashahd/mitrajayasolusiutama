@@ -32,7 +32,7 @@ if(count($invoice_history["data"]) > 0){
 	}
 }
 
-$percentage_total = $percentage_current+$total_history;
+$percentage_total = number_format($percentage_current+$total_history,2);
 ?>
 
 <style type="text/css">

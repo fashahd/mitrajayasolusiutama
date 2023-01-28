@@ -102,7 +102,7 @@ class Toolkit extends REST_Controller {
 
 		$data["StatusCode"] = "nullified";
 
-		$this->db->where("ToolkitID", $SparepartID);
+		$this->db->where("ToolkitID", $ToolkitID);
 		$query = $this->db->update("mj_toolkit", $data);
 
 		if($query){
