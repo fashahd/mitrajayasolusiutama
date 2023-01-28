@@ -192,6 +192,7 @@ class Msparepart extends CI_Model {
             SparepartType,
             SparepartCategory,
             SparepartQty,
+			RackID,
             SparepartBasicPrice,
             SparepartSellingPrice,
             SparepartStatus,

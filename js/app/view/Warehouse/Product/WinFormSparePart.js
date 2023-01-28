@@ -92,6 +92,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormSparePart' ,{
     initComponent: function() {
         var thisObj = this;
         let labelWidth = 150;
+        thisObj.combo_rack_list = Ext.create('MitraJaya.store.General.RackList');
 
 
         //items -------------------------------------------------------------- (begin)
@@ -157,9 +158,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormSparePart' ,{
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartNo',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartNo',
-                                    fieldLabel: lang('Sparepart No'),
-                                    allowBlank: false,
-                                    baseCls: 'Sfr_FormInputMandatory',
+                                    fieldLabel: lang('Sparepart No')
                                 }, {
                                     xtype: 'radiogroup',
                                     labelAlign:'top',
@@ -191,7 +190,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormSparePart' ,{
                                     msgTarget: 'side',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
-                                    columns: 2,
+                                    columns: 3,
                                     items: [{
                                         boxLabel: lang('C'),
                                         name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategory',
@@ -218,25 +217,39 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormSparePart' ,{
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartQty',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartQty',
-                                    fieldLabel: lang('Qty'),
-                                    allowBlank: false,
-                                    baseCls: 'Sfr_FormInputMandatory',
+                                    fieldLabel: lang('Base Qty')
+                                },{
+                                    xtype: 'combobox',
+									id:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-RackID',
+									name:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-RackID',
+									labelAlign:'top',
+									fieldLabel:'Rak No',
+                                    store:thisObj.combo_rack_list,
+                                    queryMode:'local',
+                                    displayField:'label',
+                                    valueField:'id',
+                                }, {
+                                    xtype: 'combobox',
+									id:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-RakNumber',
+									name:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-RakNumber',
+									labelAlign:'top',
+									fieldLabel:'Rak No',
+                                    store:thisObj.combo_rack_list,
+                                    queryMode:'local',
+                                    displayField:'label',
+                                    valueField:'id',
                                 }, {
                                     xtype: 'numericfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartBasicPrice',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartBasicPrice',
-                                    fieldLabel: lang('Basic Price'),
-                                    allowBlank: false,
-                                    baseCls: 'Sfr_FormInputMandatory',
+                                    fieldLabel: lang('Basic Price')
                                 }, {
                                     xtype: 'numericfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartSellingPrice',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartSellingPrice',
-                                    fieldLabel: lang('Selling Price'),
-                                    allowBlank: false,
-                                    baseCls: 'Sfr_FormInputMandatory',
+                                    fieldLabel: lang('Selling Price')
                                 }, {
                                     xtype: 'radiogroup',
                                     labelAlign:'top',
