@@ -82,7 +82,8 @@ class Toolkit extends REST_Controller {
             }
             $paramPost[$keyNew] = $value;
         }
-        
+
+
 		if ($varPost['OpsiDisplay'] == 'insert') {
 
             $proses = $this->mtoolkit->insert_toolkit($paramPost);
@@ -114,6 +115,56 @@ class Toolkit extends REST_Controller {
 			$response["message"] = "Failed to Deleted Data";
 			$this->response($response, 400);
 		}
+	}
+
+	function upload_post(){
+		//Cek file images
+        $ExtNya = GetFileExt($_FILES['MitraJaya_view_Warehouse_Toolkit_MainForm-FormBasicData-PhotoInput']['name']);
+        if (!in_array($ExtNya, array('png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG'))) {
+            $result['success'] = false;
+            $result['message'] = lang('File types not allowed');
+            $this->response($result, 400);
+        } else {
+			if($_POST["OpsiDisplay"] == "insert"){
+				if ($_FILES['MitraJaya_view_Warehouse_Toolkit_MainForm-FormBasicData-PhotoInput']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Toolkit_MainForm-FormBasicData-PhotoInput']['name'];
+					$fileupload['MitraJaya_view_Warehouse_Toolkit_MainForm-FormBasicData-PhotoInput'] = $_FILES['MitraJaya_view_Warehouse_Toolkit_MainForm-FormBasicData-PhotoInput'];
+	
+					$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$result['success'] = true;
+						$result['file'] = 'files/tmp/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			}else{
+				if ($_FILES['MitraJaya_view_Warehouse_Toolkit_MainForm-FormBasicData-PhotoInput']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Warehouse_Toolkit_MainForm-FormBasicData-PhotoInput']['name'];
+					$fileupload['MitraJaya_view_Warehouse_Toolkit_MainForm-FormBasicData-PhotoInput'] = $_FILES['MitraJaya_view_Warehouse_Toolkit_MainForm-FormBasicData-PhotoInput'];
+	
+					$upload = move_upload($fileupload, 'files/toolkit/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$ToolkitID = $_POST["MitraJaya_view_Warehouse_Toolkit_MainForm-FormBasicData-ToolkitID"];
+						
+						$datapost["Photo"] = 'files/toolkit/' . $gambar;
+						$this->db->where("ToolkitID", $ToolkitID);
+						$this->db->update("mj_toolkit", $datapost);
+
+						$result['success'] = true;
+						$result['file'] = 'files/toolkit/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			}
+        }
 	}
 }
 ?>
