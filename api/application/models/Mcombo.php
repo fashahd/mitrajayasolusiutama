@@ -215,4 +215,88 @@ class Mcombo extends CI_Model {
 
         return $query;
 	}
+
+	public function getFamilyStatus(){
+		$this->db->where("StatusCode", "active");
+		$this->db->select('
+			FamilyStatusID id,
+			FamilyStatusName label
+		');
+
+		$query = $this->db->get('mj_family_status')->result_array();	
+
+        return $query;
+	}
+
+	public function getEducationLevel(){
+		$this->db->where("StatusCode", "active");
+		$this->db->select('
+			EducationLevelID id,
+			EducationLevel label
+		');
+
+		$query = $this->db->get('mj_education_level')->result_array();	
+
+        return $query;
+	}
+
+	public function getProvince(){
+		$this->db->where("StatusCode", "active");
+		$this->db->select('
+			ProvinceID id,
+			ProvinceName label
+		');
+
+		$query = $this->db->get('reg_province')->result_array();	
+
+        return $query;
+	}
+
+	public function getDistrict($ProvinceID = ''){
+		if($ProvinceID != ''){
+			$this->db->where("ProvinceID", $ProvinceID);
+		}
+
+		$this->db->where("StatusCode", "active");
+		$this->db->select('
+			DistrictID id,
+			DistrictName label
+		');
+
+		$query = $this->db->get('reg_district')->result_array();	
+
+        return $query;
+	}
+
+	public function getSubDistrict($DistrictID = ''){
+		if($DistrictID != ''){
+			$this->db->where("DistrictID", $DistrictID);
+		}
+
+		$this->db->where("StatusCode", "active");
+		$this->db->select('
+			SubDistrictID id,
+			SubDistrictName label
+		');
+
+		$query = $this->db->get('reg_subdistrict')->result_array();	
+
+        return $query;
+	}
+
+	public function getVillage($SubDistrictID = ''){
+		if($SubDistrictID != ''){
+			$this->db->where("SubDistrictID", $SubDistrictID);
+		}
+
+		$this->db->where("StatusCode", "active");
+		$this->db->select('
+			VillageID id,
+			VillageName label
+		');
+
+		$query = $this->db->get('reg_village')->result_array();	
+
+        return $query;
+	}
 }
