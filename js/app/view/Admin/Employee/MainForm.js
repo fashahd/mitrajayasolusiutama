@@ -47,6 +47,55 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
                     success: function (form, action) {
                         Ext.MessageBox.hide();
                         var r = Ext.decode(action.response.responseText);
+
+						//untuk handle combo bertingkat
+                        var cmb_province = Ext.data.StoreManager.lookup('store.General.ProvinceList');
+                        var cmb_district = Ext.data.StoreManager.lookup('store.General.DistrictList');
+                        var cmb_subdistrict = Ext.data.StoreManager.lookup('store.General.SubDistrictList');
+                        var cmb_village = Ext.data.StoreManager.lookup('store.General.VillageList');
+
+						if(r.data.photo != ''){							
+							Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo').update('<img src="' + r.data.photo + '" style="height:150px;margin:0px 5px 5px 0px;float:left;" />');
+						}
+						
+                        cmb_province.load({
+                            callback: function(records, operation, success){
+                                Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-province_id').setValue(r.data.province_id);
+                                if (success == true) {
+                                    cmb_district.load({
+                                        params: {
+                                            ProvinceID: r.data.province_id
+                                        },
+                                        callback: function(records, operation, success){
+                                            if (success == true) {
+                                                Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-district_id').setValue(r.data.district_id);
+                                                cmb_subdistrict.load({
+                                                    params: {
+                                                        DistrictID: r.data.district_id
+                                                    },
+                                                    callback: function(records, operation, success){
+
+                                                        if (success == true) {
+                                                            Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-subdistrict_id').setValue(r.data.subdistrict_id);
+                                                            cmb_village.load({
+                                                                params: {
+                                                                    SubDistrictID: r.data.subdistrict_id
+                                                                },
+                                                                callback: function(records, operation, success){
+                                                                    if (success == true) {
+                                                                        Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-village_id').setValue(r.data.village_id);
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
                     },
                     failure: function (form, action) {
                         Swal.fire({
@@ -80,12 +129,17 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
         var thisObj = this;
 
         thisObj.combo_religion = Ext.create('MitraJaya.store.General.ReligionList');
+        let cmb_province = Ext.create('MitraJaya.store.General.ProvinceList');
+        cmb_province.load();
+        let cmb_district = Ext.create('MitraJaya.store.General.DistrictList');
+        let cmb_subdistrict = Ext.create('MitraJaya.store.General.SubDistrictList');
+        let cmb_village = Ext.create('MitraJaya.store.General.VillageList');
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
             frame: false,
             cls: 'Sfr_PanelLayoutForm',
-            id: 'MitraJaya.view.Finance.Employee-FormGeneralData',
+            id: 'MitraJaya.view.Admin.Employee-FormGeneralData',
             items: [{
                 layout: 'column',
                 border: false,
@@ -106,7 +160,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
                             id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData',
                             fileUpload: true,
                             buttonAlign: 'center',
-                            title: lang('Basic Info'),
+                            title: lang('Employee Data'),
                             cls: 'Sfr_PanelSubLayoutForm',
                             items: [{
 								layout: 'column',
@@ -129,12 +183,11 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 										listeners: {
 											'change': function (fb, v) {
 												Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData').getForm().submit({
-													url: m_api + '/farmers/photo_farmer',
+													url: m_api + '/v1/admin/employee/photo_upload',
 													clientValidation: false,
 													params: {
-														opsiDisplay: thisObj.viewVar.opsiDisplay,
-														FarmerID: Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-FarmerID').getValue(),
-														ProvinceID: Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Province').getValue()
+														OpsiDisplay: thisObj.viewVar.OpsiDisplay,
+														people_id: Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_id').getValue()
 													},
 													waitMsg: 'Sending Photo...',
 													success: function (fp, o) {
@@ -143,10 +196,11 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 
 														if(thisObj.viewVar.opsiDisplay == 'insert') {
 															//Insert
-															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo').update('<img src="' + m_api_base_url + '/files/export/' + o.result.file + '" style="height:150px;margin:0px 5px 5px 0px;float:left;" />');
+															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo').update('<img src="' + o.result.fileurl + '" style="height:150px;margin:0px 5px 5px 0px;float:left;" />');
 															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-PhotoOld').setValue(o.result.file);
 														} else {
 															//Update / View
+															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-PhotoOld').setValue(o.result.file);
 															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo').update('<img src="' + o.result.fileurl + '" style="height:150px;margin:0px 5px 5px 0px;float:left;" />');
 														}
 													},
@@ -279,39 +333,202 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 											}]
 										}]
 									}]
+								},{
+									columnWidth: 0.5,
+									layout: 'form',
+									style: 'padding:10px 5px 10px 20px;',
+									items: [{
+										xtype: 'panel',
+										title: lang('Address & Location'),
+										frame: false,
+										id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-SectionAddress',
+										style: 'margin-top:12px;',
+										cls: 'Sfr_PanelSubLayoutFormRoundedGray',
+										items: [{
+											layout: 'column',
+											border: false,
+											items: [{
+												columnWidth: 1,
+												layout: 'form',
+												style: 'padding:10px 0px 10px 5px;',
+												defaults: {
+													labelAlign: 'top',
+													labelWidth: 150
+												},
+												items: [{
+                                                    xtype: 'combobox',
+                                                    id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-province_id',
+                                                    name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-province_id',
+                                                    store: cmb_province,
+                                                    fieldLabel: lang('Province'),
+                                                    labelAlign:'top',
+                                                    queryMode: 'local',
+                                                    displayField: 'label',
+                                                    valueField: 'id',
+                                                    listeners: {
+                                                        change: function(cb, nv, ov) {
+                                                            cmb_district.load({
+                                                                params: {
+                                                                    ProvinceID: nv
+                                                                }
+                                                            });
+                                                            Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-district_id').setValue('');
+                                                            Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-subdistrict_id').setValue('');
+                                                            Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-village_id').setValue('');
+                                                        }
+                                                    }
+                                                },{
+                                                    xtype: 'combobox',
+                                                    id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-district_id',
+                                                    name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-district_id',
+                                                    store: cmb_district,
+                                                    fieldLabel: lang('District'),
+                                                    labelAlign:'top',
+                                                    queryMode: 'local',
+                                                    displayField: 'label',
+                                                    valueField: 'id',
+                                                    listeners: {
+                                                        change: function(cb, nv, ov) {
+                                                            cmb_subdistrict.load({
+                                                                params: {
+                                                                    DistrictID: nv
+                                                                }
+                                                            });
+                                                            Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-subdistrict_id').setValue('');
+                                                            Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-village_id').setValue('');
+                                                        }
+                                                    }
+                                                },{
+                                                    xtype: 'combobox',
+                                                    id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-subdistrict_id',
+                                                    name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-subdistrict_id',
+                                                    store: cmb_subdistrict,
+                                                    fieldLabel: lang('Sub District'),
+                                                    labelAlign:'top',
+                                                    queryMode: 'local',
+                                                    displayField: 'label',
+                                                    valueField: 'id',
+                                                    listeners: {
+                                                        change: function(cb, nv, ov) {
+                                                            cmb_village.load({
+                                                                params: {
+                                                                    SubDistrictID: nv
+                                                                }
+                                                            });
+                                                            Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-village_id').setValue('');
+                                                        }
+                                                    }
+                                                },{
+                                                    xtype: 'combobox',
+                                                    id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-village_id',
+                                                    name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-village_id',
+                                                    store: cmb_village,
+                                                    fieldLabel: lang('Village'),
+                                                    labelAlign:'top',
+                                                    queryMode: 'local',
+                                                    displayField: 'label',
+                                                    valueField: 'id',
+                                                    listeners: {
+                                                        change: function(cb, nv, ov) {
+															return false;
+                                                        }
+                                                    }
+                                                },{
+													xtype: 'textarea',
+													readOnly: m_act_update,
+													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-address',
+													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-address',
+													fieldLabel: lang('Address')
+												}]
+											}]
+										}]
+									}]
+								},{
+									columnWidth: 0.5,
+									layout: 'form',
+									style: 'padding:10px 5px 10px 20px;',
+									items: [{
+										xtype: 'panel',
+										title: lang('Communication'),
+										frame: false,
+										id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-SectionCommunication',
+										style: 'margin-top:12px;',
+										cls: 'Sfr_PanelSubLayoutFormRoundedGray',
+										items: [{
+											layout: 'column',
+											border: false,
+											items: [{
+												columnWidth: 1,
+												layout: 'form',
+												style: 'padding:10px 0px 10px 5px;',
+												defaults: {
+													labelAlign: 'top',
+													labelWidth: 150
+												},
+												items: [{
+													xtype: 'textfield',
+													readOnly: m_act_update,
+													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_email',
+													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_email',
+													fieldLabel: lang('Email')
+												},{
+													html:'<div style="margin-bottom:10px"></div>'
+												},{
+													xtype: 'textfield',
+													readOnly: m_act_update,
+													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-phone_number',
+													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-phone_number',
+													fieldLabel: lang('Handphone')
+												}]
+											}]
+										}]
+									},{
+										xtype: 'panel',
+										title: lang('Bank Information'),
+										frame: false,
+										id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-SectionBank',
+										style: 'margin-top:12px;',
+										cls: 'Sfr_PanelSubLayoutFormRoundedGray',
+										items: [{
+											layout: 'column',
+											border: false,
+											items: [{
+												columnWidth: 1,
+												layout: 'form',
+												style: 'padding:10px 0px 10px 5px;',
+												defaults: {
+													labelAlign: 'top',
+													labelWidth: 150
+												},
+												items: [{
+													xtype: 'textfield',
+													readOnly: m_act_update,
+													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-bank',
+													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-bank',
+													fieldLabel: lang('Bank Name')
+												},{
+													html:'<div style="margin-bottom:10px"></div>'
+												},{
+													xtype: 'textfield',
+													readOnly: m_act_update,
+													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-account_no',
+													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-account_no',
+													fieldLabel: lang('Account Number')
+												},{
+													html:'<div style="margin-bottom:10px"></div>'
+												},{
+													xtype: 'textfield',
+													readOnly: m_act_update,
+													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-account_beneficiary',
+													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-account_beneficiary',
+													fieldLabel: lang('Account Number Beneficiary')
+												}]
+											}]
+										}]
+									}]
 								}]
 							}]
-						},{
-                            xtype: 'panel',
-                            title: lang('Family'),
-							disabled:true,
-                            id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-TabAddDataFamily',
-                            items: [{
-                                layout: 'column',
-                                border: false,
-                                items: [{
-                                    columnWidth: 1,
-                                    layout: 'form',
-                                    style: 'padding: 10px 0 0 0;min-height:1000px;',
-                                    items: []
-                                }]
-                            }]
-                        },{
-                            xtype: 'panel',
-                            title: lang('Emergency Contact'),
-							disabled:true,
-                            id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-TabAddDataEmergency',
-                            items: [{
-                                layout: 'column',
-                                border: false,
-                                items: [{
-                                    columnWidth: 1,
-                                    layout: 'form',
-                                    style: 'padding: 10px 0 0 0;min-height:1000px;',
-                                    items: []
-                                }]
-                            }]
-                        }],
+						}],
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
@@ -388,7 +605,29 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
         });
         //Panel Basic ==================================== (End)
 
-        //============================= End DQ =========================================//
+        //============================= End DQ =========================================//		
+
+		var objPanelDinamis = [];
+
+		if(thisObj.viewVar.OpsiDisplay == 'update' || thisObj.viewVar.OpsiDisplay == 'view'){
+			//Panel Family
+			thisObj.ObjPanelFamily = Ext.create('MitraJaya.view.Admin.Employee.GridFamily',{
+				viewVar: {
+					people_id: thisObj.viewVar.people_id
+				}
+			});
+			objPanelDinamis.push(thisObj.ObjPanelFamily);
+			//panel Form Family ======================================================================== (end)
+
+			//Panel Education
+			thisObj.ObjPanelEducation = Ext.create('MitraJaya.view.Admin.Employee.GridEducation',{
+				viewVar: {
+					people_id: thisObj.viewVar.people_id
+				}
+			});
+			objPanelDinamis.push(thisObj.ObjPanelEducation);
+			//panel Form Education ======================================================================== (end)
+		}
 
         //========================================================== LAYOUT UTAMA (Begin) ========================================//
         thisObj.items = [{
@@ -415,10 +654,15 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
             border: false,
             items: [{
                 //LEFT CONTENT
-                columnWidth: 0.5,
+                columnWidth: 0.6,
+				style:'margin-right:20px',
                 items: [
                     thisObj.ObjPanelBasicData
                 ]
+            },{
+                //RIGHT CONTENT
+                columnWidth: 0.4,
+                items:objPanelDinamis
             }]
         }];
         //========================================================== LAYOUT UTAMA (END) ========================================//

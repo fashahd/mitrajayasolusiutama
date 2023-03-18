@@ -262,7 +262,13 @@ $percentage_total = number_format($percentage_current+$total_history,2);
 				<td colspan="4"><span style="float:right">PPh 23</span></td>
 				<td><span style="float:left">- Rp</span><span style="float:right"> <?=number_format($invoicedata["PPH23Value"])?></span></td>
 			</tr>
-			<?php }  }
+			<?php }  ?>
+				<tr>
+					<td colspan="4"><span style="float:right">Grand Total</span></td>
+					<td><span style="float:left">Rp</span> <span style="float:right"><?=number_format($invoicedata["InvoiceTotal"])?></span></td>
+				</tr>
+			<?php
+			}
 			?>
 			<tr>
 				<td colspan="5" style="padding:10px"><b>Terbilang : <i># <?=terbilang(round($invoicedata["InvoiceTotal"]))?> Rupiah #</i></b></td>

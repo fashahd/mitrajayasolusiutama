@@ -195,4 +195,52 @@ class Combo extends REST_Controller {
 		
 		$this->response($data);
 	}
+
+	function combo_family_status_get(){
+
+		$data = $this->mcombo->getFamilyStatus();
+
+		
+		$this->response($data);
+	}
+
+	function combo_education_level_get(){
+
+		$data = $this->mcombo->getEducationLevel();
+
+		
+		$this->response($data);
+	}
+
+	function combo_province_get(){
+
+		$data = $this->mcombo->getProvince();
+
+		
+		$this->response($data);
+	}
+
+	function combo_district_get(){
+
+		$data = $this->mcombo->getDistrict($this->get("ProvinceID"));
+
+		
+		$this->response($data);
+	}
+
+	function combo_subdistrict_get(){
+
+		$data = $this->mcombo->getSubDistrict($this->get("DistrictID"));
+
+		
+		$this->response($data);
+	}
+
+	function combo_village_get(){
+
+		$data = $this->mcombo->getVillage($this->get("SubDistrictID"));
+
+		
+		$this->response($data);
+	}
 }
