@@ -1,13 +1,13 @@
 /******************************************
  *  Author : fashahd@gmail.com.com   
  *  Created On : Fri Jan 17 2020
- *  File : MainGrid.js
+ *  File : GridContract.js
  *******************************************/
- Ext.define('MitraJaya.store.Admin.Employee.MainGrid', {
+ Ext.define('MitraJaya.store.Admin.Employee.GridContract', {
     extend: 'Ext.data.Store',
-    id: 'MitraJaya.store.Admin.Employee.MainGrid',
-    storeId: 'MitraJaya.store.Admin.Employee.MainGrid',
-    fields: ['people_id','people_ext_id','people_name','people_gender','phone_code','phone_number','address','exist_user','people_email'],
+    id: 'MitraJaya.store.Admin.Employee.GridContract',
+    storeId: 'MitraJaya.store.Admin.Employee.GridContract',
+    fields: ['contract_id','contract_number','position','gol','start_date','end_date'],
     pageSize: 50,
     autoLoad: true,
     storeVar: false,
@@ -17,7 +17,7 @@
     remoteSort: true,
     proxy: {
         type: 'ajax',
-        url: m_api + '/v1/admin/employee/list',
+        url: m_api + '/v1/admin/employee/contract_list',
         reader: {
             type: 'json',
             root: 'data',
@@ -38,13 +38,7 @@
             }
         },
         beforeload: function(store, operation, options){
-            var customer_src = JSON.parse(localStorage.getItem('customer_src'));
-            
-            if(customer_src != null){
-                store.proxy.extraParams.keySearch = customer_src.keySearch;
-            }else{
-                store.proxy.extraParams.keySearch = '';
-            }
+			store.proxy.extraParams.people_id = this.storeVar.people_id;
         }
     },
     loadInfoFilter: function() {

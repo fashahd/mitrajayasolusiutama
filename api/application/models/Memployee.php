@@ -25,9 +25,57 @@ class Memployee extends CI_Model {
 			IF(a.user_id != "", "Yes", "No") exist_user,
 			a.phone_code,
 			a.phone_number,
-			a.address
+			a.address,
+			a.people_email
 		');
 		$query = $this->db->get('mj_people a');
+
+		$data = $query->result_array();
+        // $result['sql'] = $this->db->last_query();
+        $result['data'] = $data;
+        // echo '<pre>'; print_r($this->db->last_query()); echo '</pre>'; exit;
+
+        $query = $this->db->query('SELECT FOUND_ROWS() AS total');
+        $result['total'] = $query->row()->total;
+
+        if ($sortingDir == 'ASC') {
+            $sortingInfo = 'ascending';
+        }
+        if ($sortingDir == 'DESC') {
+            $sortingInfo = 'descending';
+        }
+
+        $_SESSION['informationGrid'] = '
+            <div class="Sfr_BoxInfoDataGrid_Title"><strong>' . number_format($query->row()->total, 0, ".", ",") . '</strong> ' . 'Data' . '</div>
+            <ul class="Sft_UlListInfoDataGrid">
+                <li class="Sft_ListInfoDataGrid">
+                    <img class="Sft_ListIconInfoDataGrid" src="' . base_url() . 'assets/icons/font-awesome/svgs/solid/arrow-up-wide-short.svg" width="20" />&nbsp;&nbsp;Sorted by ' . $sortingField . ' ' . $sortingInfo . '
+                </li>
+            </ul>';
+
+        return $result;
+	}
+
+	public function list_contract($people_id, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
+
+        if ($sortingField == "") $sortingField = 'end_date';
+        if ($sortingDir == "") $sortingDir = 'DESC';
+
+		$this->db->where("a.status", "active");
+		$this->db->where("a.people_id", $people_id);
+		$this->db->limit($limit, $start);
+		$this->db->order_by($sortingField, $sortingDir);
+		$this->db->select('SQL_CALC_FOUND_ROWS a.contract_id', false);
+		$this->db->select('
+			a.people_id
+			, a.contract_number
+			, a.position
+			, a.gol
+			, a.start_date
+			, a.end_date
+			, a.location	
+		');
+		$query = $this->db->get('mj_contract a');
 
 		$data = $query->result_array();
         // $result['sql'] = $this->db->last_query();
@@ -151,6 +199,67 @@ class Memployee extends CI_Model {
             </ul>';
 
         return $result;
+	}
+
+	public function insertContract($post){
+		$document_old = $post["document_old"];
+        unset($post["OpsiDisplay"]);
+        unset($post["document_old"]);
+
+		$contract_id 				= getUUID();
+		$post["contract_id"] 		= $contract_id;
+		$post["CreatedDate"] 	= date("Y-m-d H:i:s");
+		$post["CreatedBy"] 		= $_SESSION["user_id"];
+
+		if($document_old != ''){
+			//cek folder propinsi itu sudah ada belum
+			if (!file_exists('files/employee/contract')) {
+				mkdir('files/employee/contract', 0777, true);
+			}
+
+			$file_tmp = pathinfo($document_old);
+			$gambar = date('Ymdhis') . '_' . $contract_id.".pdf";
+			rename($document_old, 'files/employee/contract/' . $gambar);
+			$post['document'] = 'files/employee/contract/' . $gambar;
+		}
+		
+		
+		$insert = $this->db->insert("mj_contract", $post);
+
+		if($insert){
+			$response["success"] = true;
+			$response["message"] = "Data Saved";
+			$response["contract_id"] = $contract_id;
+		}else{
+			$response["success"] = false;
+			$response["message"] = "Failed to saved data";
+		}
+
+		return $response;
+	}
+
+	public function updateContract($post){
+		$contract_id 				= $post['contract_id'];
+        unset($post["OpsiDisplay"]);
+        unset($post["contract_id"]);
+        unset($post["document_old"]);
+		
+		$post["UpdatedDate"] 	= date("Y-m-d H:i:s");
+		$post["UpdatedBy"] 		= $_SESSION["user_id"];
+		
+		$this->db->where("contract_id", $contract_id);
+		$update = $this->db->update("mj_contract", $post);
+
+		if($update){
+			$response["success"] = true;
+			$response["message"] = "Data Saved";
+			$response["contract_id"] = $contract_id;
+		}else{
+			$response["success"] = false;
+			$response["message"] = "Failed to saved data";
+		}
+
+		return $response;
 	}
 
 	public function insertFamily($post){
@@ -291,6 +400,36 @@ class Memployee extends CI_Model {
 
 		return $response;
     }
+
+	public function form_contract($contract_id){
+
+		$this->db->where("a.contract_id", $contract_id);
+		$this->db->select('
+			a.contract_id
+			, a.people_id
+			, a.contract_number
+			, a.position
+			, a.gol
+			, a.start_date
+			, a.end_date
+			, a.location
+			, a.document
+			, a.document document_old
+		');
+		$query = $this->db->get('mj_contract a')->row_array();
+
+		$result = array();
+        foreach($query as $row => $value){
+            $result["MitraJaya.view.Admin.Employee.WinFormContract-Form-".$row] = $value;
+        }
+
+		$result['document'] 	= base_url().$query['document'];
+
+        $return["success"]  = true;
+        $return["data"]     = $result;
+
+        return $return;
+	}
 
 	public function form_employee($people_id){
 
