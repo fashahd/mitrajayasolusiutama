@@ -163,6 +163,22 @@ class Combo extends REST_Controller {
 		$this->response($data);
 	}
 
+	function combo_golongan_get(){
+		
+		$data = $this->mcombo->GetGolonganList();
+
+		
+		$this->response($data);
+	}
+
+	function combo_position_get(){
+		
+		$data = $this->mcombo->GetPositionList();
+
+		
+		$this->response($data);
+	}
+
 	function combo_employee_get(){
 		
 		$data = $this->mcombo->GetEmployeeList();
