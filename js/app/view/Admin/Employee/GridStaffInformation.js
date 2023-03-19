@@ -1,162 +1,32 @@
 /******************************************
- *  Author : fashahd@gmail.com.com   
- *  Created On : Thu Jan 16 2020
- *  File : MainGrid.js
+ *  Author : n1colius.lau@gmail.com   
+ *  Created On : Wed Jul 24 2019
+ *  File : PanelFormAdditionalKrakakoa.js
  *******************************************/
- Ext.define('MitraJaya.view.Admin.Employee.MainGrid' ,{
+
+/*
+    Param2 yg diperlukan ketika load View ini
+    - FarmerID
+*/
+
+Ext.define('MitraJaya.view.Admin.Employee.GridStaffInformation', {
     extend: 'Ext.panel.Panel',
-    id: 'MitraJaya.view.Admin.Employee.MainGrid',
-    renderTo: 'ext-content',
-    style:'padding:0 7px 7px 7px;margin:2px 0 0 0;',
+    id: 'MitraJaya.view.Admin.Employee.GridStaffInformation',
     listeners: {
         afterRender: function(component, eOpts){
-            var thisObj = this;
-            document.getElementById('ContentTopBar').style.display = 'block';
-
-            var customer_src = JSON.parse(localStorage.getItem('customer_src'));
-
-            if(customer_src){
-                Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-keySearch').setValue(customer_src.keySearch);
-            }
+			
         }
     },
-    initComponent: function() {
+    initComponent: function () {
         var thisObj = this;
 
-		// console.log(m_api);
-        //Store
         thisObj.StoreGridMain = Ext.create('MitraJaya.store.Admin.Employee.MainGrid');
-
-        //ContextMenu
-        thisObj.ContextMenuGrid = Ext.create('Ext.menu.Menu',{
-            cls:'Sfr_ConMenu',
-	        items:[{
-                icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: lang('View'),
-                cls:'Sfr_BtnConMenuWhite',
-                itemId: 'MitraJaya.view.Admin.Employee.MainGrid-ContextMenuView',
-	            handler: function() {
-                    var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-Grid').getSelectionModel().getSelection()[0];
-                    Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid').destroy(); //destory current view
-                    
-                    var FormMainFarmer = [];
-                    if(Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm') == undefined){
-                        FormMainFarmer = Ext.create('MitraJaya.view.Admin.Employee.MainForm', {
-                            viewVar: {
-                                OpsiDisplay: 'view',
-                                people_id: sm.get('people_id'),
-                                PanelDisplayID: sm.get('PanelDisplayID')
-                            }
-                        });
-                    }else{
-                        //destroy, create ulang
-                        Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm').destroy();
-                        FormMainFarmer = Ext.create('MitraJaya.view.Admin.Employee.MainForm', {
-                            viewVar: {
-                                OpsiDisplay: 'view',
-                                people_id: sm.get('people_id'),
-                                PanelDisplayID: sm.get('PanelDisplayID')
-                            }
-                        });
-                    }
-	            }
-	        },{
-	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: lang('Update'),
-                cls:'Sfr_BtnConMenuWhite',
-                hidden: m_act_update,
-                itemId: 'MitraJaya.view.Admin.Employee.MainGrid-ContextMenuUpdate',
-	            handler: function() {
-                    var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-Grid').getSelectionModel().getSelection()[0];
-                    Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid').destroy(); //destory current view
-                    
-                    var FormMainFarmer = [];
-                    if(Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm') == undefined){
-                        FormMainFarmer = Ext.create('MitraJaya.view.Admin.Employee.MainForm', {
-                            viewVar: {
-                                OpsiDisplay: 'update',
-                                people_id: sm.get('people_id'),
-                                PanelDisplayID: sm.get('PanelDisplayID')
-                            }
-                        });
-                    }else{
-                        //destroy, create ulang
-                        Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm').destroy();
-                        FormMainFarmer = Ext.create('MitraJaya.view.Admin.Employee.MainForm', {
-                            viewVar: {
-                                OpsiDisplay: 'update',
-                                people_id: sm.get('people_id'),
-                                PanelDisplayID: sm.get('PanelDisplayID')
-                            }
-                        });
-                    }
-	            }
-	        },{
-	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: lang('Delete'),
-                cls:'Sfr_BtnConMenuWhite',
-	            hidden: m_act_delete,
-                itemId: 'MitraJaya.view.Admin.Employee.MainGrid-ContextMenuDelete',
-	            handler: function(){
-                    var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-Grid').getSelectionModel().getSelection()[0];
-
-					Swal.fire({
-						title: 'Do you want to delete this data ?',
-						text: "You won't be able to revert this!",
-						icon: 'warning',
-						showCancelButton: true,
-						confirmButtonColor: '#3085d6',
-						cancelButtonColor: '#d33',
-						confirmButtonText: 'Yes, delete it!'
-					}).then((result) => {
-						if (result.isConfirmed) {
-							Ext.Ajax.request({
-								waitMsg: 'Please Wait',
-								url: m_api + '/v1/admin/employee/delete_employee',
-								method: 'DELETE',
-								params: {
-									people_id: sm.get('people_id')
-								},
-								success: function(response, opts) {
-									Swal.fire(
-										'Deleted!',
-										'Your file has been deleted.',
-										'success'
-									)
-
-									//refresh store
-									thisObj.StoreGridMain.load();
-								},
-								failure: function(rp, o) {
-									try {
-										var r = Ext.decode(rp.responseText);
-										Swal.fire(
-											'Failed!',
-											r.message,
-											'warning'
-										)
-									}
-									catch(err) {										
-										Swal.fire(
-											'Failed!',
-											'Connection Error',
-											'warning'
-										)
-									}
-								}
-							});
-						}
-					})
-	            }
-	        }]
-	    });
 
         thisObj.items = [{
             xtype: 'grid',
-            id: 'MitraJaya.view.Admin.Employee.MainGrid-Grid',
+            id: 'MitraJaya.view.Admin.Employee.GridStaffInformation-Grid',
             style: 'border:1px solid #CCC;margin-top:4px;',
             cls:'Sfr_GridNew',
-			frame:true,
 			minHeight:600,
             loadMask: true,
             selType: 'rowmodel',
@@ -182,9 +52,9 @@
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
-                    id: 'MitraJaya.view.Admin.Employee.MainGrid-BtnAdd',
+                    id: 'MitraJaya.view.Admin.Employee.GridStaffInformation-BtnAdd',
                     handler: function() {
-                        Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid').destroy(); //destory current view
+                        Ext.getCmp('MitraJaya.view.Admin.Employee.GridStaffInformation').destroy(); //destory current view
                     	var FormMainFarmer = [];
 
                         //create object View untuk FormMainGrower
@@ -213,12 +83,12 @@
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
-                    id: 'MitraJaya.view.Admin.Employee.MainGrid-BtnExport',
+                    id: 'MitraJaya.view.Admin.Employee.GridStaffInformation-BtnExport',
                     handler: function() {
-						var keySearch	= Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-keySearch').getValue();
-						var StartDate	= Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-StartDate').getValue();
-						var EndDate		= Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-EndDate').getValue();
-						var people_id	= Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-people_id').getValue();
+						var keySearch	= Ext.getCmp('MitraJaya.view.Admin.Employee.GridStaffInformation-keySearch').getValue();
+						var StartDate	= Ext.getCmp('MitraJaya.view.Admin.Employee.GridStaffInformation-StartDate').getValue();
+						var EndDate		= Ext.getCmp('MitraJaya.view.Admin.Employee.GridStaffInformation-EndDate').getValue();
+						var people_id	= Ext.getCmp('MitraJaya.view.Admin.Employee.GridStaffInformation-people_id').getValue();
 
 						Swal.fire({
 							text: "Export data ?",
@@ -281,7 +151,7 @@
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
-                    id: 'MitraJaya.view.Admin.Employee.MainGrid-BtnImport',
+                    id: 'MitraJaya.view.Admin.Employee.GridStaffInformation-BtnImport',
                     handler: function() {
                         var winImportFarmers = Ext.create('MitraJaya.view.Admin.Employee.WinImportFarmers');
                         if (!winImportFarmers.isVisible()) {
@@ -295,8 +165,8 @@
                     xtype:'tbspacer',
                     flex:1
                 },{
-					name: 'MitraJaya.view.Admin.Employee.MainGrid-keySearch',
-					id: 'MitraJaya.view.Admin.Employee.MainGrid-keySearch',
+					name: 'MitraJaya.view.Admin.Employee.GridStaffInformation-keySearch',
+					id: 'MitraJaya.view.Admin.Employee.GridStaffInformation-keySearch',
 					xtype: 'textfield',
 					baseCls: 'Sfr_TxtfieldSearchGrid',
 					width:340,
@@ -324,9 +194,9 @@
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/recycle.svg',
                     cls:'Sfr_BtnGridBlue',
                     overCls:'Sfr_BtnGridBlue-Hover',
-                    id: 'MitraJaya.view.Admin.Employee.MainGrid-BtnReload',
+                    id: 'MitraJaya.view.Admin.Employee.GridStaffInformation-BtnReload',
                     handler: function() {
-                        Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-Grid').getStore().loadPage(1);
+                        Ext.getCmp('MitraJaya.view.Admin.Employee.GridStaffInformation-Grid').getStore().loadPage(1);
                     }
                 }]
             }],
@@ -376,28 +246,5 @@
         }];
 
         this.callParent(arguments);
-    }, 
-    submitOnEnterGrid: function (field, event) {   
-		localStorage.setItem('customer_src', JSON.stringify({
-			keySearch	: Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-keySearch').getValue()
-		}));
-		Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-Grid').getStore().loadPage(1);
     }
 });
-
-function setFilterLs() {
-	localStorage.setItem('customer_src', JSON.stringify({
-		keySearch	: Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-keySearch').getValue()
-	}));
-	Ext.getCmp('MitraJaya.view.Admin.Employee.MainGrid-Grid').getStore().loadPage(1);
-}   
-
-function fetchJSON(text){
-    try{
-        JSON.parse(text);
-        return true;
-    }
-    catch (error){
-        return false;
-    }
-}

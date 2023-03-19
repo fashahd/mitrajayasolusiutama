@@ -134,6 +134,194 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
         let cmb_district = Ext.create('MitraJaya.store.General.DistrictList');
         let cmb_subdistrict = Ext.create('MitraJaya.store.General.SubDistrictList');
         let cmb_village = Ext.create('MitraJaya.store.General.VillageList');
+        var storeGridContract = Ext.create('MitraJaya.store.Admin.Employee.GridContract',{
+			storeVar: {
+				people_id: thisObj.viewVar.people_id
+			}
+		});
+
+        var contextMenuGridContract = Ext.create('Ext.menu.Menu',{
+            items:[{
+                icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
+                text: lang('View'),
+                handler: function() {
+                    var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-gridContract').getSelectionModel().getSelection()[0];
+
+                    var winFormContract = Ext.create('MitraJaya.view.Admin.Employee.WinFormContract');
+                    winFormContract.setViewVar({
+						OpsiDisplay:'view',
+						CallerStore: storeGridContract,
+						people_id:thisObj.viewVar.people_id,
+						contract_id:sm.get('contract_id')
+					});
+                    if (!winFormContract.isVisible()) {
+                        winFormContract.center();
+                        winFormContract.show();
+                    } else {
+                        winFormContract.close();
+                    }
+                }
+            },{
+	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
+                text: lang('Update'),
+                hidden: m_act_update,
+                handler: function() {
+                    var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-gridContract').getSelectionModel().getSelection()[0];
+
+                    var winFormContract = Ext.create('MitraJaya.view.Admin.Employee.WinFormContract');
+                    winFormContract.setViewVar({
+						OpsiDisplay:'update',
+						CallerStore: storeGridContract,
+						people_id:thisObj.viewVar.people_id,
+						contract_id:sm.get('contract_id')
+					});
+                    if (!winFormContract.isVisible()) {
+                        winFormContract.center();
+                        winFormContract.show();
+                    } else {
+                        winFormContract.close();
+                    }
+
+                }
+            },{
+	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
+                text: lang('Delete'),
+                hidden: m_act_delete,
+                handler: function(){
+                    var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-gridContract').getSelectionModel().getSelection()[0];
+
+                    Ext.MessageBox.confirm('Message', 'Do you want to delete this data ?', function(btn) {
+                        if (btn == 'yes') {
+                            Ext.Ajax.request({
+                                waitMsg: 'Please Wait',
+                                url: m_api + '/v1/admin/employee/delete_contract',
+                                method: 'DELETE',
+                                params: {
+                                    contract_id: sm.get('contract_id')
+                                },
+                                success: function(response, opts) {
+                                    Ext.MessageBox.show({
+                                        title: 'Information',
+                                        msg: lang('Data deleted'),
+                                        buttons: Ext.MessageBox.OK,
+                                        animateTarget: 'mb9',
+                                        icon: 'ext-mb-success'
+                                    });
+
+                                    //refresh store FamLab
+                                    Ext.data.StoreManager.lookup('store.Grower.GridMemberContract').load();
+                                },
+                                failure: function(response, opts) {
+                                    var pesanNya;
+                                    if(o.result.message != undefined){
+                                        pesanNya = o.result.message;
+                                    }else{
+                                        pesanNya = lang('Connection error');
+                                    }
+                                    Ext.MessageBox.show({
+                                        title: 'Error',
+                                        msg: pesanNya,
+                                        buttons: Ext.MessageBox.OK,
+                                        animateTarget: 'mb9',
+                                        icon: 'ext-mb-error'
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            }]
+        });
+
+        var objPanelStaff = Ext.create('Ext.panel.Panel',{
+            title: lang('List of Staff Information'),
+            frame: false,
+            collapsible:false,
+            margin:'0 0 40 0',
+            id: 'MitraJaya.view.Admin.Employee.MainForm-PanelContract',
+            dockedItems: [{
+                xtype: 'pagingtoolbar',
+                id: 'view.Grower.GridMainGrower-gridToolbar',
+                store: storeGridContract,
+                dock: 'bottom',
+                displayInfo: true
+            },{
+                xtype: 'toolbar',
+                baseCls: 'bgToolbarTitlePanel',
+                dock: 'top',
+                items:[{
+                    icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
+                    cls:'Sfr_BtnGridNewWhite',
+					style:'margin: 10px 0px 10px 0px',
+                    overCls:'Sfr_BtnGridNewWhite-Hover',
+                    text: lang('Add'),
+                    id:'MitraJaya.view.Admin.Employee.MainForm-gridContract-BtnAdd',
+                    hidden: m_act_add,
+                    handler: function() {
+                        var winFormContract = Ext.create('MitraJaya.view.Admin.Employee.WinFormContract');
+						winFormContract.setViewVar({
+                            OpsiDisplay:'insert',
+                            CallerStore: storeGridContract,
+                            people_id:thisObj.viewVar.people_id
+                        });
+                        if (!winFormContract.isVisible()) {
+                            winFormContract.center();
+                            winFormContract.show();
+                        } else {
+                            winFormContract.close();
+                        }
+                    }
+                }]
+            }],
+            items: [{
+                xtype: 'grid',
+                id: 'MitraJaya.view.Admin.Employee.MainForm-gridContract',
+                loadMask: true,
+                selType: 'rowmodel',
+                store: storeGridContract,
+                viewConfig: {
+                    deferEmptyText: false,
+                    emptyText: GetDefaultContentNoData()
+                },
+                minHeight:125,
+                columns: [{
+                    text: lang('Action'),
+                    xtype:'actioncolumn',
+                    flex: 0.5,
+                    items:[{
+						icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/caret-down.svg',
+                        tooltip: 'Action',
+                        handler: function(grid, rowIndex, colIndex, item, e, record) {
+                            contextMenuGridContract.showAt(e.getXY());
+                        }
+                    }]
+                },{
+                    text: lang('ContractID'),
+                    dataIndex: 'contract_id',
+                    hidden:true
+                },{
+                    text: lang('Contract No'),
+                    dataIndex: 'contract_number',
+                    flex: 1,
+                },{
+                    text: lang('Position'),
+                    dataIndex: 'position',
+                    flex: 1,
+                },{
+                    text: lang('Gol'),
+                    dataIndex: 'gol',
+                    flex: 1,
+                },{
+                    text: lang('Start Date'),
+                    dataIndex: 'start_date',
+                    flex: 1,
+                },{
+                    text: lang('End Date'),
+                    dataIndex: 'end_date',
+                    flex: 1,
+                }]
+            }]
+        });
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
@@ -422,8 +610,8 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
                                                     xtype: 'combobox',
                                                     id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-village_id',
                                                     name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-village_id',
-                                                    store: cmb_village,
                                                     fieldLabel: lang('Village'),
+                                                    store: cmb_village,
                                                     labelAlign:'top',
                                                     queryMode: 'local',
                                                     displayField: 'label',
@@ -528,7 +716,21 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 									}]
 								}]
 							}]
-						}],
+						},{
+                            xtype: 'panel',
+                            title: lang('Staff Information'),
+                            id: 'Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffInformation',
+                            items: [{
+                                layout: 'column',
+                                border: false,
+                                items: [{
+                                    columnWidth: 1,
+                                    layout: 'form',
+                                    style: 'padding: 10px 0 0 0;min-height:1000px;',
+                                    items: [objPanelStaff]
+                                }]
+                            }]
+                        }],
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',

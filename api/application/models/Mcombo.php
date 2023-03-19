@@ -216,6 +216,30 @@ class Mcombo extends CI_Model {
         return $query;
 	}
 
+	public function GetGolonganList(){
+		$this->db->where("status", "active");
+		$this->db->select('
+			gol_id id,
+			gol_name label
+		');
+
+		$query = $this->db->get('mj_staff_golongan')->result_array();	
+
+        return $query;
+	}
+
+	public function GetPositionList(){
+		$this->db->where("status", "active");
+		$this->db->select('
+			position_id id,
+			position_name label
+		');
+
+		$query = $this->db->get('mj_staff_position')->result_array();	
+
+        return $query;
+	}
+
 	public function getFamilyStatus(){
 		$this->db->where("StatusCode", "active");
 		$this->db->select('
