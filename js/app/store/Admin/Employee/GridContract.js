@@ -7,7 +7,7 @@
     extend: 'Ext.data.Store',
     id: 'MitraJaya.store.Admin.Employee.GridContract',
     storeId: 'MitraJaya.store.Admin.Employee.GridContract',
-    fields: ['contract_id','contract_number','position','gol','start_date','end_date'],
+    fields: ['contract_id','contract_number','position','gol','employment_date','contract_status'],
     pageSize: 50,
     autoLoad: true,
     storeVar: false,
