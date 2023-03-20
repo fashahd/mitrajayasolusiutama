@@ -10,7 +10,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridEducation' ,{
     title:'List Education',
     frame: true,
     collapsible: true,
-    collapsed: true,
+    collapsed: false,
     listeners: {
         afterRender: function(component, eOpts){
             var thisObj = this;

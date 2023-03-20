@@ -10,7 +10,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridFamily' ,{
     title:'List Family',
     frame: true,
     collapsible: true,
-    collapsed: true,
+    collapsed: false,
     listeners: {
         afterRender: function(component, eOpts){
             var thisObj = this;

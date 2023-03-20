@@ -27,11 +27,13 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
             //Isi nilai default
 
             if (thisObj.viewVar.OpsiDisplay == 'insert') {
-				
-				
+				Ext.getCmp('Koltiva.view.Farmer.MainForm-FormBasicData-TabPayrollInformation').setDisabled(true);
+				Ext.getCmp('Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffInformation').setDisabled(true);				
             }
 
             if (thisObj.viewVar.OpsiDisplay == 'view' || thisObj.viewVar.OpsiDisplay == 'update') {
+				Ext.getCmp('Koltiva.view.Farmer.MainForm-FormBasicData-TabPayrollInformation').setDisabled(false);
+				Ext.getCmp('Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffInformation').setDisabled(false);
                 //default
                 if (thisObj.viewVar.OpsiDisplay == 'view') {
                     Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-BtnSave').setVisible(false);
@@ -55,7 +57,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
                         var cmb_village = Ext.data.StoreManager.lookup('store.General.VillageList');
 
 						if(r.data.photo != ''){							
-							Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo').update('<img src="' + r.data.photo + '" style="height:150px;margin:0px 5px 5px 0px;float:left;" />');
+							Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo').update('<img src="' + r.data.photo + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" />');
 						}
 						
                         cmb_province.load({
@@ -234,7 +236,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
         });
 
         var objPanelStaff = Ext.create('Ext.panel.Panel',{
-            title: lang('List of Staff Information'),
+            title: lang('List of Staff Contract'),
             frame: false,
             collapsible:false,
             margin:'0 0 40 0',
@@ -277,6 +279,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
                 xtype: 'grid',
                 id: 'MitraJaya.view.Admin.Employee.MainForm-gridContract',
                 loadMask: true,
+				minHeight:300,
                 selType: 'rowmodel',
                 store: storeGridContract,
                 viewConfig: {
@@ -312,16 +315,23 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
                     dataIndex: 'gol',
                     flex: 1,
                 },{
-                    text: lang('Start Date'),
-                    dataIndex: 'start_date',
+                    text: lang('Employment Status'),
+                    dataIndex: 'contract_status',
                     flex: 1,
                 },{
-                    text: lang('End Date'),
-                    dataIndex: 'end_date',
+                    text: lang('Employement Date'),
+                    dataIndex: 'employment_date',
                     flex: 1,
                 }]
             }]
         });
+
+        var objPanelPayroll = Ext.create('MitraJaya.view.Admin.Employee.PanelPayroll', {
+			viewVar: {
+				OpsiDisplay: thisObj.viewVar.OpsiDisplay,
+				people_id:thisObj.viewVar.people_id
+			}
+		});
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
@@ -360,7 +370,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 									items: [{
 										xtype: 'panel',
 										id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo',
-										html: '<img src="' + m_api_base_url + '/assets/images/no-images.png" style="height:250px;margin:0px 5px 5px 0px;float:left;" />'
+										html: '<img src="' + m_api_base_url + '/assets/images/no-images.png" style="height:300px;margin:0px 5px 5px 0px;float:left;" />'
 									}, {
 										xtype: 'fileuploadfield',
 										id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-PhotoInput',
@@ -384,12 +394,12 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 
 														if(thisObj.viewVar.opsiDisplay == 'insert') {
 															//Insert
-															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo').update('<img src="' + o.result.fileurl + '" style="height:150px;margin:0px 5px 5px 0px;float:left;" />');
+															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo').update('<img src="' + o.result.fileurl + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" />');
 															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-PhotoOld').setValue(o.result.file);
 														} else {
 															//Update / View
 															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-PhotoOld').setValue(o.result.file);
-															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo').update('<img src="' + o.result.fileurl + '" style="height:150px;margin:0px 5px 5px 0px;float:left;" />');
+															Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-Photo').update('<img src="' + o.result.fileurl + '" style="height:300px;margin:0px 5px 5px 0px;float:left;" />');
 														}
 													},
 													failure: function (fp, o) {
@@ -718,8 +728,24 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 							}]
 						},{
                             xtype: 'panel',
-                            title: lang('Staff Information'),
+                            title: lang('Payroll Information'),
+                            id: 'Koltiva.view.Farmer.MainForm-FormBasicData-TabPayrollInformation',
+							disabled:true,
+                            items: [{
+                                layout: 'column',
+                                border: false,
+                                items: [{
+                                    columnWidth: 1,
+                                    layout: 'form',
+                                    style: 'padding: 10px 0 0 0;min-height:1000px;',
+                                    items: [objPanelPayroll]
+                                }]
+                            }]
+                        },{
+                            xtype: 'panel',
+                            title: lang('Staff Contract'),
                             id: 'Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffInformation',
+							disabled:true,
                             items: [{
                                 layout: 'column',
                                 border: false,

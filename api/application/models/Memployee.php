@@ -66,13 +66,15 @@ class Memployee extends CI_Model {
 		$this->db->limit($limit, $start);
 		$this->db->order_by($sortingField, $sortingDir);
 		$this->db->select('SQL_CALC_FOUND_ROWS a.contract_id', false);
+		$this->db->join('mj_staff_position b ','b.position_id = a.position','left');
+		$this->db->join('mj_staff_golongan c ','c.gol_id = a.gol','left');
 		$this->db->select('
 			a.people_id
 			, a.contract_number
-			, a.position
-			, a.gol
-			, a.start_date
-			, a.end_date
+			, b.position_name position
+			, c.gol_name gol
+			, if(contract_status = "permanent", a.start_date, CONCAT(a.start_date, " - ", a.end_date)) employment_date
+			, UCASE(a.contract_status) contract_status
 			, a.location	
 		');
 		$query = $this->db->get('mj_contract a');
@@ -413,6 +415,7 @@ class Memployee extends CI_Model {
 			, a.start_date
 			, a.end_date
 			, a.location
+			, a.contract_status
 			, a.document
 			, a.document document_old
 		');
@@ -470,6 +473,31 @@ class Memployee extends CI_Model {
 		$result['subdistrict_id'] = $query['subdistrict_id'];
 		$result['village_id'] = $query['village_id'];
 		$result['photo'] 	= base_url().$query['photo'];
+
+        $return["success"]  = true;
+        $return["data"]     = $result;
+
+        return $return;
+	}
+
+	public function form_payroll($people_id){
+
+		$this->db->where("a.people_id", $people_id);
+		$this->db->select('
+			a.people_id
+			, a.basic_salary
+			, a.tax_number
+			, a.ptkp_status
+			, a.bpjs_tk
+			, a.bpjs_kesehatan
+			, a.bpjs_family			
+		');
+		$query = $this->db->get('mj_people a')->row_array();
+
+		$result = array();
+        foreach($query as $row => $value){
+            $result["MitraJaya.view.Admin.Employee.PanelPayroll-Form-".$row] = $value;
+        }
 
         $return["success"]  = true;
         $return["data"]     = $result;
