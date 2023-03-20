@@ -166,6 +166,38 @@ class Employee extends REST_Controller {
         }
 	}
 
+	function submit_payroll_post(){
+		
+        $varPost = $_POST;
+        $paramPost = array();
+
+        foreach ($varPost as $key => $value) {
+            $keyNew = str_replace("MitraJaya_view_Admin_Employee_PanelPayroll-Form-", '', $key);
+            if ($value == "") {
+                $value = null;
+            }
+            $paramPost[$keyNew] = $value;
+        }
+
+		$people_id = $paramPost["people_id"];
+		$paramPost["basic_salary"] = str_replace(",", "",$paramPost["basic_salary"]);
+
+		unset($paramPost["people_id"]);
+
+		$this->db->where("people_id", $people_id);
+		$this->db->update("mj_people", $paramPost);
+
+		
+		$response["success"] = true;
+		$response["people_id"] = $people_id;
+
+		if ($response['success'] == true) {
+            $this->response($response, 200);
+        } else {
+            $this->response($response, 400);
+        }
+	}
+
 	function submit_family_post(){
 		
         $varPost = $_POST;
@@ -251,6 +283,14 @@ class Employee extends REST_Controller {
 		$contract_id = $this->get("contract_id");
 
         $data = $this->memployee->form_contract($contract_id);
+
+        $this->response($data, 200);
+	}
+
+	function form_payroll_get(){
+		$people_id = $this->get("people_id");
+
+        $data = $this->memployee->form_payroll($people_id);
 
         $this->response($data, 200);
 	}
@@ -382,7 +422,8 @@ class Employee extends REST_Controller {
 				}
 			}else{
 				if ($_FILES['MitraJaya_view_Admin_Employee_MainForm-FormBasicData-PhotoInput']['name'] != '') {
-					$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Admin_Employee_MainForm-FormBasicData-PhotoInput']['name'];
+					$people_id = $_POST["people_id"];
+					$gambar = date('Ymdhis') . '_' . $people_id.".".$ExtNya;
 					$fileupload['MitraJaya_view_Admin_Employee_MainForm-FormBasicData-PhotoInput'] = $_FILES['MitraJaya_view_Admin_Employee_MainForm-FormBasicData-PhotoInput'];
 	
 					//cek folder propinsi itu sudah ada belum
@@ -392,7 +433,6 @@ class Employee extends REST_Controller {
 
 					$upload = move_upload($fileupload, 'files/employee/' . $gambar);
 					if (isset($upload['upload_data'])) {
-						$people_id = $_POST["people_id"];
 						
 						$datapost["photo"] = 'files/employee/' . $gambar;
 						$this->db->where("people_id", $people_id);

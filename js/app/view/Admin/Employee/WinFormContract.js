@@ -194,6 +194,60 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                     layout:'form',
 					style:'margin-left:20px',
                     items:[{
+						fieldLabel: lang('Employment Status'),
+						xtype: 'radiogroup',
+						allowBlank: false,
+						labelAlign:'top',
+						baseCls: 'Sfr_FormInputMandatory',
+						readOnly: m_act_update,
+						msgTarget: 'side',
+						columns: 3,
+						items: [{
+							boxLabel: lang('Contract'),
+							name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status',
+							inputValue: 'contract',
+							id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status1',
+							listeners: {
+								change: function () {
+									if(this.checked == true){
+										Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date').setVisible(true);
+										Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date').allowBlank = false;
+										Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date').addCls('Sfr_FormInputMandatory');
+									}
+									return false;
+								}
+							}
+						}, {
+							boxLabel: lang('Permanent'),
+							name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status',
+							inputValue: 'permanent',
+							id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status2',
+							listeners: {
+								change: function () {
+									if(this.checked == true){
+										Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date').setVisible(false);
+										Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date').allowBlank = true;
+									}
+									return false;
+								}
+							}
+						}, {
+							boxLabel: lang('Probation'),
+							name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status',
+							inputValue: 'probation',
+							id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status3',
+							listeners: {
+								change: function () {
+									if(this.checked == true){
+										Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date').setVisible(true);
+										Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date').allowBlank = false;
+										Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date').addCls('Sfr_FormInputMandatory');
+									}
+									return false;
+								}
+							}
+						}]
+					},{
                     	xtype: 'datefield',
 						format:'Y-m-d',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-start_date',
@@ -201,16 +255,14 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-start_date',
-                        fieldLabel: lang('Start Date')
+                        fieldLabel: lang('Join Date')
                     },{
                     	xtype: 'datefield',
 						format:'Y-m-d',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date',
                         labelAlign: "top",
-                        allowBlank: false,
-                        baseCls: 'Sfr_FormInputMandatory',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date',
-                        fieldLabel: lang('End Date')
+                        fieldLabel: lang('End of Employment Date')
                     },{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-location',
