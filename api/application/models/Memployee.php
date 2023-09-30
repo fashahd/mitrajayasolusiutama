@@ -490,7 +490,9 @@ class Memployee extends CI_Model {
 			, a.ptkp_status
 			, a.bpjs_tk
 			, a.bpjs_kesehatan
-			, a.bpjs_family			
+			, a.bpjs_family
+			, a.mobile_salary
+			, a.transport_salary
 		');
 		$query = $this->db->get('mj_people a')->row_array();
 

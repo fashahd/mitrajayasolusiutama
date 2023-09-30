@@ -60,6 +60,18 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
                                 id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-basic_salary',
                                 name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-basic_salary',
                                 height: 65
+                            },{
+                                xtype: 'numericfield',
+                                fieldLabel: lang('Transport'),
+                                id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-transport_salary',
+                                name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-transport_salary',
+                                height: 65
+                            },{
+                                xtype: 'numericfield',
+                                fieldLabel: lang('Mobile'),
+                                id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-mobile_salary',
+                                name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-mobile_salary',
+                                height: 65
                             }]
                         }]
                     }]
