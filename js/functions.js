@@ -240,6 +240,45 @@ function getNotifHeader()
         }
     });
 }
+
+function getNotifHeaderCert()
+{
+     Ext.Ajax.request({
+        url: m_api+'/v1/admin/employee/notifications_load',
+        method: 'GET',
+        params: {start: 0,limit:20},
+        success: function(response){
+            var text = Ext.decode(response.responseText);
+            $('#NumNotifHeaderCert').text(text.total);
+            if (text.total !== '0') {
+                $('#notif-indicator').removeClass('hidden');
+            } else {
+                $('#notif-indicator').addClass('hidden');
+            }
+
+            var ListNotif = '';
+            for(var i = 0; i < text.data.length; i++) {
+                var obj = text.data[i];
+                
+                ListNotif += '<a href="#" class="dropdown-item">'
+				+'<div class="media">'
+					+'<div class="media-body">'
+						+'<h5>Certificate Name: <b>'+obj.cert_name+'</b></h5>'
+						+'<h5>Certificate Number : <b>'+obj.cert_code+'</b></h5>'
+						+'<h6>Expired Date : <b>'+obj.end_date+'</b></h6>'
+						+'<h6>Employee Name : <b>'+obj.people_name+'</b></h6>'
+						// +'<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>'
+					+'</div>'
+				+'</div></a><div class="dropdown-divider"></div>';
+
+            }
+            var lists = document.getElementById('NotifDataCert');
+            if(lists !== undefined && lists !== null){
+                lists.innerHTML = ListNotif;
+            }
+        }
+    });
+}
 function loadAnnouncement()
 {
     

@@ -29,11 +29,13 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
             if (thisObj.viewVar.OpsiDisplay == 'insert') {
 				Ext.getCmp('Koltiva.view.Farmer.MainForm-FormBasicData-TabPayrollInformation').setDisabled(true);
 				Ext.getCmp('Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffInformation').setDisabled(true);				
+				Ext.getCmp('Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffCertification').setDisabled(true);				
             }
 
             if (thisObj.viewVar.OpsiDisplay == 'view' || thisObj.viewVar.OpsiDisplay == 'update') {
 				Ext.getCmp('Koltiva.view.Farmer.MainForm-FormBasicData-TabPayrollInformation').setDisabled(false);
 				Ext.getCmp('Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffInformation').setDisabled(false);
+				Ext.getCmp('Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffCertification').setDisabled(false);
                 //default
                 if (thisObj.viewVar.OpsiDisplay == 'view') {
                     Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-FormBasicData-BtnSave').setVisible(false);
@@ -141,6 +143,117 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 				people_id: thisObj.viewVar.people_id
 			}
 		});
+		thisObj.storeGridCertificaiton = Ext.create('MitraJaya.store.Admin.Employee.GridCertification',{
+        	storeVar: {
+                people_id: thisObj.viewVar.people_id
+            }
+        });
+
+        //ContextMenu
+        var contextMenuGridCertificaiton = Ext.create('Ext.menu.Menu',{
+            cls:'Sfr_ConMenu',
+	        items:[{
+                icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
+                text: lang('View'),
+                cls:'Sfr_BtnConMenuWhite',
+                itemId: 'MitraJaya.view.Admin.Employee.GridCertification-ContextMenuView',
+	            handler: function() {
+                    var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-gridCertificaiton').getSelectionModel().getSelection()[0];
+                    var WinFormCertification = Ext.create('MitraJaya.view.Admin.Employee.WinFormCertification');
+                    WinFormCertification.setViewVar({
+                        OpsiDisplay:'view',
+                        CallerStore: thisObj.StoreGridMain,
+                        cert_id:sm.get('cert_id'),
+						people_id: thisObj.viewVar.people_id
+                    });
+                    if (!WinFormCertification.isVisible()) {
+                        WinFormCertification.center();
+                        WinFormCertification.show();
+                    } else {
+                        WinFormCertification.close();
+                    }
+	            }
+	        },{
+	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
+                text: lang('Update'),
+                cls:'Sfr_BtnConMenuWhite',
+                hidden: m_act_update,
+                itemId: 'MitraJaya.view.Admin.Employee.GridCertification-ContextMenuUpdate',
+	            handler: function() {
+                    var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-gridCertificaiton').getSelectionModel().getSelection()[0];
+                    var WinFormCertification = Ext.create('MitraJaya.view.Admin.Employee.WinFormCertification');
+                    WinFormCertification.setViewVar({
+                        OpsiDisplay:'update',
+                        CallerStore: thisObj.StoreGridMain,
+                        cert_id:sm.get('cert_id'),
+						people_id: thisObj.viewVar.people_id
+                    });
+                    if (!WinFormCertification.isVisible()) {
+                        WinFormCertification.center();
+                        WinFormCertification.show();
+                    } else {
+                        WinFormCertification.close();
+                    }
+	            }
+	        },{
+	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
+                text: lang('Delete'),
+                cls:'Sfr_BtnConMenuWhite',
+	            hidden: m_act_delete,
+                itemId: 'MitraJaya.view.Admin.Employee.GridCertification-ContextMenuDelete',
+	            handler: function(){
+                    var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-gridCertificaiton').getSelectionModel().getSelection()[0];
+
+					Swal.fire({
+						title: 'Do you want to delete this data ?',
+						text: "You won't be able to revert this!",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Yes, delete it!'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							Ext.Ajax.request({
+								waitMsg: 'Please Wait',
+								url: m_api + '/v1/admin/employee/delete_certification',
+								method: 'DELETE',
+								params: {
+									cert_id: sm.get('cert_id')
+								},
+								success: function(response, opts) {
+									Swal.fire(
+										'Deleted!',
+										'Your data has been deleted.',
+										'success'
+									)
+
+									//refresh store
+									thisObj.storeGridCertificaiton.load();
+								},
+								failure: function(rp, o) {
+									try {
+										var r = Ext.decode(rp.responseText);
+										Swal.fire(
+											'Failed!',
+											r.message,
+											'warning'
+										)
+									}
+									catch(err) {										
+										Swal.fire(
+											'Failed!',
+											'Connection Error',
+											'warning'
+										)
+									}
+								}
+							});
+						}
+					})
+	            }
+	        }]
+	    });
 
         var contextMenuGridContract = Ext.create('Ext.menu.Menu',{
             items:[{
@@ -323,6 +436,97 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
                     dataIndex: 'employment_date',
                     flex: 1,
                 }]
+            }]
+        });
+
+        var objPanelStaffCertification = Ext.create('Ext.panel.Panel',{
+            title: lang('List of Staff Training & Certification'),
+            frame: false,
+            collapsible:false,
+            margin:'0 0 40 0',
+            id: 'MitraJaya.view.Admin.Employee.MainForm-PanelCertification',
+            dockedItems: [{
+                xtype: 'pagingtoolbar',
+                id: 'MitraJaya.view.Admin.Employee.MainForm-PanelCertification-gridToolbar',
+                store: thisObj.storeGridCertificaiton,
+                dock: 'bottom',
+                displayInfo: true
+            },{
+                xtype: 'toolbar',
+                baseCls: 'bgToolbarTitlePanel',
+                dock: 'top',
+                items:[{
+                    icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
+                    cls:'Sfr_BtnGridNewWhite',
+					style:'margin: 10px 0px 10px 0px',
+                    overCls:'Sfr_BtnGridNewWhite-Hover',
+                    text: lang('Add'),
+                    id:'MitraJaya.view.Admin.Employee.MainForm-PanelCertification-BtnAdd',
+                    hidden: m_act_add,
+                    handler: function() {
+                        var WinFormCertification = Ext.create('MitraJaya.view.Admin.Employee.WinFormCertification');
+						WinFormCertification.setViewVar({
+                            OpsiDisplay:'insert',
+                            CallerStore: thisObj.storeGridCertificaiton,
+                            people_id:thisObj.viewVar.people_id
+                        });
+                        if (!WinFormCertification.isVisible()) {
+                            WinFormCertification.center();
+                            WinFormCertification.show();
+                        } else {
+                            WinFormCertification.close();
+                        }
+                    }
+                }]
+            }],
+            items: [{
+                xtype: 'grid',
+                id: 'MitraJaya.view.Admin.Employee.MainForm-gridCertificaiton',
+                loadMask: true,
+				minHeight:300,
+                selType: 'rowmodel',
+                store: thisObj.storeGridCertificaiton,
+                viewConfig: {
+                    deferEmptyText: false,
+                    emptyText: GetDefaultContentNoData()
+                },
+                minHeight:125,
+                columns: [{
+                    text: lang('Action'),
+                    xtype:'actioncolumn',
+                    flex: 0.5,
+                    items:[{
+						icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/caret-down.svg',
+                        tooltip: 'Action',
+                        handler: function(grid, rowIndex, colIndex, item, e, record) {
+                            contextMenuGridCertificaiton.showAt(e.getXY());
+                        }
+                    }]
+                },{
+					text: 'No',
+					flex: 0.1,
+					xtype: 'rownumberer'
+				},{
+					text: lang('cert_id'),
+					dataIndex: 'cert_id',
+					hidden: true
+				},{
+					text: lang('Certificate Number'),
+					dataIndex: 'cert_code',
+					flex: 1
+				},{
+					text: lang('Name'),
+					dataIndex: 'cert_name',
+					flex: 1
+				},{
+					text: lang('Start'),
+					dataIndex: 'start_date',
+					flex: 1
+				},{
+					text: lang('End'),
+					dataIndex: 'end_date',
+					flex: 1
+				}]
             }]
         });
 
@@ -728,7 +932,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 							}]
 						},{
                             xtype: 'panel',
-                            title: lang('Payroll Information'),
+                            title: lang('Employee Information'),
                             id: 'Koltiva.view.Farmer.MainForm-FormBasicData-TabPayrollInformation',
 							disabled:true,
                             items: [{
@@ -754,6 +958,21 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
                                     layout: 'form',
                                     style: 'padding: 10px 0 0 0;min-height:1000px;',
                                     items: [objPanelStaff]
+                                }]
+                            }]
+                        },{
+                            xtype: 'panel',
+                            title: lang('Training & Certification'),
+                            id: 'Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffCertification',
+							disabled:true,
+                            items: [{
+                                layout: 'column',
+                                border: false,
+                                items: [{
+                                    columnWidth: 1,
+                                    layout: 'form',
+                                    style: 'padding: 10px 0 0 0;min-height:1000px;',
+                                    items: [objPanelStaffCertification]
                                 }]
                             }]
                         }],
@@ -855,6 +1074,15 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 			});
 			objPanelDinamis.push(thisObj.ObjPanelEducation);
 			//panel Form Education ======================================================================== (end)
+
+			//Panel Certification
+			// thisObj.ObjPanelCertification = Ext.create('MitraJaya.view.Admin.Employee.GridCertification',{
+			// 	viewVar: {
+			// 		people_id: thisObj.viewVar.people_id
+			// 	}
+			// });
+			// objPanelDinamis.push(thisObj.ObjPanelCertification);
+			//panel Form Certification ======================================================================== (end)
 		}
 
         //========================================================== LAYOUT UTAMA (Begin) ========================================//

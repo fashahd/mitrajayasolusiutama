@@ -250,6 +250,14 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item dropdown">
 					<a class="nav-link" data-toggle="dropdown" href="#">
+						<i class="fas fa-user"></i>
+						<span class="badge badge-danger navbar-badge" id="NumNotifHeaderCert">0</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="NotifDataCert">
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link" data-toggle="dropdown" href="#">
 						<i class="fas fa-envelope-open-text"></i>
 						<span class="badge badge-danger navbar-badge" id="NumNotifHeader">0</span>
 					</a>
