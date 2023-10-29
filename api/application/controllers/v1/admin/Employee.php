@@ -89,6 +89,31 @@ class Employee extends REST_Controller {
         $this->response($data, 200);
 	}
 
+	function certification_list_get(){
+		$people_id = $this->get("people_id");
+		
+		//sort
+        $sorting = json_decode($this->get('sort'));
+        if (isset($sorting[0]->property)) {
+            $sortingField = $sorting[0]->property;
+        } else {
+            $sortingField = null;
+        }
+
+        if (isset($sorting[0]->direction)) {
+            $sortingDir = $sorting[0]->direction;
+        } else {
+            $sortingDir = null;
+        }
+
+        $start = (int) $this->get('start');
+        $limit = (int) $this->get('limit');
+
+        // echo '<pre>'; print_r($pSearch); exit;
+        $data = $this->memployee->list_certificaiton($people_id, $start, $limit, 'limit', $sortingField, $sortingDir);
+        $this->response($data, 200);
+	}
+
 	function education_list_get(){
 		$people_id = $this->get("people_id");
 		
@@ -180,7 +205,6 @@ class Employee extends REST_Controller {
         }
 
 		$people_id = $paramPost["people_id"];
-		$paramPost["basic_salary"] = str_replace(",", "",$paramPost["basic_salary"]);
 
 		unset($paramPost["people_id"]);
 
@@ -252,6 +276,32 @@ class Employee extends REST_Controller {
         }
 	}
 
+	function submit_certification_post(){
+		$varPost = $_POST;
+        $paramPost = array();
+
+        foreach ($varPost as $key => $value) {
+            $keyNew = str_replace("MitraJaya_view_Admin_Employee_WinFormCertification-Form-", '', $key);
+            if ($value == "") {
+                $value = null;
+            }
+            $paramPost[$keyNew] = $value;
+        }
+
+
+		if ($varPost['OpsiDisplay'] == 'insert') {
+            $proses = $this->memployee->insertCertification($paramPost);
+        } else {
+            $proses = $this->memployee->updateCertification($paramPost);
+        }
+
+		if ($proses['success'] == true) {
+            $this->response($proses, 200);
+        } else {
+            $this->response($proses, 400);
+        }
+	}
+
 	function submit_post(){
 		
         $varPost = $_POST;
@@ -311,6 +361,14 @@ class Employee extends REST_Controller {
         $this->response($data, 200);
 	}
 
+	function form_certification_get(){
+		$cert_id = $this->get("cert_id");
+
+        $data = $this->memployee->form_certification($cert_id);
+
+        $this->response($data, 200);
+	}
+
 	function form_employee_get(){
 		$people_id = $this->get("people_id");
 
@@ -364,6 +422,25 @@ class Employee extends REST_Controller {
 
 		$this->db->where("education_id", $education_id);
 		$query = $this->db->update("mj_education", $data);
+
+		if($query){
+			$response["success"] = true;
+			$response["message"] = "Deleted Success";
+			$this->response($response, 200);
+		}else{
+			$response["success"] = false;
+			$response["message"] = "Failed to Deleted Data";
+			$this->response($response, 400);
+		}
+	}
+
+    function delete_certification_delete(){
+		$cert_id = $this->delete("cert_id");
+
+		$data["status"] = "nullified";
+
+		$this->db->where("cert_id", $cert_id);
+		$query = $this->db->update("mj_certification", $data);
 
 		if($query){
 			$response["success"] = true;
@@ -514,6 +591,79 @@ class Employee extends REST_Controller {
 				}
 			}
 		}
+	}
+
+	function document_certification_upload_post(){
+
+		$mime_type = mime_content_type($_FILES['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document']['tmp_name']);
+		$ExtNya = GetFileExt($_FILES['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document']['name']);
+		
+		if (!in_array($mime_type, array('application/pdf'))) {
+			$result['success'] = false;
+			$result['message'] = 'File types not allowed / Corrupt';
+			$this->response($result, 400);
+		}else{
+			if($_POST["OpsiDisplay"] == "insert"){
+				if ($_FILES['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . $_FILES['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document']['name'];
+					$fileupload['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document'] = $_FILES['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document'];
+	
+					$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$result['success'] = true;
+						$result['FilePath'] = 'files/tmp/' . $gambar;
+						$result['file'] = base_url().'files/tmp/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			}else{
+				if ($_FILES['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . $_POST['cert_id'].".pdf";
+					$fileupload['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document'] = $_FILES['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document'];
+	
+					//cek folder propinsi itu sudah ada belum
+					if (!file_exists('files/employee/certification')) {
+						mkdir('files/employee/certification', 0777, true);
+					}
+
+					$upload = move_upload($fileupload, 'files/employee/certification/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$cert_id = $_POST["cert_id"];
+						
+						$datapost["document"] = 'files/employee/certification/' . $gambar;
+						$this->db->where("cert_id", $cert_id);
+						$this->db->update("mj_certification", $datapost);
+
+						//cek folder propinsi itu sudah ada belum
+						if (file_exists($_POST['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document_old'])) {
+							unlink($_POST['MitraJaya_view_Admin_Employee_WinFormCertification-Form-document_old']);
+						}
+
+						$result['success'] = true;
+						$result['FilePath'] = 'files/employee/certification/' . $gambar;
+						$result['file'] = base_url().'files/employee/certification/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			}
+		}
+	}
+
+	function notifications_load_get(){
+		$pSearch["start"] = $this->get("start");
+		$pSearch["limit"] = $this->get("limit");
+
+		$data = $this->memployee->list_certificaiton_notif($pSearch);
+
+		$this->response($data, 200);
 	}
 }
 ?>
