@@ -156,6 +156,50 @@ class Memployee extends CI_Model {
         return $result;
 	}
 
+	public function list_certificaiton($people_id, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
+		if ($sortingField == "") $sortingField = 'cert_id';
+        if ($sortingDir == "") $sortingDir = 'DESC';
+
+		$this->db->where("a.status", "active");
+		$this->db->where("a.people_id", $people_id);
+		$this->db->limit($limit, $start);
+		$this->db->order_by($sortingField, $sortingDir);
+		$this->db->select('SQL_CALC_FOUND_ROWS a.cert_id', false);
+		$this->db->select('
+			, a.people_id
+			, a.cert_code
+			, a.cert_name
+			, a.start_date
+			, a.end_date
+		');
+		$query = $this->db->get('mj_certification a');
+
+		$data = $query->result_array();
+        // $result['sql'] = $this->db->last_query();
+        $result['data'] = $data;
+        // echo '<pre>'; print_r($this->db->last_query()); echo '</pre>'; exit;
+
+        $query = $this->db->query('SELECT FOUND_ROWS() AS total');
+        $result['total'] = $query->row()->total;
+
+        if ($sortingDir == 'ASC') {
+            $sortingInfo = 'ascending';
+        }
+        if ($sortingDir == 'DESC') {
+            $sortingInfo = 'descending';
+        }
+
+        $_SESSION['informationGrid'] = '
+            <div class="Sfr_BoxInfoDataGrid_Title"><strong>' . number_format($query->row()->total, 0, ".", ",") . '</strong> ' . 'Data' . '</div>
+            <ul class="Sft_UlListInfoDataGrid">
+                <li class="Sft_ListInfoDataGrid">
+                    <img class="Sft_ListIconInfoDataGrid" src="' . base_url() . 'assets/icons/font-awesome/svgs/solid/arrow-up-wide-short.svg" width="20" />&nbsp;&nbsp;Sorted by ' . $sortingField . ' ' . $sortingInfo . '
+                </li>
+            </ul>';
+
+        return $result;
+	}
+
 	public function list_education($people_id, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
 
         if ($sortingField == "") $sortingField = 'education_id';
@@ -346,6 +390,69 @@ class Memployee extends CI_Model {
 			$response["success"] = true;
 			$response["message"] = "Data Saved";
 			$response["education_id"] = $education_id;
+		}else{
+			$response["success"] = false;
+			$response["message"] = "Failed to saved data";
+		}
+
+		return $response;
+	}
+
+	public function insertCertification($post){		
+		$document_old = $post["document_old"];
+        unset($post["OpsiDisplay"]);
+        unset($post["document_old"]);
+
+		$cert_id 				= getUUID();
+		$post["cert_id"] 		= $cert_id;
+		$post["CreatedDate"] 	= date("Y-m-d H:i:s");
+		$post["CreatedBy"] 		= $_SESSION["user_id"];
+		$filename = str_replace(" ", "_", $document_old);
+
+		if($document_old != ''){
+			//cek folder propinsi itu sudah ada belum
+			if (!file_exists('files/employee/certification')) {
+				mkdir('files/employee/certification', 0777, true);
+			}
+
+			$file_tmp = pathinfo($filename);
+			$gambar = date('Ymdhis') . '_' . $cert_id.".pdf";
+			rename($filename, 'files/employee/certification/' . $gambar);
+			$post['file'] = 'files/employee/certification/' . $gambar;
+		}
+		
+		
+		$insert = $this->db->insert("mj_certification", $post);
+
+		if($insert){
+			$response["success"] = true;
+			$response["message"] = "Data Saved";
+			$response["cert_id"] = $cert_id;
+		}else{
+			$response["success"] = false;
+			$response["message"] = "Failed to saved data";
+		}
+
+		return $response;
+	}
+
+	public function updateCertification($post){
+		$cert_id 				= $post['cert_id'];
+        unset($post["OpsiDisplay"]);
+        unset($post["cert_id"]);
+        unset($post["document_old"]);
+        unset($post["document"]);
+		
+		$post["UpdatedDate"] 	= date("Y-m-d H:i:s");
+		$post["UpdatedBy"] 		= $_SESSION["user_id"];
+		
+		$this->db->where("cert_id", $cert_id);
+		$update = $this->db->update("mj_certification", $post);
+
+		if($update){
+			$response["success"] = true;
+			$response["message"] = "Data Saved";
+			$response["cert_id"] = $cert_id;
 		}else{
 			$response["success"] = false;
 			$response["message"] = "Failed to saved data";
@@ -570,5 +677,60 @@ class Memployee extends CI_Model {
         $return["data"]     = $result;
 
         return $return;
+	}
+
+	public function form_certification($cert_id){
+
+		$this->db->where("a.cert_id", $cert_id);
+		$this->db->select('
+			a.cert_id,
+			a.cert_code,
+			a.people_id,
+			a.cert_name,
+			a.start_date,
+			a.end_date,
+			a.description,
+			a.file as document,
+			a.file as document_old
+		');
+		$query = $this->db->get('mj_certification a')->row_array();
+
+		$result = array();
+        foreach($query as $row => $value){
+            $result["MitraJaya.view.Admin.Employee.WinFormCertification-Form-".$row] = $value;
+        }
+
+		$result["document"] = $result["MitraJaya.view.Admin.Employee.WinFormCertification-Form-document"];
+
+        $return["success"]  = true;
+        $return["data"]     = $result;
+
+        return $return;
+	}
+
+	public function list_certificaiton_notif($pSearch){
+		$sql = "SELECT
+			a.cert_code
+			, a.cert_name
+			, b.people_name
+			, DATE_FORMAT(a.end_date, '%d %M %Y') end_date  
+		FROM
+			mj_certification a
+		JOIN
+			mj_people b on b.people_id = a.people_id
+		WHERE
+			a.status = 'active'
+		AND
+			a.start_date >= DATE(NOW())
+		AND
+			a.end_date <= DATE(NOW() + INTERVAL 14 DAY)
+		LIMIT ".$pSearch["start"].",".$pSearch["limit"];
+		$query = $this->db->query($sql);
+
+		$data["total"] = $query->num_rows();
+		$data["data"]	= $query->result_array();
+
+
+		return $data;
 	}
 }

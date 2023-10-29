@@ -37,49 +37,6 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
                 columnWidth: 0.5,
                 layout: 'form',
                 cls: 'Sfr_PanelLayoutFormContainer',
-                style: 'padding-right:6px;',
-                items: [{
-                    xtype: 'panel',
-                    title: lang('Salary'),
-                    frame: false,
-                    id: 'MitraJaya.view.Admin.Employee.PanelPayroll-SectionSalary',
-                    style: 'margin-top:5px;padding-top:7px;',
-                    cls: 'Sfr_PanelSubLayoutFormRoundedGray',
-                    items: [{
-                        layout: 'column',
-                        border: false,
-                        items: [{
-                            columnWidth: 1,
-                            layout: 'form',
-                            defaults: {
-                                labelAlign: 'top'
-                            },
-                            items: [{ html: '<div style="height:13px;">&nbsp;</div>' },{
-                                xtype: 'numericfield',
-                                fieldLabel: lang('Basic Salary'),
-                                id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-basic_salary',
-                                name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-basic_salary',
-                                height: 65
-                            },{
-                                xtype: 'numericfield',
-                                fieldLabel: lang('Transport'),
-                                id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-transport_salary',
-                                name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-transport_salary',
-                                height: 65
-                            },{
-                                xtype: 'numericfield',
-                                fieldLabel: lang('Mobile'),
-                                id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-mobile_salary',
-                                name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-mobile_salary',
-                                height: 65
-                            }]
-                        }]
-                    }]
-                }]
-            }, {
-                columnWidth: 0.5,
-                layout: 'form',
-                cls: 'Sfr_PanelLayoutFormContainer',
                 style: 'padding-left:6px;',
                 items: [{
                     xtype: 'panel',
@@ -146,13 +103,13 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
                             },
                             items: [{ html: '<div style="height:13px;">&nbsp;</div>' },{
                                 xtype: 'textfield',
-                                fieldLabel: lang('BPJS Ketenagakerjaan'),
+                                fieldLabel: lang('BPJS Ketenagakerjaan Number'),
                                 id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-bpjs_tk',
                                 name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-bpjs_tk',
                                 height: 65
                             },{
                                 xtype: 'textfield',
-                                fieldLabel: lang('BPJS Kesehatan'),
+                                fieldLabel: lang('BPJS Kesehatan Number'),
                                 id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-bpjs_kesehatan',
                                 name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-bpjs_kesehatan',
                                 height: 65
