@@ -177,6 +177,8 @@ class Employee extends REST_Controller {
             $paramPost[$keyNew] = $value;
         }
 
+		$paramPost["contract_wage"] = str_replace(",","",$paramPost["contract_wage"]);
+
 
 		if ($varPost['OpsiDisplay'] == 'insert') {
             $proses = $this->memployee->insertContract($paramPost);

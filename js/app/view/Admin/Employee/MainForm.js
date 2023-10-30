@@ -435,6 +435,10 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
                     text: lang('Employement Date'),
                     dataIndex: 'employment_date',
                     flex: 1,
+                },{
+                    text: lang('Contract Status'),
+                    dataIndex: 'employee_status',
+                    flex: 1,
                 }]
             }]
         });
