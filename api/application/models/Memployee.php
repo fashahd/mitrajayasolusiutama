@@ -58,7 +58,7 @@ class Memployee extends CI_Model {
 
 	public function list_contract($people_id, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
 
-        if ($sortingField == "") $sortingField = 'end_date';
+        if ($sortingField == "") $sortingField = 'start_date';
         if ($sortingDir == "") $sortingDir = 'DESC';
 
 		$this->db->where("a.status", "active");
@@ -71,6 +71,7 @@ class Memployee extends CI_Model {
 		$this->db->select('
 			a.people_id
 			, a.contract_number
+			, IF(a.employee_status = "1", "Active", "Inactive") employee_status
 			, b.position_name position
 			, c.gol_name gol
 			, if(contract_status = "permanent", a.start_date, CONCAT(a.start_date, " - ", a.end_date)) employment_date
@@ -256,6 +257,7 @@ class Memployee extends CI_Model {
 		$post["contract_id"] 		= $contract_id;
 		$post["CreatedDate"] 	= date("Y-m-d H:i:s");
 		$post["CreatedBy"] 		= $_SESSION["user_id"];
+		$filename = str_replace(" ", "_", $document_old);
 
 		if($document_old != ''){
 			//cek folder propinsi itu sudah ada belum
@@ -263,9 +265,9 @@ class Memployee extends CI_Model {
 				mkdir('files/employee/contract', 0777, true);
 			}
 
-			$file_tmp = pathinfo($document_old);
+			$file_tmp = pathinfo($filename);
 			$gambar = date('Ymdhis') . '_' . $contract_id.".pdf";
-			rename($document_old, 'files/employee/contract/' . $gambar);
+			rename($filename, 'files/employee/contract/' . $gambar);
 			$post['document'] = 'files/employee/contract/' . $gambar;
 		}
 		
@@ -276,6 +278,10 @@ class Memployee extends CI_Model {
 			$response["success"] = true;
 			$response["message"] = "Data Saved";
 			$response["contract_id"] = $contract_id;
+
+			if($post["employee_status"] == '1'){
+				$this->db->query("UPDATE mj_contract SET employee_status = '2' WHERE contract_id != '$contract_id'");
+			}
 		}else{
 			$response["success"] = false;
 			$response["message"] = "Failed to saved data";
@@ -300,6 +306,10 @@ class Memployee extends CI_Model {
 			$response["success"] = true;
 			$response["message"] = "Data Saved";
 			$response["contract_id"] = $contract_id;
+
+			if($post["employee_status"] == '1'){
+				$this->db->query("UPDATE mj_contract SET employee_status = '2' WHERE contract_id != '$contract_id'");
+			}
 		}else{
 			$response["success"] = false;
 			$response["message"] = "Failed to saved data";
@@ -517,6 +527,8 @@ class Memployee extends CI_Model {
 			a.contract_id
 			, a.people_id
 			, a.contract_number
+			, a.contract_wage
+			, a.employee_status
 			, a.position
 			, a.gol
 			, a.start_date
