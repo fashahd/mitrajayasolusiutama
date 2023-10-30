@@ -138,6 +138,14 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
 							}
 						}
                     },{
+                    	xtype: 'numericfield',
+                        id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_wage',
+                        name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_wage',
+                        fieldLabel: lang('Salary per Month'),
+                        labelAlign: "top",
+                        allowBlank: false,
+                        baseCls: 'Sfr_FormInputMandatory',
+                    },{
                         xtype: 'hiddenfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-document_old',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-document_old'
@@ -188,6 +196,11 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                                 }
                             }
                         }
+                    },{
+                        id:'MitraJaya.view.Admin.Employee.WinFormContract-Form-FileDocument',
+                        html:'<img src="'+m_api_base_url+'/assets/images/no-images.png" height="200" />'        
+                    },{
+                        html:'<div style="margin-top:5px;font-size:10px;font-style:italic;">'+lang('File must PDF')+'</div>'
                     }]
                 },{
                     columnWidth: 0.5,
@@ -270,11 +283,26 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                         fieldLabel: lang('Work Location'),
                         labelAlign: "top"
                     },{
-                        id:'MitraJaya.view.Admin.Employee.WinFormContract-Form-FileDocument',
-                        html:'<img src="'+m_api_base_url+'/assets/images/no-images.png" height="200" />'        
-                    },{
-                        html:'<div style="margin-top:5px;font-size:10px;font-style:italic;">'+lang('File must PDF')+'</div>'
-                    }]
+						fieldLabel: lang('Contract Status'),
+						xtype: 'radiogroup',
+						allowBlank: false,
+						labelAlign:'top',
+						baseCls: 'Sfr_FormInputMandatory',
+						readOnly: m_act_update,
+						msgTarget: 'side',
+						columns: 2,
+						items: [{
+							boxLabel: lang('Active'),
+							name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-employee_status',
+							inputValue: '1',
+							id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-employee_status1'
+						}, {
+							boxLabel: lang('Inactie'),
+							name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-employee_status',
+							inputValue: '2',
+							id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-employee_status2'
+						}]
+					}]
 				}]
             }]
         }];
