@@ -39,6 +39,42 @@ class Payroll extends REST_Controller {
 		$this->load->model("mpayroll");
     }
 
+	public function print_pay_slip_get(){
+		$people_id 	= $_GET["people_id"];
+		$month 		= $_GET["month"];
+		$year 		= $_GET["year"];
+
+        // Header
+        $dataHeader['titleNya'] = "Print Pay Slip";
+        $this->load->view('printout/print_header', $dataHeader);
+
+		
+        // Body
+        $this->cetak_payroll($people_id, $month, $year);
+	}
+
+	public function cetak_payroll($people_id, $month, $year){
+		
+		$payroll			= $this->mpayroll->form_payroll($month, $year, $people_id);
+
+		$paramPost = array();
+		if(is_array($payroll['data'])){
+			foreach ($payroll['data'] as $key => $value) {
+				$keyNew = str_replace("MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-", '', $key);
+				if ($value == "") {
+					$value = null;
+				}
+				$paramPost[$keyNew] = $value;
+			}
+		}
+
+		// echo "<pre>";print_r($paramPost);die;
+
+		$data["PayrollData"] = $paramPost;
+
+        $this->load->view('printout/payroll', $data);
+	}
+
 	function list_employee_get(){
 		$pSearch["Year"]    = $this->get("Year");
 		$pSearch["Month"]   = $this->get("Month");
@@ -265,18 +301,17 @@ class Payroll extends REST_Controller {
         $start = (int) $this->get('start');
         $limit = (int) $this->get('limit');
 		
-        $dataList 		= $this->mpayroll->list_income($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
-        $dataExpenses 	= $this->mpayroll->list_expense($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
+        $dataList 		= $this->mpayroll->list_employee($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
 
 		include APPPATH.'third_party/PHPExcel18/PHPExcel.php';        
 		$excel = new PHPExcel();
 
 		$excel->getProperties()->setCreator('PT. Mitrajaya Solusi Utama')
 			->setLastModifiedBy('PT. Mitrajaya Solusi Utama')
-			->setTitle("INVOICE")
-			->setSubject("INVOICE")
-			->setDescription("INVOICE template")
-			->setKeywords("INVOICE");
+			->setTitle("Payroll")
+			->setSubject("Payroll")
+			->setDescription("Payroll template")
+			->setKeywords("Payroll");
 		
 		$styleFontBoldHeader = array(
 			'font' => array(

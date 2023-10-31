@@ -104,7 +104,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 								}, {
 									xtype: 'button',
 									icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-									text: lang('Prefill Data'),
+									text: lang('Prefill Data From Before'),
 									cls: 'Sfr_BtnGridNewWhite',
 									overCls: 'Sfr_BtnGridNewWhite-Hover',
 									style: 'margin-top:25px',
