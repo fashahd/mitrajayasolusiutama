@@ -132,7 +132,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 				}, {
 					xtype: 'tbspacer',
 					flex: 1
-				},{
+				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
 					text: lang('Update'),
@@ -167,8 +167,8 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 						WinFormPayroll.setViewVar({
 							OpsiDisplay: 'update',
 							people_id: sm.data.people_id,
-							month:month,
-							year:year,
+							month: month,
+							year: year,
 							CallerStore: thisObj.StoreGridMain
 						});
 						if (!WinFormPayroll.isVisible()) {
@@ -179,7 +179,42 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 						}
 
 					}
-				},{
+				}, {
+					xtype: 'button',
+					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/paperclip.svg',
+					text: lang('Slip Gaji'),
+					cls: 'Sfr_BtnGridNewWhite',
+					overCls: 'Sfr_BtnGridNewWhite-Hover',
+					hidden: m_act_update,
+					id: 'MitraJaya.view.Admin.Payroll.MainGrid-Income-Grid-BtnSlipGaji',
+					handler: function () {
+						let sm = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Grid').getSelectionModel().getSelection()[0];
+						let month = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Month').getValue();
+						let year = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Year').getValue();
+
+						if (sm == undefined) {
+							Swal.fire(
+								'Please Select Data!',
+								'',
+								'warning'
+							)
+							return false;
+						}
+
+						if (sm.data.people_id == '' || sm.data.people_id == null) {
+							Swal.fire(
+								'Please Select Data!',
+								'',
+								'warning'
+							)
+							return false;
+						}
+
+						var url = m_api + '/v1/admin/payroll/print_pay_slip';
+						preview_cetak_surat(url + '?people_id=' + sm.data.people_id+'&month='+month+'&year='+year);
+
+					}
+				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
 					text: lang('Export'),
@@ -201,7 +236,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 						}).then((result) => {
 							if (result.isConfirmed) {
 								Ext.Ajax.request({
-									url: m_api + '/v1/finance/budgetplan/export_data',
+									url: m_api + '/v1/admin/payroll/export_data',
 									method: 'GET',
 									waitMsg: lang('Please Wait'),
 									params: {
@@ -257,13 +292,13 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 			columns: [{
 				text: lang('Employee ID'),
 				dataIndex: 'people_id',
-				hidden:true,
+				hidden: true,
 				flex: 1
-			},{
-                text: 'No',
-                flex: 0.1,
-                xtype: 'rownumberer'
-            }, {
+			}, {
+				text: 'No',
+				flex: 0.1,
+				xtype: 'rownumberer'
+			}, {
 				text: lang('Employee ID'),
 				dataIndex: 'people_ext_id',
 				flex: 1
@@ -326,13 +361,18 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 									var totalData = storeSalary.getTotalCount();
 
 									var Salary = 0;
-									var Actual = 0;
+									var Incentive = 0;
+									var Deduction = 0;
+									var Net_salary = 0;
 									for (i = 0; i < totalData; i++) {
 										var dataSalary = storeSalary.getAt(i).data;
 
 										// console.log(dataSalary)
 
 										Salary += parseFloat(dataSalary.salary);
+										Incentive += parseFloat(dataSalary.incentive);
+										Deduction += parseFloat(dataSalary.deduction);
+										Net_salary += parseFloat(dataSalary.net_salary);
 									}
 
 									thisObj.TotalIncomePlaning = Salary;
@@ -341,7 +381,10 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 
 									myStoreSalary.add({
 										'people_id': 'Total Budget',
-										'salary': Salary
+										'salary': Salary,
+										'incentive': Incentive,
+										'deduction': Deduction,
+										'net_salary': Net_salary,
 									})
 								}
 							}

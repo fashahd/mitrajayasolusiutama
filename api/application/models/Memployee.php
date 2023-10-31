@@ -250,6 +250,7 @@ class Memployee extends CI_Model {
 
 	public function insertContract($post){
 		$document_old = $post["document_old"];
+		$people_id = $post["people_id"];
         unset($post["OpsiDisplay"]);
         unset($post["document_old"]);
 
@@ -280,7 +281,7 @@ class Memployee extends CI_Model {
 			$response["contract_id"] = $contract_id;
 
 			if($post["employee_status"] == '1'){
-				$this->db->query("UPDATE mj_contract SET employee_status = '2' WHERE contract_id != '$contract_id'");
+				$this->db->query("UPDATE mj_contract SET employee_status = '2' WHERE contract_id != '$contract_id' AND people_id = '$people_id'");
 			}
 		}else{
 			$response["success"] = false;
@@ -292,6 +293,7 @@ class Memployee extends CI_Model {
 
 	public function updateContract($post){
 		$contract_id 				= $post['contract_id'];
+		$people_id 				= $post['people_id'];
         unset($post["OpsiDisplay"]);
         unset($post["contract_id"]);
         unset($post["document_old"]);
@@ -308,7 +310,7 @@ class Memployee extends CI_Model {
 			$response["contract_id"] = $contract_id;
 
 			if($post["employee_status"] == '1'){
-				$this->db->query("UPDATE mj_contract SET employee_status = '2' WHERE contract_id != '$contract_id'");
+				$this->db->query("UPDATE mj_contract SET employee_status = '2' WHERE contract_id != '$contract_id' AND people_id = '$people_id'");
 			}
 		}else{
 			$response["success"] = false;

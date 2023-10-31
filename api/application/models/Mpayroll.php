@@ -24,10 +24,17 @@ class Mpayroll extends CI_Model
 			, c.deduction_kasbon
 			, c.deduction_pph_21_insentif
 			, c.deduction_pph_21
+			, a.people_name
+			, a.people_ext_id
+			, msp.position_name
+			, (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus) total_insentif
+			, (c.deduction_bpjs_tk + c.deduction_bpjs_kesehatan + c.deduction_kasbon + c.deduction_pph_21_insentif + c.deduction_pph_21) total_deduction
 		FROM
 			`mj_people` a
 		LEFT JOIN
 			mj_contract b on b.people_id = a.people_id AND b.employee_status = 1
+		LEFT JOIN
+			mj_staff_position msp on msp.position_id = b.position
 		LEFT JOIN
 			mj_payroll c on c.people_id = a.people_id AND c.`month` = ? AND c.`year` = ?
 		WHERE

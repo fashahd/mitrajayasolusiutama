@@ -31,6 +31,19 @@ class Combo extends REST_Controller {
 
 	function combo_month_get(){
 
+		$month["1"] = "January";
+		$month["2"] = "February";
+		$month["3"] = "March";
+		$month["4"] = "April";
+		$month["5"] = "May";
+		$month["6"] = "June";
+		$month["7"] = "July";
+		$month["8"] = "August";
+		$month["9"] = "September";
+		$month["10"] = "October";
+		$month["11"] = "November";
+		$month["12"] = "December";
+
 		for ($i_month = 1; $i_month <= 12; $i_month++) { 
 			$key = $i_month-1;
 
@@ -39,7 +52,7 @@ class Combo extends REST_Controller {
 			}
 			
             $arrReturn[$key]['id'] = (string) $i_month;
-            $arrReturn[$key]['label'] = date('F', mktime(0,0,0,$i_month));
+            $arrReturn[$key]['label'] = $month[(int)$i_month];
 		}
 
         $this->response($arrReturn, 200);
