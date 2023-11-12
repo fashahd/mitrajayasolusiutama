@@ -58,7 +58,7 @@ class Mpayroll extends CI_Model
 	public function form_prefill_payroll($Month, $Year, $people_id)
 	{
 		$sql = "SELECT
-			IF(c.salary IS NULL, b.contract_wage, c.salary) salary
+			IF(b.contract_wage IS NULL, c.salary, b.contract_wage) salary
 			, '$Month' month
 			, '$Year' year
 			, '$people_id' people_id
@@ -169,9 +169,68 @@ class Mpayroll extends CI_Model
 			, a.people_ext_id
 			, a.people_name
 			, c.salary
+			, c.insentif_thr
+			, c.insentif_transportasi
+			, c.insentif_komunikasi
+			, c.insentif_lembur
+			, c.insentif_bonus
+			, c.deduction_bpjs_tk
+			, c.deduction_bpjs_kesehatan
+			, c.deduction_kasbon
+			, c.deduction_pph_21_insentif
+			, c.deduction_pph_21
 			, (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus) incentive
 			, (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif+c.deduction_pph_21) deduction
 			, (c.salary + (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus)) - (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif+c.deduction_pph_21) net_salary
+		FROM
+			mj_people a
+		INNER JOIN
+			mj_contract b on b.people_id = a.people_id AND b.employee_status = '1'
+		LEFT JOIN
+			mj_payroll c on c.people_id = a.people_id AND c.`month` = ? AND c.`year` = ?
+		WHERE
+			a.`status` = 'active'
+		GROUP BY
+			a.people_id ORDER BY $sortingField $sortingDir";
+		$query = $this->db->query($sql, array($Month, $Year));
+
+		$result['data'] = $query->result_array();
+
+		return $result;
+	}
+
+	public function list_employee_export($pSearch, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir)
+	{
+
+		$Year = ($pSearch["Year"] != '') ? $pSearch["Year"] : date("Y");
+		$Month = ($pSearch["Month"] != '') ? $pSearch["Month"] : date("m");
+
+		$sortingField = ($sortingField == '') ? 'a.people_name' : $sortingField;
+
+		if ($sortingDir == 'ASC') {
+			$sortingInfo = 'ascending';
+		}
+		if ($sortingDir == 'DESC') {
+			$sortingInfo = 'descending';
+		}
+
+		$sql = "SELECT
+			a.people_ext_id AS 'Nomor Induk Pegawai'
+			, a.people_name AS 'Nama Pegawai'
+			, c.insentif_transportasi AS 'Transportasi'
+			, c.insentif_komunikasi AS 'Komunikasi'
+			, c.insentif_lembur AS 'Lembur'
+			, c.insentif_bonus AS 'Bonus'
+			, c.insentif_thr AS 'THR'
+			, c.deduction_bpjs_tk AS 'BPJS TK'
+			, c.deduction_bpjs_kesehatan AS 'BPJS Kesehatan'
+			, c.deduction_kasbon AS 'Kasbon'
+			, c.deduction_pph_21_insentif AS 'PPH 21 Insentif'
+			, c.deduction_pph_21 AS 'PPH 21'
+			, c.salary AS 'Gross Salary'
+			, (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus) AS 'Total Insentif'
+			, (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif+c.deduction_pph_21) AS 'Total Pengurangan'
+			, (c.salary + (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus)) - (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif+c.deduction_pph_21) AS 'Net Salary'
 		FROM
 			mj_people a
 		INNER JOIN

@@ -89,6 +89,31 @@ class Employee extends REST_Controller {
         $this->response($data, 200);
 	}
 
+	function doc_list_get(){
+		$people_id = $this->get("people_id");
+		
+		//sort
+        $sorting = json_decode($this->get('sort'));
+        if (isset($sorting[0]->property)) {
+            $sortingField = $sorting[0]->property;
+        } else {
+            $sortingField = null;
+        }
+
+        if (isset($sorting[0]->direction)) {
+            $sortingDir = $sorting[0]->direction;
+        } else {
+            $sortingDir = null;
+        }
+
+        $start = (int) $this->get('start');
+        $limit = (int) $this->get('limit');
+
+        // echo '<pre>'; print_r($pSearch); exit;
+        $data = $this->memployee->list_doc($people_id, $start, $limit, 'limit', $sortingField, $sortingDir);
+        $this->response($data, 200);
+	}
+
 	function certification_list_get(){
 		$people_id = $this->get("people_id");
 		
@@ -184,6 +209,33 @@ class Employee extends REST_Controller {
             $proses = $this->memployee->insertContract($paramPost);
         } else {
             $proses = $this->memployee->updateContract($paramPost);
+        }
+
+		if ($proses['success'] == true) {
+            $this->response($proses, 200);
+        } else {
+            $this->response($proses, 400);
+        }
+	}
+
+	function submit_document_post(){
+		
+        $varPost = $_POST;
+        $paramPost = array();
+
+        foreach ($varPost as $key => $value) {
+            $keyNew = str_replace("MitraJaya_view_Admin_Employee_WinFormDocument-Form-", '', $key);
+            if ($value == "") {
+                $value = null;
+            }
+            $paramPost[$keyNew] = $value;
+        }
+
+
+		if ($varPost['OpsiDisplay'] == 'insert') {
+            $proses = $this->memployee->insertDocument($paramPost);
+        } else {
+            $proses = $this->memployee->updateDocument($paramPost);
         }
 
 		if ($proses['success'] == true) {
@@ -339,6 +391,14 @@ class Employee extends REST_Controller {
         $this->response($data, 200);
 	}
 
+	function form_document_get(){
+		$doc_id = $this->get("doc_id");
+
+        $data = $this->memployee->form_document($doc_id);
+
+        $this->response($data, 200);
+	}
+
 	function form_payroll_get(){
 		$people_id = $this->get("people_id");
 
@@ -455,6 +515,25 @@ class Employee extends REST_Controller {
 		}
 	}
 
+    function delete_document_delete(){
+		$doc_id = $this->delete("doc_id");
+
+		$data["StatusCode"] = "nullified";
+
+		$this->db->where("doc_id", $doc_id);
+		$query = $this->db->update("mj_document", $data);
+
+		if($query){
+			$response["success"] = true;
+			$response["message"] = "Deleted Success";
+			$this->response($response, 200);
+		}else{
+			$response["success"] = false;
+			$response["message"] = "Failed to Deleted Data";
+			$this->response($response, 400);
+		}
+	}
+
     function delete_contract_delete(){
 		$contract_id = $this->delete("contract_id");
 
@@ -529,6 +608,75 @@ class Employee extends REST_Controller {
 				}
 			}
         }
+	}
+
+	function document_file_upload_post(){
+
+		$mime_type = mime_content_type($_FILES['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document']['tmp_name']);
+		$ExtNya = GetFileExt($_FILES['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document']['name']);
+		
+		if (!in_array($mime_type, array('application/pdf','image/png','image/jpg','image/jpeg'))) {
+			$result['success'] = false;
+			$result['message'] = 'File types not allowed / Corrupt';
+			$this->response($result, 400);
+		}else{
+			if($_POST["OpsiDisplay"] == "insert"){
+				if ($_FILES['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . str_replace(" ","_", $_FILES['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document']['name']);
+					$fileupload['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document'] = $_FILES['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document'];
+	
+					$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
+					$file_tmp = pathinfo('files/tmp/' . $gambar);
+					
+					if (isset($upload['upload_data'])) {
+						$result['success'] = true;
+						$result['mimetype'] = $file_tmp["extension"];
+						$result['FilePath'] = 'files/tmp/' . $gambar;
+						$result['file'] = base_url().'files/tmp/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			}else{
+				if ($_FILES['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document']['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . str_replace(" ","_", $_FILES['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document']['name']);
+					$fileupload['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document'] = $_FILES['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document'];
+	
+					//cek folder propinsi itu sudah ada belum
+					if (!file_exists('files/employee/document')) {
+						mkdir('files/employee/document', 0777, true);
+					}
+
+					$upload = move_upload($fileupload, 'files/employee/document/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$doc_id = $_POST["doc_id"];
+						
+						$datapost["file"] = 'files/employee/document/' . $gambar;
+						$this->db->where("doc_id", $doc_id);
+						$this->db->update("mj_document", $datapost);
+
+						//cek folder propinsi itu sudah ada belum
+						if (file_exists($_POST['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document_old'])) {
+							unlink($_POST['MitraJaya_view_Admin_Employee_WinFormDocument-Form-document_old']);
+						}
+
+						$file_tmp = pathinfo($datapost["file"]);
+						$result['success'] = true;
+						$result['mimetype'] = $file_tmp["extension"];
+						$result['FilePath'] = 'files/employee/document/' . $gambar;
+						$result['file'] = base_url().'files/employee/document/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			}
+		}
 	}
 
 	function document_contract_upload_post(){

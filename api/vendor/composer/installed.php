@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'chriskacerguis/codeigniter-restserver',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '4ad4fb4b0b24a9415da2015ee7611bc11c722423',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '6131b7e1a4e40c6441262d5d37ff58b3ea91524b',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'chriskacerguis/codeigniter-restserver' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '4ad4fb4b0b24a9415da2015ee7611bc11c722423',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '6131b7e1a4e40c6441262d5d37ff58b3ea91524b',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

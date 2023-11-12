@@ -192,6 +192,14 @@ class Combo extends REST_Controller {
 		$this->response($data);
 	}
 
+	function combo_doc_type_get(){
+		
+		$data = $this->mcombo->GetDocumentTypeList();
+
+		
+		$this->response($data);
+	}
+
 	function combo_employee_get(){
 		
 		$data = $this->mcombo->GetEmployeeList();
