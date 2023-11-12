@@ -106,6 +106,52 @@ class Memployee extends CI_Model {
         return $result;
 	}
 
+	public function list_doc($people_id, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
+
+        if ($sortingField == "") $sortingField = 'b.doc_type_name';
+        if ($sortingDir == "") $sortingDir = 'DESC';
+
+		$this->db->where("a.StatusCode", "active");
+		$this->db->where("a.people_id", $people_id);
+		$this->db->limit($limit, $start);
+		$this->db->order_by($sortingField, $sortingDir);
+		$this->db->select('SQL_CALC_FOUND_ROWS a.doc_id', false);
+		$this->db->join('mj_document_type b ','b.doc_type_id = a.doc_type_id','left');
+		$this->db->select('
+			a.doc_id
+			, a.doc_number
+			, b.doc_type_name doc_type
+			, a.expired_date
+			, a.file
+		');
+		$query = $this->db->get('mj_document a');
+
+		$data = $query->result_array();
+        // $result['sql'] = $this->db->last_query();
+        $result['data'] = $data;
+        // echo '<pre>'; print_r($this->db->last_query()); echo '</pre>'; exit;
+
+        $query = $this->db->query('SELECT FOUND_ROWS() AS total');
+        $result['total'] = $query->row()->total;
+
+        if ($sortingDir == 'ASC') {
+            $sortingInfo = 'ascending';
+        }
+        if ($sortingDir == 'DESC') {
+            $sortingInfo = 'descending';
+        }
+
+        $_SESSION['informationGrid'] = '
+            <div class="Sfr_BoxInfoDataGrid_Title"><strong>' . number_format($query->row()->total, 0, ".", ",") . '</strong> ' . 'Data' . '</div>
+            <ul class="Sft_UlListInfoDataGrid">
+                <li class="Sft_ListInfoDataGrid">
+                    <img class="Sft_ListIconInfoDataGrid" src="' . base_url() . 'assets/icons/font-awesome/svgs/solid/arrow-up-wide-short.svg" width="20" />&nbsp;&nbsp;Sorted by ' . $sortingField . ' ' . $sortingInfo . '
+                </li>
+            </ul>';
+
+        return $result;
+	}
+
 	public function list_family($people_id, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
 
         if ($sortingField == "") $sortingField = 'family_id';
@@ -267,7 +313,7 @@ class Memployee extends CI_Model {
 			}
 
 			$file_tmp = pathinfo($filename);
-			$gambar = date('Ymdhis') . '_' . $contract_id.".pdf";
+			$gambar = date('Ymdhis') . '_' . $contract_id.".".$file_tmp["extension"];
 			rename($filename, 'files/employee/contract/' . $gambar);
 			$post['document'] = 'files/employee/contract/' . $gambar;
 		}
@@ -312,6 +358,78 @@ class Memployee extends CI_Model {
 			if($post["employee_status"] == '1'){
 				$this->db->query("UPDATE mj_contract SET employee_status = '2' WHERE contract_id != '$contract_id' AND people_id = '$people_id'");
 			}
+		}else{
+			$response["success"] = false;
+			$response["message"] = "Failed to saved data";
+		}
+
+		return $response;
+	}
+
+	public function insertDocument($post){
+		$document_old = $post["document_old"];
+		$doc_type_id = $post["doc_type"];
+		$people_id = $post["people_id"];
+		
+        unset($post["OpsiDisplay"]);
+        unset($post["document_old"]);
+        unset($post["doc_type"]);
+        unset($post["doc_id"]);
+
+		$post["people_id"] = $people_id;
+		$post["doc_type_id"] 		= $doc_type_id;
+		$post["CreatedDate"] 	= date("Y-m-d H:i:s");
+		$post["CreatedBy"] 		= $_SESSION["user_id"];
+		$filename = str_replace(" ", "_", $document_old);
+
+		if($document_old != ''){
+			//cek folder propinsi itu sudah ada belum
+			if (!file_exists('files/employee/document')) {
+				mkdir('files/employee/document', 0777, true);
+			}
+
+			$file_tmp = pathinfo($filename);
+			
+			$gambar = date('Ymdhis') . '_' . $doc_type_id."_".$people_id.".".$file_tmp["extension"];
+			rename($filename, 'files/employee/document/' . $gambar);
+			$post['file'] = 'files/employee/document/' . $gambar;
+		}
+		
+		
+		$insert = $this->db->insert("mj_document", $post);
+
+		if($insert){
+			$response["success"] = true;
+			$response["message"] = "Data Saved";
+			$response["doc_id"] = $this->db->insert_id();
+		}else{
+			$response["success"] = false;
+			$response["message"] = "Failed to saved data";
+		}
+
+		return $response;
+	}
+
+	public function updateDocument($post){
+		$doc_id 				= $post['doc_id'];
+		$people_id 				= $post['people_id'];
+		$post['doc_type_id']	= $post['doc_type'];
+
+        unset($post["OpsiDisplay"]);
+        unset($post["doc_id"]);
+        unset($post["document_old"]);
+        unset($post["doc_type"]);
+		
+		$post["UpdatedDate"] 	= date("Y-m-d H:i:s");
+		$post["UpdatedBy"] 		= $_SESSION["user_id"];
+		
+		$this->db->where("doc_id", $doc_id);
+		$update = $this->db->update("mj_document", $post);
+
+		if($update){
+			$response["success"] = true;
+			$response["message"] = "Data Saved";
+			$response["doc_id"] = $doc_id;
 		}else{
 			$response["success"] = false;
 			$response["message"] = "Failed to saved data";
@@ -548,6 +666,36 @@ class Memployee extends CI_Model {
         }
 
 		$result['document'] 	= base_url().$query['document'];
+
+        $return["success"]  = true;
+        $return["data"]     = $result;
+
+        return $return;
+	}
+
+	public function form_document($doc_id){
+
+		$this->db->where("a.doc_id", $doc_id);
+		$this->db->select('
+			a.doc_id
+			, a.people_id
+			, a.doc_type_id doc_type
+			, a.doc_number
+			, a.expired_date
+			, a.file document_old
+			, a.file document
+		');
+		$query = $this->db->get('mj_document a')->row_array();
+
+		$result = array();
+        foreach($query as $row => $value){
+            $result["MitraJaya.view.Admin.Employee.WinFormDocument-Form-".$row] = $value;
+        }
+
+		$tmp_file = pathinfo($query['document']);
+
+		$result['document'] 	= base_url().$query['document'];
+		$result['mimetype'] 	= $tmp_file['extension'];
 
         $return["success"]  = true;
         $return["data"]     = $result;

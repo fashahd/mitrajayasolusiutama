@@ -27,4 +27,13 @@ class Tools extends REST_Controller
     {
         echo $_SESSION['informationGrid'];exit;
     }
+	
+    public function lang_c_POST()
+    {
+        $data['msg'] = lang($this->post('msg'));
+        $data['title'] = lang($this->post('title'));
+        $this->_output = array('success' => true, 'data' => $data);
+
+        $this->response($this->_output, 200);
+    }
 }
