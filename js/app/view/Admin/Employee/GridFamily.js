@@ -14,6 +14,12 @@ Ext.define('MitraJaya.view.Admin.Employee.GridFamily' ,{
     listeners: {
         afterRender: function(component, eOpts){
             var thisObj = this;
+
+			if(thisObj.viewVar.OpsiDisplay == 'update'){
+				Ext.getCmp('MitraJaya.view.Admin.Employee.GridFamily-BtnAdd').setVisible(true);
+			}else{
+				Ext.getCmp('MitraJaya.view.Admin.Employee.GridFamily-BtnAdd').setVisible(false);
+			}
         },
         expand: function() {
             var thisObj = this;

@@ -153,55 +153,7 @@
 				emptyMsg: '<?= 'No data to display'; ?>'
 			});
 		}
-		// Overide Message Confirm box
-		Ext.override(Ext.window.MessageBox, {
-			buttonText: {
-				yes: "<?= 'Yes'; ?>",
-				no: "<?= 'No'; ?>",
-				ok: "<?= 'OK'; ?>",
-				cancel: "<?= 'Cancel'; ?>"
-			},
-			confirm: function(title, msg, fn, scope) {
-				var $this = this;
-				var promise = new Promise(async function(resolve, reject) {
-					resolve($this, title, msg, fn, scope);
-				}).then(function(value) {
-					Ext.Ajax.request({
-						waitMsg: 'Please Wait',
-						url: '/api/tools/lang_c',
-						params: {
-							title: title,
-							msg: msg
-						},
-						method: 'POST',
-						success: function(response, opts) {
-							result = response.responseText;
-							result = JSON.parse(result);
-
-							$this.show({
-								title: result.data.title,
-								msg: result.data.msg,
-								buttonText: {
-									yes: "<?= 'Yes'; ?>",
-									no: "<?= 'No'; ?>"
-								},
-								closable: false,
-								promptConfig: false,
-								scope: scope,
-								animateTarget: 'mb9',
-								icon: 'ext-mb-info',
-								fn: function() {
-									if (fn) {
-										fn.apply(scope, arguments);
-									}
-								}
-							});
-							return $this;
-						},
-					});
-				});
-			},
-		});
+		
 
 		function signOut() {
 			//jalankan fungsi clear localstorage

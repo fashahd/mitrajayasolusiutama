@@ -240,6 +240,18 @@ class Mcombo extends CI_Model {
         return $query;
 	}
 
+	public function GetDocumentTypeList(){
+		$this->db->where("status", "active");
+		$this->db->select('
+			doc_type_id id,
+			doc_type_name label
+		');
+
+		$query = $this->db->get('mj_document_type')->result_array();	
+
+        return $query;
+	}
+
 	public function getFamilyStatus(){
 		$this->db->where("StatusCode", "active");
 		$this->db->select('
