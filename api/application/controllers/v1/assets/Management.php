@@ -73,11 +73,63 @@ class Management extends REST_Controller
 				$value = null;
 			}
 			$paramPost[$keyNew] = $value;
+		}		
+
+		if($paramPost["File1_old"] != ''){
+			//cek folder propinsi itu sudah ada belum
+			if (!file_exists('files/assets')) {
+				mkdir('files/assets', 0777, true);
+			}
+
+			$file_tmp = pathinfo($paramPost["File1_old"]);
+			$gambar = date('Ymdhis') . '_' .str_replace("files/tmp/", "", $paramPost["File1_old"]).".".$file_tmp["extension"];
+			rename($paramPost["File1_old"], 'files/assets/' . $gambar);
+			$paramPost['File1'] = 'files/assets/' . $gambar;
+		}		
+
+		if($paramPost["File2_old"] != ''){
+			//cek folder propinsi itu sudah ada belum
+			if (!file_exists('files/assets')) {
+				mkdir('files/assets', 0777, true);
+			}
+
+			$file_tmp = pathinfo($paramPost["File2_old"]);
+			$gambar = date('Ymdhis') . '_' .str_replace("files/tmp/", "", $paramPost["File2_old"]).".".$file_tmp["extension"];
+			rename($paramPost["File2_old"], 'files/assets/' . $gambar);
+			$paramPost['File2'] = 'files/assets/' . $gambar;
+		}		
+
+		if($paramPost["File3_old"] != ''){
+			//cek folder propinsi itu sudah ada belum
+			if (!file_exists('files/assets')) {
+				mkdir('files/assets', 0777, true);
+			}
+
+			$file_tmp = pathinfo($paramPost["File3_old"]);
+			$gambar = date('Ymdhis') . '_' .str_replace("files/tmp/", "", $paramPost["File3_old"]).".".$file_tmp["extension"];
+			rename($paramPost["File3_old"], 'files/assets/' . $gambar);
+			$paramPost['File3'] = 'files/assets/' . $gambar;
+		}		
+
+		if($paramPost["File4_old"] != ''){
+			//cek folder propinsi itu sudah ada belum
+			if (!file_exists('files/assets')) {
+				mkdir('files/assets', 0777, true);
+			}
+
+			$file_tmp = pathinfo($paramPost["File4_old"]);
+			$gambar = date('Ymdhis') . '_' .str_replace("files/tmp/", "", $paramPost["File4_old"]).".".$file_tmp["extension"];
+			rename($paramPost["File4_old"], 'files/assets/' . $gambar);
+			$paramPost['File4'] = 'files/assets/' . $gambar;
 		}
 
 		$AssetID = $paramPost['AssetID'];
 		unset($paramPost["OpsiDisplay"]);
 		unset($paramPost["AssetID"]);
+		unset($paramPost["File1_old"]);
+		unset($paramPost["File2_old"]);
+		unset($paramPost["File3_old"]);
+		unset($paramPost["File4_old"]);
 
 		$paramPost["HPP"] = ($paramPost["HPP"] != '') ? str_replace(",", "", $paramPost["HPP"]) : '0';
 
@@ -155,14 +207,14 @@ class Management extends REST_Controller
 		} else {
 			if ($_POST["OpsiDisplay"] == "insert") {
 				if ($_FILES["MitraJaya_view_Assets_Management_MainForm-FormBasicData-$FileSource"]['name'] != '') {
-					$gambar = date('Ymdhis') . '_' . $_FILES["MitraJaya_view_Assets_Management_MainForm-FormBasicData-$FileSource"]['name'];
+					$gambar = date('Ymdhis') . '_' . str_replace(" ", "_", $_FILES["MitraJaya_view_Assets_Management_MainForm-FormBasicData-$FileSource"]['name']);
 					$fileupload["MitraJaya_view_Assets_Management_MainForm-FormBasicData-$FileSource"] = $_FILES["MitraJaya_view_Assets_Management_MainForm-FormBasicData-$FileSource"];
 
 					$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
 					if (isset($upload['upload_data'])) {
 						$result['success'] = true;
-						$result['file'] = 'files/tmp/' . $gambar;
-						$result['fileurl'] = base_url() . 'files/tmp/' . $gambar;
+						$result['FilePath'] = 'files/tmp/' . $gambar;
+						$result['file'] = base_url() . 'files/tmp/' . $gambar;
 						$this->response($result, 200);
 					} else {
 						$result['success'] = false;
