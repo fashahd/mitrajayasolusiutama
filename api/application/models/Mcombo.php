@@ -101,6 +101,30 @@ class Mcombo extends CI_Model {
         return $query;
 	}
 
+	public function GetAssetBrandList(){
+		$this->db->select('
+			BrandID id,
+			BrandName label
+		');
+
+		$this->db->where("StatusCode", "active");
+		$query = $this->db->get('mj_assets_brand')->result_array();	
+
+        return $query;
+	}
+
+	public function GetAssetCategoryList(){
+		$this->db->select('
+			CategoryID id,
+			CategoryName label
+		');
+
+		$this->db->where("StatusCode", "active");
+		$query = $this->db->get('mj_assets_category')->result_array();	
+
+        return $query;
+	}
+
 	public function GetBrandList(){
 		$this->db->select('
 			BrandID id,

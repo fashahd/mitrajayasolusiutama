@@ -144,6 +144,22 @@ class Combo extends REST_Controller {
 		$this->response($data);
 	}
 
+	function combo_asset_brand_get(){
+		
+		$data = $this->mcombo->GetAssetBrandList();
+
+		
+		$this->response($data);
+	}
+
+	function combo_asset_category_get(){
+		
+		$data = $this->mcombo->GetAssetCategoryList();
+
+		
+		$this->response($data);
+	}
+
 	function combo_product_get(){
 		
 		$data = $this->mcombo->GetProductList();
