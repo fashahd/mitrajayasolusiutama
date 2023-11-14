@@ -82,7 +82,23 @@ class Massets extends CI_Model
     }
 
 	public function generateAssetCode($CategoryCode, $Year){
-		$AssetCode = $CategoryCode."/".$Year."/".time()."/"."00001";
+		$sql = "SELECT
+			SUBSTR(a.AssetCode, -5) Current
+			, LPAD(SUBSTR(a.AssetCode, -5) + 1, 5, 0) Next
+		FROM
+			`mj_assets` a
+		WHERE
+			a.AssetCode LIKE '$CategoryCode/$Year/%'
+		ORDER BY SUBSTR(a.AssetCode, -5) DESC LIMIT 1";
+		$query = $this->db->query($sql, []);
+
+		if($query->num_rows() > 0){
+			$data = $query->row_array();
+
+			$AssetCode = $CategoryCode."/".$Year."/".time()."/".$data["Next"];
+		}else{
+			$AssetCode = $CategoryCode."/".$Year."/".time()."/"."00001";
+		}
 		
 		return $AssetCode;
 	}
@@ -172,49 +188,106 @@ class Massets extends CI_Model
 		return $result;
 	}
 
-	public function list_employee_export($pSearch, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir)
+	public function form_assets_history($HistoryID){
+		$sql = "SELECT
+			a.HistoryID
+			, a.PeopleID
+			, a.StartDate
+			, a.AssetID
+			, a.Description
+			, a.File
+			, a.EndDate
+		FROM
+			mj_assets_history a
+		WHERE
+			a.StatusCode != 'nullified'
+			AND a.HistoryID = ?";
+
+		$query = $this->db->query($sql, [$HistoryID])->row_array();
+
+		$result = array();
+		if ($query) {
+			foreach ($query as $row => $value) {
+				$result["MitraJaya.view.Assets.Management.WinFormHistory-Form-" . $row] = $value;
+			}
+
+			$result["File"] = ($result["MitraJaya.view.Assets.Management.WinFormHistory-Form-File"] != '') ? base_url().$result["MitraJaya.view.Assets.Management.WinFormHistory-Form-File"] : '';
+			$result["MitraJaya.view.Assets.Management.WinFormHistory-Form-File_old"] = $result["MitraJaya.view.Assets.Management.WinFormHistory-Form-File"];
+		}
+
+		$return["success"]  = true;
+		$return["data"]     = $result;
+
+		return $return;
+
+		return $result;
+	}
+
+	public function list_assets_history($AssetID, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir)
 	{
-
-		$Year = ($pSearch["Year"] != '') ? $pSearch["Year"] : date("Y");
-		$Month = ($pSearch["Month"] != '') ? $pSearch["Month"] : date("m");
-
-		$sortingField = ($sortingField == '') ? 'a.people_name' : $sortingField;
-
-		if ($sortingDir == 'ASC') {
-			$sortingInfo = 'ascending';
-		}
-		if ($sortingDir == 'DESC') {
-			$sortingInfo = 'descending';
-		}
+		$sortingField = ($sortingField == '') ? 'a.HistoryID' : $sortingField;
+		$sortingDir = ($sortingDir == '') ? ' DESC' : $sortingDir;
 
 		$sql = "SELECT
-			a.people_ext_id AS 'Nomor Induk Pegawai'
-			, a.people_name AS 'Nama Pegawai'
-			, c.insentif_transportasi AS 'Transportasi'
-			, c.insentif_komunikasi AS 'Komunikasi'
-			, c.insentif_lembur AS 'Lembur'
-			, c.insentif_bonus AS 'Bonus'
-			, c.insentif_thr AS 'THR'
-			, c.deduction_bpjs_tk AS 'BPJS TK'
-			, c.deduction_bpjs_kesehatan AS 'BPJS Kesehatan'
-			, c.deduction_kasbon AS 'Kasbon'
-			, c.deduction_pph_21_insentif AS 'PPH 21 Insentif'
-			, c.deduction_pph_21 AS 'PPH 21'
-			, c.salary AS 'Gross Salary'
-			, (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus) AS 'Total Insentif'
-			, (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif+c.deduction_pph_21) AS 'Total Pengurangan'
-			, (c.salary + (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus)) - (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif+c.deduction_pph_21) AS 'Net Salary'
+			a.HistoryID
+			, mp.people_ext_id
+			, mp.people_name
+			, a.StartDate
+			, a.EndDate
+			, a.Status
 		FROM
-			mj_people a
-		INNER JOIN
-			mj_contract b on b.people_id = a.people_id AND b.employee_status = '1'
+			mj_assets_history a
 		LEFT JOIN
-			mj_payroll c on c.people_id = a.people_id AND c.`month` = ? AND c.`year` = ?
+			mj_assets d on d.AssetID = a.AssetID
+		LEFT JOIN
+			mj_assets_brand b on b.BrandID = d.BrandID
+		LEFT JOIN
+			mj_assets_category c on c.CategoryID = d.CategoryID
+		LEFT JOIN
+			mj_people mp on mp.people_id = a.PeopleID
 		WHERE
-			a.`status` = 'active'
+			a.StatusCode != 'nullified'
+			AND a.AssetID = ?
 		GROUP BY
-			a.people_id ORDER BY $sortingField $sortingDir";
-		$query = $this->db->query($sql, array($Month, $Year));
+			a.HistoryID ORDER BY $sortingField $sortingDir LIMIT ?, ?";
+
+		$query = $this->db->query($sql, array($AssetID, $start, $limit));
+
+		$result['data'] = $query->result_array();
+
+		return $result;
+	}
+
+	public function list_assets_export($pSearch, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir)
+	{
+		$sqlwhere = '';
+		$sqlwhere .= ($pSearch["keySearch"] != '') ? ' AND (a.AssetCode = "'. $pSearch['keySearch'] .'" OR a.AssetExternalID = "'. $pSearch['keySearch'] .'")' : '';
+		$sqlwhere .= ($pSearch["CategoryID"] != '') ? ' AND a.CategoryID = "'. $pSearch['CategoryID'] .'"' : '';
+		$sqlwhere .= ($pSearch["Year"] != '') ? ' AND a.Year = "'. $pSearch['Year'] .'"' : '';
+		$sqlwhere .= ($pSearch["BrandID"] != '') ? ' AND a.BrandID = "'. $pSearch['BrandID'] .'"' : '';
+
+		$sortingField = ($sortingField == '') ? 'a.AssetID' : $sortingField;
+
+		$sql = "SELECT
+			a.AssetCode AS 'Asset Number'
+			, a.AssetExternalID AS 'Serial Number'
+			, c.CategoryName AS 'Type'
+			, b.BrandName AS 'Brand'
+			, a.AssetName AS 'Model Name'
+			, a.Year AS 'Year'
+			, a.HPP AS 'HPP'
+		FROM
+			mj_assets a
+		LEFT JOIN
+			mj_assets_brand b on b.BrandID = a.BrandID
+		LEFT JOIN
+			mj_assets_category c on c.CategoryID = a.CategoryID
+		WHERE
+			a.StatusCode != 'nullified'
+			$sqlwhere
+		GROUP BY
+			a.AssetID ORDER BY $sortingField $sortingDir";
+		$query = $this->db->query($sql);
 
 		$result['data'] = $query->result_array();
 

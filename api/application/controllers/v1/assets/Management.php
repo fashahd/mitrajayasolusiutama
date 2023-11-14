@@ -8,6 +8,13 @@ require APPPATH . '/libraries/REST_Controller.php';
 
 // use namespace
 use Restserver\Libraries\REST_Controller;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+//use Box\Spout\Common\Entity\Style\CellAlignment;
+use Box\Spout\Common\Entity\Style\Color;
+use Box\Spout\Common\Entity\Style\Border;
+use Box\Spout\Writer\Common\Creator\Style\BorderBuilder;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
 /**
  * This is an example of a few basic user interaction methods you could use
@@ -57,6 +64,33 @@ class Management extends REST_Controller
 
 		// echo '<pre>'; print_r($pSearch); exit;
 		$data = $this->massets->list_assets($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
+
+		$this->response($data, 200);
+	}
+
+	public function list_history_get()
+	{
+		$AssetID = $_GET["AssetID"];
+
+		//sort
+		$sorting = json_decode($this->get('sort'));
+		if (isset($sorting[0]->property)) {
+			$sortingField = $sorting[0]->property;
+		} else {
+			$sortingField = null;
+		}
+
+		if (isset($sorting[0]->direction)) {
+			$sortingDir = $sorting[0]->direction;
+		} else {
+			$sortingDir = null;
+		}
+
+		$start = (int) $this->get('start');
+		$limit = (int) $this->get('limit');
+
+		// echo '<pre>'; print_r($pSearch); exit;
+		$data = $this->massets->list_assets_history($AssetID, $start, $limit, 'limit', $sortingField, $sortingDir);
 
 		$this->response($data, 200);
 	}
@@ -163,6 +197,84 @@ class Management extends REST_Controller
 			$results['AssetID'] = $AssetID;
 			$this->response($results, 200);
 		}
+	}	
+
+	function submit_assets_history_post()
+	{
+		$varPost = $_POST;
+		$paramPost = array();
+		$this->db->trans_begin();
+
+		foreach ($varPost as $key => $value) {
+			$keyNew = str_replace("MitraJaya_view_Assets_Management_WinFormHistory-Form-", '', $key);
+			if ($value == "") {
+				$value = null;
+			}
+			$paramPost[$keyNew] = $value;
+		}
+
+		if($paramPost["EndDate"] == ""){
+			$paramPost["Status"] = "In Use";
+		}else{
+			$paramPost["Status"] = "Returned";
+		}
+
+		if($paramPost["HistoryID"] == "") {
+			if($paramPost["File_old"] != ''){
+				//cek folder propinsi itu sudah ada belum
+				if (!file_exists('files/assets/history')) {
+					mkdir('files/assets/history', 0777, true);
+				}
+	
+				$file_tmp = pathinfo($paramPost["File_old"]);
+				$gambar = date('Ymdhis') . '_' .str_replace("files/tmp/", "", $paramPost["File_old"]).".".$file_tmp["extension"];
+				rename($paramPost["File_old"], 'files/assets/history/' . $gambar);
+				$paramPost['File'] = 'files/assets/' . $gambar;
+			}
+
+			$paramPost["StatusCode"] = "active";
+			$paramPost["CreatedDate"] = date("Y-m-d H:i:s");
+			$paramPost["CreatedBy"] = $_SESSION["user_id"];
+
+			unset($paramPost["HistoryID"]);
+			unset($paramPost["File_old"]);
+			unset($paramPost["OpsiDisplay"]);
+
+			$this->db->insert("mj_assets_history", $paramPost);
+		}else{
+			$paramPost["UpdatedDate"] = date("Y-m-d H:i:s");
+			$paramPost["UpdatedBy"] = $_SESSION["user_id"];
+			$HistoryID = $paramPost["HistoryID"];
+
+			unset($paramPost["HistoryID"]);
+			unset($paramPost["File_old"]);
+			unset($paramPost["OpsiDisplay"]);
+
+			$this->db->where("HistoryID", $HistoryID);
+			$this->db->update("mj_assets_history", $paramPost);
+		}
+
+		if ($this->db->trans_status() === false) {
+			$this->db->trans_rollback();
+			$results['success'] = false;
+			$results['message'] = "Failed to save data";
+			//function table temp
+			$this->response($results, 400);
+		} else {
+			$this->db->trans_commit();
+			$results['success'] = true;
+			$results['message'] = "Data saved";
+			$this->response($results, 200);
+		}
+	}
+
+	function form_assets_history_get()
+	{
+		$HistoryID 	= $this->get("HistoryID");
+
+		$data = $this->massets->form_assets_history($HistoryID);
+
+		$this->response($data, 200);
 	}
 
 	function form_asset_get()
@@ -262,48 +374,83 @@ class Management extends REST_Controller
 		}
 	}
 
-	function export_data_get()
+	function asset_history_upload_post()
+	{
+		$FileSource = "File";
+		//Cek file images
+		$ExtNya = GetFileExt($_FILES["MitraJaya_view_Assets_Management_WinFormHistory-Form-$FileSource"]['name']);
+
+		if (!in_array($ExtNya, array('png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG'))) {
+			$result['success'] = false;
+			$result['message'] = 'File types not allowed';
+			$this->response($result, 400);
+		} else {
+			if ($_POST["OpsiDisplay"] == "insert") {
+				if ($_FILES["MitraJaya_view_Assets_Management_WinFormHistory-Form-$FileSource"]['name'] != '') {
+					$gambar = date('Ymdhis') . '_' . str_replace(" ", "_", $_FILES["MitraJaya_view_Assets_Management_WinFormHistory-Form-$FileSource"]['name']);
+					$fileupload["MitraJaya_view_Assets_Management_WinFormHistory-Form-$FileSource"] = $_FILES["MitraJaya_view_Assets_Management_WinFormHistory-Form-$FileSource"];
+
+					$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
+					if (isset($upload['upload_data'])) {
+						$result['success'] = true;
+						$result['FilePath'] = 'files/tmp/' . $gambar;
+						$result['file'] = base_url() . 'files/tmp/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			} else {
+				if ($_FILES["MitraJaya_view_Assets_Management_WinFormHistory-Form-$FileSource"]['name'] != '') {
+					$HistoryID = $_POST["HistoryID"];
+					$File_old = $_POST["MitraJaya_view_Assets_Management_WinFormHistory-Form-$FileSource" . "_old"];
+
+					$gambar = date('Ymdhis') . '_' . $HistoryID . "." . $ExtNya;
+					$fileupload["MitraJaya_view_Assets_Management_WinFormHistory-Form-$FileSource"] = $_FILES["MitraJaya_view_Assets_Management_WinFormHistory-Form-$FileSource"];
+
+					//cek folder propinsi itu sudah ada belum
+					if (!file_exists('files/assets/history')) {
+						mkdir('files/assets/history', 0777, true);
+					}
+
+					$upload = move_upload($fileupload, 'files/assets/history/' . $gambar);
+					if (isset($upload['upload_data'])) {
+
+
+						//cek folder propinsi itu sudah ada belum
+						if (file_exists($File_old)) {
+							unlink($File_old);
+						}
+
+						$datapost["$FileSource"] = 'files/assets/history/' . $gambar;
+						$this->db->where("HistoryID", $HistoryID);
+						$this->db->update("mj_assets_history", $datapost);
+
+						$result['success'] = true;
+						$result['FilePath'] = 'files/assets/history/' . $gambar;
+						$result['file'] = base_url() . 'files/assets/history/' . $gambar;
+						$this->response($result, 200);
+					} else {
+						$result['success'] = false;
+						$result['message'] = 'Upload failed';
+						$this->response($result, 400);
+					}
+				}
+			}
+		}
+	}
+
+	function export_assets_post()
 	{
 		ini_set('memory_limit', -1);
 		ini_set('max_execution_time', 0);
 
-		include APPPATH . 'third_party/PHPExcel18/PHPExcel.php';
-		$excel = new PHPExcel();
-		$styleFontBoldHeader = array(
-			'font' => array(
-				'name' => 'Arial',
-				'size' => '9',
-				'bold' => true,
-			),
-			'fill' => array(
-				'type' => PHPExcel_Style_Fill::FILL_SOLID,
-				'color' => array('rgb' => '8DB4E3'),
-			),
-		);
-
-		$styleBorderFull = array(
-			'borders' => array(
-				'left' => array(
-					'style' => PHPExcel_Style_Border::BORDER_THIN,
-				),
-				'right' => array(
-					'style' => PHPExcel_Style_Border::BORDER_THIN,
-				),
-				'bottom' => array(
-					'style' => PHPExcel_Style_Border::BORDER_THIN,
-				),
-				'top' => array(
-					'style' => PHPExcel_Style_Border::BORDER_THIN,
-				),
-			),
-		);
-
-		$pSearch["Year"] 	= $this->get("Year");
-		$pSearch["Month"] 	= $this->get("Month");
-
-		$dataHeaderMonth = array(
-			date("F Y", strtotime($pSearch["Year"] . "-" . $pSearch["Month"] . "-01"))
-		);
+		$pSearch["keySearch"] = $_POST["keySearch"];
+		$pSearch["CategoryID"] = $_POST["CategoryID"];
+		$pSearch["Year"] = $_POST["Year"];
+		$pSearch["BrandID"] = $_POST["BrandID"];
 
 		//sort
 		$sorting = json_decode($this->get('sort'));
@@ -322,7 +469,7 @@ class Management extends REST_Controller
 		$start = (int) $this->get('start');
 		$limit = (int) $this->get('limit');
 
-		$dataList 		= $this->mpayroll->list_employee_export($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
+		$dataList 		= $this->massets->list_assets_export($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
 
 		if (count($dataList['data'])) {
 			//Kolom Header order book
@@ -345,25 +492,101 @@ class Management extends REST_Controller
 				$no++;
 			}
 			//Kolom Body order book
+
+			$writer = WriterEntityFactory::createXLSXWriter(); // for XLSX files// 
+            $namaFile = date('Y-m-d_H-i-s') . '_export_excel_asset.xlsx';
+            $filePath = 'files/tmp/' . $namaFile;
+            $writer->openToFile($filePath);
+
+            $defaultStyle = (new StyleBuilder())
+                ->setFontName('Arial')
+                ->setFontSize(11)
+                ->setShouldWrapText(false)
+                ->build();
+            $writer->setDefaultRowStyle($defaultStyle)
+                ->openToFile($filePath);
+
+            $borderDefa = (new BorderBuilder())
+                ->setBorderBottom(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
+                ->setBorderTop(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
+                ->setBorderRight(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
+                ->setBorderLeft(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
+                ->build();
+
+            //style
+            $styleHeader = (new StyleBuilder())
+                ->setFontColor(Color::WHITE)
+                ->setBorder($borderDefa)
+                ->setBackgroundColor(Color::GREEN)
+                ->build();
+
+            //row header
+            $rowHeader = WriterEntityFactory::createRowFromArray($dataHeader, $styleHeader);
+            $writer->addRow($rowHeader);
+
+            $styleData = (new StyleBuilder())
+                ->setBorder($borderDefa)
+                ->build();
+
+            $styleFormatAngka = (new StyleBuilder())
+                ->setBorder($borderDefa)
+                ->setFormat('0')
+                ->build();
+
+            $styleFormatTanggal = (new StyleBuilder())
+                ->setBorder($borderDefa)
+                ->setFormat('YYYY-mm-dd')
+                ->build();
+
+            for ($i=0; $i < count($dataListExcel); $i++) {
+                $dataRows = $dataListExcel[$i];
+                $cells = array();
+    
+                for ($j=0; $j < count($dataRows); $j++) {
+                    $styleRow = null;
+                    $dataRow = null;
+    
+                    //cek apakah numeric
+                    if(is_numeric($dataRows[$j])){
+                        $styleRow = $styleFormatAngka;
+                        $dataRow = $dataRows[$j];
+                    } else {
+                        //cek apakah tanggal
+                        if($this->validateDate($dataRows[$j]) == true) {
+                            $styleRow = $styleFormatTanggal;
+                            $dataRow = $dataRows[$j];
+                        } else {
+                            $styleRow = $styleData;
+                            $dataRow = $dataRows[$j];
+                        }
+                    }
+    
+                    $cells[$j] = WriterEntityFactory::createCell($dataRow, $styleRow);
+                }
+                /*$cells = [
+                    WriterEntityFactory::createCell($dataRows[0], $styleData),
+                    WriterEntityFactory::createCell((float) $dataRows[1], $styleFormatAngka),
+                    WriterEntityFactory::createCell($dataRows[2], $styleData),
+                    WriterEntityFactory::createCell(25569 + (time() / 86400), $styleFormatTanggal),
+                    WriterEntityFactory::createCell($dataRows[4], $styleFormatTanggal)
+                ];*/
+    
+                $rowData = WriterEntityFactory::createRow($cells);
+                $writer->addRow($rowData);
+            }
+    
+            $writer->close();
+
+			$response["success"] = true;
+			$response["filenya"] = base_url() . $filePath;
+    
+            $this->response($response, 200);
+		}else{
+			$response["success"] = true;
+			$response["filenya"] = '';
+
+            $this->response($response, 400);
 		}
-		$excel->getProperties()->setCreator('PT. Mitrajaya Solusi Utama')
-			->setLastModifiedBy('PT. Mitrajaya Solusi Utama')
-			->setTitle("Payroll " . $dataHeaderMonth[0])
-			->setSubject("Payroll")
-			->setDescription("Payroll " . $dataHeaderMonth[0])
-			->setKeywords("Payroll");
-
-
-		$namaFile =	"Payroll_" . str_replace(" ", "_", $dataHeaderMonth[0]) . '_' . time() . '_export_excel_payroll.xlsx';
-		$filePath = 'files/tmp/' . $namaFile;
-		$objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
-		$namaFile = 'template_invoice.xlsx';
-		$objWriter->save($filePath);
-		// $this->response(array('success' => true, 'url' => 'files/tmp/'.$namaFile), 200);
-		$response["success"] = true;
-		$response["filenya"] = base_url() . $filePath;
-
-		$this->response($response, 200);
 	}
 
 	private function validateDate($date, $format = 'Y-m-d')

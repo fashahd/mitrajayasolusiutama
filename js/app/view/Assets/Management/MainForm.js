@@ -27,14 +27,14 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 			//Isi nilai default
 
 			if (thisObj.viewVar.OpsiDisplay == 'insert') {
-
-
+				Ext.getCmp('MitraJaya.view.Assets.Management.Mainform-PanelAssetTransaction-BtnAdd').setVisible(false);
 			}
 
 			if (thisObj.viewVar.OpsiDisplay == 'view' || thisObj.viewVar.OpsiDisplay == 'update') {
 				//default
 				if (thisObj.viewVar.OpsiDisplay == 'view') {
 					Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-BtnSave').setVisible(false);
+					Ext.getCmp('MitraJaya.view.Assets.Management.Mainform-PanelAssetTransaction-BtnAdd').setVisible(false);
 				}
 
 				//load formnya
@@ -103,6 +103,12 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 		thisObj.comboYear = Ext.create('MitraJaya.store.General.StoreYear', {
 			storeVar: {
 				yearRange: 20
+			}
+		});
+
+		thisObj.storeGridAssetHistory = Ext.create('MitraJaya.store.Assets.Management.GridAssetsHistory', {
+			storeVar: {
+				AssetID: thisObj.viewVar.AssetID
 			}
 		});
 
@@ -516,6 +522,209 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 		});
 		//Panel Basic ==================================== (End)
 
+		
+
+		//ContextMenu
+		var contextMenuGridAssetHistory = Ext.create('Ext.menu.Menu', {
+			cls: 'Sfr_ConMenu',
+			items: [{
+				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
+				text: lang('View'),
+				cls: 'Sfr_BtnConMenuWhite',
+				itemId: 'MitraJaya.view.Assets.Management.GridAssetHistory-ContextMenuView',
+				handler: function () {
+					var sm = Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-GridMain').getSelectionModel().getSelection()[0];
+					var WinFormHistory = Ext.create('MitraJaya.view.Assets.Management.WinFormHistory');
+					WinFormHistory.setViewVar({
+						OpsiDisplay: 'view',
+						CallerStore: thisObj.storeGridAssetHistory,
+						HistoryID: sm.get('HistoryID')
+					});
+					if (!WinFormHistory.isVisible()) {
+						WinFormHistory.center();
+						WinFormHistory.show();
+					} else {
+						WinFormHistory.close();
+					}
+				}
+			}, {
+				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
+				text: lang('Update'),
+				cls: 'Sfr_BtnConMenuWhite',
+				hidden: m_act_update,
+				itemId: 'MitraJaya.view.Assets.Management.GridAssetHistory-ContextMenuUpdate',
+				handler: function () {
+					var sm = Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-GridMain').getSelectionModel().getSelection()[0];
+					var WinFormHistory = Ext.create('MitraJaya.view.Assets.Management.WinFormHistory');
+					WinFormHistory.setViewVar({
+						OpsiDisplay: 'update',
+						CallerStore: thisObj.storeGridAssetHistory,
+						HistoryID: sm.get('HistoryID')
+					});
+					if (!WinFormHistory.isVisible()) {
+						WinFormHistory.center();
+						WinFormHistory.show();
+					} else {
+						WinFormHistory.close();
+					}
+				}
+			}, {
+				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
+				text: lang('Delete'),
+				cls: 'Sfr_BtnConMenuWhite',
+				hidden: m_act_delete,
+				itemId: 'MitraJaya.view.Assets.Management.GridAssetHistory-ContextMenuDelete',
+				handler: function () {
+					var sm = Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-GridMain').getSelectionModel().getSelection()[0];
+
+					Swal.fire({
+						title: 'Do you want to delete this data ?',
+						text: "You won't be able to revert this!",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Yes, delete it!'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							Ext.Ajax.request({
+								waitMsg: 'Please Wait',
+								url: m_api + '/v1/admin/employee/delete_certification',
+								method: 'DELETE',
+								params: {
+									HistoryID: sm.get('HistoryID')
+								},
+								success: function (response, opts) {
+									Swal.fire(
+										'Deleted!',
+										'Your data has been deleted.',
+										'success'
+									)
+
+									//refresh store
+									thisObj.storeGridCertificaiton.load();
+								},
+								failure: function (rp, o) {
+									try {
+										var r = Ext.decode(rp.responseText);
+										Swal.fire(
+											'Failed!',
+											r.message,
+											'warning'
+										)
+									}
+									catch (err) {
+										Swal.fire(
+											'Failed!',
+											'Connection Error',
+											'warning'
+										)
+									}
+								}
+							});
+						}
+					})
+				}
+			}]
+		});
+
+		thisObj.ObjPanelTransaction = Ext.create('Ext.panel.Panel', {
+			title: lang('List of Historical Asset'),
+			frame: false,
+			collapsible: false,
+			margin: '0 0 40 0',
+			id: 'MitraJaya.view.Assets.Management.Mainform-PanelAssetTransaction',
+			dockedItems: [{
+				xtype: 'pagingtoolbar',
+				id: 'MitraJaya.view.Assets.Management.Mainform-PanelAssetTransaction-gridToolbar',
+				store: thisObj.storeGridAssetHistory,
+				dock: 'bottom',
+				displayInfo: true
+			}, {
+				xtype: 'toolbar',
+				baseCls: 'bgToolbarTitlePanel',
+				dock: 'top',
+				items: [{
+					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
+					cls: 'Sfr_BtnGridNewWhite',
+					style: 'margin: 10px 0px 10px 0px',
+					overCls: 'Sfr_BtnGridNewWhite-Hover',
+					text: lang('Add'),
+					id: 'MitraJaya.view.Assets.Management.Mainform-PanelAssetTransaction-BtnAdd',
+					handler: function () {
+						var WinFormHistory = Ext.create('MitraJaya.view.Assets.Management.WinFormHistory');
+						WinFormHistory.setViewVar({
+							OpsiDisplay: 'insert',
+							CallerStore: thisObj.storeGridAssetHistory,
+							AssetID: thisObj.viewVar.AssetID
+						});
+						if (!WinFormHistory.isVisible()) {
+							WinFormHistory.center();
+							WinFormHistory.show();
+						} else {
+							WinFormHistory.close();
+						}
+					}
+				}]
+			}],
+			items: [{
+				xtype: 'grid',
+				id: 'MitraJaya.view.Assets.Management.WinFormHistory-GridMain',
+				loadMask: true,
+				minHeight: 300,
+				selType: 'rowmodel',
+				store: thisObj.storeGridAssetHistory,
+				viewConfig: {
+					deferEmptyText: false,
+					emptyText: GetDefaultContentNoData()
+				},
+				minHeight: 125,
+				columns: [{
+					text: lang('Action'),
+					xtype: 'actioncolumn',
+					flex: 0.5,
+					items: [{
+						icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/caret-down.svg',
+						tooltip: 'Action',
+						handler: function (grid, rowIndex, colIndex, item, e, record) {
+							contextMenuGridAssetHistory.showAt(e.getXY());
+						}
+					}]
+				}, {
+					text: 'No',
+					flex: 0.1,
+					xtype: 'rownumberer'
+				}, {
+					text: lang('HistoryID'),
+					dataIndex: 'HistoryID',
+					hidden: true
+				}, {
+					text: lang('Employee'),
+					dataIndex: 'EmployeeName',
+					flex: 1,
+					renderer: function (t, meta, record) {
+						let RetVal;
+
+						RetVal = record.data.people_ext_id+ ' - '+ record.data.people_name;
+	
+						return RetVal;
+					}
+				}, {
+					text: lang('Date of Submission'),
+					dataIndex: 'StartDate',
+					flex: 1
+				}, {
+					text: lang('Date of Return'),
+					dataIndex: 'EndDate',
+					flex: 1
+				}, {
+					text: lang('Status'),
+					dataIndex: 'Status',
+					flex: 1
+				}]
+			}]
+		});
+
 		//============================= End DQ =========================================//
 
 		//========================================================== LAYOUT UTAMA (Begin) ========================================//
@@ -546,6 +755,13 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 				columnWidth: 1,
 				items: [
 					thisObj.ObjPanelBasicData
+				]
+			},{
+				//LEFT CONTENT
+				columnWidth: 1,
+				style:'margin-top:50px',
+				items: [
+					thisObj.ObjPanelTransaction
 				]
 			}]
 		}];

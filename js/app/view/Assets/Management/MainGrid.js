@@ -163,6 +163,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
 				text: lang('Print QR Code'),
+				hidden:true,
 				cls: 'Sfr_BtnConMenuWhite',
 				itemId: 'MitraJaya.view.Assets.Management.MainGrid-ContextMenuPrint',
 				handler: function () {
@@ -347,13 +348,12 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 					text: lang('Export'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
-					hidden: m_act_export_excel,
 					id: 'MitraJaya.view.Assets.Management.MainGrid-BtnExport',
 					handler: function () {
-						var keySearch = Ext.getCmp('MitraJaya.view.Assets.Management.MainGrid-keySearch').getValue();
-						var Month = Ext.getCmp('MitraJaya.view.Assets.Management.MainGrid-CategoryID').getValue();
-						var Year = Ext.getCmp('MitraJaya.view.Assets.Management.MainGrid-Year').getValue();
-						var CustomerID = Ext.getCmp('MitraJaya.view.Assets.Management.MainGrid-BrandID').getValue();
+						let keySearch = Ext.getCmp('MitraJaya.view.Assets.Management.MainGrid-keySearch').getValue();
+						let CategoryID = Ext.getCmp('MitraJaya.view.Assets.Management.MainGrid-CategoryID').getValue();
+						let Year = Ext.getCmp('MitraJaya.view.Assets.Management.MainGrid-Year').getValue();
+						let BrandID = Ext.getCmp('MitraJaya.view.Assets.Management.MainGrid-BrandID').getValue();
 
 						Swal.fire({
 							text: "Export data ?",
@@ -365,14 +365,14 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 						}).then((result) => {
 							if (result.isConfirmed) {
 								Ext.Ajax.request({
-									url: m_api + '/v1/finance/invoice/export_invoice',
+									url: m_api + '/v1/assets/management/export_assets',
 									method: 'POST',
 									waitMsg: lang('Please Wait'),
 									params: {
 										keySearch: keySearch,
-										Month: Month,
+										CategoryID: CategoryID,
 										Year: Year,
-										CustomerID: CustomerID
+										BrandID: BrandID
 									},
 									success: function (data) {
 										// console.log(data);
@@ -476,7 +476,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 			}, {
 				text: lang('Asset Number'),
 				dataIndex: 'AssetCode',
-				flex: 10
+				flex: 15
 			}, {
 				text: lang('Serial Number'),
 				dataIndex: 'AssetExternalID',
@@ -484,7 +484,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 			}, {
 				text: lang('Type'),
 				dataIndex: 'CategoryName',
-				flex: 15
+				flex: 10
 			}, {
 				text: lang('Brand'),
 				dataIndex: 'BrandName',
@@ -496,11 +496,11 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 			}, {
 				text: lang('Year'),
 				dataIndex: 'Year',
-				flex: 15
+				flex: 10
 			}, {
 				text: lang('HPP'),
 				dataIndex: 'HPP',
-				flex: 15,
+				flex: 10,
 				renderer: function (t, meta, record) {
 					let RetVal;
 
