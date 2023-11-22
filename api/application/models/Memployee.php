@@ -594,6 +594,7 @@ class Memployee extends CI_Model {
     public function insertCustomer($post)
     {
         unset($post["OpsiDisplay"]);
+        unset($post["phone_code"]);
 		$people_id 			= getUUID();
 		$post["people_id"] = $people_id;
 		$post["CreatedDate"] = date("Y-m-d H:i:s");
@@ -619,6 +620,7 @@ class Memployee extends CI_Model {
 		$people_id = $post["people_id"];
 		$post["photo"] = $post["PhotoOld"];
         unset($post["OpsiDisplay"]);
+        unset($post["phone_code"]);
         unset($post["people_id"]);
         unset($post["PhotoOld"]);
 
@@ -713,7 +715,7 @@ class Memployee extends CI_Model {
 			, a.people_name
 			, a.people_gender
 			, a.user_id
-			, a.phone_code
+			, "+62" phone_code
 			, a.phone_number
 			, a.people_email
 			, a.address
