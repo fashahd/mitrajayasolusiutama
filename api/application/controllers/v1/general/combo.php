@@ -29,6 +29,10 @@ class Combo extends REST_Controller {
 		$this->load->model("mcombo");
 	}
 
+	function index_get(){
+		
+	}
+
 	function combo_month_get(){
 
 		$month["1"] = "January";

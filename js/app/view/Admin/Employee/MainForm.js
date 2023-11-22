@@ -1079,13 +1079,28 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													fieldLabel: lang('Email')
 												}, {
 													html: '<div style="margin-bottom:10px"></div>'
-												}, {
-													xtype: 'textfield',
-													readOnly: m_act_update,
-													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-phone_number',
-													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-phone_number',
-													fieldLabel: lang('Handphone')
-												}]
+												},{
+                                                    columnWidth: 0.5,
+                                                    border: false,
+                                                    layout: 'column',
+                                                    style: 'margin-bottom:3px;',
+                                                    items: [{
+                                                        xtype: 'textfield',
+                                                        fieldLabel: lang('Handphone'),
+                                                        labelAlign: 'top',
+                                                        style: 'margin-right:5px;',
+                                                        width: 80,
+                                                        readOnly: true,
+														value:'+62',
+                                                        id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-phone_code',
+                                                        name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-phone_code'
+                                                    }, {
+                                                        xtype: 'numberfield',
+                                                        style: 'margin-top:30px;',
+                                                        id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-phone_number',
+                                                        name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-phone_number'
+                                                    }]
+                                                }]
 											}]
 										}]
 									}, {
