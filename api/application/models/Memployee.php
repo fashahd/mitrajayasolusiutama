@@ -14,17 +14,20 @@ class Memployee extends CI_Model {
 		($pSearch["keySearch"] != '') ? $this->db->like("people_name", $pSearch["keySearch"]): "";
 
 		$this->db->where("a.status", "active");
+		$this->db->group_by('a.people_id');
 		$this->db->limit($limit, $start);
 		$this->db->order_by($sortingField, $sortingDir);
+		$this->db->join('(SELECT a.people_id , b.position_name FROM `mj_contract` a LEFT JOIN mj_staff_position b on b.position_id = a.position GROUP BY a.people_id ORDER BY a.start_date desc) b', ' b.people_id = a.people_id', 'left');
 		$this->db->select('SQL_CALC_FOUND_ROWS a.people_id', false);
 		$this->db->select('
 			a.partner_id,
+			b.position_name,
 			a.people_ext_id,
 			a.people_name,
 			IF(a.people_gender = "male", "Male", IF(a.people_gender = "female", "Female", "-")) people_gender,
 			IF(a.user_id != "", "Yes", "No") exist_user,
 			a.phone_code,
-			a.phone_number,
+			CONCAT("+62 ", a.phone_number) phone_number,
 			a.address,
 			a.people_email
 		');

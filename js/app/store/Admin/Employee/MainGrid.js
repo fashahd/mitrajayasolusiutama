@@ -7,7 +7,7 @@
     extend: 'Ext.data.Store',
     id: 'MitraJaya.store.Admin.Employee.MainGrid',
     storeId: 'MitraJaya.store.Admin.Employee.MainGrid',
-    fields: ['people_id','people_ext_id','people_name','people_gender','phone_code','phone_number','address','exist_user','people_email'],
+    fields: ['people_id','people_ext_id','people_name','people_gender','phone_code','phone_number','address','exist_user','people_email','position_name'],
     pageSize: 50,
     autoLoad: true,
     storeVar: false,
