@@ -623,7 +623,7 @@ class Payroll extends REST_Controller
 		$config['newline'] = "\r\n";
 		$this->email->initialize($config);
 
-		$this->email->from('hrd@mitrajayasolusiutama.com', 'HR Departnment');
+		$this->email->from('hrd@mitrajayasolusiutama.com', 'HRD Mitrajaya Solusi Utama');
 		$this->email->to($paramPost["people_email"]);
 		$this->email->subject('Slip Gaji Periode ' . $period . ' - ' . $paramPost['people_name']);
 		$this->email->message('Dear '. $paramPost['people_name'] .', Berikut Lampiran Slip Gaji Periode ' . $period.".");
