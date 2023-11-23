@@ -211,72 +211,90 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 						}
 
 						var url = m_api + '/v1/admin/payroll/print_pay_slip';
-						preview_cetak_surat(url + '?people_id=' + sm.data.people_id+'&month='+month+'&year='+year);
+						preview_cetak_surat(url + '?people_id=' + sm.data.people_id + '&month=' + month + '&year=' + year);
 
 					}
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-					text: lang('Export'),
+					text: lang('Share'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					style: 'margin-top:25px',
 					id: 'MitraJaya.view.Finance.OrderBook.MainGrid-BtnExport',
 					handler: function () {
-						var Year = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Year').getValue();
-						var Month = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Month').getValue();
+						let sm = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Grid').getSelectionModel().getSelection()[0];
+						let month = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Month').getValue();
+						let year = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Year').getValue();
+
+						if (sm == undefined) {
+							Swal.fire(
+								'Please Select Data!',
+								'',
+								'warning'
+							)
+							return false;
+						}
+
+						if (sm.data.people_id == '' || sm.data.people_id == null) {
+							Swal.fire(
+								'Please Select Data!',
+								'',
+								'warning'
+							)
+							return false;
+						}
 
 						Swal.fire({
-							text: "Export data ?",
+							text: "Share this to user ?",
 							icon: 'warning',
 							showCancelButton: true,
 							confirmButtonColor: '#3085d6',
 							cancelButtonColor: '#d33',
-							confirmButtonText: 'Yes, Export it!'
+							confirmButtonText: 'Yes, Share it!'
 						}).then((result) => {
-							if (result.isConfirmed) {
-								Ext.Ajax.request({
-									url: m_api + '/v1/admin/payroll/export_data',
-									method: 'GET',
-									waitMsg: lang('Please Wait'),
-									params: {
-										Year: Year,
-										Month: Month
-									},
-									success: function (data) {
-										// console.log(data);
-										if (!fetchJSON(data.responseText)) {
-											Swal.fire({
-												icon: 'error',
-												text: 'Connection Failed',
-												// footer: '<a href="">Why do I have this issue?</a>'
-											})
-											return false;
-										}
+							Ext.MessageBox.show({
+								msg: 'Please wait...',
+								progressText: 'Loading...',
+								width: 300,
+								wait: true,
+								waitConfig: {
+									interval: 200
+								},
+								icon: 'ext-mb-info', //custom class in msg-box.html
+								animateTarget: 'mb9'
+							});
 
-										var jsonResp = JSON.parse(data.responseText);
-										if (jsonResp.success == true) {
-											window.location = jsonResp.filenya;
-										} else if (jsonResp.message == 'Empty') {
-											Swal.fire({
-												icon: 'warning',
-												text: jsonResp.filenya,
-												// footer: '<a href="">Why do I have this issue?</a>'
-											})
-											return false;
-										}
-									},
-									failure: function () {
-										Ext.MessageBox.hide();
-										Swal.fire({
-											icon: 'error',
-											text: 'Failed to export, Please try again',
-											// footer: '<a href="">Why do I have this issue?</a>'
-										})
-									}
-								});
-							}
-						})
+							Ext.Ajax.request({
+								url: m_api + '/v1/admin/payroll/share_payroll',
+								method: 'GET',
+								waitMsg: lang('Please Wait'),
+								params: {
+									month: month,
+									year: year,
+									people_id: sm.data.people_id
+								},
+								success: function (data) {
+									let response = JSON.parse(data.responseText);
+									Ext.MessageBox.hide();
+
+									Swal.fire({
+										icon: response.desc,
+										text: response.message,
+										// footer: '<a href="">Why do I have this issue?</a>'
+									})
+								},
+								failure: function (err) {
+									let response = JSON.parse(err.responseText);
+									Ext.MessageBox.hide();
+									Swal.fire({
+										icon: response.desc,
+										text: response.message,
+										// footer: '<a href="">Why do I have this issue?</a>'
+									})
+								}
+							});
+						});
 					}
 				}, {
 					xtype: 'button',
@@ -354,42 +372,6 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 			listeners: {
 				afterrender: {
 					fn: function (grid) {
-						var myStoreSalary = grid.getStore();
-						myStoreSalary.on({
-							load: {
-								fn: function (storeSalary) {
-									var totalData = storeSalary.getTotalCount();
-
-									var Salary = 0;
-									var Incentive = 0;
-									var Deduction = 0;
-									var Net_salary = 0;
-									for (i = 0; i < totalData; i++) {
-										var dataSalary = storeSalary.getAt(i).data;
-
-										// console.log(dataSalary)
-
-										Salary += parseFloat(dataSalary.salary);
-										Incentive += parseFloat(dataSalary.incentive);
-										Deduction += parseFloat(dataSalary.deduction);
-										Net_salary += parseFloat(dataSalary.net_salary);
-									}
-
-									thisObj.TotalIncomePlaning = Salary;
-
-									var Outstanding = Salary + Actual;
-
-									myStoreSalary.add({
-										'people_id': 'Total Budget',
-										'salary': Salary,
-										'incentive': Incentive,
-										'deduction': Deduction,
-										'net_salary': Net_salary,
-									})
-								}
-							}
-						});
-						myStoreSalary.load();
 					}
 				}
 			}

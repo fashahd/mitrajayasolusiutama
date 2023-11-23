@@ -8,6 +8,8 @@ require APPPATH . '/libraries/REST_Controller.php';
 
 // use namespace
 use Restserver\Libraries\REST_Controller;
+// Reference the Dompdf namespace 
+use Dompdf\Dompdf;
 
 /**
  * This is an example of a few basic user interaction methods you could use
@@ -280,7 +282,7 @@ class Payroll extends REST_Controller
 	{
 		ini_set('memory_limit', -1);
 		ini_set('max_execution_time', 0);
-		
+
 		include APPPATH . 'third_party/PHPExcel18/PHPExcel.php';
 		$excel = new PHPExcel();
 		$styleFontBoldHeader = array(
@@ -384,5 +386,262 @@ class Payroll extends REST_Controller
 	{
 		$d = DateTime::createFromFormat($format, $date);
 		return $d && $d->format($format) === $date;
+	}
+
+	public function print_header()
+	{
+		$titleNya = "Print Pay Slip";
+		$baseurlnya = base_url();
+
+		$html = '<html lang="en" xmlns="http://www.w3.org/1999/html" moznomarginboxes mozdisallowselectionprint>'
+			. '<head>'
+			. '<meta charset="utf-8"/>'
+			. '<title>' . $titleNya . '</title>'
+
+			. '<!--<link rel="stylesheet" type="text/css" href="' . $baseurlnya . 'assets/css/bootstrap.min.css"/>-->'
+			. '<link href="https://fonts.cdnfonts.com/css/cascadia-code" rel="stylesheet">'
+			. '<style>'
+			. '	@import url("https://fonts.cdnfonts.com/css/cascadia-code");'
+			. '</style>'
+
+			. '<link rel="stylesheet" type="text/css" href="' . $baseurlnya . 'assets/css/print_beneficiary/print_beneficiary.css?' . time() . '"/>'
+			. '<link rel="stylesheet" type="text/css" href="' . $baseurlnya . 'assets/css/print_beneficiary/print_beneficiary-media.css?' . time() . ' " media="print"/>'
+			. '<link'
+			. 'rel="stylesheet"'
+			. 'href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"'
+			. '/>'
+
+			. '<script src="' . $baseurlnya . 'assets/js/print_beneficiary/jquery-1.8.3.min.js" type="text/javascript"></script>'
+			. '<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACXVwWCJen2OZeCAEYdRxP_HEh7CkxOvs"></script> -->'
+			. '<!-- <script src="' . $baseurlnya . 'assets/js/gmap3.js"></script> -->'
+			. '</head>'
+			. '<body>';
+
+		return $html;
+	}
+
+	public function print_body($paramPost)
+	{
+
+		// echo "<pre>";print_r($paramPost);die;
+
+		$PayrollData = $paramPost;
+		$history = "";
+		$total_history = 0;
+		$net_salary = $PayrollData["salary"] - $PayrollData["total_deduction"];
+
+		$html = '<style type="text/css">
+			.gm-style-cc:last-child {
+				display: none !important;
+				height: 0px !important;
+			}
+			a[title="Report errors in the road map or imagery to Google"] {
+				display: none !important;
+				height: 0px !important;
+			}
+			a[href="https://www.google.com/intl/en-US_US/help/terms_maps.html"] {
+				display: none !important;
+				height: 0px !important;
+			}
+		</style>
+		
+		<div class="page">
+			<div id="mainContainer">
+				<table width="95%" border="0" cellpadding="4" style="border:none">
+					<tr>
+						<td height="60px" width="20%" align="center" style="vertical-align:middle;">
+							<img src="' . base_url() . 'assets/logo/logo-msu.png" style="width:80px"  onerror="this.onerror=null;">
+						</td>
+						<td width="80%"  style="text-align:center" colspan="2">
+							<div style="font-size:16pt;color:#000"><u>PT. MITRAJAYA SOLUSI UTAMA</u></div>
+							<span style="color:#000">Jl. Tentara Pelajar No. 21 RT 004/008, Jakarta 12210</span>
+							<span style="color:#000">Phone (021) 53653465</span>
+						</td>
+					</tr>
+				</table>
+				<hr style="border-top: 4px solid #5188B9; width:95%; margin-left:0px">
+				<table width="95%" border="0" cellpadding="4" style="border:none;margin-top:20px">
+					<tr>
+						<td width="95%"  style="text-align:center" colspan="2">
+							<div style="font-size:14pt;color:#000"><u>SLIP GAJI KARYAWAN</u></div>
+							<span style="color:#000">Periode : ' . date("F", strtotime($PayrollData["year"] . "-" . $PayrollData["month"] . "-01")) . " " . $PayrollData["year"] . '</span>
+						</td>
+					</tr>
+				</table>
+				<table width="60%" border="0" cellpadding="4" style="border:none;margin-top:40px;font-weight:800;font-size:10pt">
+					<tr>
+						<td>No. Induk</td>
+						<td>:</td>
+						<td>' . $PayrollData["people_ext_id"] . '</td>
+					</tr>
+					<tr>
+						<td style="width: 30%">Nama</td>
+						<td>:</td>
+						<td>' . $PayrollData["people_name"] . '</td>
+					</tr>
+					<tr>
+						<td>Jabatan</td>
+						<td>:</td>
+						<td>' . $PayrollData["position_name"] . '</td>
+					</tr>
+					<tr>
+						<td>Gaji Bruto (A)</td>
+						<td>:</td>
+						<td>Rp ' . number_format($PayrollData["salary"], 2) . '</td>
+					</tr>
+				</table>
+				<table width="60%" border="0" cellpadding="4" style="border:none;margin-top:40px;font-weight:800;font-size:10pt">
+					<tr>
+						<td>Potongan (B)</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>BPJS TK</td>
+						<td>:</td>
+						<td>Rp ' . number_format($PayrollData["deduction_bpjs_tk"], 2) . '</td>
+					</tr>
+					<tr>
+						<td style="width: 30%">BPJS Kesehatan</td>
+						<td>:</td>
+						<td>Rp ' . number_format($PayrollData["deduction_bpjs_kesehatan"], 2) . '</td>
+					</tr>
+					<tr>
+						<td>PPh 21 Gaji</td>
+						<td>:</td>
+						<td>Rp ' . number_format($PayrollData["deduction_pph_21"], 2) . '</td>
+					</tr>
+					<tr>
+						<td>PPh 21 Insentif</td>
+						<td>:</td>
+						<td>Rp ' . number_format($PayrollData["deduction_pph_21_insentif"], 2) . '</td>
+					</tr>
+					<tr>
+						<td>Kasbon</td>
+						<td>:</td>
+						<td>Rp ' . number_format($PayrollData["deduction_kasbon"], 2) . '</td>
+					</tr>
+				</table>
+				<table width="60%" border="0" cellpadding="4" style="border:none;margin-top:40px;font-weight:800;font-size:10pt">
+					<tr>
+						<td style="width: 30%">Total (A)</td>
+						<td>:</td>
+						<td>Rp ' . number_format($PayrollData["salary"], 2) . '</td>
+					</tr>
+					<tr>
+						<td>Total (B)</td>
+						<td>:</td>
+						<td>Rp ' . number_format($PayrollData["total_deduction"], 2) . '</td>
+					</tr>
+				</table>
+				<table width="95%" border="1" cellpadding="4" style="border:1px solid #000;margin-top:40px;font-weight:800;font-size:10pt;background:#b7d0e5">
+					<tr>
+						<td style="width:80%; text-align:center">Penerimaan Bersih (A-B)</td>
+						<td colspan="3">: Rp ' . number_format($net_salary, 2) . '</td>
+					</tr>
+					<tr>
+						<td style="width:60%; text-align:center" colspan="4">Terbilang : #' . terbilang(round($net_salary)) . ' Rupiah</td>
+					</tr>
+				</table>
+			</div>		
+		</div>
+		</body>
+		</html>
+		';
+
+		return $html;
+	}
+
+	public function share_payroll_get()
+	{
+		$people_id 	= $_GET["people_id"];
+		$month 		= $_GET["month"];
+		$year 		= $_GET["year"];
+
+		$period	= date("F", strtotime($year . "-" . $month . "-01")) . " " . $year;
+		$payroll = $this->mpayroll->form_payroll($month, $year, $people_id);
+
+		$paramPost = array();
+		if (is_array($payroll['data'])) {
+			foreach ($payroll['data'] as $key => $value) {
+				$keyNew = str_replace("MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-", '', $key);
+				if ($value == "") {
+					$value = null;
+				}
+				$paramPost[$keyNew] = $value;
+			}
+		}
+
+		if($paramPost["people_email"] == ""){
+			$response["success"] = false;
+			$response["desc"] = "warning";
+			$response["message"] = "Email not Found";
+			$this->response($response, 400);
+			return;
+		}
+
+		// Instantiate and use the dompdf class 
+		$dompdf = new Dompdf();
+		$html = $this->print_header();
+		$body = $this->print_body($paramPost);
+
+		// (Optional) Setup the paper size and orientation 
+		$dompdf->setPaper('A4', 'potrait');
+
+		$tmp = 'assets/payroll/';
+
+		$dompdf = new Dompdf([
+			'logOutputFile' => '',
+			// authorize DomPdf to download fonts and other Internet assets
+			'isRemoteEnabled' => true,
+			// all directories must exist and not end with /
+			'fontDir' => $tmp,
+			'fontCache' => $tmp,
+			'tempDir' => $tmp,
+			'chroot' => $tmp,
+		]);
+
+		$dompdf->loadHtml($html . $body); //load an html
+
+		$dompdf->render('/assets/payroll/' . time() . '.pdf');
+
+		$pdf = $dompdf->output();
+
+		// $dompdf->stream(time() . '.pdf', [
+		// 	'compress' => true,
+		// 	'Attachment' => false,
+		// ]);
+
+		$this->load->library('email');
+		$config = array();
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'idsmtp5.idcloudhosting.com';
+		$config['smtp_user'] = 'hrd@mitrajayasolusiutama.com';
+		$config['smtp_pass'] = 'Password1234!';
+		$config['smtp_port'] = 465;
+		$config['smtp_crypto'] = 'ssl';
+		$config['newline'] = "\r\n";
+		$this->email->initialize($config);
+
+		$this->email->from('hrd@mitrajayasolusiutama.com', 'HRD Mitrajaya Solusi Utama');
+		$this->email->to($paramPost["people_email"]);
+		$this->email->subject('Slip Gaji Periode ' . $period . ' - ' . $paramPost['people_name']);
+		$this->email->message('Dear '. $paramPost['people_name'] .', Berikut Lampiran Slip Gaji Periode ' . $period.".");
+		$this->email->attach($pdf, 'application/pdf', "Slip Gaji " . $period . ' - ' . $paramPost['people_name'] . ".pdf", false);
+
+		if ($this->email->send()) {
+			$response["success"] = true;
+			$response["desc"] = "success";
+			$response["message"] = "Email Terkirim";
+			$this->response($response, 200);
+			return;
+		} else {
+			$response["success"] = true;
+			$response["desc"] = "error";
+			$response["message"] = "Email Gagal Terkirim";
+			$response["error"] = $this->email->print_debugger();
+			$this->response($response, 400);
+			return;
+		}
 	}
 }
