@@ -357,6 +357,10 @@
                 dataIndex: 'people_name',
                 flex:10
             },{
+                text: lang('Position'),
+                dataIndex: 'position_name',
+                flex: 5
+            },{
                 text: lang('Gender'),
                 dataIndex: 'people_gender',
                 flex: 5
