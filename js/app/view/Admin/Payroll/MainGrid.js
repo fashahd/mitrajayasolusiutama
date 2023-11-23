@@ -253,47 +253,49 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 							cancelButtonColor: '#d33',
 							confirmButtonText: 'Yes, Share it!'
 						}).then((result) => {
-							Ext.MessageBox.show({
-								msg: 'Please wait...',
-								progressText: 'Loading...',
-								width: 300,
-								wait: true,
-								waitConfig: {
-									interval: 200
-								},
-								icon: 'ext-mb-info', //custom class in msg-box.html
-								animateTarget: 'mb9'
-							});
+							if (result.isConfirmed) {
+								Ext.MessageBox.show({
+									msg: 'Please wait...',
+									progressText: 'Loading...',
+									width: 300,
+									wait: true,
+									waitConfig: {
+										interval: 200
+									},
+									icon: 'ext-mb-info', //custom class in msg-box.html
+									animateTarget: 'mb9'
+								});
 
-							Ext.Ajax.request({
-								url: m_api + '/v1/admin/payroll/share_payroll',
-								method: 'GET',
-								waitMsg: lang('Please Wait'),
-								params: {
-									month: month,
-									year: year,
-									people_id: sm.data.people_id
-								},
-								success: function (data) {
-									let response = JSON.parse(data.responseText);
-									Ext.MessageBox.hide();
+								Ext.Ajax.request({
+									url: m_api + '/v1/admin/payroll/share_payroll',
+									method: 'GET',
+									waitMsg: lang('Please Wait'),
+									params: {
+										month: month,
+										year: year,
+										people_id: sm.data.people_id
+									},
+									success: function (data) {
+										let response = JSON.parse(data.responseText);
+										Ext.MessageBox.hide();
 
-									Swal.fire({
-										icon: response.desc,
-										text: response.message,
-										// footer: '<a href="">Why do I have this issue?</a>'
-									})
-								},
-								failure: function (err) {
-									let response = JSON.parse(err.responseText);
-									Ext.MessageBox.hide();
-									Swal.fire({
-										icon: response.desc,
-										text: response.message,
-										// footer: '<a href="">Why do I have this issue?</a>'
-									})
-								}
-							});
+										Swal.fire({
+											icon: response.desc,
+											text: response.message,
+											// footer: '<a href="">Why do I have this issue?</a>'
+										})
+									},
+									failure: function (err) {
+										let response = JSON.parse(err.responseText);
+										Ext.MessageBox.hide();
+										Swal.fire({
+											icon: response.desc,
+											text: response.message,
+											// footer: '<a href="">Why do I have this issue?</a>'
+										})
+									}
+								});
+							}
 						});
 					}
 				}, {
