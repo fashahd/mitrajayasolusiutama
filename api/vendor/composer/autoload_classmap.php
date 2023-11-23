@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Dompdf\\Cpdf' => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php',
     'Format' => $baseDir . '/application/libraries/Format.php',
     'Restserver\\Libraries\\REST_Controller' => $baseDir . '/application/libraries/REST_Controller.php',
 );
