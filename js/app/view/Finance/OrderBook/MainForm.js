@@ -157,14 +157,14 @@ Ext.define('MitraJaya.view.Finance.OrderBook.MainForm', {
 									xtype: 'textfield',
 									labelAlign:'top',
 									fieldLabel: lang('PO Number'),
-									allowBlank: false,
-									baseCls: 'Sfr_FormInputMandatory',
 									id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-ContractNumber',
 									name: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-ContractNumber'
 								},{
 									xtype: 'textfield',
 									labelAlign:'top',
 									fieldLabel: lang('JO Number'),
+									allowBlank: false,
+									baseCls: 'Sfr_FormInputMandatory',
 									id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-JONumber',
 									name: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-JONumber'
 								}, {

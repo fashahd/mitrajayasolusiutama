@@ -5,6 +5,23 @@ class Mcombo extends CI_Model {
     {
         parent::__construct();
     }
+	
+    public function getComboPartner(){
+        //Cek apakah partner koltiva
+        $SqlPartner = "";
+        $sql="SELECT
+                a.`PartnerID` AS id
+                , a.`PartnerName` AS label
+            FROM
+                mj_partner a
+            WHERE
+                a.`StatusCode` = 'active'
+                $SqlPartner
+            ORDER BY a.`PartnerName` ASC";
+        $query = $this->db->query($sql);
+		$return["data"] = $query->result_array();
+        return $return;
+    }
 
 	public function GetComponentList(){
 		$this->db->where("StatusCode", "active");

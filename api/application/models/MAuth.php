@@ -55,10 +55,13 @@
 				, a.`name`
 				, b.UserGroupGroupId GroupID
 				, a.user_status
+				, c.GroupPartnerID PartnerID
 			FROM
 				mj_user a
 			JOIN
 				sys_user_group b on b.UserGroupUserId = a.user_id AND b.UserGroupIsDefault = '1'
+			LEFT JOIN
+				sys_group c on c.GroupId = b.UserGroupGroupId
 			WHERE
 				a.username = ?";
 			$query = $this->db->query($sql, array($username));
