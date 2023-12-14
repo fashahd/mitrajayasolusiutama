@@ -241,9 +241,7 @@
 								fieldLabel:'Customer',
 								queryMode:'local',
 								displayField:'label',
-								valueField:'id',
-								allowBlank:false,
-								baseCls: 'Sfr_FormInputMandatory'										
+								valueField:'id'								
 							}]
 						},{
 							columnWidth: 0.1,

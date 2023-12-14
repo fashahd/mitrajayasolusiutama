@@ -3,11 +3,11 @@
  *  Created On : Fri Jan 17 2020
  *  File : MainGrid.js
  *******************************************/
- Ext.define('MitraJaya.store.Project.MainGrid', {
+ Ext.define('MitraJaya.store.Admin.Brand.MainGrid', {
     extend: 'Ext.data.Store',
-    id: 'MitraJaya.store.Project.MainGrid',
-    storeId: 'MitraJaya.store.Project.MainGrid',
-    fields: ['OrderBookID','ContractNumber','ProjectName','CustomerName','TotalContactAmount','ContractDate','TotalPaid','TotalUnpaid','Description','DeptName'],
+    id: 'MitraJaya.store.Admin.Brand.MainGrid',
+    storeId: 'MitraJaya.store.Admin.Brand.MainGrid',
+    fields: ['BrandID','BrandName'],
     pageSize: 50,
     autoLoad: true,
     storeVar: false,
@@ -17,7 +17,7 @@
     remoteSort: true,
     proxy: {
         type: 'ajax',
-        url: m_api + '/v1/finance/project/list',
+        url: m_api + '/v1/admin/brand/list',
         reader: {
             type: 'json',
             root: 'data',
@@ -38,18 +38,12 @@
             }
         },
         beforeload: function(store, operation, options){
-            var order_book_src = JSON.parse(localStorage.getItem('order_book_src'));
+            var Brand_src = JSON.parse(localStorage.getItem('Brand_src'));
             
-            if(order_book_src != null){
-                store.proxy.extraParams.keySearch = order_book_src.keySearch;
-                store.proxy.extraParams.StartDate = order_book_src.StartDate;
-                store.proxy.extraParams.EndDate = order_book_src.EndDate;
-                store.proxy.extraParams.CustomerID = order_book_src.CustomerID;
+            if(Brand_src != null){
+                store.proxy.extraParams.keySearch = Brand_src.keySearch;
             }else{
                 store.proxy.extraParams.keySearch = '';
-                store.proxy.extraParams.StartDate = '';
-                store.proxy.extraParams.EndDate = '';
-                store.proxy.extraParams.CustomerID = '';
             }
         }
     },
@@ -60,10 +54,10 @@
             success: function(data) {
                 document.getElementById('Sfr_IdBoxInfoDataGrid').innerHTML = data.responseText;
                 
-                // let order_book_src = JSON.parse(localStorage.getItem('order_book_src'));
-                // if(order_book_src != null){
-                //     if(order_book_src.length > 0)
-                //         document.getElementById('Sfr_IdBoxInfoFilterGrid').innerHTML = '<strong>'+lang('Data filter by')+':</strong>&nbsp;&nbsp;<span style="color:#895608;">'+order_book_src.join(', ')+'</span>';
+                // let cof_gridfarmers_params = JSON.parse(localStorage.getItem('cof_gridfarmers_params'));
+                // if(cof_gridfarmers_params != null){
+                //     if(cof_gridfarmers_params.length > 0)
+                //         document.getElementById('Sfr_IdBoxInfoFilterGrid').innerHTML = '<strong>'+lang('Data filter by')+':</strong>&nbsp;&nbsp;<span style="color:#895608;">'+cof_gridfarmers_params.join(', ')+'</span>';
                 //     else
                 //         document.getElementById('Sfr_IdBoxInfoFilterGrid').innerHTML = '';
                 // } else {

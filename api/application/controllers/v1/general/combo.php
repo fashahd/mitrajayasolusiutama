@@ -32,6 +32,11 @@ class Combo extends REST_Controller {
 	function index_get(){
 		
 	}
+	
+    public function combo_partner_get(){
+        $data = $this->mcombo->getComboPartner();
+        $this->response($data, 200);
+    }
 
 	function combo_month_get(){
 
