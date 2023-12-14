@@ -52,7 +52,7 @@ class Mproduct extends CI_Model {
 		($pSearch["keySearch"] != '') ? $this->db->like("a.ProductCode", $pSearch["keySearch"]): "";
 		($pSearch["ProductBrand"] != '') ? $this->db->where("a.ProductBrand", $pSearch["ProductBrand"]): "";
 
-		$this->db->where("StatusCode", "active");
+		$this->db->where("a.StatusCode", "active");
 		$this->db->group_by("a.ProductID");
 		$this->db->limit($limit, $start);
 		$this->db->order_by($sortingField, $sortingDir);
