@@ -13,6 +13,8 @@ class Memployee extends CI_Model {
 
 		($pSearch["keySearch"] != '') ? $this->db->like("people_name", $pSearch["keySearch"]): "";
 
+		if ($_SESSION["username"] != 'admin') $this->db->where('a.partner_id', $_SESSION["partner_id"]);
+
 		$this->db->where("a.status", "active");
 		$this->db->group_by('a.people_id');
 		$this->db->limit($limit, $start);

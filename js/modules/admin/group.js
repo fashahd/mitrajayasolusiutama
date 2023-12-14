@@ -163,7 +163,7 @@ Ext.onReady(function () {
 		autoLoad: true,
 		proxy: {
 			type: 'ajax',
-			url: m_api + '/common/combo_partner',
+			url: m_api + '/v1/general/combo/combo_partner',
 			reader: {
 				type: 'json',
 				root: 'data'
@@ -203,7 +203,6 @@ Ext.onReady(function () {
 			name: 'GroupPartnerID',
 			xtype: 'combobox',
 			width: 100,
-			hidden: true,
 			allowBlank: true,
 			fieldLabel: lang('Partner'),
 			store: mc_partner,
@@ -302,20 +301,6 @@ Ext.onReady(function () {
 				// //var params = Ext.getCmp('menuu').getValue();
 				var methode;
 				if (Ext.getCmp('GroupId').getValue() == '') methode = 'POST'; else methode = 'PUT';
-
-				// form.submit({
-				//     //url: m_crud+'?'+ Ext.urlEncode(params),
-				//     url: m_crud,
-				//     method : methode,
-				//     waitMsg: 'Sending data...',
-				//     success: function(fp, o) {
-				//         Ext.MessageBox.alert('Success', 'Data saved.');
-				//     }
-				// });
-
-				// win.hide(this, function() {
-				//     store.load();
-				// });
 
 				if (form.isValid()) {
 					form.submit({
@@ -418,7 +403,8 @@ Ext.onReady(function () {
 	});
 	storeGroupUserList.on('beforeload', function () {
 		var proxy = storeGroupUserList.getProxy();
-		var sm = Ext.getCmp('grid').getSelectionModel().getSelection()[0];
+		var sm = Ext.getCmp('grid-group').getSelectionModel().getSelection()[0];
+		console.log(sm.get());
 		proxy.setExtraParam('groupId', sm.get('GroupId'));
 	});
 

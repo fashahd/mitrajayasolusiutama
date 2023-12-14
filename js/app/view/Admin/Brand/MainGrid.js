@@ -3,9 +3,9 @@
  *  Created On : Thu Jan 16 2020
  *  File : MainGrid.js
  *******************************************/
- Ext.define('MitraJaya.view.Project.MainGrid' ,{
+ Ext.define('MitraJaya.view.Admin.Brand.MainGrid' ,{
     extend: 'Ext.panel.Panel',
-    id: 'MitraJaya.view.Project.MainGrid',
+    id: 'MitraJaya.view.Admin.Brand.MainGrid',
     renderTo: 'ext-content',
     style:'padding:0 7px 7px 7px;margin:2px 0 0 0;',
     listeners: {
@@ -13,11 +13,10 @@
             var thisObj = this;
             document.getElementById('ContentTopBar').style.display = 'block';
 
-			var project_list_ls = JSON.parse(localStorage.getItem('project_list_ls'));
+            var Brand_src = JSON.parse(localStorage.getItem('Brand_src'));
 
-            if(project_list_ls){
-                Ext.getCmp('MitraJaya.view.Project.MainGrid-keySearch').setValue(project_list_ls.keySearch);
-				Ext.getCmp('MitraJaya.view.Project.MainGrid-CustomerID').setValue(project_list_ls.CustomerID);
+            if(Brand_src){
+                Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-keySearch').setValue(Brand_src.keySearch);
             }
         }
     },
@@ -26,13 +25,7 @@
 
 		// console.log(m_api);
         //Store
-        thisObj.StoreGridMain = Ext.create('MitraJaya.store.Project.MainGrid');
-		
-		thisObj.combo_company = Ext.create('MitraJaya.store.General.CompanyList',{
-        	storeVar: {
-                CustomerID: ''
-            }
-        });
+        thisObj.StoreGridMain = Ext.create('MitraJaya.store.Admin.Brand.MainGrid');
 
         //ContextMenu
         thisObj.ContextMenuGrid = Ext.create('Ext.menu.Menu',{
@@ -41,27 +34,27 @@
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
                 text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
-                itemId: 'MitraJaya.view.Project.MainGrid-ContextMenuView',
+                itemId: 'MitraJaya.view.Admin.Brand.MainGrid-ContextMenuView',
 	            handler: function() {
-                    var sm = Ext.getCmp('MitraJaya.view.Project.MainGrid-Grid').getSelectionModel().getSelection()[0];
-                    Ext.getCmp('MitraJaya.view.Project.MainGrid').destroy(); //destory current view
+                    var sm = Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-Grid').getSelectionModel().getSelection()[0];
+                    Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid').destroy(); //destory current view
                     
                     var FormMainFarmer = [];
-                    if(Ext.getCmp('MitraJaya.view.Finance.OrderBook.MainForm') == undefined){
-                        FormMainFarmer = Ext.create('MitraJaya.view.Finance.OrderBook.MainForm', {
+                    if(Ext.getCmp('MitraJaya.view.Admin.Brand.MainForm') == undefined){
+                        FormMainFarmer = Ext.create('MitraJaya.view.Admin.Brand.MainForm', {
                             viewVar: {
                                 OpsiDisplay: 'view',
-                                OrderBookID: sm.get('OrderBookID'),
+                                BrandID: sm.get('BrandID'),
                                 PanelDisplayID: sm.get('PanelDisplayID')
                             }
                         });
                     }else{
                         //destroy, create ulang
-                        Ext.getCmp('MitraJaya.view.Finance.OrderBook.MainForm').destroy();
-                        FormMainFarmer = Ext.create('MitraJaya.view.Finance.OrderBook.MainForm', {
+                        Ext.getCmp('MitraJaya.view.Admin.Brand.MainForm').destroy();
+                        FormMainFarmer = Ext.create('MitraJaya.view.Admin.Brand.MainForm', {
                             viewVar: {
                                 OpsiDisplay: 'view',
-                                OrderBookID: sm.get('OrderBookID'),
+                                BrandID: sm.get('BrandID'),
                                 PanelDisplayID: sm.get('PanelDisplayID')
                             }
                         });
@@ -72,27 +65,27 @@
                 text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
-                itemId: 'MitraJaya.view.Project.MainGrid-ContextMenuUpdate',
+                itemId: 'MitraJaya.view.Admin.Brand.MainGrid-ContextMenuUpdate',
 	            handler: function() {
-                    var sm = Ext.getCmp('MitraJaya.view.Project.MainGrid-Grid').getSelectionModel().getSelection()[0];
-                    Ext.getCmp('MitraJaya.view.Project.MainGrid').destroy(); //destory current view
+                    var sm = Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-Grid').getSelectionModel().getSelection()[0];
+                    Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid').destroy(); //destory current view
                     
                     var FormMainFarmer = [];
-                    if(Ext.getCmp('MitraJaya.view.Finance.OrderBook.MainForm') == undefined){
-                        FormMainFarmer = Ext.create('MitraJaya.view.Finance.OrderBook.MainForm', {
+                    if(Ext.getCmp('MitraJaya.view.Admin.Brand.MainForm') == undefined){
+                        FormMainFarmer = Ext.create('MitraJaya.view.Admin.Brand.MainForm', {
                             viewVar: {
                                 OpsiDisplay: 'update',
-                                OrderBookID: sm.get('OrderBookID'),
+                                BrandID: sm.get('BrandID'),
                                 PanelDisplayID: sm.get('PanelDisplayID')
                             }
                         });
                     }else{
                         //destroy, create ulang
-                        Ext.getCmp('MitraJaya.view.Finance.OrderBook.MainForm').destroy();
-                        FormMainFarmer = Ext.create('MitraJaya.view.Finance.OrderBook.MainForm', {
+                        Ext.getCmp('MitraJaya.view.Admin.Brand.MainForm').destroy();
+                        FormMainFarmer = Ext.create('MitraJaya.view.Admin.Brand.MainForm', {
                             viewVar: {
                                 OpsiDisplay: 'update',
-                                OrderBookID: sm.get('OrderBookID'),
+                                BrandID: sm.get('BrandID'),
                                 PanelDisplayID: sm.get('PanelDisplayID')
                             }
                         });
@@ -103,9 +96,9 @@
                 text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
-                itemId: 'MitraJaya.view.Project.MainGrid-ContextMenuDelete',
+                itemId: 'MitraJaya.view.Admin.Brand.MainGrid-ContextMenuDelete',
 	            handler: function(){
-                    var sm = Ext.getCmp('MitraJaya.view.Project.MainGrid-Grid').getSelectionModel().getSelection()[0];
+                    var sm = Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-Grid').getSelectionModel().getSelection()[0];
 
 					Swal.fire({
 						title: 'Do you want to delete this data ?',
@@ -119,11 +112,10 @@
 						if (result.isConfirmed) {
 							Ext.Ajax.request({
 								waitMsg: 'Please Wait',
-								url: m_api + '/v1/finance/order/delete_order',
+								url: m_api + '/v1/admin/brand/delete_brand',
 								method: 'DELETE',
 								params: {
-									OrderBookID		: sm.get('OrderBookID'),
-									ContractNumber	: sm.get('ContractNumber')
+									BrandID: sm.get('BrandID')
 								},
 								success: function(response, opts) {
 									Swal.fire(
@@ -160,71 +152,8 @@
 	    });
 
         thisObj.items = [{
-            layout: 'column',
-            border: false,
-            items: [{
-				columnWidth: 1,
-				layout: 'form',
-				cls: 'Sfr_PanelLayoutFormContainer',
-				items: [{
-					xtype: 'form',
-					fileUpload: true,
-					buttonAlign: 'center',
-					items: [{
-						layout: 'column',
-						border: false,
-						items: [{
-							columnWidth: 0.18,
-							layout: 'form',
-							style: 'padding-right:10px',
-							items: [{
-								name: 'MitraJaya.view.Project.MainGrid-keySearch',
-								id: 'MitraJaya.view.Project.MainGrid-keySearch',
-								xtype: 'textfield',
-								baseCls: 'Sfr_TxtfieldSearchGrid',
-								fieldLabel:'PO Number',
-								labelAlign:'top',
-								emptyText: lang('Search by Project Name')
-							}]
-						},{
-							columnWidth: 0.2,
-							layout: 'form',
-							items: [{
-								xtype: 'combobox',
-								id:'MitraJaya.view.Project.MainGrid-CustomerID',
-								name:'MitraJaya.view.Project.MainGrid-CustomerID',
-								store:thisObj.combo_company,
-								labelAlign:'top',
-								fieldLabel:'Customer',
-								queryMode:'local',
-								displayField:'label',
-								valueField:'id',
-								allowBlank:false,
-								baseCls: 'Sfr_FormInputMandatory'										
-							}]
-						},{
-							columnWidth: 0.1,
-							layout: 'form',
-							items: [{
-								xtype:'button',
-								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text:lang('Search'),
-								style:'margin-left:20px; margin-top:30px',
-								cls:'Sfr_BtnFormCyan',
-								overCls:'Sfr_BtnFormCyan-Hover',
-								id: 'MitraJaya.view.Project.MainGrid-BtnApplyFilter',
-								handler: function() {
-									setFilterLs();
-								}
-							}]
-						}]
-					}]
-				}]
-			}]
-		},
-		{
             xtype: 'grid',
-            id: 'MitraJaya.view.Project.MainGrid-Grid',
+            id: 'MitraJaya.view.Admin.Brand.MainGrid-Grid',
             style: 'border:1px solid #CCC;margin-top:4px;',
             cls:'Sfr_GridNew',
 			minHeight:600,
@@ -234,7 +163,17 @@
             enableColumnHide: false,
             viewConfig: {
                 deferEmptyText: false,
-                emptyText: GetDefaultContentNoData()
+                emptyText: GetDefaultContentNoData(),
+                listeners:{
+					itemdblclick: function(c,r,i,idx) {
+						var uid = r.get('BrandName');
+						var clipboard = document.getElementById("clipboard");
+						clipboard.value = uid;
+						clipboard.select();
+						document.execCommand("copy");
+						alert('Copied ' + uid);
+					}
+				}
             },
             dockedItems: [{
                 xtype: 'pagingtoolbar',
@@ -252,14 +191,14 @@
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
-                    id: 'MitraJaya.view.Project.MainGrid-BtnAdd',
+                    id: 'MitraJaya.view.Admin.Brand.MainGrid-BtnAdd',
                     handler: function() {
-                        Ext.getCmp('MitraJaya.view.Project.MainGrid').destroy(); //destory current view
+                        Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid').destroy(); //destory current view
                     	var FormMainFarmer = [];
 
                         //create object View untuk FormMainGrower
-                        if(Ext.getCmp('MitraJaya.view.Finance.OrderBook.MainForm') == undefined){
-                            FormMainFarmer = Ext.create('MitraJaya.view.Finance.OrderBook.MainForm', {
+                        if(Ext.getCmp('MitraJaya.view.Admin.Brand.MainForm') == undefined){
+                            FormMainFarmer = Ext.create('MitraJaya.view.Admin.Brand.MainForm', {
                             	viewVar: {
                                     OpsiDisplay: 'insert',
                                     PanelDisplayID: null
@@ -267,8 +206,8 @@
                             });
                         }else{
                             //destroy, create ulang
-                            Ext.getCmp('MitraJaya.view.Finance.OrderBook.MainForm').destroy();
-                            FormMainFarmer = Ext.create('MitraJaya.view.Finance.OrderBook.MainForm', {
+                            Ext.getCmp('MitraJaya.view.Admin.Brand.MainForm').destroy();
+                            FormMainFarmer = Ext.create('MitraJaya.view.Admin.Brand.MainForm', {
                                 viewVar: {
                                     OpsiDisplay: 'insert',
                                     PanelDisplayID: null
@@ -278,17 +217,17 @@
                     }
                 },{
                     xtype:'button',
-                    icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
+                    icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
                     text: lang('Export'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
-                    id: 'MitraJaya.view.Project.MainGrid-BtnExport',
+                    id: 'MitraJaya.view.Admin.Brand.MainGrid-BtnExport',
                     handler: function() {
-						var keySearch	= Ext.getCmp('MitraJaya.view.Project.MainGrid-keySearch').getValue();
-						var StartDate	= Ext.getCmp('MitraJaya.view.Project.MainGrid-StartDate').getValue();
-						var EndDate		= Ext.getCmp('MitraJaya.view.Project.MainGrid-EndDate').getValue();
-						var CustomerID	= Ext.getCmp('MitraJaya.view.Project.MainGrid-CustomerID').getValue();
+						var keySearch	= Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-keySearch').getValue();
+						var StartDate	= Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-StartDate').getValue();
+						var EndDate		= Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-EndDate').getValue();
+						var BrandID	= Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-BrandID').getValue();
 
 						Swal.fire({
 							text: "Export data ?",
@@ -300,14 +239,14 @@
 						}).then((result) => {
 							if (result.isConfirmed) {
 								Ext.Ajax.request({
-									url: m_api + '/v1/finance/order/export_order',
+									url: m_api + '/v1/finance/invoice/export_invoice',
 									method: 'POST',
 									waitMsg: lang('Please Wait'),
 									params: {
 										keySearch : keySearch,
 										StartDate : StartDate,
 										EndDate : EndDate,
-										CustomerID : CustomerID
+										BrandID : BrandID
 									},
 									success: function(data) {
 										// console.log(data);
@@ -346,32 +285,42 @@
                     }
                 },{
                     xtype:'button',
-                    icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-import.svg',
+                    icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/upload.svg',
                     text: lang('Import'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
-                    hidden: m_act_add,
-                    id: 'MitraJaya.view.Project.MainGrid-BtnImport',
+                    hidden: m_act_export_excel,
+                    id: 'MitraJaya.view.Admin.Brand.MainGrid-BtnImport',
                     handler: function() {
-						var WinFormImportOrderBook = Ext.create('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook');
-                        if (!WinFormImportOrderBook.isVisible()) {
-                            WinFormImportOrderBook.center();
-                            WinFormImportOrderBook.show();
+                        var winImportFarmers = Ext.create('MitraJaya.view.Admin.Brand.WinImportFarmers');
+                        if (!winImportFarmers.isVisible()) {
+                            winImportFarmers.center();
+                            winImportFarmers.show();
                         } else {
-                            WinFormImportOrderBook.close();
+                            winImportFarmers.close();
                         }
                     }
                 },{
                     xtype:'tbspacer',
                     flex:1
                 },{
+					name: 'MitraJaya.view.Admin.Brand.MainGrid-keySearch',
+					id: 'MitraJaya.view.Admin.Brand.MainGrid-keySearch',
+					xtype: 'textfield',
+					baseCls: 'Sfr_TxtfieldSearchGrid',
+					width:340,
+					emptyText: lang('Search by Brand Name, Press Enter to Search'),
+					listeners: {
+						specialkey: thisObj.submitOnEnterGrid
+					}
+				},{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
                     text: lang('Advanced Filter'),
 					hidden:true,
                     handler: function () {
                         //advanced search
-                        var winAdvFilter = Ext.create('MitraJaya.view.Finance.OrderBook.WinAdvancedFilter');
+                        var winAdvFilter = Ext.create('MitraJaya.view.Admin.Brand.WinAdvancedFilter');
                         if (!winAdvFilter.isVisible()) {
                             winAdvFilter.center();
                             winAdvFilter.show();
@@ -384,16 +333,17 @@
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/recycle.svg',
                     cls:'Sfr_BtnGridBlue',
                     overCls:'Sfr_BtnGridBlue-Hover',
-                    id: 'MitraJaya.view.Project.MainGrid-BtnReload',
+                    id: 'MitraJaya.view.Admin.Brand.MainGrid-BtnReload',
                     handler: function() {
-                        Ext.getCmp('MitraJaya.view.Project.MainGrid-Grid').getStore().loadPage(1);
+                        Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-Grid').getStore().loadPage(1);
                     }
-                }]
+                },
+				'<input type="text" value="" aria-hidden="true" id="clipboard" style="opacity:0;">']
             }],
             columns:[{
             	text: '',
                 xtype:'actioncolumn',
-                flex: 0.2,
+                flex: 5,
                 items:[{
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/caret-down.svg',
                     handler: function(grid, rowIndex, colIndex, item, e, record) {
@@ -402,75 +352,28 @@
                 }]
             },{
                 text: 'No',
-                flex: 0.2,
+                flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: lang('OrderBookID'),
-                dataIndex: 'OrderBookID',
+                text: lang('Brand ID'),
+                dataIndex: 'BrandID',
                 hidden: true
             },{
-                text: lang('PO Number'),
-                dataIndex: 'ContractNumber',
-                flex: 1.5
-            },{
-                text: lang('PO Date'),
-                dataIndex: 'ContractDate',
-                flex: 1
-            },{
-                text: lang('Description'),
-                dataIndex: 'Description',
-                flex: 2
-            },{
-                text: lang('Project'),
-                dataIndex: 'ProjectName',
-                flex: 2
-            },{
-                text: lang('Customer'),
-                dataIndex: 'CustomerName',
-                flex: 2
-            },{
-                text: lang('Dept'),
-                dataIndex: 'DeptName',
-                flex: 2
-            },{
-                text: lang('Total Amount'),
-                dataIndex: 'TotalContactAmount',
-                flex: 2
-            },{
-                text: lang('Total Paid'),
-                dataIndex: 'TotalPaid',
-                flex: 2
-            },{
-                text: lang('Potential Paid'),
-                dataIndex: 'TotalUnpaid',
-                flex: 2
+                text: lang('Brand Name'),
+                dataIndex: 'BrandName',
+                flex:10
             }]
         }];
 
         this.callParent(arguments);
-    },
-    submitOnEnterGrid: function (field, event) {        
-		localStorage.setItem('project_list_ls', JSON.stringify({
-			keySearch	: Ext.getCmp('MitraJaya.view.Project.MainGrid-keySearch').getValue(),
-			StartDate	: Ext.getCmp('MitraJaya.view.Project.MainGrid-StartDate').getValue(),
-			EndDate		: Ext.getCmp('MitraJaya.view.Project.MainGrid-EndDate').getValue(),
-			CustomerID	: Ext.getCmp('MitraJaya.view.Project.MainGrid-CustomerID').getValue()
+    }, 
+    submitOnEnterGrid: function (field, event) {
+		localStorage.setItem('Brand_src', JSON.stringify({
+			keySearch	: Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-keySearch').getValue()
 		}));
-		Ext.getCmp('MitraJaya.view.Project.MainGrid-Grid').getStore().loadPage(1);
+		Ext.getCmp('MitraJaya.view.Admin.Brand.MainGrid-Grid').getStore().loadPage(1);
     }
 });
-
-
-
-function setFilterLs() {
-	localStorage.setItem('project_list_ls', JSON.stringify({
-		keySearch	: Ext.getCmp('MitraJaya.view.Project.MainGrid-keySearch').getValue(),
-		StartDate	: Ext.getCmp('MitraJaya.view.Project.MainGrid-StartDate').getValue(),
-		EndDate		: Ext.getCmp('MitraJaya.view.Project.MainGrid-EndDate').getValue(),
-		CustomerID	: Ext.getCmp('MitraJaya.view.Project.MainGrid-CustomerID').getValue()
-	}));
-	Ext.getCmp('MitraJaya.view.Project.MainGrid-Grid').getStore().loadPage(1);
-}   
 
 function fetchJSON(text){
     try{
