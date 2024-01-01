@@ -60,16 +60,20 @@ class Auth extends REST_Controller
 								"username" => $row->username,
 								"name"	=> $row->name,
 								"user_status" => $row->user_status,
-								"group_id"	=> $row->GroupID,
-								"partner_id" => $row->PartnerID
+								"group_id" => $row->GroupID,
+								"people_id"	=> $row->people_id,
+								"partner_id" => $row->PartnerID,
+								"role_id" => $row->RoleID
 							);
 						}
 
-						$_SESSION["user_id"] 	= $dataRes["user_id"];
-						$_SESSION["name"] 		= $dataRes["name"];
-						$_SESSION["username"] 	= $dataRes["username"];
-						$_SESSION["groupid"] 	= $dataRes["group_id"];
+						$_SESSION["user_id"] = $dataRes["user_id"];
+						$_SESSION["name"] = $dataRes["name"];
+						$_SESSION["username"] = $dataRes["username"];
+						$_SESSION["groupid"] = $dataRes["group_id"];
 						$_SESSION["partner_id"] = $dataRes["partner_id"];
+						$_SESSION["people_id"] = $dataRes["people_id"];
+						$_SESSION["role_id"] = $dataRes["role_id"];
 
 						return $this->set_response([
 							"status" => 200,

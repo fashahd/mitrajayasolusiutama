@@ -330,10 +330,10 @@ INSERT INTO `mj_people` VALUES (99971749675794443, NULL, 'Fajar', 'male', NULL, 
 INSERT INTO `mj_people` VALUES (100006860899221512, NULL, 'Fashah Update', 'male', NULL, NULL, 2147483647, 'asdasds@gmail.com', 'asdasdasdasd', 'nullified', '2022-10-16 14:22:24', 99971749675794438, '2022-10-16 14:24:54', 99971749675794438);
 
 -- ----------------------------
--- Table structure for mj_project
+-- Table structure for mj_project_new
 -- ----------------------------
-DROP TABLE IF EXISTS `mj_project`;
-CREATE TABLE `mj_project`  (
+DROP TABLE IF EXISTS `mj_project_new`;
+CREATE TABLE `mj_project_new`  (
   `ProjectID` bigint NOT NULL,
   `OrderBookID` bigint NULL DEFAULT NULL,
   `PartnerID` bigint NULL DEFAULT NULL,
@@ -348,11 +348,11 @@ CREATE TABLE `mj_project`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of mj_project
+-- Records of mj_project_new
 -- ----------------------------
-INSERT INTO `mj_project` VALUES (99983442774589464, 99983442774589463, NULL, 'Kone Project 2', NULL, 'active', '2022-10-02 16:04:24', 99971749675794438, '2022-10-02 16:07:00', 99971749675794438);
-INSERT INTO `mj_project` VALUES (99983442774589467, 99983442774589466, NULL, 'Project123', NULL, 'active', '2022-10-03 07:06:22', 99971749675794438, '2022-10-08 10:14:35', 99971749675794438);
-INSERT INTO `mj_project` VALUES (99993514640670768, 99993514640670767, NULL, 'NEW Project', NULL, 'active', '2022-10-08 10:07:03', 99971749675794438, '2022-10-08 10:13:21', 99971749675794438);
+INSERT INTO `mj_project_new` VALUES (99983442774589464, 99983442774589463, NULL, 'Kone Project 2', NULL, 'active', '2022-10-02 16:04:24', 99971749675794438, '2022-10-02 16:07:00', 99971749675794438);
+INSERT INTO `mj_project_new` VALUES (99983442774589467, 99983442774589466, NULL, 'Project123', NULL, 'active', '2022-10-03 07:06:22', 99971749675794438, '2022-10-08 10:14:35', 99971749675794438);
+INSERT INTO `mj_project_new` VALUES (99993514640670768, 99993514640670767, NULL, 'NEW Project', NULL, 'active', '2022-10-08 10:07:03', 99971749675794438, '2022-10-08 10:13:21', 99971749675794438);
 
 -- ----------------------------
 -- Table structure for mj_user

@@ -68,7 +68,7 @@ class Morder extends CI_Model
 			FROM
 				`mj_order_book` `a`
 				LEFT JOIN `mj_customer` `b` ON `b`.`CustomerID` = `a`.`CustomerID`
-				LEFT JOIN `mj_project` `c` ON `c`.`OrderBookID` = `a`.`OrderBookID`
+				LEFT JOIN `mj_project_new` `c` ON `c`.`OrderBookID` = `a`.`OrderBookID`
 				LEFT JOIN mj_department d on d.DeptID = a.DeptID
 				LEFT JOIN (
 					SELECT
@@ -190,7 +190,7 @@ class Morder extends CI_Model
 		$this->db->where("a.StatusCode", "active");
 		$this->db->order_by($sortingField, $sortingDir);
 		$this->db->join("mj_customer b", " b.CustomerID = a.CustomerID", "left");
-		$this->db->join("mj_project c", " c.ProjectID = a.ProjectID", "left");
+		$this->db->join("mj_project_new c", " c.ProjectID = a.ProjectID", "left");
 		$this->db->join("mj_department d", " d.DeptID = a.DeptID", "left");
 		$this->db->join("mj_people e", " e.people_id = a.PeopleID", "left");
 		$this->db->select('SQL_CALC_FOUND_ROWS a.OrderBookID', false);
@@ -238,7 +238,7 @@ class Morder extends CI_Model
 			$postProject["ProjectName"]	= $ProjectName;
 			$postProject["CreatedDate"] = date("Y-m-d H:i:s");
 			$postProject["CreatedBy"]	= $_SESSION["user_id"];
-			$insert = $this->db->insert("mj_project", $postProject);
+			$insert = $this->db->insert("mj_project_new", $postProject);
 
 			$response["success"] = true;
 			$response["message"] = "Data Saved";
@@ -267,7 +267,7 @@ class Morder extends CI_Model
 		$insert = $this->db->update("mj_order_book", $post);
 
 		if ($insert) {
-			$sql = "SELECT * FROM mj_project WHERE OrderBookID = ? ";
+			$sql = "SELECT * FROM mj_project_new WHERE OrderBookID = ? ";
 			$query = $this->db->query($sql, array($OrderBookID));
 
 			if ($query->num_rows() > 0) {
@@ -275,11 +275,11 @@ class Morder extends CI_Model
 				$postProject["UpdatedDate"] = date("Y-m-d H:i:s");
 				$postProject["UpdatedBy"]	= $_SESSION["user_id"];
 				$this->db->where("OrderBookID", $OrderBookID);
-				$insert = $this->db->update("mj_project", $postProject);
+				$insert = $this->db->update("mj_project_new", $postProject);
 			} else {
 				$postProject["ProjectName"]	= $ProjectName;
 				$postProject["OrderBookID"] = $OrderBookID;
-				$insert = $this->db->insert("mj_project", $postProject);
+				$insert = $this->db->insert("mj_project_new", $postProject);
 			}
 
 			$response["success"] = true;
@@ -296,7 +296,7 @@ class Morder extends CI_Model
 	public function form_order_book($OrderBookID)
 	{
 		$this->db->where("a.OrderBookID", $OrderBookID);
-		$this->db->join("mj_project b", " b.OrderBookID = a.OrderBookID", "left");
+		$this->db->join("mj_project_new b", " b.OrderBookID = a.OrderBookID", "left");
 		$this->db->select('a.OrderBookID,
 			a.CustomerID,
 			a.ContractNumber,
@@ -329,7 +329,7 @@ class Morder extends CI_Model
 	{
 		($OrderBookID != "") ? $this->db->where("a.OrderBookID <> ", $OrderBookID) : "";
 		$this->db->where($field, $id);
-		$this->db->join("mj_project b", " b.OrderBookID = a.OrderBookID", "left");
+		$this->db->join("mj_project_new b", " b.OrderBookID = a.OrderBookID", "left");
 		$this->db->select('a.OrderBookID,
 			a.CustomerID,
 			a.ContractNumber,
@@ -414,7 +414,7 @@ class Morder extends CI_Model
 					FROM 
 						mj_order_book a
 					LEFT JOIN
-						mj_project b on b.OrderBookID = a.OrderBookID
+						mj_project_new b on b.OrderBookID = a.OrderBookID
 					WHERE a.ContractNumber = ?";
 		$query	= $this->db->query($sql, array($ContractNumber));
 

@@ -14,13 +14,14 @@ class Mvendorpayment extends CI_Model {
 		($pSearch["keySearch"] != '') ? $this->db->like("a.DocumentNo", $pSearch["keySearch"]): "";
 		($pSearch["VendorID"] != '') ? $this->db->where("a.MitraName", $pSearch["VendorID"]): "";
 		($pSearch["ProjectID"] != '') ? $this->db->where("a.ProjectID", $pSearch["ProjectID"]): "";
+		($_SESSION["role_id"] == "1") ? $this->db->where("a.CreatedBy", $_SESSION["user_id"]) : "";
 
 		$this->db->where("a.StatusCode", "active");
 		$this->db->group_by("a.PaymentID");
 		$this->db->limit($limit, $start);
 		$this->db->order_by($sortingField, $sortingDir);
 		$this->db->join("mj_order_book d", " d.OrderBookID = a.ProjectID", "left");
-		$this->db->join("mj_project b", " b.OrderBookID = d.OrderBookID", "left");
+		$this->db->join("mj_project_new b", " b.ProjectID = d.ProjectID", "left");
 		$this->db->join("mj_vendor c", " c.VendorID = a.MitraName", "left");
 		// $this->db->join("mj_loan_payment c", " c.LoanID = a.LoanID and c.StatusCode = 'active'", "left");
 		$this->db->select('SQL_CALC_FOUND_ROWS a.PaymentID', false);
@@ -35,24 +36,24 @@ class Mvendorpayment extends CI_Model {
 			a.PeriodMonth,
 			a.PeriodYear,
 			a.Contract,
-            CONCAT("Rp ",FORMAT(a.Contract,2,"en_US")) Contract,
+            CONCAT("Rp ", FORMAT(a.Contract,2,"en_US")) Contract,
             a.Amount,
-            CONCAT("Rp ",FORMAT(a.Amount,2,"en_US")) Amount,
-            CONCAT("Rp ",FORMAT(a.Outstanding,2,"en_US")) Outstanding,
+            CONCAT("Rp ", FORMAT(a.Amount,2,"en_US")) Amount,
+            CONCAT("Rp ", FORMAT(a.Outstanding,2,"en_US")) Outstanding,
             a.Insurance,
-            CONCAT("Rp ",FORMAT(a.Insurance,2,"en_US")) Insurance,
+            CONCAT("Rp ", FORMAT(a.Insurance,2,"en_US")) Insurance,
 			a.PPH23Option,
             a.Contract,
-            CONCAT("Rp ",FORMAT(a.PPHValue,2,"en_US")) PPHValue,
+            CONCAT("Rp ", FORMAT(a.PPHValue,2,"en_US")) PPHValue,
             a.CashbonAmount,
-            CONCAT("Rp ",FORMAT(a.CashbonAmount,2,"en_US")) CashbonAmount,
+            CONCAT("Rp ", FORMAT(a.CashbonAmount,2,"en_US")) CashbonAmount,
 			a.SIOK3Name,
             a.SIOK3Amount,
-            CONCAT("Rp ",FORMAT(a.SIOK3Amount,2,"en_US")) SIOK3Amount,
+            CONCAT("Rp ", FORMAT(a.SIOK3Amount,2,"en_US")) SIOK3Amount,
 			CONCAT(d.ContractNumber, " - ", b.ProjectName) ProjectName,
 			c.VendorName,
 			a.PaidDate,
-			IF(a.PaidDate != "", "Paid", "Open") PaidStatus
+			IF(a.PaidDate IS NOT NULL, "Paid", "Open") PaidStatus
 		');
 		$query = $this->db->get('mj_vendorpayment a');
 
@@ -142,7 +143,7 @@ class Mvendorpayment extends CI_Model {
 		$this->db->group_by("a.PaymentID");
 		$this->db->order_by($sortingField, $sortingDir);
 		$this->db->join("mj_order_book d", " d.OrderBookID = a.ProjectID", "left");
-		$this->db->join("mj_project b", " b.OrderBookID = d.OrderBookID", "left");
+		$this->db->join("mj_project_new b", " b.OrderBookID = d.OrderBookID", "left");
 		$this->db->join("mj_vendor c", " c.VendorID = a.MitraName", "left");
 		$this->db->select('
 			a.DocumentNo as "Doc Number",
@@ -178,6 +179,8 @@ class Mvendorpayment extends CI_Model {
 		$PaymentID = getUUID();
 		$post["PaymentID"] = $PaymentID;
 		$post['MitraName'] = ($post["Type"] == "vendor") ? $post["MitraNameVendor"] : $post["MitraNameSubcont"];
+		$post["CreatedBy"] = $_SESSION["user_id"];
+		$post["CreatedDate"] = date("Y-m-d H:i:s");
 		
         unset($post["MitraNameVendor"]);
         unset($post["MitraNameSubcont"]);
@@ -201,6 +204,8 @@ class Mvendorpayment extends CI_Model {
         unset($post["OpsiDisplay"]);
 		$VendorPaymentID = getUUID();
 		$post["VendorPaymentID"] = $VendorPaymentID;
+		$post["CreatedBy"] = $_SESSION["user_id"];
+		$post["CreatedDate"] = date("Y-m-d H:i:s");
 		
 		$insert = $this->db->insert("mj_vendorpayment_pay", $post);
 
@@ -223,6 +228,8 @@ class Mvendorpayment extends CI_Model {
         unset($post["OpsiDisplay"]);
         unset($post["PaymentID"]);
 		$post['MitraName'] 			= ($post["Type"] == "vendor") ? $post["MitraNameVendor"] : $post["MitraNameSubcont"];
+		$post["UpdatedBy"] = $_SESSION["user_id"];
+		$post["UpdatedDate"] = date("Y-m-d H:i:s");
 		
         unset($post["MitraNameVendor"]);
         unset($post["MitraNameSubcont"]);
@@ -252,6 +259,8 @@ class Mvendorpayment extends CI_Model {
         $param['VendorPaymentAmount'] = $post['VendorPaymentAmount'];
         $param['VendorPaymentDate'] = $post['VendorPaymentDate'];
         $param['VendorPaymentDescription'] = $post['VendorPaymentDescription'];
+		$param["UpdatedBy"] = $_SESSION["user_id"];
+		$param["UpdatedDate"] = date("Y-m-d H:i:s");
 		
 		$this->db->where("VendorPaymentID", $VendorPaymentID);
 		$insert = $this->db->update("mj_vendorpayment_pay", $param);
@@ -282,6 +291,8 @@ class Mvendorpayment extends CI_Model {
 			a.MitraName AS MitraNameSubcont,
 			a.Description,
 			a.Type,
+			a.InvoiceNumber,
+			a.isInsurance,
 			a.InvoiceComplete,
 			a.DueDate,
 			a.PeriodMonth,

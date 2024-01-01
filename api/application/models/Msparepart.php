@@ -156,7 +156,7 @@ class Msparepart extends CI_Model {
 		$this->db->where("a.StatusCode", "active");
 		$this->db->group_by("a.LoanID");
 		$this->db->order_by($sortingField, $sortingDir);
-		$this->db->join("mj_project b", " b.ProjectID = a.ProjectID", "left");
+		$this->db->join("mj_project_new b", " b.ProjectID = a.ProjectID", "left");
 		$this->db->join("mj_loan_payment c", " c.LoanID = a.LoanID and c.StatusCode = 'active'", "left");
 		$this->db->join("mj_vendor d", " d.VendorID = a.VendorName and d.StatusCode = 'active'", "left");
 		$this->db->select('SQL_CALC_FOUND_ROWS a.LoanID', false);

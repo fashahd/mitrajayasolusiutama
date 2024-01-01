@@ -90,7 +90,17 @@ class Group extends REST_Controller {
 		if (!$this->put('GroupId'))
             $this->response(NULL, 400);
         $group = $this->mgroup->updateGroup(
-                $this->put('GroupId'), $this->put('GroupName'), $this->put('GroupDescription'), $this->put('GroupUnitId'), $this->put('itemselector'), $this->put('itemselectorReport'), $this->put('GroupMenuId'),  $this->put('GroupFilterBy'), $_SESSION['user_id'], $this->put('GroupPartnerID'), $this->put('GroupMenuBusinessUnit')
+                $this->put('GroupId')
+				, $this->put('GroupName')
+				, $this->put('GroupDescription')
+				, $this->put('GroupUnitId')
+				, $this->put('itemselector')
+				, $this->put('itemselectorReport')
+				, $this->put('GroupMenuId'),  $this->put('GroupFilterBy')
+				, $_SESSION['user_id']
+				, $this->put('GroupPartnerID')
+				, $this->put('GroupMenuBusinessUnit')
+				, $this->put('GroupRoleID')
         );
         if ($group)
             $this->response($group, 200);
@@ -102,7 +112,16 @@ class Group extends REST_Controller {
         if (!$this->post('GroupName'))
             $this->response(NULL, 400);
         $group = $this->mgroup->createGroup(
-                $this->post('GroupName'), $this->post('GroupDescription'), $this->post('GroupUnitId'), $this->post('itemselector'),$this->post('itemselectorReport'), $this->post('GroupMenuId'), $this->post('GroupFilterBy'), $_SESSION['user_id'], $this->post('GroupPartnerID'), $this->post('GroupMenuBusinessUnit')
+                $this->post('GroupName')
+				, $this->post('GroupDescription')
+				, $this->post('GroupUnitId')
+				, $this->post('itemselector'),$this->post('itemselectorReport')
+				, $this->post('GroupMenuId')
+				, $this->post('GroupFilterBy')
+				, $_SESSION['user_id']
+				, $this->post('GroupPartnerID')
+				, $this->post('GroupMenuBusinessUnit')
+				, $this->post('GroupRoleID')
         );
         if ($group)
             $this->response($group, 200);

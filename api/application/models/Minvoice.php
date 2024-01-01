@@ -306,7 +306,7 @@ class Minvoice extends CI_Model {
 
 		$this->db->where("a.InvoiceID", $InvoiceID);
 		$this->db->join("mj_order_book b", " b.OrderBookID = a.ContractNumber", "left");
-		$this->db->join("mj_project d", " d.OrderBookID = b.OrderBookID", "left");
+		$this->db->join("mj_project_new d", " d.OrderBookID = b.OrderBookID", "left");
 		$this->db->join("mj_people c", " c.people_id = b.PeopleID", "left");
 		$this->db->join("mj_customer e", " e.CustomerID = a.CustomerID", "left");
 		$this->db->select('a.InvoiceID,
