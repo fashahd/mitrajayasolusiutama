@@ -27,6 +27,7 @@ class Mpayroll extends CI_Model
 			, a.people_name
 			, a.people_email
 			, a.people_ext_id
+			, c.date_state
 			, msp.position_name
 			, (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus) total_insentif
 			, (c.deduction_bpjs_tk + c.deduction_bpjs_kesehatan + c.deduction_kasbon + c.deduction_pph_21_insentif + c.deduction_pph_21) total_deduction
@@ -49,6 +50,12 @@ class Mpayroll extends CI_Model
 				$result["MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-" . $row] = $value;
 			}
 		}
+
+		
+		$this->db->select("signature as document_old, name as signatrue_name, signature as document");
+		$query = $this->db->get("mj_payroll_setting")->result_array();
+		$result["signatrue_name"] = $query[0]["signatrue_name"];
+		$result["document"] = base_url().$query[0]["document"];
 
 		$return["success"]  = true;
 		$return["data"]     = $result;
