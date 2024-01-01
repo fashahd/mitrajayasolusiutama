@@ -134,6 +134,27 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 					flex: 1
 				}, {
 					xtype: 'button',
+					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/signature.svg',
+					text: lang('Setting Payroll'),
+					cls: 'Sfr_BtnGridNewWhite',
+					overCls: 'Sfr_BtnGridNewWhite-Hover',
+					hidden: m_act_update,
+					id: 'MitraJaya.view.Admin.Payroll.MainGrid-Income-Grid-BtnSignature',
+					handler: function () {
+						var WinFormSettingPayroll = Ext.create('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll');
+						WinFormSettingPayroll.setViewVar({
+							CallerStore: thisObj.StoreGridMain
+						});
+						if (!WinFormSettingPayroll.isVisible()) {
+							WinFormSettingPayroll.center();
+							WinFormSettingPayroll.show();
+						} else {
+							WinFormSettingPayroll.close();
+						}
+
+					}
+				}, {
+					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
 					text: lang('Update'),
 					cls: 'Sfr_BtnGridNewWhite',

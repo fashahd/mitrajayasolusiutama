@@ -102,6 +102,15 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 									displayField: 'label',
 									valueField: 'id'
 								}, {
+									xtype: 'datefield',
+									id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-date_state',
+									name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-date_state',
+									labelAlign: 'top',
+									format: 'Y-m-d',
+									fieldLabel: 'Payroll Date',
+									allowBlank: false,
+									baseCls: 'Sfr_FormInputMandatory'
+								}, {
 									xtype: 'button',
 									icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
 									text: lang('Prefill Data From Before'),
@@ -141,7 +150,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 												Ext.MessageBox.hide();
 											},
 											failure: function (form, action) {
-												
+
 												Ext.MessageBox.hide();
 												Swal.fire({
 													icon: 'error',
