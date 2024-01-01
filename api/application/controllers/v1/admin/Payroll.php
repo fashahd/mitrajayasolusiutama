@@ -156,6 +156,77 @@ class Payroll extends REST_Controller
 		}
 	}
 
+	function submit_setting_post()
+	{
+		$varPost = $_POST;
+
+		foreach ($varPost as $key => $value) {
+			$keyNew = str_replace("MitraJaya_view_Admin_Payroll_WinFormSettingPayroll-FormBasicData-", '', $key);
+			if ($value == "") {
+				$value = null;
+			}
+			$paramPost[$keyNew] = $value;
+		}
+		$post["signature"] = $paramPost["document_old"];
+		$post["name"] = $paramPost["signatrue_name"];
+
+		//cek folder propinsi itu sudah ada belum
+		if (!file_exists('files/payroll/setting')) {
+			mkdir('files/payroll/setting', 0777, true);
+		}
+
+		$ExtNya = GetFileExt($post["signature"]);
+		$gambar = time() . "_signature." . $ExtNya;
+
+		$upload = rename($post["signature"], 'files/payroll/setting/' . $gambar);
+
+		$post["signature"] = 'files/payroll/setting/' . $gambar;
+
+		$this->db->where("id", "1");
+		$this->db->update("mj_payroll_setting", $post);
+
+
+		$results['success'] = true;
+		$results['message'] = "Data saved";
+		$this->response($results, 200);
+	}
+
+	function signature_upload_post()
+	{
+		//Cek file images
+		$ExtNya = GetFileExt($_FILES['MitraJaya_view_Admin_Payroll_WinFormSettingPayroll-FormBasicData-document']['name']);
+		if (!in_array($ExtNya, array('png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG'))) {
+			$result['success'] = false;
+			$result['message'] = lang('File types not allowed');
+			$this->response($result, 400);
+		} else {
+			if ($_FILES['MitraJaya_view_Admin_Payroll_WinFormSettingPayroll-FormBasicData-document']['name'] != '') {
+				$gambar = date('Ymdhis') . '_' . str_replace(" ", "_", strtolower($_FILES['MitraJaya_view_Admin_Payroll_WinFormSettingPayroll-FormBasicData-document']['name']));
+				$fileupload['MitraJaya_view_Admin_Payroll_WinFormSettingPayroll-FormBasicData-document'] = $_FILES['MitraJaya_view_Admin_Payroll_WinFormSettingPayroll-FormBasicData-document'];
+
+				$data_exist = $_POST["MitraJaya_view_Admin_Payroll_WinFormSettingPayroll-FormBasicData-document_old"];
+
+				//cek folder propinsi itu sudah ada belum
+				if (file_exists($data_exist)) {
+					unlink($data_exist);
+				}
+
+				$upload = move_upload($fileupload, 'files/tmp/' . $gambar);
+
+				if (isset($upload['upload_data'])) {
+					$result['success'] = true;
+					$result['FilePath'] = 'files/tmp/' . $upload["upload_data"]["file_name"];
+					$result['file'] = base_url() . 'files/tmp/' . $upload["upload_data"]["file_name"];
+					$this->response($result, 200);
+				} else {
+					$result['success'] = false;
+					$result['message'] = 'Upload failed';
+					$this->response($result, 400);
+				}
+			}
+		}
+	}
+
 	function submit_payroll_post()
 	{
 		$varPost = $_POST;
@@ -187,6 +258,8 @@ class Payroll extends REST_Controller
 		$query = $this->db->query("SELECT * FROM mj_payroll WHERE people_id = ? AND month = ? AND year = ?", [$paramPost['people_id'], $paramPost['month'], $paramPost['year']]);
 		if ($query->num_rows() > 0) {
 			$this->db->where("people_id", $paramPost["people_id"]);
+			$this->db->where("year", $paramPost["year"]);
+			$this->db->where("month", $paramPost["month"]);
 			$this->db->update("mj_payroll", $paramPost);
 		} else {
 			$this->db->insert("mj_payroll", $paramPost);
@@ -215,6 +288,27 @@ class Payroll extends REST_Controller
 		$data = $this->mpayroll->form_payroll($Month, $Year, $people_id);
 
 		$this->response($data, 200);
+	}
+
+	function form_payroll_setting_get()
+	{
+		$this->db->select("signature as document_old, name as signatrue_name, signature as document");
+		$query = $this->db->get("mj_payroll_setting")->result_array();
+
+		$result = array();
+		if ($query[0]) {
+			foreach ($query[0] as $row => $value) {
+				$result["MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData-" . $row] = $value;
+			}
+		}
+
+		$result["document"] = base_url() . $result["MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData-document"];
+
+
+		$return["success"]  = true;
+		$return["data"]     = $result;
+
+		$this->response($return, 200);
 	}
 
 	function form_prefill_payroll_get()
@@ -543,6 +637,13 @@ class Payroll extends REST_Controller
 						<td style="width:60%; text-align:center" colspan="4">Terbilang : #' . terbilang(round($net_salary)) . ' Rupiah</td>
 					</tr>
 				</table>
+				<div style="white-space: pre; padding-right: 100px">
+					<p style="text-align: right;font-size:10pt">Jakarta, ' . date("d F Y", strtotime($PayrollData["date_state"])) . '</p>
+					<img style="float:right" width="250" src="' . $PayrollData["document"] . '">
+					<br>
+					<br>
+					<p style="text-align: right;font-size:10pt">' . $PayrollData["signatrue_name"] . '</p>
+				</div>
 			</div>		
 		</div>
 		</body>
@@ -572,7 +673,7 @@ class Payroll extends REST_Controller
 			}
 		}
 
-		if($paramPost["people_email"] == ""){
+		if ($paramPost["people_email"] == "") {
 			$response["success"] = false;
 			$response["desc"] = "warning";
 			$response["message"] = "Email not Found";
@@ -626,7 +727,7 @@ class Payroll extends REST_Controller
 		$this->email->from('hrd@mitrajayasolusiutama.com', 'HRD Mitrajaya Solusi Utama');
 		$this->email->to($paramPost["people_email"]);
 		$this->email->subject('Slip Gaji Periode ' . $period . ' - ' . $paramPost['people_name']);
-		$this->email->message('Dear '. $paramPost['people_name'] .', Berikut Lampiran Slip Gaji Periode ' . $period.".");
+		$this->email->message('Dear ' . $paramPost['people_name'] . ', Berikut Lampiran Slip Gaji Periode ' . $period . ".");
 		$this->email->attach($pdf, 'application/pdf', "Slip Gaji " . $period . ' - ' . $paramPost['people_name'] . ".pdf", false);
 
 		if ($this->email->send()) {
