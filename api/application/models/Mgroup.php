@@ -9,7 +9,7 @@ class Mgroup extends CI_Model {
 	public function list_group($pSearch, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
 
         if ($sortingField == "") $sortingField = 'GroupName';
-        if ($sortingDir == "") $sortingDir = 'DESC';
+        if ($sortingDir == "") $sortingDir = 'ASC';
 
 		($pSearch["keySearch"] != '') ? $this->db->like("GroupName", $pSearch["keySearch"]) : "";
 
@@ -62,7 +62,7 @@ class Mgroup extends CI_Model {
                    a.GroupId
                   , a.GroupName
                   , a.GroupDescription
-                  , a.RoleId
+                  , a.RoleID
                   , a.GroupMenuTemID
                   , a.GroupMenuId
                   , a.GroupFilterBy
@@ -145,14 +145,14 @@ class Mgroup extends CI_Model {
         return $result;
     }	
 
-    function updateGroup($id,$name,$description,$unitid,$aksi,$listReport,$menuid,$filterby,$userid,$partnerid,$GroupMenuBusinessUnit){
+    function updateGroup($id,$name,$description,$unitid,$aksi,$listReport,$menuid,$filterby,$userid,$partnerid,$GroupMenuBusinessUnit,$GroupRoleID){
         if (empty($partnerid)) {
             $partnerid = 0;
         }
 
         $sql = "
             UPDATE sys_group
-            SET GroupName=?,GroupDescription=?,GroupUnitId=?,GroupMenuId=?,GroupFilterBy=?,GroupUpdateUserId=?,GroupUpdateTime=now(),GroupPartnerID=?
+            SET GroupName=?,GroupDescription=?,GroupUnitId=?,GroupMenuId=?,GroupFilterBy=?,GroupUpdateUserId=?,GroupUpdateTime=now(),GroupPartnerID=?,RoleID=?
             WHERE GroupId=?";
         $sql_aksi_delete = "
             DELETE FROM sys_group_menu_act WHERE GroupMenuGroupId=?";
@@ -165,7 +165,7 @@ class Mgroup extends CI_Model {
             where MenuAksiId=?";
 			
         $this->db->trans_start();
-        $this->db->query($sql, array($name,$description,$unitid,$menuid,$filterby,$userid,$partnerid,$id));
+        $this->db->query($sql, array($name,$description,$unitid,$menuid,$filterby,$userid,$partnerid,$GroupRoleID,$id));
         $this->db->query($sql_aksi_delete, array($id));
         $arrAksi = explode(',', $aksi);
         for ($i=0;$i<sizeof($arrAksi);$i++) {
@@ -183,14 +183,14 @@ class Mgroup extends CI_Model {
         return $results;
     }
 
-    function createGroup($name,$description,$unitid,$aksi,$listReport,$menuid,$filterby,$userid,$partnerid,$GroupMenuBusinessUnit){
+    function createGroup($name,$description,$unitid,$aksi,$listReport,$menuid,$filterby,$userid,$partnerid,$GroupMenuBusinessUnit, $GroupRoleID){
         if (empty($partnerid)) {
             $partnerid = 0;
         }
 
         $sql = "
-            INSERT INTO sys_group(GroupName,GroupDescription,GroupUnitId,GroupAddUserId,GroupAddTime,GroupMenuId,GroupFilterBy,GroupPartnerID)
-            VALUES (?,?,?,?,now(),?,?,?)";
+            INSERT INTO sys_group(GroupName,GroupDescription,GroupUnitId,GroupAddUserId,GroupAddTime,GroupMenuId,GroupFilterBy,GroupPartnerID,RoleID)
+            VALUES (?,?,?,?,now(),?,?,?,?)";
          $sql_aksi = "
             INSERT IGNORE INTO sys_group_menu_act(GroupMenuMenuAksiId,GroupMenuGroupId,GroupMenuSegmen)
             SELECT MenuAksiId,?,concat(MenuModule,'/',AksiFungsi,IF(MenuParam!='',concat('/',MenuParam),''))
@@ -199,7 +199,7 @@ class Mgroup extends CI_Model {
             LEFT JOIN sys_act ON MenuAksiAksiId=AksiId
             where MenuAksiId=?";
         $this->db->trans_start();
-        $this->db->query($sql, array($name,$description,$unitid,$userid,$menuid,$filterby,$partnerid));
+        $this->db->query($sql, array($name,$description,$unitid,$userid,$menuid,$filterby,$partnerid,$GroupRoleID));
         $id = $this->db->insert_id();
         $arrAksi = explode(',', $aksi);
         for ($i=0;$i<sizeof($arrAksi);$i++) {

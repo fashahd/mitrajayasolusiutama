@@ -8,8 +8,8 @@ class Mcomponent extends CI_Model {
 
 	public function list_component($pSearch, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
 
-        if ($sortingField == "") $sortingField = 'ComponentID';
-        if ($sortingDir == "") $sortingDir = 'DESC';
+        if ($sortingField == "") $sortingField = 'Code';
+        if ($sortingDir == "") $sortingDir = 'ASC';
 
 		($pSearch["keySearch"] != '') ? $this->db->like("Code", $pSearch["keySearch"])->or_where("Description", $pSearch["keySearch"]): "";
 

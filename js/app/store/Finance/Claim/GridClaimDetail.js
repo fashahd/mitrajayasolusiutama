@@ -3,11 +3,11 @@
  *  Created On : Fri Jan 17 2020
  *  File : MainGrid.js
  *******************************************/
-Ext.define('MitraJaya.store.Project.MainGrid', {
+Ext.define('MitraJaya.store.Finance.Claim.GridClaimDetail', {
 	extend: 'Ext.data.Store',
-	id: 'MitraJaya.store.Project.MainGrid',
-	storeId: 'MitraJaya.store.Project.MainGrid',
-	fields: ['ProjectID', 'ProjectName', 'CustomerName', 'TotalPO', 'TotalInvoice'],
+	id: 'MitraJaya.store.Finance.Claim.GridClaimDetail',
+	storeId: 'MitraJaya.store.Finance.Claim.GridClaimDetail',
+	fields: ['ClaimDetailID', 'ClaimID', 'ClaimDetailDate', 'Amount', 'Description', 'CostElement'],
 	pageSize: 50,
 	autoLoad: true,
 	storeVar: false,
@@ -17,7 +17,7 @@ Ext.define('MitraJaya.store.Project.MainGrid', {
 	remoteSort: true,
 	proxy: {
 		type: 'ajax',
-		url: m_api + '/v1/finance/project/list',
+		url: m_api + '/v1/finance/claim/claim_detail_list',
 		reader: {
 			type: 'json',
 			root: 'data',
@@ -38,15 +38,7 @@ Ext.define('MitraJaya.store.Project.MainGrid', {
 			}
 		},
 		beforeload: function (store, operation, options) {
-			var project_list_ls = JSON.parse(localStorage.getItem('project_list_ls'));
-
-			if (project_list_ls != null) {
-				store.proxy.extraParams.keySearch = project_list_ls.keySearch;
-				store.proxy.extraParams.CustomerID = project_list_ls.CustomerID;
-			} else {
-				store.proxy.extraParams.keySearch = '';
-				store.proxy.extraParams.CustomerID = '';
-			}
+			store.proxy.extraParams.ClaimID = this.storeVar.ClaimID;
 		}
 	},
 	loadInfoFilter: function () {

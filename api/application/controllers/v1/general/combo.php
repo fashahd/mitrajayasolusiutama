@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 /** @noinspection PhpIncludeInspection */
@@ -20,25 +20,34 @@ use Restserver\Libraries\REST_Controller;
  * @license         MIT
  * @link            https://github.com/chriskacerguis/codeigniter-restserver
  */
-class Combo extends REST_Controller {
+class Combo extends REST_Controller
+{
 	function __construct()
-    {
-        // Construct the parent class
-        parent::__construct();
+	{
+		// Construct the parent class
+		parent::__construct();
 
 		$this->load->model("mcombo");
 	}
 
-	function index_get(){
-		
+	function index_get()
+	{
 	}
-	
-    public function combo_partner_get(){
-        $data = $this->mcombo->getComboPartner();
-        $this->response($data, 200);
-    }
 
-	function combo_month_get(){
+	public function combo_partner_get()
+	{
+		$data = $this->mcombo->getComboPartner();
+		$this->response($data, 200);
+	}
+
+	public function combo_role_get()
+	{
+		$data = $this->mcombo->getComboRole();
+		$this->response($data, 200);
+	}
+
+	function combo_month_get()
+	{
 
 		$month["1"] = "January";
 		$month["2"] = "February";
@@ -53,256 +62,293 @@ class Combo extends REST_Controller {
 		$month["11"] = "November";
 		$month["12"] = "December";
 
-		for ($i_month = 1; $i_month <= 12; $i_month++) { 
-			$key = $i_month-1;
+		for ($i_month = 1; $i_month <= 12; $i_month++) {
+			$key = $i_month - 1;
 
-			if($i_month < 10){
-				$i_month = "0".$i_month;
+			if ($i_month < 10) {
+				$i_month = "0" . $i_month;
 			}
-			
-            $arrReturn[$key]['id'] = (string) $i_month;
-            $arrReturn[$key]['label'] = $month[(int)$i_month];
+
+			$arrReturn[$key]['id'] = (string) $i_month;
+			$arrReturn[$key]['label'] = $month[(int)$i_month];
 		}
 
-        $this->response($arrReturn, 200);
+		$this->response($arrReturn, 200);
 	}
 
-	function combo_year_get(){
+	function combo_year_get()
+	{
 		$yearRange = (int) $this->get('yearRange');
-        if($yearRange == 0) $yearRange = 50;
+		if ($yearRange == 0) $yearRange = 50;
 
-        $yearNow = date('Y')+2;
+		$yearNow = date('Y') + 2;
 
-		if($this->get("endyear")){
+		if ($this->get("endyear")) {
 			$yearNow = ($this->get("endyear") == 'now') ? date("Y") : date("Y") + 2;
 		}
 
-        $arrReturn = array();
-        $incre = 0;
+		$arrReturn = array();
+		$incre = 0;
 
-        for ($i=$yearNow; $i >= ($yearNow-$yearRange); $i--) {
-            $arrReturn[$incre]['id'] = $i;
-            $arrReturn[$incre]['label'] = $i;
-            $incre++;
-        }
+		for ($i = $yearNow; $i >= ($yearNow - $yearRange); $i--) {
+			$arrReturn[$incre]['id'] = $i;
+			$arrReturn[$incre]['label'] = $i;
+			$incre++;
+		}
 
-        $this->response($arrReturn, 200);
+		$this->response($arrReturn, 200);
 	}
 
-	function combo_cost_element_get(){
-		
+	function combo_cost_element_get()
+	{
+
 		$data = $this->mcombo->GetComponentList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_department_get(){
-		
+	function combo_department_get()
+	{
+
 		$data = $this->mcombo->GetDepartmentList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_project_get(){
-		
+	function combo_project_get()
+	{
+
 		$data = $this->mcombo->GetProjectList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_project_bank_get(){
-		
+	function combo_cashbon_get()
+	{
+		$param = $this->get();
+		$data = $this->mcombo->GetCashbonList($param);
+
+
+		$this->response($data);
+	}
+
+	function combo_project_bank_get()
+	{
+
 		$data = $this->mcombo->GetProjectBankList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_company_get(){
-		
+	function combo_company_get()
+	{
+
 		$data = $this->mcombo->GetCompanyList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_subcont_get(){
-		
+	function combo_subcont_get()
+	{
+
 		$data = $this->mcombo->GetSubContList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_vendor_get(){
-		
+	function combo_vendor_get()
+	{
+
 		$data = $this->mcombo->GetVendorList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_brand_get(){
-		
+	function combo_brand_get()
+	{
+
 		$data = $this->mcombo->GetBrandList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_asset_brand_get(){
-		
+	function combo_asset_brand_get()
+	{
+
 		$data = $this->mcombo->GetAssetBrandList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_asset_category_get(){
-		
+	function combo_asset_category_get()
+	{
+
 		$data = $this->mcombo->GetAssetCategoryList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_product_get(){
-		
+	function combo_product_get()
+	{
+
 		$data = $this->mcombo->GetProductList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_rack_get(){
-		
+	function combo_rack_get()
+	{
+
 		$data = $this->mcombo->GetRackList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_part_code_get(){
-		
+	function combo_part_code_get()
+	{
+
 		$data = $this->mcombo->GetPartCodeList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_toolkit_get(){
-		
+	function combo_toolkit_get()
+	{
+
 		$data = $this->mcombo->GetToolkitList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_golongan_get(){
-		
+	function combo_golongan_get()
+	{
+
 		$data = $this->mcombo->GetGolonganList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_position_get(){
-		
+	function combo_position_get()
+	{
+
 		$data = $this->mcombo->GetPositionList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_doc_type_get(){
-		
+	function combo_doc_type_get()
+	{
+
 		$data = $this->mcombo->GetDocumentTypeList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_employee_get(){
-		
+	function combo_employee_get()
+	{
+
 		$data = $this->mcombo->GetEmployeeList();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_contract_number_get(){
+	function combo_contract_number_get()
+	{
 		$CustomerID = $this->get("CustomerID");
-		
+
 		$data = $this->mcombo->GetContractNumber($CustomerID);
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_category_expenses_get(){
+	function combo_category_expenses_get()
+	{
 
 		$data = $this->mcombo->getCategoryExpenses();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_religion_get(){
+	function combo_religion_get()
+	{
 
 		$data = $this->mcombo->getReligion();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_family_status_get(){
+	function combo_family_status_get()
+	{
 
 		$data = $this->mcombo->getFamilyStatus();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_education_level_get(){
+	function combo_education_level_get()
+	{
 
 		$data = $this->mcombo->getEducationLevel();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_province_get(){
+	function combo_province_get()
+	{
 
 		$data = $this->mcombo->getProvince();
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_district_get(){
+	function combo_district_get()
+	{
 
 		$data = $this->mcombo->getDistrict($this->get("ProvinceID"));
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_subdistrict_get(){
+	function combo_subdistrict_get()
+	{
 
 		$data = $this->mcombo->getSubDistrict($this->get("DistrictID"));
 
-		
+
 		$this->response($data);
 	}
 
-	function combo_village_get(){
+	function combo_village_get()
+	{
 
 		$data = $this->mcombo->getVillage($this->get("SubDistrictID"));
 
-		
+
 		$this->response($data);
 	}
 }

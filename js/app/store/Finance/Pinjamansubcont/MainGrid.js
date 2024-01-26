@@ -7,7 +7,7 @@ Ext.define('MitraJaya.store.Finance.PinjamanSubCont.MainGrid', {
     extend: 'Ext.data.Store',
     id: 'MitraJaya.store.Finance.PinjamanSubCont.MainGrid',
     storeId: 'MitraJaya.store.Finance.PinjamanSubCont.MainGrid',
-    fields: ['LoanID','VendorNameDisplay','ProjectName','LoanAmount','LoanDate','TotalPayment','LoanRemaining','LoanType'],
+    fields: ['LoanID','VendorNameDisplay','DocNumber','ProjectName','LoanAmount','LoanDate','TotalPayment','LoanRemaining','LoanType','Status'],
     pageSize: 50,
     autoLoad: true,
     storeVar: false,
@@ -45,11 +45,13 @@ Ext.define('MitraJaya.store.Finance.PinjamanSubCont.MainGrid', {
                 store.proxy.extraParams.ProjectID = subcontloan_src.ProjectID;
                 store.proxy.extraParams.EmployeeID = subcontloan_src.EmployeeID;
                 store.proxy.extraParams.LoanType = subcontloan_src.LoanType;
+                store.proxy.extraParams.DocNumber = subcontloan_src.DocNumber;
             }else{
                 store.proxy.extraParams.VendorID = '';
                 store.proxy.extraParams.ProjectID = '';
                 store.proxy.extraParams.EmployeeID = '';
                 store.proxy.extraParams.LoanType = '';
+                store.proxy.extraParams.DocNumber = '';
             }
         }
     },
