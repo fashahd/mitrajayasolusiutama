@@ -61,7 +61,7 @@ class Mkas extends CI_Model {
 		LEFT JOIN
 			mj_order_book c on c.OrderBookID = b.ProjectID
 		LEFT JOIN
-			mj_project e on e.OrderBookID = c.OrderBookID
+			mj_project_new e on e.OrderBookID = c.OrderBookID
 		LEFT JOIN
 			mj_people d on d.people_id = b.EmployeeName
 		WHERE

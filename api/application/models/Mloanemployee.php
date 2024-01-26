@@ -120,7 +120,7 @@ class Mloanemployee extends CI_Model {
 		$this->db->where("a.StatusCode", "active");
 		$this->db->order_by($sortingField, $sortingDir);
 		$this->db->join("mj_customer b", " b.CustomerID = a.CustomerID", "left");
-		$this->db->join("mj_project c", " c.ProjectID = a.ProjectID", "left");
+		$this->db->join("mj_project_new c", " c.ProjectID = a.ProjectID", "left");
 		$this->db->select('SQL_CALC_FOUND_ROWS a.OrderBookID', false);
 		$this->db->select('
 			a.CustomerID,

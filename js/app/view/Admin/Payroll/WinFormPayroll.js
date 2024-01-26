@@ -286,6 +286,18 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21',
 												fieldLabel: lang('PPH 21 Gaji')
+											}, {
+												xtype: 'numericfield',
+												labelAlign: 'top',
+												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21_kompensasi',
+												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21_kompensasi',
+												fieldLabel: lang('PPH 21 Kompensasi')
+											}, {
+												xtype: 'numericfield',
+												labelAlign: 'top',
+												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21_thr',
+												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21_thr',
+												fieldLabel: lang('PPH 21 THR')
 											}]
 										}]
 									}]

@@ -361,6 +361,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 			}, {
 				text: lang('Incentive'),
 				dataIndex: 'incentive',
+				hidden:true,
 				flex: 1,
 				renderer: function (t, meta, record) {
 					let RetVal;
@@ -386,8 +387,10 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 				flex: 1,
 				renderer: function (t, meta, record) {
 					let RetVal;
+					let salary = record.data.salary;
+					let deduction = record.data.deduction;
 
-					RetVal = 'Rp ' + number_format(record.data.net_salary, 2);
+					RetVal = 'Rp ' + number_format(salary - deduction, 2);
 
 					return RetVal;
 				}

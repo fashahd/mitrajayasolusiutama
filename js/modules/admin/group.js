@@ -171,6 +171,20 @@ Ext.onReady(function () {
 		}
 	});
 
+	var mc_role = Ext.create('Ext.data.Store', {
+		extend: 'Ext.data.Model',
+		fields: ['id', 'label'],
+		autoLoad: true,
+		proxy: {
+			type: 'ajax',
+			url: m_api + '/v1/general/combo/combo_role',
+			reader: {
+				type: 'json',
+				root: 'data'
+			}
+		}
+	});
+
 	//var GroupForm = Ext.create('Ext.form.Panel', {
 	var GroupForm = Ext.widget('form', {
 		frame: false,
@@ -193,6 +207,22 @@ Ext.onReady(function () {
 			fieldLabel: 'Nama',
 			id: 'GroupName',
 			name: 'GroupName'
+		}, {
+			id: 'GroupRoleID',
+			name: 'GroupRoleID',
+			xtype: 'combobox',
+			width: 100,
+			allowBlank: true,
+			fieldLabel: lang('Role'),
+			store: mc_role,
+			readOnly: false,
+			displayField: 'label',
+			queryMode: 'local',
+			valueField: 'id',
+			listeners: {
+				change: function (cb, nv, ov) {
+				}
+			}
 		}, {
 			xtype: 'textareafield',
 			fieldLabel: 'Deskripsi',
@@ -911,6 +941,7 @@ Ext.onReady(function () {
 						Ext.getCmp('GroupId').setValue(sm.get('GroupId'));
 						Ext.getCmp('GroupName').setValue(r.GroupName);
 						Ext.getCmp('GroupDescription').setValue(r.GroupDescription);
+						Ext.getCmp('GroupRoleID').setValue(r.RoleID);
 						Ext.getCmp('GroupPartnerID').setValue(r.GroupPartnerID);
 						Ext.getCmp('GroupUnitId').setValue(r.GroupUnitId);
 						setTimeout(function () {
@@ -947,6 +978,7 @@ Ext.onReady(function () {
 						var r = Ext.decode(fp.responseText);
 						Ext.getCmp('GroupId').setValue(sm.get('GroupId'));
 						Ext.getCmp('GroupName').setValue(r.GroupName);
+						Ext.getCmp('GroupRoleID').setValue(r.RoleID);
 						Ext.getCmp('GroupDescription').setValue(r.GroupDescription);
 						Ext.getCmp('GroupPartnerID').setValue(r.GroupPartnerID);
 						Ext.getCmp('GroupUnitId').setValue(r.GroupUnitId);

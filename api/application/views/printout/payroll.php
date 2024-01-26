@@ -108,6 +108,16 @@ $net_salary = $PayrollData["salary"] - $PayrollData["total_deduction"];
 				<td>Rp <?= number_format($PayrollData["deduction_pph_21_insentif"], 2) ?></td>
 			</tr>
 			<tr>
+				<td>PPh 21 Kompensasi</td>
+				<td>:</td>
+				<td>Rp <?= number_format($PayrollData["deduction_pph_21_kompensasi"], 2) ?></td>
+			</tr>
+			<tr>
+				<td>PPh 21 THR</td>
+				<td>:</td>
+				<td>Rp <?= number_format($PayrollData["deduction_pph_21_thr"], 2) ?></td>
+			</tr>
+			<tr>
 				<td>Kasbon</td>
 				<td>:</td>
 				<td>Rp <?= number_format($PayrollData["deduction_kasbon"], 2) ?></td>

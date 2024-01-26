@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 /** @noinspection PhpIncludeInspection */
@@ -31,628 +31,622 @@ use Endroid\QrCode\ErrorCorrectionLevel;
  * @license         MIT
  * @link            https://github.com/chriskacerguis/codeigniter-restserver
  */
-class Project extends REST_Controller {
+class Project extends REST_Controller
+{
 
-    function __construct()
-    {
-        // Construct the parent class
-        parent::__construct();
-		
+	function __construct()
+	{
+		// Construct the parent class
+		parent::__construct();
+
 		$this->load->model("mproject");
-    }
+	}
 
-	function list_get(){
+	function list_get()
+	{
 		$pSearch["keySearch"] = $this->get("keySearch");
 		$pSearch["StartDate"] = $this->get("StartDate");
 		$pSearch["EndDate"] = $this->get("EndDate");
 		$pSearch["CustomerID"] = $this->get("CustomerID");
-		
+
 		//sort
-        $sorting = json_decode($this->get('sort'));
-        if (isset($sorting[0]->property)) {
-            $sortingField = $sorting[0]->property;
-        } else {
-            $sortingField = null;
-        }
+		$sorting = json_decode($this->get('sort'));
+		if (isset($sorting[0]->property)) {
+			$sortingField = $sorting[0]->property;
+		} else {
+			$sortingField = null;
+		}
 
-        if (isset($sorting[0]->direction)) {
-            $sortingDir = $sorting[0]->direction;
-        } else {
-            $sortingDir = null;
-        }
+		if (isset($sorting[0]->direction)) {
+			$sortingDir = $sorting[0]->direction;
+		} else {
+			$sortingDir = null;
+		}
 
-        $start = (int) $this->get('start');
-        $limit = (int) $this->get('limit');
+		$start = (int) $this->get('start');
+		$limit = (int) $this->get('limit');
 
-        // echo '<pre>'; print_r($pSearch); exit;
-        $data = $this->mproject->list_project($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
-        $this->response($data, 200);
+		// echo '<pre>'; print_r($pSearch); exit;
+		$data = $this->mproject->list_project($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
+		$this->response($data, 200);
 	}
 
-	function list_import_failed_get(){
+	function list_import_failed_get()
+	{
 		$pSearch["keySearch"] = $this->get("keySearch");
 		$pSearch["StartDate"] = $this->get("StartDate");
 		$pSearch["EndDate"] = $this->get("EndDate");
 		$pSearch["CustomerID"] = $this->get("CustomerID");
-		
-		//sort
-        $sorting = json_decode($this->get('sort'));
-        if (isset($sorting[0]->property)) {
-            $sortingField = $sorting[0]->property;
-        } else {
-            $sortingField = null;
-        }
-
-        if (isset($sorting[0]->direction)) {
-            $sortingDir = $sorting[0]->direction;
-        } else {
-            $sortingDir = null;
-        }
-
-        $start = (int) $this->get('start');
-        $limit = (int) $this->get('limit');
-
-        // echo '<pre>'; print_r($pSearch); exit;
-        $data = $this->mproject->list_import_failed($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
-        $this->response($data, 200);
-	}
-
-	function list_invoice_get(){
-		$OrderBookID = $this->get("OrderBookID");
 
 		//sort
-        $sorting = json_decode($this->get('sort'));
-        if (isset($sorting[0]->property)) {
-            $sortingField = $sorting[0]->property;
-        } else {
-            $sortingField = null;
-        }
+		$sorting = json_decode($this->get('sort'));
+		if (isset($sorting[0]->property)) {
+			$sortingField = $sorting[0]->property;
+		} else {
+			$sortingField = null;
+		}
 
-        if (isset($sorting[0]->direction)) {
-            $sortingDir = $sorting[0]->direction;
-        } else {
-            $sortingDir = null;
-        }
+		if (isset($sorting[0]->direction)) {
+			$sortingDir = $sorting[0]->direction;
+		} else {
+			$sortingDir = null;
+		}
 
-        $start = (int) $this->get('start');
-        $limit = (int) $this->get('limit');
+		$start = (int) $this->get('start');
+		$limit = (int) $this->get('limit');
 
-        $data = $this->mproject->list_invoice($OrderBookID, $start, $limit, 'limit', $sortingField, $sortingDir);
-        $this->response($data, 200);
+		// echo '<pre>'; print_r($pSearch); exit;
+		$data = $this->mproject->list_import_failed($pSearch, $start, $limit, 'limit', $sortingField, $sortingDir);
+		$this->response($data, 200);
 	}
 
-	function submit_order_post(){
-		
-        $varPost = $_POST;
-        $paramPost = array();
+	function list_invoice_get()
+	{
+		$ProjectID = $this->get("ProjectID");
+
+		//sort
+		$sorting = json_decode($this->get('sort'));
+		if (isset($sorting[0]->property)) {
+			$sortingField = $sorting[0]->property;
+		} else {
+			$sortingField = null;
+		}
+
+		if (isset($sorting[0]->direction)) {
+			$sortingDir = $sorting[0]->direction;
+		} else {
+			$sortingDir = null;
+		}
+
+		$start = (int) $this->get('start');
+		$limit = (int) $this->get('limit');
+
+		$data = $this->mproject->list_invoice($ProjectID, $start, $limit, 'limit', $sortingField, $sortingDir);
+		$this->response($data, 200);
+	}
+
+	function submit_project_post()
+	{
+
+		$varPost = $_POST;
+		$paramPost = array();
 
 		foreach ($varPost as $key => $value) {
-			$keyNew = str_replace("MitraJaya_view_Finance_OrderBook_MainForm-FormBasicData-", '', $key);
+			$keyNew = str_replace("MitraJaya_view_Project_MainForm-FormBasicData-", '', $key);
 			if ($value == "") {
 				$value = null;
 			}
 			$paramPost[$keyNew] = $value;
 		}
 
-
-		$cekExistCN = $this->mproject->CekEksisOrderBook("ContractNumber",$paramPost["ContractNumber"],$paramPost["OrderBookID"]);
-		$cekExistJO	= $this->mproject->CekEksisOrderBook("JONumber",$paramPost["JONumber"],$paramPost["OrderBookID"]);
-
-		if($cekExistCN["exist"] == 1){
-			$return["success"] = "false";
-			$return["message"] = "Contract Number Already Registered";
-            $this->response($return, 400);
-			return;
-		}
-
-		if($cekExistJO["exist"] == 1){
-			$return["success"] = "false";
-			$return["message"] = "JO Number Already Registered";
-            $this->response($return, 400);
-			return;
-		}
-
 		if ($varPost['OpsiDisplay'] == 'insert') {
 
-            $proses = $this->mproject->insert_order($paramPost);
-        } else {
+			$proses = $this->mproject->insert_project($paramPost);
+		} else {
 
-            $proses = $this->mproject->update_order($paramPost);
-        }
+			$proses = $this->mproject->update_project($paramPost);
+		}
 
 		if ($proses['success'] == true) {
-            $this->response($proses, 200);
-        } else {
-            $this->response($proses, 400);
-        }
+			$this->response($proses, 200);
+		} else {
+			$this->response($proses, 400);
+		}
 	}
 
-	function form_order_get(){
-		$OrderBookID = $this->get("OrderBookID");
+	function form_project_get()
+	{
+		$ProjectID = $this->get("ProjectID");
 
-        $data = $this->mproject->form_order_book($OrderBookID);
+		$data = $this->mproject->form_project($ProjectID);
 
-        $this->response($data, 200);
+		$this->response($data, 200);
 	}
 
-	function delete_order_delete(){
-		$OrderBookID 	= $this->delete("OrderBookID");
+	function delete_order_delete()
+	{
+		$ProjectID 	= $this->delete("ProjectID");
 		$ContractNumber	= $this->delete("ContractNumber");
 
 		$data["StatusCode"] 	= "nullified";
-		$data["ContractNumber"] = $ContractNumber."-deleted";
+		$data["ContractNumber"] = $ContractNumber . "-deleted";
 
-		$this->db->where("OrderBookID", $OrderBookID);
+		$this->db->where("ProjectID", $ProjectID);
 		$query = $this->db->update("mj_order_book", $data);
 
-		if($query){
+		if ($query) {
 			$response["success"] = true;
 			$response["message"] = "Deleted Success";
 			$this->response($response, 200);
-		}else{
+		} else {
 			$response["success"] = false;
 			$response["message"] = "Failed to Deleted Data";
 			$this->response($response, 400);
 		}
 	}
 
-	function export_order_post(){
-        ini_set('memory_limit', -1);
-        ini_set('max_execution_time', 0);
-		
+	function export_order_post()
+	{
+		ini_set('memory_limit', -1);
+		ini_set('max_execution_time', 0);
+
 		$pSearch["keySearch"] = $this->post("keySearch");
 		$pSearch["StartDate"] = $this->post("StartDate");
 		$pSearch["EndDate"] = $this->post("EndDate");
 		$pSearch["CustomerID"] = $this->post("CustomerID");
 		//sort
-        $sorting = json_decode($this->get('sort'));
-        if (isset($sorting[0]->property)) {
-            $sortingField = $sorting[0]->property;
-        } else {
-            $sortingField = null;
-        }
+		$sorting = json_decode($this->get('sort'));
+		if (isset($sorting[0]->property)) {
+			$sortingField = $sorting[0]->property;
+		} else {
+			$sortingField = null;
+		}
 
-        if (isset($sorting[0]->direction)) {
-            $sortingDir = $sorting[0]->direction;
-        } else {
-            $sortingDir = null;
-        }
-          
-		
-        $dataList       = $this->mproject->list_order_excel($pSearch, $sortingField, $sortingDir);
+		if (isset($sorting[0]->direction)) {
+			$sortingDir = $sorting[0]->direction;
+		} else {
+			$sortingDir = null;
+		}
 
-		if(count($dataList)){
 
-            //Kolom Header order book
-            $dataHeader = array('No');
-            foreach($dataList[0] as $key => $value){
-                array_push($dataHeader,$key);
-            }
-            //Kolom Header order book
+		$dataList       = $this->mproject->list_order_excel($pSearch, $sortingField, $sortingDir);
+
+		if (count($dataList)) {
+
+			//Kolom Header order book
+			$dataHeader = array('No');
+			foreach ($dataList[0] as $key => $value) {
+				array_push($dataHeader, $key);
+			}
+			//Kolom Header order book
 
 			//Kolom Body order book
-            $dataListExcel = array();
-            $no = 1;
-            foreach ($dataList as $key => $value) {
-                $data = array();
-                array_push($data,$no);
-                foreach($value as $keyx => $valuex){
-                    array_push($data,$valuex);
-                }
-                $dataListExcel[$key] = $data;
-                $no++;
-            }
-            //Kolom Body order book
+			$dataListExcel = array();
+			$no = 1;
+			foreach ($dataList as $key => $value) {
+				$data = array();
+				array_push($data, $no);
+				foreach ($value as $keyx => $valuex) {
+					array_push($data, $valuex);
+				}
+				$dataListExcel[$key] = $data;
+				$no++;
+			}
+			//Kolom Body order book
 
-            $writer = WriterEntityFactory::createXLSXWriter(); // for XLSX files// 
-            $namaFile = date('Y-m-d_H-i-s') . '_export_excel_order_book.xlsx';
-            $filePath = 'files/tmp/' . $namaFile;
-            $writer->openToFile($filePath);
+			$writer = WriterEntityFactory::createXLSXWriter(); // for XLSX files// 
+			$namaFile = date('Y-m-d_H-i-s') . '_export_excel_order_book.xlsx';
+			$filePath = 'files/tmp/' . $namaFile;
+			$writer->openToFile($filePath);
 
-            $defaultStyle = (new StyleBuilder())
-                ->setFontName('Arial')
-                ->setFontSize(11)
-                ->setShouldWrapText(false)
-                ->build();
-            $writer->setDefaultRowStyle($defaultStyle)
-                ->openToFile($filePath);
+			$defaultStyle = (new StyleBuilder())
+				->setFontName('Arial')
+				->setFontSize(11)
+				->setShouldWrapText(false)
+				->build();
+			$writer->setDefaultRowStyle($defaultStyle)
+				->openToFile($filePath);
 
-            $borderDefa = (new BorderBuilder())
-                ->setBorderBottom(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
-                ->setBorderTop(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
-                ->setBorderRight(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
-                ->setBorderLeft(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
-                ->build();
+			$borderDefa = (new BorderBuilder())
+				->setBorderBottom(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
+				->setBorderTop(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
+				->setBorderRight(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
+				->setBorderLeft(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
+				->build();
 
-            //style
-            $styleHeader = (new StyleBuilder())
-                ->setFontColor(Color::WHITE)
-                ->setBorder($borderDefa)
-                ->setBackgroundColor(Color::GREEN)
-                ->build();
+			//style
+			$styleHeader = (new StyleBuilder())
+				->setFontColor(Color::WHITE)
+				->setBorder($borderDefa)
+				->setBackgroundColor(Color::GREEN)
+				->build();
 
-            //row header
-            $rowHeader = WriterEntityFactory::createRowFromArray($dataHeader, $styleHeader);
-            $writer->addRow($rowHeader);
+			//row header
+			$rowHeader = WriterEntityFactory::createRowFromArray($dataHeader, $styleHeader);
+			$writer->addRow($rowHeader);
 
-            $styleData = (new StyleBuilder())
-                ->setBorder($borderDefa)
-                ->build();
+			$styleData = (new StyleBuilder())
+				->setBorder($borderDefa)
+				->build();
 
-            $styleFormatAngka = (new StyleBuilder())
-                ->setBorder($borderDefa)
-                ->setFormat('0')
-                ->build();
+			$styleFormatAngka = (new StyleBuilder())
+				->setBorder($borderDefa)
+				->setFormat('0')
+				->build();
 
-            $styleFormatTanggal = (new StyleBuilder())
-                ->setBorder($borderDefa)
-                ->setFormat('YYYY-mm-dd')
-                ->build();
+			$styleFormatTanggal = (new StyleBuilder())
+				->setBorder($borderDefa)
+				->setFormat('YYYY-mm-dd')
+				->build();
 
-            for ($i=0; $i < count($dataListExcel); $i++) {
-                $dataRows = $dataListExcel[$i];
-                $cells = array();
-    
-                for ($j=0; $j < count($dataRows); $j++) {
-                    $styleRow = null;
-                    $dataRow = null;
-    
-                    //cek apakah numeric
-                    if(is_numeric($dataRows[$j])){
-                        $styleRow = $styleFormatAngka;
-                        $dataRow = $dataRows[$j];
-                    } else {
-                        //cek apakah tanggal
-                        if($this->validateDate($dataRows[$j]) == true) {
-                            $styleRow = $styleFormatTanggal;
-                            $dataRow = $dataRows[$j];
-                        } else {
-                            $styleRow = $styleData;
-                            $dataRow = $dataRows[$j];
-                        }
-                    }
-    
-                    $cells[$j] = WriterEntityFactory::createCell($dataRow, $styleRow);
-                }
-                /*$cells = [
+			for ($i = 0; $i < count($dataListExcel); $i++) {
+				$dataRows = $dataListExcel[$i];
+				$cells = array();
+
+				for ($j = 0; $j < count($dataRows); $j++) {
+					$styleRow = null;
+					$dataRow = null;
+
+					//cek apakah numeric
+					if (is_numeric($dataRows[$j])) {
+						$styleRow = $styleFormatAngka;
+						$dataRow = $dataRows[$j];
+					} else {
+						//cek apakah tanggal
+						if ($this->validateDate($dataRows[$j]) == true) {
+							$styleRow = $styleFormatTanggal;
+							$dataRow = $dataRows[$j];
+						} else {
+							$styleRow = $styleData;
+							$dataRow = $dataRows[$j];
+						}
+					}
+
+					$cells[$j] = WriterEntityFactory::createCell($dataRow, $styleRow);
+				}
+				/*$cells = [
                     WriterEntityFactory::createCell($dataRows[0], $styleData),
                     WriterEntityFactory::createCell((float) $dataRows[1], $styleFormatAngka),
                     WriterEntityFactory::createCell($dataRows[2], $styleData),
                     WriterEntityFactory::createCell(25569 + (time() / 86400), $styleFormatTanggal),
                     WriterEntityFactory::createCell($dataRows[4], $styleFormatTanggal)
                 ];*/
-    
-                $rowData = WriterEntityFactory::createRow($cells);
-                $writer->addRow($rowData);
-            }
-    
-            $writer->close();
+
+				$rowData = WriterEntityFactory::createRow($cells);
+				$writer->addRow($rowData);
+			}
+
+			$writer->close();
 
 			$response["success"] = true;
 			$response["filenya"] = base_url() . $filePath;
-    
-            $this->response($response, 200);
-		}else{
+
+			$this->response($response, 200);
+		} else {
 			$response["success"] = true;
 			$response["filenya"] = '';
 
-            $this->response($response, 400);
-        }
+			$this->response($response, 400);
+		}
 	}
 
-    private function validateDate($date, $format = 'Y-m-d') {
-        $d = DateTime::createFromFormat($format, $date);
-        return $d && $d->format($format) === $date;
-    }
+	private function validateDate($date, $format = 'Y-m-d')
+	{
+		$d = DateTime::createFromFormat($format, $date);
+		return $d && $d->format($format) === $date;
+	}
 
 	// Import Order Book 
-    public function generate_template_post(){
+	public function generate_template_post()
+	{
 		$this->load->model("mcombo");
-        $data = $this->post();
-        try{
-            include APPPATH.'third_party/PHPExcel18/PHPExcel.php';        
-            $excel = new PHPExcel();
+		$data = $this->post();
+		try {
+			include APPPATH . 'third_party/PHPExcel18/PHPExcel.php';
+			$excel = new PHPExcel();
 
-            $excel->getProperties()->setCreator('PT. Mitrajaya Solusi Utama')
-                ->setLastModifiedBy('PT. Mitrajaya Solusi Utama')
-                ->setTitle("Order Book")
-                ->setSubject("Order Book")
-                ->setDescription("Order Book template")
-                ->setKeywords("Order Book");
-            
-            $styleFontBoldHeader = array(
-                'font' => array(
-                    'name' => 'Arial',
-                    'size' => '9',
-                    'bold' => true,
-                ),
-                'fill' => array(
-                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                    'color' => array('rgb' => '8DB4E3'),
-                ),
-            );
+			$excel->getProperties()->setCreator('PT. Mitrajaya Solusi Utama')
+				->setLastModifiedBy('PT. Mitrajaya Solusi Utama')
+				->setTitle("Order Book")
+				->setSubject("Order Book")
+				->setDescription("Order Book template")
+				->setKeywords("Order Book");
 
-            $styleBorderFull = array(
-                'borders' => array(
-                    'left' => array(
-                        'style' => PHPExcel_Style_Border::BORDER_THIN,
-                    ),
-                    'right' => array(
-                        'style' => PHPExcel_Style_Border::BORDER_THIN,
-                    ),
-                    'bottom' => array(
-                        'style' => PHPExcel_Style_Border::BORDER_THIN,
-                    ),
-                    'top' => array(
-                        'style' => PHPExcel_Style_Border::BORDER_THIN,
-                    ),
-                ),
-            );
+			$styleFontBoldHeader = array(
+				'font' => array(
+					'name' => 'Arial',
+					'size' => '9',
+					'bold' => true,
+				),
+				'fill' => array(
+					'type' => PHPExcel_Style_Fill::FILL_SOLID,
+					'color' => array('rgb' => '8DB4E3'),
+				),
+			);
 
-            /*
+			$styleBorderFull = array(
+				'borders' => array(
+					'left' => array(
+						'style' => PHPExcel_Style_Border::BORDER_THIN,
+					),
+					'right' => array(
+						'style' => PHPExcel_Style_Border::BORDER_THIN,
+					),
+					'bottom' => array(
+						'style' => PHPExcel_Style_Border::BORDER_THIN,
+					),
+					'top' => array(
+						'style' => PHPExcel_Style_Border::BORDER_THIN,
+					),
+				),
+			);
+
+			/*
              * farmer get data
             */
 
-            // set header 
-            // Sheet 1
-            $excel->getActiveSheet()->setTitle("Order Book Template");
-            $excel->getActiveSheet()->setCellValue('A1', 'TEMPLATE GENERATOR ORDER BOOK');
-            $excel->getActiveSheet()->setCellValue('A2', 'No');
-            $excel->getActiveSheet()->setCellValue('B2', 'PO Number');
-            $excel->getActiveSheet()->setCellValue('C2', 'Customer');
-            $excel->getActiveSheet()->setCellValue('D2', 'PO Date');
-            $excel->getActiveSheet()->setCellValue('E2', 'Description');
-            $excel->getActiveSheet()->setCellValue('F2', 'Project Name');
-            $excel->getActiveSheet()->setCellValue('G2', 'Dept');
-            $excel->getActiveSheet()->setCellValue('H2', 'PJ');
-            $excel->getActiveSheet()->setCellValue('I2', 'PO (Excld. PPN)');
-            $excel->getActiveSheet()->setCellValue('J2', 'PPN');
+			// set header 
+			// Sheet 1
+			$excel->getActiveSheet()->setTitle("Order Book Template");
+			$excel->getActiveSheet()->setCellValue('A1', 'TEMPLATE GENERATOR ORDER BOOK');
+			$excel->getActiveSheet()->setCellValue('A2', 'No');
+			$excel->getActiveSheet()->setCellValue('B2', 'PO Number');
+			$excel->getActiveSheet()->setCellValue('C2', 'Customer');
+			$excel->getActiveSheet()->setCellValue('D2', 'PO Date');
+			$excel->getActiveSheet()->setCellValue('E2', 'Description');
+			$excel->getActiveSheet()->setCellValue('F2', 'Project Name');
+			$excel->getActiveSheet()->setCellValue('G2', 'Dept');
+			$excel->getActiveSheet()->setCellValue('H2', 'PJ');
+			$excel->getActiveSheet()->setCellValue('I2', 'PO (Excld. PPN)');
+			$excel->getActiveSheet()->setCellValue('J2', 'PPN');
 
-            $excel->getActiveSheet()->setCellValue('A3', '1');
-            $excel->getActiveSheet()->setCellValue('B3', '071/FIDA/SPK/V/21');
-            $excel->getActiveSheet()->setCellValue('C3', 'PT Kone Indo Elevator');
+			$excel->getActiveSheet()->setCellValue('A3', '1');
+			$excel->getActiveSheet()->setCellValue('B3', '071/FIDA/SPK/V/21');
+			$excel->getActiveSheet()->setCellValue('C3', 'PT Kone Indo Elevator');
 
-            $excel->getActiveSheet()->setCellValue('D3', PHPExcel_Shared_Date::PHPToExcel('2022-01-01'));
-            $excel->getActiveSheet()->getStyle('D3:D2000')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD2);
-            $excel->getActiveSheet()->setCellValue('E3', 'Description');
-            $excel->getActiveSheet()->setCellValue('F3', 'Project Name');
-            $excel->getActiveSheet()->setCellValue('G3', 'Stand By');
-            $excel->getActiveSheet()->setCellValue('H3', 'Agus');
-            $excel->getActiveSheet()->setCellValue('I3', '50000000');
-            $excel->getActiveSheet()->setCellValue('J3', '11');
+			$excel->getActiveSheet()->setCellValue('D3', PHPExcel_Shared_Date::PHPToExcel('2022-01-01'));
+			$excel->getActiveSheet()->getStyle('D3:D2000')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD2);
+			$excel->getActiveSheet()->setCellValue('E3', 'Description');
+			$excel->getActiveSheet()->setCellValue('F3', 'Project Name');
+			$excel->getActiveSheet()->setCellValue('G3', 'Stand By');
+			$excel->getActiveSheet()->setCellValue('H3', 'Agus');
+			$excel->getActiveSheet()->setCellValue('I3', '50000000');
+			$excel->getActiveSheet()->setCellValue('J3', '11');
 
-            $columnSet = 'A2:J2';
-            $excel->getActiveSheet()->mergeCells('A1:C1');
-            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
-            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);
-            // End Sheet 1
+			$columnSet = 'A2:J2';
+			$excel->getActiveSheet()->mergeCells('A1:C1');
+			$excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+			$excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);
+			// End Sheet 1
 
 			$objValidation = $excel->getActiveSheet()->getDataValidation('C3:C2000');
-            $objValidation->setType( PHPExcel_Cell_DataValidation::TYPE_LIST );
-            $objValidation->setErrorStyle( PHPExcel_Cell_DataValidation::STYLE_INFORMATION );
-            $objValidation->setAllowBlank(false);
-            $objValidation->setShowInputMessage(true);
-            $objValidation->setShowErrorMessage(true);
-            $objValidation->setShowDropDown(true);
-            $objValidation->setErrorTitle('Input error');
-            $objValidation->setError('Value is not in list.');
-            $objValidation->setPromptTitle('Pick from list');
-            $objValidation->setPrompt('Please pick a value from the drop-down list.');
-            $objValidation->setFormula1("=customer");
+			$objValidation->setType(PHPExcel_Cell_DataValidation::TYPE_LIST);
+			$objValidation->setErrorStyle(PHPExcel_Cell_DataValidation::STYLE_INFORMATION);
+			$objValidation->setAllowBlank(false);
+			$objValidation->setShowInputMessage(true);
+			$objValidation->setShowErrorMessage(true);
+			$objValidation->setShowDropDown(true);
+			$objValidation->setErrorTitle('Input error');
+			$objValidation->setError('Value is not in list.');
+			$objValidation->setPromptTitle('Pick from list');
+			$objValidation->setPrompt('Please pick a value from the drop-down list.');
+			$objValidation->setFormula1("=customer");
 
 			$objValidation = $excel->getActiveSheet()->getDataValidation('G3:G2000');
-            $objValidation->setType( PHPExcel_Cell_DataValidation::TYPE_LIST );
-            $objValidation->setErrorStyle( PHPExcel_Cell_DataValidation::STYLE_INFORMATION );
-            $objValidation->setAllowBlank(false);
-            $objValidation->setShowInputMessage(true);
-            $objValidation->setShowErrorMessage(true);
-            $objValidation->setShowDropDown(true);
-            $objValidation->setErrorTitle('Input error');
-            $objValidation->setError('Value is not in list.');
-            $objValidation->setPromptTitle('Pick from list');
-            $objValidation->setPrompt('Please pick a value from the drop-down list.');
-            $objValidation->setFormula1("=dept");
+			$objValidation->setType(PHPExcel_Cell_DataValidation::TYPE_LIST);
+			$objValidation->setErrorStyle(PHPExcel_Cell_DataValidation::STYLE_INFORMATION);
+			$objValidation->setAllowBlank(false);
+			$objValidation->setShowInputMessage(true);
+			$objValidation->setShowErrorMessage(true);
+			$objValidation->setShowDropDown(true);
+			$objValidation->setErrorTitle('Input error');
+			$objValidation->setError('Value is not in list.');
+			$objValidation->setPromptTitle('Pick from list');
+			$objValidation->setPrompt('Please pick a value from the drop-down list.');
+			$objValidation->setFormula1("=dept");
 
 			$objValidation = $excel->getActiveSheet()->getDataValidation('H3:H2000');
-            $objValidation->setType( PHPExcel_Cell_DataValidation::TYPE_LIST );
-            $objValidation->setErrorStyle( PHPExcel_Cell_DataValidation::STYLE_INFORMATION );
-            $objValidation->setAllowBlank(false);
-            $objValidation->setShowInputMessage(true);
-            $objValidation->setShowErrorMessage(true);
-            $objValidation->setShowDropDown(true);
-            $objValidation->setErrorTitle('Input error');
-            $objValidation->setError('Value is not in list.');
-            $objValidation->setPromptTitle('Pick from list');
-            $objValidation->setPrompt('Please pick a value from the drop-down list.');
-            $objValidation->setFormula1("=employee");
+			$objValidation->setType(PHPExcel_Cell_DataValidation::TYPE_LIST);
+			$objValidation->setErrorStyle(PHPExcel_Cell_DataValidation::STYLE_INFORMATION);
+			$objValidation->setAllowBlank(false);
+			$objValidation->setShowInputMessage(true);
+			$objValidation->setShowErrorMessage(true);
+			$objValidation->setShowDropDown(true);
+			$objValidation->setErrorTitle('Input error');
+			$objValidation->setError('Value is not in list.');
+			$objValidation->setPromptTitle('Pick from list');
+			$objValidation->setPrompt('Please pick a value from the drop-down list.');
+			$objValidation->setFormula1("=employee");
 
 			// Sheet 2
-            // Reference Customer
-            $excel->createSheet(1)->setTitle("Customer Reference");
-            $excel->setActiveSheetIndex(1);
-            $excel->getActiveSheet()->setCellValue('A1', 'REFERENCE CUSTOMER');
-            $excel->getActiveSheet()->setCellValue('A2', 'No');
-            $excel->getActiveSheet()->setCellValue('B2', 'Customer');
+			// Reference Customer
+			$excel->createSheet(1)->setTitle("Customer Reference");
+			$excel->setActiveSheetIndex(1);
+			$excel->getActiveSheet()->setCellValue('A1', 'REFERENCE CUSTOMER');
+			$excel->getActiveSheet()->setCellValue('A2', 'No');
+			$excel->getActiveSheet()->setCellValue('B2', 'Customer');
 
-            $customer = $this->mcombo->GetCompanyList();
+			$customer = $this->mcombo->GetCompanyList();
 
-            $number = 1;
-            $idx = 3;
-            foreach($customer AS $data_customer){
-                $excel->getActiveSheet()->setCellValue('A'.$idx, $number);
-                $excel->getActiveSheet()->setCellValue('B'.$idx, $data_customer['label']);
-                $excel->getActiveSheet()->getStyle('A'.$idx.':C'.$idx)->applyFromArray($styleBorderFull, false);  
+			$number = 1;
+			$idx = 3;
+			foreach ($customer as $data_customer) {
+				$excel->getActiveSheet()->setCellValue('A' . $idx, $number);
+				$excel->getActiveSheet()->setCellValue('B' . $idx, $data_customer['label']);
+				$excel->getActiveSheet()->getStyle('A' . $idx . ':C' . $idx)->applyFromArray($styleBorderFull, false);
 
-                $excel->addNamedRange( 
-                    new PHPExcel_NamedRange(
-                        'customer', 
-                        $excel->getSheetByName('Customer Reference'), 
-                        'B3:B2500'
-                    ) 
-                );
+				$excel->addNamedRange(
+					new PHPExcel_NamedRange(
+						'customer',
+						$excel->getSheetByName('Customer Reference'),
+						'B3:B2500'
+					)
+				);
 
-                $idx++;
-                $number++;
-            }
+				$idx++;
+				$number++;
+			}
 
-            $columnSet = 'A2:C2';
-            $excel->getActiveSheet()->mergeCells('A1:C1');
-            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
-            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
-            // End Sheet 2
+			$columnSet = 'A2:C2';
+			$excel->getActiveSheet()->mergeCells('A1:C1');
+			$excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+			$excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);
+			// End Sheet 2
 
 			// Sheet 3
-            // Reference Dept
-            $excel->createSheet(1)->setTitle("Dept Reference");
-            $excel->setActiveSheetIndex(1);
-            $excel->getActiveSheet()->setCellValue('A1', 'REFERENCE DEPT');
-            $excel->getActiveSheet()->setCellValue('A2', 'No');
-            $excel->getActiveSheet()->setCellValue('B2', 'Dept');
+			// Reference Dept
+			$excel->createSheet(1)->setTitle("Dept Reference");
+			$excel->setActiveSheetIndex(1);
+			$excel->getActiveSheet()->setCellValue('A1', 'REFERENCE DEPT');
+			$excel->getActiveSheet()->setCellValue('A2', 'No');
+			$excel->getActiveSheet()->setCellValue('B2', 'Dept');
 
-            $dept = $this->mcombo->GetDepartmentList();
+			$dept = $this->mcombo->GetDepartmentList();
 
-            $number = 1;
-            $idx = 3;
-            foreach($dept AS $data_dept){
-                $excel->getActiveSheet()->setCellValue('A'.$idx, $number);
-                $excel->getActiveSheet()->setCellValue('B'.$idx, $data_dept['label']);
-                $excel->getActiveSheet()->getStyle('A'.$idx.':C'.$idx)->applyFromArray($styleBorderFull, false);  
+			$number = 1;
+			$idx = 3;
+			foreach ($dept as $data_dept) {
+				$excel->getActiveSheet()->setCellValue('A' . $idx, $number);
+				$excel->getActiveSheet()->setCellValue('B' . $idx, $data_dept['label']);
+				$excel->getActiveSheet()->getStyle('A' . $idx . ':C' . $idx)->applyFromArray($styleBorderFull, false);
 
-                $excel->addNamedRange( 
-                    new PHPExcel_NamedRange(
-                        'dept', 
-                        $excel->getSheetByName('Dept Reference'), 
-                        'B3:B2500'
-                    ) 
-                );
+				$excel->addNamedRange(
+					new PHPExcel_NamedRange(
+						'dept',
+						$excel->getSheetByName('Dept Reference'),
+						'B3:B2500'
+					)
+				);
 
-                $idx++;
-                $number++;
-            }
+				$idx++;
+				$number++;
+			}
 
-            $columnSet = 'A2:C2';
-            $excel->getActiveSheet()->mergeCells('A1:C1');
-            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
-            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
-            // End Sheet 3
+			$columnSet = 'A2:C2';
+			$excel->getActiveSheet()->mergeCells('A1:C1');
+			$excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+			$excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);
+			// End Sheet 3
 
 			// Sheet 4
-            // Reference Employee
-            $excel->createSheet(1)->setTitle("Employee Reference");
-            $excel->setActiveSheetIndex(1);
-            $excel->getActiveSheet()->setCellValue('A1', 'REFERENCE EMPLOYEE');
-            $excel->getActiveSheet()->setCellValue('A2', 'No');
-            $excel->getActiveSheet()->setCellValue('B2', 'Employee');
+			// Reference Employee
+			$excel->createSheet(1)->setTitle("Employee Reference");
+			$excel->setActiveSheetIndex(1);
+			$excel->getActiveSheet()->setCellValue('A1', 'REFERENCE EMPLOYEE');
+			$excel->getActiveSheet()->setCellValue('A2', 'No');
+			$excel->getActiveSheet()->setCellValue('B2', 'Employee');
 
-            $employee = $this->mcombo->GetEmployeeList();
+			$employee = $this->mcombo->GetEmployeeList();
 
-            $number = 1;
-            $idx = 3;
-            foreach($employee AS $data_employee){
-                $excel->getActiveSheet()->setCellValue('A'.$idx, $number);
-                $excel->getActiveSheet()->setCellValue('B'.$idx, $data_employee['people_name']);
-                $excel->getActiveSheet()->getStyle('A'.$idx.':C'.$idx)->applyFromArray($styleBorderFull, false);  
+			$number = 1;
+			$idx = 3;
+			foreach ($employee as $data_employee) {
+				$excel->getActiveSheet()->setCellValue('A' . $idx, $number);
+				$excel->getActiveSheet()->setCellValue('B' . $idx, $data_employee['people_name']);
+				$excel->getActiveSheet()->getStyle('A' . $idx . ':C' . $idx)->applyFromArray($styleBorderFull, false);
 
-                $excel->addNamedRange( 
-                    new PHPExcel_NamedRange(
-                        'employee', 
-                        $excel->getSheetByName('Employee Reference'), 
-                        'B3:B2500'
-                    ) 
-                );
+				$excel->addNamedRange(
+					new PHPExcel_NamedRange(
+						'employee',
+						$excel->getSheetByName('Employee Reference'),
+						'B3:B2500'
+					)
+				);
 
-                $idx++;
-                $number++;
-            }
+				$idx++;
+				$number++;
+			}
 
-            $columnSet = 'A2:C2';
-            $excel->getActiveSheet()->mergeCells('A1:C1');
-            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
-            $excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);  
-            // End Sheet 4
+			$columnSet = 'A2:C2';
+			$excel->getActiveSheet()->mergeCells('A1:C1');
+			$excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleFontBoldHeader);
+			$excel->getActiveSheet()->getStyle($columnSet)->applyFromArray($styleBorderFull, false);
+			// End Sheet 4
 
-            $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
-            $namaFile = 'template_order_book.xlsx';
-            $objWriter->save('files/tmp/'.$namaFile);
-            $this->response(array('success' => true, 'url' => 'files/tmp/'.$namaFile), 200);
-        }catch(Exception $exc) {
-            $this->response(array('success' => false, 'message' => $exc), 400);
-        }
-    }
+			$objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+			$namaFile = 'template_order_book.xlsx';
+			$objWriter->save('files/tmp/' . $namaFile);
+			$this->response(array('success' => true, 'url' => 'files/tmp/' . $namaFile), 200);
+		} catch (Exception $exc) {
+			$this->response(array('success' => false, 'message' => $exc), 400);
+		}
+	}
 
-    public function download_template_get(){
-        $filenya =  $this->get('url');
-        $namaFile =  $this->get('namaFile');
+	public function download_template_get()
+	{
+		$filenya =  $this->get('url');
+		$namaFile =  $this->get('namaFile');
 
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="'.$namaFile);
-        header('Cache-Control: max-age=0');
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="' . $namaFile);
+		header('Cache-Control: max-age=0');
 
-        readfile($filenya);
-        exit;
-    }
+		readfile($filenya);
+		exit;
+	}
 
-	public function import_order_post(){
+	public function import_order_post()
+	{
 		$this->load->helper('string');
 
-        // buat folder jika blm ada
-        if (!is_dir('files/tmp/import'))
-            mkdir('files/tmp/import', 0777, TRUE);
-        
-        $config['upload_path']      = './files/tmp/import';
-        $config['allowed_types']    = 'xlsx|xls';
-        $config['file_name']        = 'import-' . random_string('alnum', 12) . time();
+		// buat folder jika blm ada
+		if (!is_dir('files/tmp/import'))
+			mkdir('files/tmp/import', 0777, TRUE);
 
-        $this->load->library('upload', $config);
+		$config['upload_path']      = './files/tmp/import';
+		$config['allowed_types']    = 'xlsx|xls';
+		$config['file_name']        = 'import-' . random_string('alnum', 12) . time();
+
+		$this->load->library('upload', $config);
 
 		if ($this->upload->do_upload('order_ImportFile')) {
-            $file   = $this->upload->data();
-            $reader = ReaderEntityFactory::createXLSXReader();
-            $reader->open($_FILES['order_ImportFile']['tmp_name']);
+			$file   = $this->upload->data();
+			$reader = ReaderEntityFactory::createXLSXReader();
+			$reader->open($_FILES['order_ImportFile']['tmp_name']);
 
-            // untuk validasi        
-            foreach ($reader->getSheetIterator() as $sheet) {
-                $numRow = 1;
+			// untuk validasi        
+			foreach ($reader->getSheetIterator() as $sheet) {
+				$numRow = 1;
 				$success = 0;
 				$err	 = 0;
 				$dataError = array();
 
-                //looping pembacaan row dalam sheet
-                foreach ($sheet->getRowIterator() as $row) {
+				//looping pembacaan row dalam sheet
+				foreach ($sheet->getRowIterator() as $row) {
 
-                    if ($numRow >= 4) {
+					if ($numRow >= 4) {
 						$StatusData = true;
 						$Error		= array();
 
-                        //ambil cell
-                        $cells = $row->getCells();
+						//ambil cell
+						$cells = $row->getCells();
 
 						$ContractNumber = $this->mproject->CheckExistContractNumber($cells[1]->getValue());
 
-						if($ContractNumber){
+						if ($ContractNumber) {
 							$StatusData = false;
-							
+
 							array_push($Error, "Contract Number Already Exist");
 						}
 
 						$CustomerID = $this->mproject->getCustomerID($cells[2]->getValue());
-						if(!$CustomerID){
+						if (!$CustomerID) {
 							$StatusData = false;
-							
+
 							array_push($Error, "Customer Not Found");
 						}
 
 						$DeptID = $this->mproject->getDeptID($cells[6]->getValue());
-						if(!$DeptID){
+						if (!$DeptID) {
 							$StatusData = false;
-							
+
 							array_push($Error, "Department Not Found");
 						}
 
 						$PeopleID = $this->mproject->getPeopleID($cells[7]->getValue());
-						if(!$PeopleID){
+						if (!$PeopleID) {
 							$StatusData = false;
-							
+
 							array_push($Error, "Employee Not Found");
 						}
 
@@ -669,46 +663,47 @@ class Project extends REST_Controller {
 						$data['ContractAmountPPN']	= $ContractPPN;
 						$data['TotalContactAmount']	= $cells[8]->getValue() + $ContractPPN;
 
-                        if (!$StatusData) {
-							
+						if (!$StatusData) {
+
 							$dataError[$err] = $data;
 							$dataError[$err]["ErrorMessages"] = implode(", ", $Error);
 							$err++;
-                        }
+						}
 
-						if($StatusData){
+						if ($StatusData) {
 							$this->db->insert("mj_order_book", $data);
 							$success++;
 						}
-                    }
+					}
 
-                    $numRow++;
-                }
-				
-				if(count($dataError) > 0){
+					$numRow++;
+				}
+
+				if (count($dataError) > 0) {
 					$this->db->truncate("mj_order_book_tmp");
 					$this->db->insert_batch("mj_order_book_tmp", $dataError);
 				}
-                break;
-            }
-            //tutup spout reader
-            $reader->close();
+				break;
+			}
+			//tutup spout reader
+			$reader->close();
 
-            $this->response(array(
-                'success' => true,
-                'message' => array("Success"=> $success, "Failed"=> $err),
-            ), 200);
-        } else {
-            $error = array('error' => $this->upload->display_errors());
-            $this->response(array(
-                'success' => false,
-                'message' => 'Bad request',
-                'error' => $error
-            ), 400);
-        }
+			$this->response(array(
+				'success' => true,
+				'message' => array("Success" => $success, "Failed" => $err),
+			), 200);
+		} else {
+			$error = array('error' => $this->upload->display_errors());
+			$this->response(array(
+				'success' => false,
+				'message' => 'Bad request',
+				'error' => $error
+			), 400);
+		}
 	}
 
-	public function clear_data_get(){
+	public function clear_data_get()
+	{
 		$this->db->truncate("mj_order_book_tmp");
 
 		$this->response(array(
@@ -716,21 +711,21 @@ class Project extends REST_Controller {
 		));
 	}
 
-    private function _importValid($data){
-        // supplier name
-        if ($data[3]->getValue() == ''){
-            return false;
-        }
-        // gender
-        if ($data[2]->getValue() == ''){
-            return false;
-        }
-        // Birthdate
-        if ($data[5]->getValue() == ''){
-            return false;
-        }
+	private function _importValid($data)
+	{
+		// supplier name
+		if ($data[3]->getValue() == '') {
+			return false;
+		}
+		// gender
+		if ($data[2]->getValue() == '') {
+			return false;
+		}
+		// Birthdate
+		if ($data[5]->getValue() == '') {
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 }
-?>

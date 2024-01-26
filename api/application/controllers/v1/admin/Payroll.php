@@ -254,6 +254,8 @@ class Payroll extends REST_Controller
 		$paramPost["deduction_kasbon"] = ($paramPost["deduction_kasbon"] != '') ? str_replace(",", "", $paramPost["deduction_kasbon"]) : '0';
 		$paramPost["deduction_pph_21_insentif"] = ($paramPost["deduction_pph_21_insentif"] != '') ? str_replace(",", "", $paramPost["deduction_pph_21_insentif"]) : '0';
 		$paramPost["deduction_pph_21"] = ($paramPost["deduction_pph_21"] != '') ? str_replace(",", "", $paramPost["deduction_pph_21"]) : '0';
+		$paramPost["deduction_pph_21_kompensasi"] = ($paramPost["deduction_pph_21_kompensasi"] != '') ? str_replace(",", "", $paramPost["deduction_pph_21_kompensasi"]) : '0';
+		$paramPost["deduction_pph_21_thr"] = ($paramPost["deduction_pph_21_thr"] != '') ? str_replace(",", "", $paramPost["deduction_pph_21_thr"]) : '0';
 
 		$query = $this->db->query("SELECT * FROM mj_payroll WHERE people_id = ? AND month = ? AND year = ?", [$paramPost['people_id'], $paramPost['month'], $paramPost['year']]);
 		if ($query->num_rows() > 0) {
