@@ -8,8 +8,8 @@ class Memployee extends CI_Model {
 
 	public function list_employee($pSearch, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir){
 
-        if ($sortingField == "") $sortingField = 'people_id';
-        if ($sortingDir == "") $sortingDir = 'DESC';
+        if ($sortingField == "") $sortingField = 'people_name';
+        if ($sortingDir == "") $sortingDir = 'ASC';
 
 		($pSearch["keySearch"] != '') ? $this->db->like("people_name", $pSearch["keySearch"]): "";
 
