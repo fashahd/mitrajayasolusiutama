@@ -604,6 +604,7 @@ class Memployee extends CI_Model {
 		$post["people_id"] = $people_id;
 		$post["CreatedDate"] = date("Y-m-d H:i:s");
 		$post["CreatedBy"] = $_SESSION["user_id"];
+		$post["partner_id"] = $_SESSION["partner_id"];
 		
 		
 		$insert = $this->db->insert("mj_people", $post);
