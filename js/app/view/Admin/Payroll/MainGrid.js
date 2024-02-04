@@ -321,6 +321,71 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 					}
 				}, {
 					xtype: 'button',
+					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
+					text: lang('Share to All'),
+					cls: 'Sfr_BtnGridNewWhite',
+					overCls: 'Sfr_BtnGridNewWhite-Hover',
+					style: 'margin-top:25px',
+					id: 'MitraJaya.view.Finance.OrderBook.MainGrid-BtnExportAll',
+					handler: function () {
+						let sm = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Grid').getSelectionModel().getSelection()[0];
+						let month = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Month').getValue();
+						let year = Ext.getCmp('MitraJaya.view.Admin.Payroll.MainGrid-Year').getValue();
+
+						Swal.fire({
+							text: "Share payroll to all employees ?",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Yes, Share it!'
+						}).then((result) => {
+							if (result.isConfirmed) {
+								Ext.MessageBox.show({
+									msg: 'Please wait...',
+									progressText: 'Loading...',
+									width: 300,
+									wait: true,
+									waitConfig: {
+										interval: 200
+									},
+									icon: 'ext-mb-info', //custom class in msg-box.html
+									animateTarget: 'mb9'
+								});
+
+								Ext.Ajax.request({
+									url: m_api + '/v1/admin/payroll/share_payroll_all',
+									method: 'GET',
+									waitMsg: lang('Please Wait'),
+									params: {
+										month: month,
+										year: year
+									},
+									success: function (data) {
+										let response = JSON.parse(data.responseText);
+										Ext.MessageBox.hide();
+
+										Swal.fire({
+											icon: response.desc,
+											text: response.message,
+											// footer: '<a href="">Why do I have this issue?</a>'
+										})
+									},
+									failure: function (err) {
+										let response = JSON.parse(err.responseText);
+										Ext.MessageBox.hide();
+										Swal.fire({
+											icon: response.desc,
+											text: response.message,
+											// footer: '<a href="">Why do I have this issue?</a>'
+										})
+									}
+								});
+							}
+						});
+					}
+				}, {
+					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/recycle.svg',
 					cls: 'Sfr_BtnGridBlue',
 					overCls: 'Sfr_BtnGridBlue-Hover',
