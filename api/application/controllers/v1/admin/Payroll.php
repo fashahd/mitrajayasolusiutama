@@ -670,6 +670,55 @@ class Payroll extends REST_Controller
 		$people_id 	= $_GET["people_id"];
 		$month 		= $_GET["month"];
 		$year 		= $_GET["year"];
+		
+		$sendPayroll = $this->sendPayroll($people_id, $month, $year);
+
+		if ($sendPayroll["success"]) {
+			$this->response($sendPayroll, 200);
+			return;
+		} else {
+			$this->response($sendPayroll, 400);
+			return;
+		}
+	}	
+
+	public function share_payroll_all_get()
+	{
+		$pSearch["Month"] = $_GET["month"];
+		$pSearch["Year"] = $_GET["year"];
+
+		$data = $this->mpayroll->list_employee($pSearch);
+
+		if(count($data["data"]) > 0){
+			$sukses = 0;
+			$failed = 0;
+
+			foreach($data["data"] as $row){
+				$sendPayroll = $this->sendPayroll($row["people_id"],$pSearch["Month"], $pSearch["Year"]);
+
+				$statusSend = isset($sendPayroll["success"]) ? $sendPayroll["success"] : NULL;
+
+				if($statusSend){
+					$sukses++;
+				}else{
+					$failed++;
+				}
+			}
+			$response["success"] = true;
+			$response["desc"] = "success";
+			$response["message"] = "Sending -> Success : $sukses | Failed : $failed";
+		
+			$this->response($response, 200);
+		}else{
+			$response["success"] = false;
+			$response["desc"] = "error";
+			$response["message"] = "No Employees Found";
+		
+			$this->response($response, 400);
+		}
+	}
+
+	function sendPayroll($people_id, $month, $year){
 
 		$period	= date("F", strtotime($year . "-" . $month . "-01")) . " " . $year;
 		$payroll = $this->mpayroll->form_payroll($month, $year, $people_id);
@@ -746,15 +795,13 @@ class Payroll extends REST_Controller
 			$response["success"] = true;
 			$response["desc"] = "success";
 			$response["message"] = "Email Terkirim";
-			$this->response($response, 200);
-			return;
 		} else {
-			$response["success"] = true;
+			$response["success"] = false;
 			$response["desc"] = "error";
 			$response["message"] = "Email Gagal Terkirim";
 			$response["error"] = $this->email->print_debugger();
-			$this->response($response, 400);
-			return;
 		}
+
+		return $response;
 	}
 }

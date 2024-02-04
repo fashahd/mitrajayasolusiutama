@@ -163,7 +163,7 @@ class Mpayroll extends CI_Model
 		return $data;
 	}
 
-	public function list_employee($pSearch, $start, $limit, $opsiLimit = 'limit', $sortingField, $sortingDir)
+	public function list_employee($pSearch, $start = 0, $limit = 0, $opsiLimit = 'limit', $sortingField = '', $sortingDir = 'ASC')
 	{
 
 		$Year = ($pSearch["Year"] != '') ? $pSearch["Year"] : date("Y");
