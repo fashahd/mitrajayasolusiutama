@@ -524,7 +524,7 @@ class Payroll extends REST_Controller
 		$PayrollData = $paramPost;
 		$history = "";
 		$total_history = 0;
-		$net_salary = $PayrollData["salary"] - $PayrollData["total_deduction"];
+		$net_salary = $PayrollData["salary"] + $PayrollData["total_insentif"] - $PayrollData["total_deduction"];
 
 		$html = '<style type="text/css">
 			.gm-style-cc:last-child {
@@ -586,9 +586,23 @@ class Payroll extends REST_Controller
 						<td>Rp ' . number_format($PayrollData["salary"], 2) . '</td>
 					</tr>
 				</table>
+				<table width="65%" border="0" cellpadding="2" style="border:none;margin-top:40px;font-weight:600;font-size:9pt">
+					<tr>
+						<td>
+							<h3>Insentif (B)</h3>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>THR</td>
+						<td>:</td>
+						<td>Rp '.number_format($PayrollData["insentif_thr"], 2).'</td>
+					</tr>
+				</table>
 				<table width="60%" border="0" cellpadding="4" style="border:none;margin-top:40px;font-weight:800;font-size:10pt">
 					<tr>
-						<td>Potongan (B)</td>
+						<td>Potongan (C)</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -628,16 +642,21 @@ class Payroll extends REST_Controller
 						<td>Rp ' . number_format($PayrollData["deduction_kasbon"], 2) . '</td>
 					</tr>
 				</table>
-				<table width="60%" border="0" cellpadding="4" style="border:none;margin-top:40px;font-weight:800;font-size:10pt">
+				<table width="100%" border="0" cellpadding="2" style="border:none;margin-top:40px;font-weight:600;font-size:9pt">
 					<tr>
 						<td style="width: 30%">Total (A)</td>
 						<td>:</td>
-						<td>Rp ' . number_format($PayrollData["salary"], 2) . '</td>
+						<td>Rp '.number_format($PayrollData["salary"], 2).'</td>
 					</tr>
 					<tr>
-						<td>Total (B)</td>
+						<td style="width: 30%">Total (B)</td>
 						<td>:</td>
-						<td>Rp ' . number_format($PayrollData["total_deduction"], 2) . '</td>
+						<td>Rp '.number_format($PayrollData["total_insentif"], 2).'</td>
+					</tr>
+					<tr>
+						<td>Total (C)</td>
+						<td>:</td>
+						<td>Rp '.number_format($PayrollData["total_deduction"], 2).'</td>
 					</tr>
 				</table>
 				<table width="95%" border="1" cellpadding="4" style="border:1px solid #000;margin-top:40px;font-weight:800;font-size:10pt;background:#b7d0e5">
