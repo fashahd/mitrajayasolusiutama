@@ -10,7 +10,7 @@ $baseurlnya = base_url();
 // echo "<pre>";print_r($PayrollData);die;
 $history = "";
 $total_history = 0;
-$net_salary = $PayrollData["salary"] - $PayrollData["total_deduction"];
+$net_salary = $PayrollData["salary"] + $PayrollData["total_insentif"] - $PayrollData["total_deduction"];
 ?>
 
 <style type="text/css">
@@ -79,10 +79,24 @@ $net_salary = $PayrollData["salary"] - $PayrollData["total_deduction"];
 				</td>
 			</tr>
 		</table>
+		<table width="65%" border="0" cellpadding="2" style="border:none;margin-top:40px;font-weight:600;font-size:9pt">
+			<tr>
+				<td>
+					<h3>Insentif (B)</h3>
+				</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>THR</td>
+				<td>:</td>
+				<td>Rp <?= number_format($PayrollData["insentif_thr"], 2) ?></td>
+			</tr>
+		</table>
 		<table width="100%" border="0" cellpadding="2" style="border:none;margin-top:40px;font-weight:600;font-size:9pt">
 			<tr>
 				<td>
-					<h3>Potongan (B)</h3>
+					<h3>Potongan (C)</h3>
 				</td>
 				<td></td>
 				<td></td>
@@ -130,7 +144,12 @@ $net_salary = $PayrollData["salary"] - $PayrollData["total_deduction"];
 				<td>Rp <?= number_format($PayrollData["salary"], 2) ?></td>
 			</tr>
 			<tr>
-				<td>Total (B)</td>
+				<td style="width: 30%">Total (B)</td>
+				<td>:</td>
+				<td>Rp <?= number_format($PayrollData["total_insentif"], 2) ?></td>
+			</tr>
+			<tr>
+				<td>Total (C)</td>
 				<td>:</td>
 				<td>Rp <?= number_format($PayrollData["total_deduction"], 2) ?></td>
 			</tr>
