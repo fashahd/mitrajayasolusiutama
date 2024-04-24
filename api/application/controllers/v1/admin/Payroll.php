@@ -667,6 +667,9 @@ class Payroll extends REST_Controller
 					<tr>
 						<td style="width:60%; text-align:center" colspan="4">Terbilang : #' . terbilang(round($net_salary)) . ' Rupiah</td>
 					</tr>
+					<tr>
+						<td style="width:60%; text-align:center" colspan="4">Catatan : '.$PayrollData["notes"].'</td>
+					</tr>
 				</table>
 				<div style="white-space: pre; padding-right: 100px">
 					<p style="text-align: right;font-size:10pt">Jakarta, ' . date("d F Y", strtotime($PayrollData["date_state"])) . '</p>
@@ -723,6 +726,7 @@ class Payroll extends REST_Controller
 					$failed++;
 				}
 			}
+			
 			$response["success"] = true;
 			$response["desc"] = "success";
 			$response["message"] = "Sending -> Success : $sukses | Failed : $failed";
