@@ -30,6 +30,7 @@ class Mpayroll extends CI_Model
 			, a.people_email
 			, a.people_ext_id
 			, c.date_state
+			, c.notes
 			, msp.position_name
 			, (c.insentif_thr) total_insentif
 			, (c.deduction_bpjs_tk + c.deduction_bpjs_kesehatan + c.deduction_kasbon + c.deduction_pph_21_insentif + c.deduction_pph_21 + c.deduction_pph_21_kompensasi + c.deduction_pph_21_thr) total_deduction

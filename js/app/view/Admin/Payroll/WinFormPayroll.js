@@ -302,6 +302,38 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 										}]
 									}]
 								}]
+							}, {
+								columnWidth: 1,
+								layout: 'form',
+								style: 'padding:0px 15px 10px 5px;',
+								items: [{
+									xtype: 'panel',
+									title: lang('Note'),
+									frame: false,
+									id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-SectionNote',
+									style: 'margin-top:12px;',
+									cls: 'Sfr_PanelSubLayoutFormRoundedGray',
+									items: [{
+										layout: 'column',
+										border: false,
+										items: [{
+											columnWidth: 1,
+											layout: 'form',
+											style: 'padding:10px 0px 10px 5px;',
+											defaults: {
+												labelAlign: 'left',
+												labelWidth: 150
+											},
+											items: [{
+												xtype: 'textfield',
+												labelAlign: 'top',
+												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-notes',
+												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-notes',
+												fieldLabel: lang('Notes')
+											}]
+										}]
+									}]
+								}]
 							}]
 						}]
 					}]
