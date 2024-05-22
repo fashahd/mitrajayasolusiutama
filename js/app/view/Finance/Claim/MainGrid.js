@@ -46,7 +46,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainGrid', {
 			cls: 'Sfr_ConMenu',
 			items: [{
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-				text: 'View',
+				text: lang('View'),
 				cls: 'Sfr_BtnConMenuWhite',
 				itemId: 'MitraJaya.view.Finance.Claim.MainGrid-ContextMenuView',
 				handler: function () {
@@ -76,7 +76,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainGrid', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-				text: 'Update',
+				text: lang('Update'),
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_update,
 				itemId: 'MitraJaya.view.Finance.Claim.MainGrid-ContextMenuUpdate',
@@ -107,7 +107,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainGrid', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-				text: 'Delete',
+				text: lang('Delete'),
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_delete,
 				itemId: 'MitraJaya.view.Finance.Claim.MainGrid-ContextMenuDelete',
@@ -214,7 +214,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainGrid', {
 							items: [{
 								xtype: 'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text: 'Search',
+								text: lang('Search'),
 								style: 'margin-left:20px; margin-top:30px',
 								cls: 'Sfr_BtnFormCyan',
 								overCls: 'Sfr_BtnFormCyan-Hover',
@@ -247,14 +247,14 @@ Ext.define('MitraJaya.view.Finance.Claim.MainGrid', {
 				store: thisObj.StoreGridMain,
 				dock: 'bottom',
 				displayInfo: true,
-				displayMsg: 'Showing' + ' {0} ' + 'to' + ' {1} ' + 'of' + ' {2} ' + 'data'
+				displayMsg: lang('Showing') + ' {0} ' + lang('to') + ' {1} ' + lang('of') + ' {2} ' + lang('data')
 			}, {
 				xtype: 'toolbar',
 				dock: 'top',
 				items: [{
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-					text: 'Add',
+					text: lang('Add'),
 					hidden: m_act_add,
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
@@ -285,7 +285,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-					text: 'Export',
+					text: lang('Export'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					hidden: m_act_export_excel,
@@ -306,7 +306,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainGrid', {
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/loan/export_loan',
 									method: 'POST',
-									waitMsg: 'Please Wait',
+									waitMsg: lang('Please Wait'),
 									params: {
 										VendorID: VendorID,
 										ProjectID: ProjectID
@@ -352,7 +352,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainGrid', {
 				}, {
 					icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
 					cls: 'Sfr_BtnGridPaleBlue',
-					text: 'Advanced Filter',
+					text: lang('Advanced Filter'),
 					hidden: true,
 					handler: function () {
 						//advanced search
@@ -390,27 +390,27 @@ Ext.define('MitraJaya.view.Finance.Claim.MainGrid', {
 				flex: 1,
 				xtype: 'rownumberer'
 			}, {
-				text: 'ClaimID',
+				text: lang('ClaimID'),
 				dataIndex: 'ClaimID',
 				hidden: true
 			}, {
-				text: 'Doc Number',
+				text: lang('Doc Number'),
 				dataIndex: 'DocNumber',
 				flex: 8
 			}, {
-				text: 'Claim Date',
+				text: lang('Claim Date'),
 				dataIndex: 'ClaimDate',
 				flex: 15
 			}, {
-				text: 'Location',
+				text: lang('Location'),
 				dataIndex: 'Location',
 				flex: 10
 			}, {
-				text: 'Project Name',
+				text: lang('Project Name'),
 				dataIndex: 'ProjectName',
 				flex: 10
 			}, {
-				text: 'Total Amount',
+				text: lang('Total Amount'),
 				dataIndex: 'TotalAmount',
 				flex: 10,
 				renderer: function (t, meta, record) {
@@ -421,7 +421,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainGrid', {
 					return RetVal;
 				}
 			}, {
-				text: 'Cost out By',
+				text: lang('Cost out By'),
 				dataIndex: 'PeopleName',
 				flex: 10
 			}]

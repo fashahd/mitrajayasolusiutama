@@ -42,7 +42,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridEducation' ,{
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'View',
+                text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Admin.Employee.GridEducation-ContextMenuView',
 	            handler: function() {
@@ -63,7 +63,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridEducation' ,{
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: 'Update',
+                text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Admin.Employee.GridEducation-ContextMenuUpdate',
@@ -85,7 +85,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridEducation' ,{
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: 'Delete',
+                text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Admin.Employee.GridEducation-ContextMenuDelete',
@@ -162,14 +162,14 @@ Ext.define('MitraJaya.view.Admin.Employee.GridEducation' ,{
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
+                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: 'Add',
+                    text: lang('Add'),
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -205,27 +205,27 @@ Ext.define('MitraJaya.view.Admin.Employee.GridEducation' ,{
                 flex: 0.1,
                 xtype: 'rownumberer'
             },{
-                text: 'education_id',
+                text: lang('education_id'),
                 dataIndex: 'education_id',
                 hidden: true
             },{
-                text: 'Level',
+                text: lang('Level'),
                 dataIndex: 'education_level',
                 flex: 1
             },{
-                text: 'Name',
+                text: lang('Name'),
                 dataIndex: 'school_name',
                 flex: 1
             },{
-                text: 'Start',
+                text: lang('Start'),
                 dataIndex: 'start_year',
                 flex: 1
             },{
-                text: 'End',
+                text: lang('End'),
                 dataIndex: 'end_year',
                 flex: 1
             },{
-                text: 'GPA',
+                text: lang('GPA'),
                 dataIndex: 'gpa',
                 flex: 1
             }]

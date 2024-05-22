@@ -42,7 +42,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridFamily' ,{
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'View',
+                text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Admin.Employee.GridFamily-ContextMenuView',
 	            handler: function() {
@@ -63,7 +63,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridFamily' ,{
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: 'Update',
+                text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Admin.Employee.GridFamily-ContextMenuUpdate',
@@ -85,7 +85,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridFamily' ,{
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: 'Delete',
+                text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Admin.Employee.GridFamily-ContextMenuDelete',
@@ -162,14 +162,14 @@ Ext.define('MitraJaya.view.Admin.Employee.GridFamily' ,{
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
+                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: 'Add',
+                    text: lang('Add'),
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -205,19 +205,19 @@ Ext.define('MitraJaya.view.Admin.Employee.GridFamily' ,{
                 flex: 0.1,
                 xtype: 'rownumberer'
             },{
-                text: 'family_id',
+                text: lang('family_id'),
                 dataIndex: 'family_id',
                 hidden: true
 			},{
-                text: 'Name',
+                text: lang('Name'),
                 dataIndex: 'family_name',
                 flex: 1
             },{
-                text: 'Status',
+                text: lang('Status'),
                 dataIndex: 'family_status',
                 flex: 1
             },{
-                text: 'Gender',
+                text: lang('Gender'),
                 dataIndex: 'family_gender',
                 flex: 1
             }]

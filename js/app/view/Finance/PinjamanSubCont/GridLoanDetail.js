@@ -36,7 +36,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.GridLoanDetail', {
 			cls: 'Sfr_ConMenu',
 			items: [{
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-				text: 'View',
+				text: lang('View'),
 				cls: 'Sfr_BtnConMenuWhite',
 				itemId: 'MitraJaya.view.Finance.PinjamanSubCont.GridLoanDetail-ContextMenuView',
 				handler: function () {
@@ -56,7 +56,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.GridLoanDetail', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-				text: 'Update',
+				text: lang('Update'),
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_update,
 				itemId: 'MitraJaya.view.Finance.PinjamanSubCont.GridLoanDetail-ContextMenuUpdate',
@@ -78,7 +78,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.GridLoanDetail', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-				text: 'Delete',
+				text: lang('Delete'),
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_delete,
 				itemId: 'MitraJaya.view.Finance.PinjamanSubCont.GridLoanDetail-ContextMenuDelete',
@@ -175,14 +175,14 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.GridLoanDetail', {
 				store: thisObj.StoreGridMain,
 				dock: 'bottom',
 				displayInfo: true,
-				displayMsg: 'Showing' + ' {0} ' + 'to' + ' {1} ' + 'of' + ' {2} ' + 'data'
+				displayMsg: lang('Showing') + ' {0} ' + lang('to') + ' {1} ' + lang('of') + ' {2} ' + lang('data')
 			}, {
 				xtype: 'toolbar',
 				dock: 'top',
 				items: [{
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-					text: 'Add',
+					text: lang('Add'),
 					hidden: m_act_add,
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
@@ -218,11 +218,11 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.GridLoanDetail', {
 				flex: 1,
 				xtype: 'rownumberer'
 			}, {
-				text: 'LoanDetailID',
+				text: lang('LoanDetailID'),
 				dataIndex: 'LoanDetailID',
 				hidden: true
 			}, {
-				text: 'Cost Element',
+				text: lang('Cost Element'),
 				dataIndex: 'CostElement',
 				flex: 5
 			}, {
@@ -230,11 +230,11 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.GridLoanDetail', {
 				dataIndex: 'Description',
 				flex: 20
 			}, {
-				text: 'Qty',
+				text: lang('Qty'),
 				dataIndex: 'Qty',
 				flex: 5
 			}, {
-				text: 'Amount',
+				text: lang('Amount'),
 				dataIndex: 'Amount',
 				flex: 10,
 				renderer: function (t, meta, record) {

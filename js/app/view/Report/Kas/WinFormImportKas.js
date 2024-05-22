@@ -1,7 +1,7 @@
 Ext.define('MitraJaya.view.Report.Kas.WinFormImportKas', {
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Report.Kas.WinFormImportKas',
-    title: 'Import Form',
+    title: lang('Import Form'),
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -33,7 +33,7 @@ Ext.define('MitraJaya.view.Report.Kas.WinFormImportKas', {
                         xtype: 'button',
                         id: 'MitraJaya.view.Report.Kas.WinFormImportKas-DownloadTemplate',
                         style: 'margin-top:15px;',
-                        text: 'Download Template Excel',
+                        text: lang('Download Template Excel'),
                         handler: function () {
                             Ext.MessageBox.show({
                                 msg: 'Please wait...',
@@ -56,7 +56,7 @@ Ext.define('MitraJaya.view.Report.Kas.WinFormImportKas', {
                                     window.location = m_api + '/v1/finance/order/download_template' + "?url=" + text.url + '&namaFile=template_bank_transaction.xlsx'
                                 },
                                 failure: function (response) {
-                                    Ext.MessageBox.alert('Warning', 'Failed to generate template !');
+                                    Ext.MessageBox.alert(lang('Warning'), lang('Failed to generate template !'));
                                 }
                             });
                             Ext.MessageBox.hide();
@@ -116,7 +116,7 @@ Ext.define('MitraJaya.view.Report.Kas.WinFormImportKas', {
                                                     if (o.result.message != undefined) {
                                                         msg = o.result.message;
                                                     } else {
-                                                        msg = 'Connection error';
+                                                        msg = lang('Connection error');
                                                     }
                                                     Ext.getCmp('MitraJaya.view.Report.Kas.WinFormImportKas-Form-FileName').setValue(null)
                                                     Ext.MessageBox.show({
@@ -132,7 +132,7 @@ Ext.define('MitraJaya.view.Report.Kas.WinFormImportKas', {
                                         } else {
                                             Ext.MessageBox.show({
                                                 title: 'Attention',
-                                                msg: 'Form not complete yet',
+                                                msg: lang('Form not complete yet'),
                                                 buttons: Ext.MessageBox.OK,
                                                 animateTarget: 'mb9',
                                                 icon: 'ext-mb-info'
@@ -150,7 +150,7 @@ Ext.define('MitraJaya.view.Report.Kas.WinFormImportKas', {
                                     xtype: 'button',
                                     id: 'MitraJaya.view.Report.Kas.WinFormImportKas-ClearData',
                                     style: 'margin-top:18px;margin-left:20px',
-                                    text: 'Clear',
+                                    text: lang('Clear'),
                                     handler: function () {
                                         Ext.Ajax.request({
                                             url: m_api + '/v1/report/kas/clear_data',
@@ -160,7 +160,7 @@ Ext.define('MitraJaya.view.Report.Kas.WinFormImportKas', {
 												storeGridFailed.load();
                                             },
                                             failure: function(response) {
-                                                Ext.MessageBox.alert('Warning', 'Failed to generate template !');
+                                                Ext.MessageBox.alert(lang('Warning'), lang('Failed to generate template !'));
                                             }
                                         });
                                     }
@@ -180,12 +180,12 @@ Ext.define('MitraJaya.view.Report.Kas.WinFormImportKas', {
                     overflowX: 'scroll',
                     overflowY: 'scroll',
                     selType: 'rowmodel',
-                    title: 'Failed Data',
+                    title: lang('Failed Data'),
                     store: storeGridFailed,
                     minHeight: 500,
                     viewConfig: {
                         deferEmptyText: false,
-                        emptyText: 'No data Available',
+                        emptyText: lang('No data Available'),
                     },
                     dockedItems: [{
                         xtype: 'pagingtoolbar',
@@ -198,43 +198,43 @@ Ext.define('MitraJaya.view.Report.Kas.WinFormImportKas', {
                         flex: 0.2,
                         xtype: 'rownumberer'
                     }, {
-						text: 'BankTransactionID',
+						text: lang('BankTransactionID'),
 						dataIndex: 'BankTransactionID',
 						hidden: true
 					},{
-						text: 'Date Transaction',
+						text: lang('Date Transaction'),
 						dataIndex: 'DateTransaction',
 						flex: 10
 					},{
-						text: 'Checking Account',
+						text: lang('Checking Account'),
 						dataIndex: 'CheckingAccount',
 						flex: 10
 					},{
-						text: 'Transaction No',
+						text: lang('Transaction No'),
 						dataIndex: 'NoVoucher',
 						flex: 10
 					},{
-						text: 'Cost Element',
+						text: lang('Cost Element'),
 						dataIndex: 'CostElement',
 						flex: 10
 					},{
-						text: 'Description',
+						text: lang('Description'),
 						dataIndex: 'Description',
 						flex: 20
 					},{
-						text: 'Debit',
+						text: lang('Debit'),
 						dataIndex: 'TransactionAmountDebit',
 						flex: 15
 					},{
-						text: 'Credit',
+						text: lang('Credit'),
 						dataIndex: 'TransactionAmountCredit',
 						flex: 15
 					},{
-						text: 'Project',
+						text: lang('Project'),
 						dataIndex: 'Project',
 						flex: 15
 					},{
-						text: 'Error',
+						text: lang('Error'),
 						dataIndex: 'ErrorMessages',
 						flex: 15
 					}]
@@ -245,7 +245,7 @@ Ext.define('MitraJaya.view.Report.Kas.WinFormImportKas', {
         this.callParent(arguments);
     },
     buttons: [{
-        text: 'Close',
+        text: lang('Close'),
         margin: '5px',
         scale: 'large',
         ui: 's-button',

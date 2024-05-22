@@ -36,7 +36,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridCertification' ,{
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'View',
+                text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Admin.Employee.GridCertification-ContextMenuView',
 	            handler: function() {
@@ -57,7 +57,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridCertification' ,{
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: 'Update',
+                text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Admin.Employee.GridCertification-ContextMenuUpdate',
@@ -79,7 +79,7 @@ Ext.define('MitraJaya.view.Admin.Employee.GridCertification' ,{
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: 'Delete',
+                text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Admin.Employee.GridCertification-ContextMenuDelete',
@@ -156,14 +156,14 @@ Ext.define('MitraJaya.view.Admin.Employee.GridCertification' ,{
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
+                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: 'Add',
+                    text: lang('Add'),
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -199,19 +199,19 @@ Ext.define('MitraJaya.view.Admin.Employee.GridCertification' ,{
                 flex: 0.1,
                 xtype: 'rownumberer'
             },{
-                text: 'cert_id',
+                text: lang('cert_id'),
                 dataIndex: 'cert_id',
                 hidden: true
             },{
-                text: 'Name',
+                text: lang('Name'),
                 dataIndex: 'cert_name',
                 flex: 1
             },{
-                text: 'Start',
+                text: lang('Start'),
                 dataIndex: 'cert_date',
                 flex: 1
             },{
-                text: 'End',
+                text: lang('End'),
                 dataIndex: 'cert_end',
                 flex: 1
             }]

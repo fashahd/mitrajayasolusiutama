@@ -86,7 +86,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: 'Form Penerimaan Barang',
+            title: lang('Form Penerimaan Barang'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Warehouse.PenerimaanBarang-FormGeneralData',
@@ -119,7 +119,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                                     name: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-PenerimaanBarangID'
                                 }, {
                                     xtype: 'radiogroup',
-                                    fieldLabel: 'Type',
+                                    fieldLabel: lang('Type'),
                                     msgTarget: 'side',
                                     labelWidth:180,
                                     allowBlank:false,
@@ -127,7 +127,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                                     baseCls: 'Sfr_FormInputMandatory',
                                     columns: 2,
                                     items: [{
-                                        boxLabel: 'Toolkit',
+                                        boxLabel: lang('Toolkit'),
                                         name: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-Type',
                                         inputValue: 'toolkit',
                                         id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-TypeToolkit',
@@ -144,7 +144,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                                             }
                                         }
                                     }, {
-                                        boxLabel: 'Product',
+                                        boxLabel: lang('Product'),
                                         name: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-Type',
                                         inputValue: 'product',
                                         id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-TypeProduct',
@@ -186,13 +186,13 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                                 }, {
                                     xtype: 'radiogroup',
                                     labelAlign:'top',
-                                    fieldLabel: 'Category',
+                                    fieldLabel: lang('Category'),
                                     msgTarget: 'side',
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory',
                                     columns: 2,
                                     items: [{
-                                        boxLabel: 'Pembelian',
+                                        boxLabel: lang('Pembelian'),
                                         name: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-PartCategory',
                                         inputValue: 'pembelian',
                                         id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-PartCategoryPembelian',
@@ -200,7 +200,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                                             
                                         }
                                     }, {
-                                        boxLabel: 'Pengembalian',
+                                        boxLabel: lang('Pengembalian'),
                                         name: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-PartCategory',
                                         inputValue: 'pengembalian',
                                         id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-PartCategoryPengembalian',
@@ -213,7 +213,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-TanggalPenerimaan',
                                     name: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-TanggalPenerimaan',
-                                    fieldLabel: 'Tanggal Penerimaan',
+                                    fieldLabel: lang('Tanggal Penerimaan'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory',
                                     format: 'Y-m-d',
@@ -234,7 +234,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-DocNo',
                                     name: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-DocNo',
-                                    fieldLabel: 'Document No',
+                                    fieldLabel: lang('Document No'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }, {
@@ -242,7 +242,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-Qty',
                                     name: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-Qty',
-                                    fieldLabel: 'Qty',
+                                    fieldLabel: lang('Qty'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }, {
@@ -262,7 +262,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-RowNumber',
                                     name: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-RowNumber',
-                                    fieldLabel: 'Baris No',
+                                    fieldLabel: lang('Baris No'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }, {
@@ -270,7 +270,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-ColumnNumber',
                                     name: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-ColumnNumber',
-                                    fieldLabel: 'Kolom No',
+                                    fieldLabel: lang('Kolom No'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }]
@@ -279,7 +279,7 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: 'Save',
+                            text: lang('Save'),
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-FormBasicData-BtnSave',
@@ -363,14 +363,14 @@ Ext.define('MitraJaya.view.Warehouse.PenerimaanBarang.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + 'Penerimaan Barang Data' + '</div>'
+                html: '<div id="header_title_farmer">' + lang('Penerimaan Barang Data') + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.PenerimaanBarang.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Penerimaan Barang List' + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Penerimaan Barang List') + '</a></li></div>'
             }]
         }, {
             html: '<br />'

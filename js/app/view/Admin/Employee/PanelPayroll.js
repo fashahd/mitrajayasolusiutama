@@ -40,7 +40,7 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
                 style: 'padding-left:6px;',
                 items: [{
                     xtype: 'panel',
-                    title: 'Tax Information',
+                    title: lang('Tax Information'),
                     frame: false,
                     id: 'MitraJaya.view.Admin.Employee.PanelPayroll-SectionTaxInfo',
                     style: 'margin-top:5px;padding-top:7px;',
@@ -56,7 +56,7 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
                             },
                             items: [{ html: '<div style="height:13px;">&nbsp;</div>' },{
                                 xtype: 'textfield',
-                                fieldLabel: 'Tax Number',
+                                fieldLabel: lang('Tax Number'),
                                 id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-tax_number',
                                 name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-tax_number',
                                 height: 65
@@ -64,7 +64,7 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
 								xtype: 'combobox',
 								id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-ptkp_status',
 								name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-ptkp_status',
-								fieldLabel: 'PTKP Status',
+								fieldLabel: lang('PTKP Status'),
 								labelAlign: "top",
 								store: combo_ptkp_status,
 								labelAlign:'top',
@@ -87,7 +87,7 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
                 style: 'padding-left:6px;',
                 items: [{
                     xtype: 'panel',
-                    title: 'BPJS Information',
+                    title: lang('BPJS Information'),
                     frame: false,
                     id: 'MitraJaya.view.Admin.Employee.PanelPayroll-SectionBPJS',
                     style: 'margin-top:5px;padding-top:7px;',
@@ -103,13 +103,13 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
                             },
                             items: [{ html: '<div style="height:13px;">&nbsp;</div>' },{
                                 xtype: 'textfield',
-                                fieldLabel: 'BPJS Ketenagakerjaan Number',
+                                fieldLabel: lang('BPJS Ketenagakerjaan Number'),
                                 id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-bpjs_tk',
                                 name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-bpjs_tk',
                                 height: 65
                             },{
                                 xtype: 'textfield',
-                                fieldLabel: 'BPJS Kesehatan Number',
+                                fieldLabel: lang('BPJS Kesehatan Number'),
                                 id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-bpjs_kesehatan',
                                 name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-bpjs_kesehatan',
                                 height: 65
@@ -117,7 +117,7 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
 								xtype: 'combobox',
 								id: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-bpjs_family',
 								name: 'MitraJaya.view.Admin.Employee.PanelPayroll-Form-bpjs_family',
-								fieldLabel: 'BPJS Kesehatan Family',
+								fieldLabel: lang('BPJS Kesehatan Family'),
 								labelAlign: "top",
 								store: combo_bpjs_family,
 								labelAlign:'top',
@@ -139,7 +139,7 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
         thisObj.buttons = [{
             xtype: 'button',
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-            text: 'Save',
+            text: lang('Save'),
             hidden: (thisObj.viewVar.OpsiDisplay === 'update') && m_act_update === false ? false : true,
 			cls: 'Sfr_BtnFormBlue',
 			overCls: 'Sfr_BtnFormBlue-Hover',
@@ -158,7 +158,7 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
                         success: function (fp, o) {
                             Ext.MessageBox.show({
                                 title: 'Information',
-                                msg: 'Data saved',
+                                msg: lang('Data saved'),
                                 buttons: Ext.MessageBox.OK,
                                 animateTarget: 'mb9',
                                 icon: 'ext-mb-success'
@@ -213,7 +213,7 @@ Ext.define('MitraJaya.view.Admin.Employee.PanelPayroll', {
                 } else {
                     Ext.MessageBox.show({
                         title: 'Attention',
-                        msg: 'Form not complete yet',
+                        msg: lang('Form not complete yet'),
                         buttons: Ext.MessageBox.OK,
                         animateTarget: 'mb9',
                         icon: 'ext-mb-info'
