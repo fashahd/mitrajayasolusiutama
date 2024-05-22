@@ -32,7 +32,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: lang('View'),
+                text: 'View',
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Admin.Employee.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -62,7 +62,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: lang('Update'),
+                text: 'Update',
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Admin.Employee.MainGrid-ContextMenuUpdate',
@@ -93,7 +93,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: lang('Delete'),
+                text: 'Delete',
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Admin.Employee.MainGrid-ContextMenuDelete',
@@ -171,14 +171,14 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
+                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: lang('Add'),
+                    text: 'Add',
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -209,7 +209,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-                    text: lang('Export'),
+                    text: 'Export',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -232,7 +232,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/invoice/export_invoice',
 									method: 'POST',
-									waitMsg: lang('Please Wait'),
+									waitMsg: 'Please Wait',
 									params: {
 										keySearch : keySearch,
 										StartDate : StartDate,
@@ -277,7 +277,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/upload.svg',
-                    text: lang('Import'),
+                    text: 'Import',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -300,14 +300,14 @@
 					xtype: 'textfield',
 					baseCls: 'Sfr_TxtfieldSearchGrid',
 					width:340,
-					emptyText: lang('Search by Employee Name, Press Enter to Search'),
+					emptyText: 'Search by Employee Name, Press Enter to Search',
 					listeners: {
 						specialkey: thisObj.submitOnEnterGrid
 					}
 				},{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: lang('Advanced Filter'),
+                    text: 'Advanced Filter',
 					hidden:true,
                     handler: function () {
                         //advanced search
@@ -345,35 +345,35 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: lang('People ID'),
+                text: 'People ID',
                 dataIndex: 'people_id',
                 hidden: true
             },{
-                text: lang('Employee ID'),
+                text: 'Employee ID',
                 dataIndex: 'people_ext_id',
                 flex:10
             },{
-                text: lang('Name'),
+                text: 'Name',
                 dataIndex: 'people_name',
                 flex:10
             },{
-                text: lang('Position'),
+                text: 'Position',
                 dataIndex: 'position_name',
                 flex: 5
             },{
-                text: lang('Gender'),
+                text: 'Gender',
                 dataIndex: 'people_gender',
                 flex: 5
             },{
-                text: lang('Phone Number'),
+                text: 'Phone Number',
                 dataIndex: 'phone_number',
                 flex: 10
             },{
-                text: lang('Email'),
+                text: 'Email',
                 dataIndex: 'people_email',
                 flex: 10
 			},{
-                text: lang('Address'),
+                text: 'Address',
                 dataIndex: 'address',
                 flex: 20
             }]

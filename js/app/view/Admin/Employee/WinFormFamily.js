@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Admin.Employee.WinFormFamily',
     cls: 'Sfr_LayoutPopupWindows',
-    title:lang('Family Form'),
+    title:'Family Form',
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -139,17 +139,17 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
                     	xtype: 'hiddenfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_id',
                         name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_id',
-                        fieldLabel: lang('Loan Payment Amount')
+                        fieldLabel: 'Loan Payment Amount'
                     },{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_name',
                         name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_name',
-                        fieldLabel: lang('Family Name'),
+                        fieldLabel: 'Family Name',
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
                     },{
-						fieldLabel: lang('Gender'),
+						fieldLabel: 'Gender',
 						xtype: 'radiogroup',
                         labelAlign: "top",
 						allowBlank: false,
@@ -158,7 +158,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
 						msgTarget: 'side',
 						columns: 2,
 						items: [{
-							boxLabel: lang('Male'),
+							boxLabel: 'Male',
 							name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_gender',
 							inputValue: 'male',
 							id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_gender1',
@@ -168,7 +168,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
 								}
 							}
 						}, {
-							boxLabel: lang('Female'),
+							boxLabel: 'Female',
 							name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_gender',
 							inputValue: 'female',
 							id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_gender2',
@@ -183,7 +183,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
                     	xtype: 'datefield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_birth_date',
                         name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_birth_date',
-                        fieldLabel: lang('Birth Date'),
+                        fieldLabel: 'Birth Date',
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -192,7 +192,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_birth_place',
                         name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_birth_place',
-                        fieldLabel: lang('Birth Place'),
+                        fieldLabel: 'Birth Place',
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -200,7 +200,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
 						xtype: 'combobox',
 						id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_status',
 						name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_status',
-						fieldLabel: lang('Family Status'),
+						fieldLabel: 'Family Status',
                         labelAlign: "top",
 						readOnly: m_act_update,
 						store:thisObj.combo_family_status,
@@ -212,13 +212,13 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
                         id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_phone',
                         labelAlign: "top",
                         name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_phone',
-                        fieldLabel: lang('Phone Number')
+                        fieldLabel: 'Phone Number'
                     },{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_email',
                         labelAlign: "top",
                         name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_email',
-                        fieldLabel: lang('Email')
+                        fieldLabel: 'Email'
                     }]
                 },{
                     columnWidth: 0.5,
@@ -229,7 +229,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
 						id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-province_id',
 						name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-province_id',
 						store: cmb_province,
-						fieldLabel: lang('Province'),
+						fieldLabel: 'Province',
 						labelAlign:'top',
 						queryMode: 'local',
 						displayField: 'label',
@@ -251,7 +251,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
 						id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-district_id',
 						name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-district_id',
 						store: cmb_district,
-						fieldLabel: lang('District'),
+						fieldLabel: 'District',
 						labelAlign:'top',
 						queryMode: 'local',
 						displayField: 'label',
@@ -272,7 +272,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
 						id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-subdistrict_id',
 						name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-subdistrict_id',
 						store: cmb_subdistrict,
-						fieldLabel: lang('Sub District'),
+						fieldLabel: 'Sub District',
 						labelAlign:'top',
 						queryMode: 'local',
 						displayField: 'label',
@@ -292,7 +292,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
 						id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-village_id',
 						name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-village_id',
 						store: cmb_village,
-						fieldLabel: lang('Village'),
+						fieldLabel: 'Village',
 						labelAlign:'top',
 						queryMode: 'local',
 						displayField: 'label',
@@ -307,7 +307,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
                         id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_address',
                         labelAlign: "top",
                         name: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-family_address',
-                        fieldLabel: lang('Address')
+                        fieldLabel: 'Address'
                     }]
 				}]
             }]
@@ -319,7 +319,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
             cls:'Sfr_BtnFormBlue',
             overCls:'Sfr_BtnFormBlue-Hover',
-            text: lang('Save'),
+            text: 'Save',
             id: 'MitraJaya.view.Admin.Employee.WinFormFamily-Form-BtnSave',
             handler: function () {
             	var FormNya = Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormFamily-Form').getForm();
@@ -335,7 +335,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
                         success: function(fp, o) {
                             Ext.MessageBox.show({
                                 title: 'Information',
-                                msg: lang('Data saved'),
+                                msg: 'Data saved',
                                 buttons: Ext.MessageBox.OK,
                                 animateTarget: 'mb9',
                                 icon: 'ext-mb-success'
@@ -396,7 +396,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
                 }else{
                     Ext.MessageBox.show({
                         title: 'Attention',
-                        msg: lang('Form not valid yet'),
+                        msg: 'Form not valid yet',
                         buttons: Ext.MessageBox.OK,
                         animateTarget: 'mb9',
                         icon: 'ext-mb-info'
@@ -405,7 +405,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormFamily' ,{
             }
         },{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: lang('Close'),
+			text: 'Close',
 			cls:'Sfr_BtnFormGrey',
 			overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {

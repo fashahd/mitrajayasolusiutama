@@ -44,7 +44,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: lang('View'),
+                text: 'View',
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Report.Aktiva.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -67,7 +67,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: lang('Update'),
+                text: 'Update',
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Report.Aktiva.MainGrid-ContextMenuUpdate',
@@ -116,14 +116,14 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
+                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: lang('Add'),
+                    text: 'Add',
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -149,7 +149,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-                    text: lang('Export'),
+                    text: 'Export',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -172,7 +172,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/order/export_order',
 									method: 'POST',
-									waitMsg: lang('Please Wait'),
+									waitMsg: 'Please Wait',
 									params: {
 										keySearch : keySearch,
 										StartDate : StartDate,
@@ -237,7 +237,7 @@
 					value:m_year
 				},{
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: lang('Apply'),
+                    text: 'Apply',
 					cls: 'Sfr_BtnFormBlue',
 					overCls: 'Sfr_BtnFormBlue-Hover',
 					style:'margin-right:20px',
@@ -270,22 +270,22 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: lang('AktivaID'),
+                text: 'AktivaID',
                 dataIndex: 'AktivaID',
                 hidden: true
             },{
-                text: lang('Keterangan'),
+                text: 'Keterangan',
                 dataIndex: 'Description',
                 flex: 10,
 				summaryRenderer: function(value, summaryData, dataIndex) {
 					return 'Total Peralatan';
 				}
             },{
-                text: lang('Unit'),
+                text: 'Unit',
                 dataIndex: 'Unit',
                 flex: 5
             },{
-                text: lang('Tarif'),
+                text: 'Tarif',
                 dataIndex: 'Tarif',
                 flex: 5,
 				renderer: function (t, meta, record) {
@@ -297,7 +297,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('TH Pembelian'),
+                text: 'TH Pembelian',
                 dataIndex: 'Month',
                 flex: 10,
 				renderer: function (t, meta, record) {
@@ -312,7 +312,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Nilai Perolehan'),
+                text: 'Nilai Perolehan',
                 dataIndex: 'InputValue',
                 flex: 15,
 				renderer: function (t, meta, record) {
@@ -323,7 +323,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Total'),
+                text: 'Total',
                 dataIndex: 'Total',
                 flex: 15,
                 summaryType: 'sum',
@@ -335,7 +335,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Akumulasi Penyusutan Akhir'),
+                text: 'Akumulasi Penyusutan Akhir',
                 dataIndex: 'FinalAccumulated',
                 flex: 15,
                 summaryType: 'sum',
@@ -347,7 +347,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Nilai Buku Akhir'),
+                text: 'Nilai Buku Akhir',
                 dataIndex: 'FinalBookValue',
                 flex: 15,
                 summaryType: 'sum',
@@ -359,7 +359,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Biaya Penyusutan Bulan Ini'),
+                text: 'Biaya Penyusutan Bulan Ini',
                 dataIndex: 'CostDecreasing',
                 flex: 15,
                 summaryType: 'sum',
@@ -371,7 +371,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Akumulasi Penyusutan Akhir'),
+                text: 'Akumulasi Penyusutan Akhir',
                 dataIndex: 'FinalAccumulatedCost',
                 flex: 15,
                 summaryType: 'sum',
@@ -383,7 +383,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Nilai Buku Akhir'),
+                text: 'Nilai Buku Akhir',
                 dataIndex: 'FinalBookValueCost',
                 flex: 15,
                 summaryType: 'sum',

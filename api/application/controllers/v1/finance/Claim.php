@@ -80,7 +80,7 @@ class Claim extends REST_Controller
 		$ExtNya = GetFileExt($_FILES['MitraJaya_view_Finance_Claim_WinFormClaimDetail-Form-PhotoInput2']['name']);
 		if (!in_array($ExtNya, array('png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG'))) {
 			$result['success'] = false;
-			$result['message'] = lang('File types not allowed');
+			$result['message'] = 'File types not allowed';
 			$this->response($result, 400);
 		} else {
 			if ($_FILES['MitraJaya_view_Finance_Claim_WinFormClaimDetail-Form-PhotoInput2']['name'] != '') {

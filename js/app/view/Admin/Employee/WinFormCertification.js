@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Admin.Employee.WinFormCertification',
     cls: 'Sfr_LayoutPopupWindows',
-    title:lang('Training & Certification Form'),
+    title:'Training & Certification Form',
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -55,7 +55,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
                         var r = Ext.decode(action.response.responseText);
 
 						if(r.data.document != ''){
-							Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form-FileDocument').update('<a href="'+m_api_base_url+'/'+r.data.document+'" title="Download File" target="_blank">'+lang('Download File')+'    <img src="'+m_api_base_url+'/assets/images/pdf-icon.png" height="24" /></a>');
+							Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form-FileDocument').update('<a href="'+m_api_base_url+'/'+r.data.document+'" title="Download File" target="_blank">'+'Download File'+'    <img src="'+m_api_base_url+'/assets/images/pdf-icon.png" height="24" /></a>');
 							Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form-FileDocument').doLayout();
 						}
                     },
@@ -91,18 +91,18 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
                     	xtype: 'hiddenfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-cert_id',
                         name: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-cert_id',
-                        fieldLabel: lang('Certification ID')
+                        fieldLabel: 'Certification ID'
                     },{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-cert_code',
                         name: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-cert_code',
-                        fieldLabel: lang('Certification ID'),
+                        fieldLabel: 'Certification ID',
                         labelAlign: "top"
                     },{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-cert_name',
                         name: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-cert_name',
-                        fieldLabel: lang('Certification Name'),
+                        fieldLabel: 'Certification Name',
                         labelAlign: "top"
                     },{
                     	xtype: 'datefield',
@@ -112,7 +112,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
                         name: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-start_date',
-                        fieldLabel: lang('Start Date')
+                        fieldLabel: 'Start Date'
                     },{
                     	xtype: 'datefield',
 						format:'Y-m-d',
@@ -121,7 +121,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
                         name: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-end_date',
-                        fieldLabel: lang('End Date')
+                        fieldLabel: 'End Date'
                     }]
                 },{
                     columnWidth: 0.5,
@@ -131,7 +131,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-description',
                         name: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-description',
-                        fieldLabel: lang('Description'),
+                        fieldLabel: 'Description',
                         labelAlign: "top"
                     },{
                         xtype: 'hiddenfield',
@@ -141,10 +141,10 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
                         xtype: 'fileuploadfield',
                         labelWidth: 125,
 						labelAlign:'top',
-                        fieldLabel: lang('Attachment') + ' <sup style="color:#FF0000;">(Max:10MB)</sup>' + ' *',
+                        fieldLabel: 'Attachment' + ' <sup style="color:#FF0000;">(Max:10MB)</sup>' + ' *',
                         id: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-document',
                         name: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-document',
-                        buttonText: lang('Browse'),
+                        buttonText: 'Browse',
                         listeners: {
 							afterrender: function (cmp) {
 								cmp.fileInputEl.set({
@@ -154,7 +154,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
                             'change': function (fb, v) {
 
                                 if (Math.floor(fb.fileInputEl.dom.files[0].size / 1000000) > 10) { //maksimal 10MB
-                                    alert(lang("file size more than 10MB"));
+                                    alert("file size more than 10MB");
                                     Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form-document').reset(true);
                                 } else {
                                     Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form').getForm().submit({
@@ -165,15 +165,15 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
 											people_id: thisObj.viewVar.people_id,
                                             cert_id: Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form-cert_id').getValue()
                                         },
-                                        waitMsg: lang('Sending Image'),
+                                        waitMsg: 'Sending Image',
                                         success: function (fp, o) {
                                             Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form-document_old').setValue(o.result.FilePath);
-											Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form-FileDocument').update('<a href="'+o.result.file+'" title="Download File" target="_blank">'+lang('Download File')+'    <img src="'+m_api_base_url+'/assets/images/pdf-icon.png" height="24" /></a>');
+											Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form-FileDocument').update('<a href="'+o.result.file+'" title="Download File" target="_blank">'+'Download File'+'    <img src="'+m_api_base_url+'/assets/images/pdf-icon.png" height="24" /></a>');
 											Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form-FileDocument').doLayout();
                                         },
                                         failure: function (fp, o) {
                                             Ext.MessageBox.show({
-                                                title: lang('Attention'),
+                                                title: 'Attention',
                                                 msg: o.result.message,
                                                 buttons: Ext.MessageBox.OK,
                                                 animateTarget: 'mb9',
@@ -188,7 +188,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
                         id:'MitraJaya.view.Admin.Employee.WinFormCertification-Form-FileDocument',
                         html:'<img src="'+m_api_base_url+'/assets/images/no-images.png" height="200" />'        
                     },{
-                        html:'<div style="margin-top:5px;font-size:10px;font-style:italic;">'+lang('File must PDF')+'</div>'
+                        html:'<div style="margin-top:5px;font-size:10px;font-style:italic;">'+'File must PDF'+'</div>'
                     }]
 				}]
             }]
@@ -200,7 +200,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
             cls:'Sfr_BtnFormBlue',
             overCls:'Sfr_BtnFormBlue-Hover',
-            text: lang('Save'),
+            text: 'Save',
             id: 'MitraJaya.view.Admin.Employee.WinFormCertification-Form-BtnSave',
             handler: function () {
             	var FormNya = Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormCertification-Form').getForm();
@@ -216,7 +216,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
                         success: function(fp, o) {
                             Ext.MessageBox.show({
                                 title: 'Information',
-                                msg: lang('Data saved'),
+                                msg: 'Data saved',
                                 buttons: Ext.MessageBox.OK,
                                 animateTarget: 'mb9',
                                 icon: 'ext-mb-success'
@@ -277,7 +277,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
                 }else{
                     Ext.MessageBox.show({
                         title: 'Attention',
-                        msg: lang('Form not valid yet'),
+                        msg: 'Form not valid yet',
                         buttons: Ext.MessageBox.OK,
                         animateTarget: 'mb9',
                         icon: 'ext-mb-info'
@@ -286,7 +286,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormCertification' ,{
             }
         },{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: lang('Close'),
+			text: 'Close',
 			cls:'Sfr_BtnFormGrey',
 			overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {

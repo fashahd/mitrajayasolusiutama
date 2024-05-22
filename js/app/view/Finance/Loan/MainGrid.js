@@ -42,7 +42,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: lang('View'),
+                text: 'View',
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Finance.Loan.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -72,7 +72,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: lang('Update'),
+                text: 'Update',
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Finance.Loan.MainGrid-ContextMenuUpdate',
@@ -103,7 +103,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: lang('Delete'),
+                text: 'Delete',
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Finance.Loan.MainGrid-ContextMenuDelete',
@@ -187,7 +187,7 @@
 								baseCls: 'Sfr_TxtfieldSearchGrid',
 								fieldLabel:'PO Number',
 								labelAlign:'top',
-								emptyText: lang('Search by PO Number')
+								emptyText: 'Search by PO Number'
 							}]
 						},{
 							columnWidth: 0.15,
@@ -249,7 +249,7 @@
 							items: [{
 								xtype:'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text:lang('Search'),
+								text:'Search',
 								style:'margin-left:20px; margin-top:30px',
 								cls:'Sfr_BtnFormCyan',
 								overCls:'Sfr_BtnFormCyan-Hover',
@@ -283,14 +283,14 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
+                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: lang('Add'),
+                    text: 'Add',
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -321,7 +321,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-                    text: lang('Export'),
+                    text: 'Export',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -344,7 +344,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/order/export_order',
 									method: 'POST',
-									waitMsg: lang('Please Wait'),
+									waitMsg: 'Please Wait',
 									params: {
 										keySearch : keySearch,
 										StartDate : StartDate,
@@ -386,11 +386,11 @@
 							}
 						})
 
-                        // Ext.MessageBox.confirm(lang('Message'), lang('Export data ?') , function(btn){
+                        // Ext.MessageBox.confirm('Message', 'Export data ?' , function(btn){
 						// 	if (btn == 'yes') {
 						// 		Ext.MessageBox.show({
-						// 			msg: lang('Please wait...'),
-						// 			progressText: lang('Exporting...'),
+						// 			msg: 'Please wait...',
+						// 			progressText: 'Exporting...',
 						// 			width: 300,
 						// 			wait: true,
 						// 			waitConfig: {
@@ -410,7 +410,7 @@
 						// 		Ext.Ajax.request({
 						// 			url: m_api + '/farmers/farmer_export_excel',
 						// 			method: 'POST',
-						// 			waitMsg: lang('Please Wait'),
+						// 			waitMsg: 'Please Wait',
 						// 			params: {
 						// 			},
 						// 			success: function(data) {
@@ -431,8 +431,8 @@
 						// 					window.location = jsonResp.filenya;
 						// 				} else if (jsonResp.message == 'Empty') {
 						// 					Ext.MessageBox.show({
-						// 						title: lang('Success'),
-						// 						msg: lang(jsonResp.filenya),
+						// 						title: 'Success',
+						// 						msg: jsonResp.filenya,
 						// 						buttons: Ext.MessageBox.OK,
 						// 						animateTarget: 'mb9',
 						// 						icon: 'ext-mb-info'
@@ -457,7 +457,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/upload.svg',
-                    text: lang('Import'),
+                    text: 'Import',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -477,7 +477,7 @@
                 },{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: lang('Advanced Filter'),
+                    text: 'Advanced Filter',
 					hidden:true,
                     handler: function () {
                         //advanced search
@@ -515,39 +515,39 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: lang('EmployeeLoanID'),
+                text: 'EmployeeLoanID',
                 dataIndex: 'EmployeeLoanID',
                 hidden: true
             },{
-                text: lang('Doc Number'),
+                text: 'Doc Number',
                 dataIndex: 'DocNumber',
                 flex: 10
             },{
-                text: lang('Name'),
+                text: 'Name',
                 dataIndex: 'Name',
                 flex: 10
             },{
-                text: lang('Loan Date'),
+                text: 'Loan Date',
                 dataIndex: 'LoanDate',
                 flex: 5
             },{
-                text: lang('Transfer Date'),
+                text: 'Transfer Date',
                 dataIndex: 'LoanTransferDate',
                 flex: 5
             },{
-                text: lang('Loan Amount'),
+                text: 'Loan Amount',
                 dataIndex: 'LoanAmount',
                 flex: 10
             },{
-                text: lang('Total Payment'),
+                text: 'Total Payment',
                 dataIndex: 'TotalPayment',
                 flex: 10
             },{
-                text: lang('Loan Remaining'),
+                text: 'Loan Remaining',
                 dataIndex: 'LoanRemaining',
                 flex: 10
             },{
-                text: lang('Description'),
+                text: 'Description',
                 dataIndex: 'LoanDescription',
                 flex: 10
             }]

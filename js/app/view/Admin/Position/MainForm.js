@@ -81,7 +81,7 @@ Ext.define('MitraJaya.view.Admin.Position.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: lang('Form Position'),
+            title: 'Form Position',
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Finance.Position-FormGeneralData',
@@ -119,20 +119,20 @@ Ext.define('MitraJaya.view.Admin.Position.MainForm', {
                                     baseCls: 'Sfr_FormInputMandatory',
                                     id: 'MitraJaya.view.Admin.Position.MainForm-FormBasicData-position_code',
                                     name: 'MitraJaya.view.Admin.Position.MainForm-FormBasicData-position_code',
-                                    fieldLabel: lang('Position ID')
+                                    fieldLabel: 'Position ID'
                                 }, {
                                     xtype: 'textfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.Position.MainForm-FormBasicData-position_name',
                                     name: 'MitraJaya.view.Admin.Position.MainForm-FormBasicData-position_name',
-                                    fieldLabel: lang('Position Name')
+                                    fieldLabel: 'Position Name'
                                 }]
                             }]
                         }],
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: lang('Save'),
+                            text: 'Save',
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Admin.Position.MainForm-FormBasicData-BtnSave',
@@ -216,14 +216,14 @@ Ext.define('MitraJaya.view.Admin.Position.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Admin.Position.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + lang('Position Data') + '</div>'
+                html: '<div id="header_title_farmer">' + 'Position Data' + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Admin.Position.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Admin.Position.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Position List') + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Position List' + '</a></li></div>'
             }]
         }, {
             html: '<br />'

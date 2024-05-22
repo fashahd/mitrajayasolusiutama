@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Finance.Loan.WinFormLoanPayment' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Finance.Loan.WinFormLoanPayment',
     cls: 'Sfr_LayoutPopupWindows',
-    title:lang('Payment Form'),
+    title:'Payment Form',
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -90,7 +90,7 @@ Ext.define('MitraJaya.view.Finance.Loan.WinFormLoanPayment' ,{
                     	xtype: 'numberfield',
                         id: 'MitraJaya.view.Finance.Loan.WinFormLoanPayment-Form-LoanPaymentAmount',
                         name: 'MitraJaya.view.Finance.Loan.WinFormLoanPayment-Form-LoanPaymentAmount',
-                        fieldLabel: lang('Loan Payment Amount'),
+                        fieldLabel: 'Loan Payment Amount',
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -99,7 +99,7 @@ Ext.define('MitraJaya.view.Finance.Loan.WinFormLoanPayment' ,{
                     	xtype: 'datefield',
                         id: 'MitraJaya.view.Finance.Loan.WinFormLoanPayment-Form-LoanPaymentDate',
                         name: 'MitraJaya.view.Finance.Loan.WinFormLoanPayment-Form-LoanPaymentDate',
-                        fieldLabel: lang('Loan Payment Date'),
+                        fieldLabel: 'Loan Payment Date',
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -109,7 +109,7 @@ Ext.define('MitraJaya.view.Finance.Loan.WinFormLoanPayment' ,{
                         labelAlign:'top',
                         id: 'MitraJaya.view.Finance.Loan.WinFormLoanPayment-Form-PaymentLoanDescription',
                         name: 'MitraJaya.view.Finance.Loan.WinFormLoanPayment-Form-PaymentLoanDescription',
-                        fieldLabel: lang('Payment Loan Description')
+                        fieldLabel: 'Payment Loan Description'
                     }]
                 }]
             }]
@@ -121,7 +121,7 @@ Ext.define('MitraJaya.view.Finance.Loan.WinFormLoanPayment' ,{
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
             cls:'Sfr_BtnFormBlue',
             overCls:'Sfr_BtnFormBlue-Hover',
-            text: lang('Save'),
+            text: 'Save',
             id: 'MitraJaya.view.Finance.Loan.WinFormLoanPayment-Form-BtnSave',
             handler: function () {
             	var FormNya = Ext.getCmp('MitraJaya.view.Finance.Loan.WinFormLoanPayment-Form').getForm();
@@ -138,7 +138,7 @@ Ext.define('MitraJaya.view.Finance.Loan.WinFormLoanPayment' ,{
                         success: function(fp, o) {
                             Ext.MessageBox.show({
                                 title: 'Information',
-                                msg: lang('Data saved'),
+                                msg: 'Data saved',
                                 buttons: Ext.MessageBox.OK,
                                 animateTarget: 'mb9',
                                 icon: 'ext-mb-success'
@@ -199,7 +199,7 @@ Ext.define('MitraJaya.view.Finance.Loan.WinFormLoanPayment' ,{
                 }else{
                     Ext.MessageBox.show({
                         title: 'Attention',
-                        msg: lang('Form not valid yet'),
+                        msg: 'Form not valid yet',
                         buttons: Ext.MessageBox.OK,
                         animateTarget: 'mb9',
                         icon: 'ext-mb-info'
@@ -208,7 +208,7 @@ Ext.define('MitraJaya.view.Finance.Loan.WinFormLoanPayment' ,{
             }
         },{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: lang('Close'),
+			text: 'Close',
 			cls:'Sfr_BtnFormGrey',
 			overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {
