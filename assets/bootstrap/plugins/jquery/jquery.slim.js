@@ -2134,7 +2134,7 @@ Expr = Sizzle.selectors = {
 			};
 		} ),
 
-		// "Whether an element is represented by a :lang() selector
+		// "Whether an element is represented by a : selector
 		// is based solely on the element's language value
 		// being equal to the identifier C,
 		// or beginning with the identifier C immediately followed by "-".

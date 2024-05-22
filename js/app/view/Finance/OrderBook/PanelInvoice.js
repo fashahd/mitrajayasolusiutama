@@ -32,7 +32,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: lang('View'),
+                text: 'View',
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.OrderBook.PanelInvoice-ContextMenuView',
 	            handler: function() {
@@ -74,7 +74,7 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
+                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
             },{
                 xtype: 'toolbar',
                 dock:'top',
@@ -96,23 +96,23 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: lang('InvoiceID'),
+                text: 'InvoiceID',
                 dataIndex: 'InvoiceID',
                 hidden: true
             },{
-                text: lang('Invoice Number'),
+                text: 'Invoice Number',
                 dataIndex: 'InvoiceNumber',
                 flex: 20
             },{
-                text: lang('Due Date'),
+                text: 'Due Date',
                 dataIndex: 'DueDate',
                 flex: 20
             },{
-                text: lang('Amount'),
+                text: 'Amount',
                 dataIndex: 'Amount',
                 flex: 20
             },{
-                text: lang('Status'),
+                text: 'Status',
                 dataIndex: 'Status',
                 flex: 20,
                 renderer: function (t, meta, record) {

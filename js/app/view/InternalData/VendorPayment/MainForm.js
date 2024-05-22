@@ -114,7 +114,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 
 		//Panel Basic ==================================== (Begin)
 		thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-			title: lang('Loan Data'),
+			title: 'Loan Data',
 			frame: true,
 			cls: 'Sfr_PanelLayoutForm',
 			id: 'MitraJaya.view.InternalData.VendorPayment-FormGeneralData',
@@ -141,7 +141,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 								style: 'padding:10px 0px 10px 5px;',
 								items: [{
 									xtype: 'panel',
-									title: lang('General Data'),
+									title: 'General Data',
 									frame: false,
 									id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-SectionGeneral',
 									style: 'margin-top:5px;',
@@ -161,12 +161,12 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 											}, {
 												xtype: 'textfield',
 												labelAlign: 'top',
-												fieldLabel: lang('Document Number'),
+												fieldLabel: 'Document Number',
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-DocumentNo',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-DocumentNo'
 											}, {
 												xtype: 'radiogroup',
-												fieldLabel: lang('Type'),
+												fieldLabel: 'Type',
 												msgTarget: 'side',
 												labelWidth: 180,
 												allowBlank: false,
@@ -174,7 +174,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 												baseCls: 'Sfr_FormInputMandatory',
 												columns: 3,
 												items: [{
-													boxLabel: lang('Vendor'),
+													boxLabel: 'Vendor',
 													name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-Type',
 													inputValue: 'vendor',
 													id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-TypeVendor',
@@ -188,7 +188,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 														}
 													}
 												}, {
-													boxLabel: lang('Subcont'),
+													boxLabel: 'Subcont',
 													name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-Type',
 													inputValue: 'subcont',
 													id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-TypeSubcont',
@@ -290,7 +290,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 											}, {
 												xtype: 'textfield',
 												labelAlign: 'top',
-												fieldLabel: lang('Invoice Number'),
+												fieldLabel: 'Invoice Number',
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-InvoiceNumber',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-InvoiceNumber'
 											}, {
@@ -299,7 +299,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 												editable: false,
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-InvoiceComplete',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-InvoiceComplete',
-												fieldLabel: lang('Invoice Date'),
+												fieldLabel: 'Invoice Date',
 												format: 'Y-m-d'
 											}, {
 												xtype: 'datefield',
@@ -307,14 +307,14 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 												editable: false,
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-DueDate',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-DueDate',
-												fieldLabel: lang('Due Date'),
+												fieldLabel: 'Due Date',
 												format: 'Y-m-d'
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-Amount',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-Amount',
-												fieldLabel: lang('Amount'),
+												fieldLabel: 'Amount',
 												allowBlank: false,
 												baseCls: 'Sfr_FormInputMandatory',
 												listeners: {
@@ -327,7 +327,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 												labelAlign: 'top',
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-Description',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-Description',
-												fieldLabel: lang('Description')
+												fieldLabel: 'Description'
 											}]
 										}]
 									}]
@@ -342,7 +342,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 								},
 								items: [{
 									xtype: 'panel',
-									title: lang('Cashbon'),
+									title: 'Cashbon',
 									frame: false,
 									id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-SectionGeneralData',
 									style: 'margin-top:5px;',
@@ -370,7 +370,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 												labelAlign: 'top',
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-CashbonAmount',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-CashbonAmount',
-												fieldLabel: lang('Payment Loan Amount'),
+												fieldLabel: 'Payment Loan Amount',
 												listeners: {
 													change: function (o, val, a) {
 														thisObj.CalCulateOutstanding();
@@ -381,7 +381,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 									}]
 								}, {
 									xtype: 'panel',
-									title: lang('SIO K3'),
+									title: 'SIO K3',
 									frame: false,
 									id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-SectionK3',
 									style: 'margin-top:5px;',
@@ -397,13 +397,13 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 												labelAlign: 'top',
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-SIOK3Name',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-SIOK3Name',
-												fieldLabel: lang('SIO K3 Name')
+												fieldLabel: 'SIO K3 Name'
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-SIOK3Amount',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-SIOK3Amount',
-												fieldLabel: lang('SIO K3 Amount'),
+												fieldLabel: 'SIO K3 Amount',
 												listeners: {
 													change: function (o, val, a) {
 														thisObj.CalCulateOutstanding();
@@ -414,7 +414,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 									}]
 								}, {
 									xtype: 'panel',
-									title: lang('Insurance & PPH'),
+									title: 'Insurance & PPH',
 									frame: false,
 									id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-SectionInsurance',
 									style: 'margin-top:5px;',
@@ -428,13 +428,13 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 											// style: 'padding:10px 10px 10px 0px;',
 											items: [{
 												xtype: 'radiogroup',
-												fieldLabel: lang('Insurance'),
+												fieldLabel: 'Insurance',
 												msgTarget: 'side',
 												labelWidth: 180,
 												labelAlign: 'top',
 												columns: 3,
 												items: [{
-													boxLabel: lang('Yes'),
+													boxLabel: 'Yes',
 													name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-isInsurance',
 													inputValue: '1',
 													id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-isInsuranceYes',
@@ -447,7 +447,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 														}
 													}
 												}, {
-													boxLabel: lang('No'),
+													boxLabel: 'No',
 													name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-isInsurance',
 													inputValue: '2',
 													id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-isInsuranceNo',
@@ -465,14 +465,14 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 												labelAlign: 'top',
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-Insurance',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-Insurance',
-												fieldLabel: lang('Insurance Amount'),
+												fieldLabel: 'Insurance Amount',
 												readOnly: true
 											}, {
 												xtype: 'numberfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-PPH23Option',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-PPH23Option',
-												fieldLabel: lang('PPH %'),
+												fieldLabel: 'PPH %',
 												value: 4,
 												listeners: {
 													change: function (o, val, a) {
@@ -485,7 +485,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-PPHValue',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-PPHValue',
 												readOnly: true,
-												fieldLabel: lang('PPH Value')
+												fieldLabel: 'PPH Value'
 											}]
 										}]
 									}]
@@ -496,7 +496,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 								style: 'padding:10px 0px 10px 10px;',
 								items: [{
 									xtype: 'panel',
-									title: lang('Outstanding'),
+									title: 'Outstanding',
 									frame: false,
 									id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-SectionOutstanding',
 									style: 'margin-top:5px;',
@@ -513,13 +513,13 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-Outstanding',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-Outstanding',
 												readOnly: true,
-												fieldLabel: lang('Outstanding')
+												fieldLabel: 'Outstanding'
 											}]
 										}]
 									}]
 								}, {
 									xtype: 'panel',
-									title: lang('Paid Status'),
+									title: 'Paid Status',
 									frame: false,
 									id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-SectionPaid',
 									style: 'margin-top:5px;',
@@ -536,13 +536,13 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 												format: "Y-m-d",
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-PaidDate',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-PaidDate',
-												fieldLabel: lang('Paid Date')
+												fieldLabel: 'Paid Date'
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-PaidAmount',
 												name: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-PaidAmount',
-												fieldLabel: lang('Paid Amount')
+												fieldLabel: 'Paid Amount'
 											}]
 										}]
 									}]
@@ -552,7 +552,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 						buttons: [{
 							xtype: 'button',
 							icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-							text: lang('Save'),
+							text: 'Save',
 							cls: 'Sfr_BtnFormBlue',
 							overCls: 'Sfr_BtnFormBlue-Hover',
 							id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-FormBasicData-BtnSave',
@@ -651,14 +651,14 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.MainForm', {
 			},
 			items: [{
 				id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-labelInfoInsert',
-				html: '<div id="header_title_farmer">' + lang('Payment Data') + '</div>'
+				html: '<div id="header_title_farmer">' + 'Payment Data' + '</div>'
 			}]
 		}, {
 			items: [{
 				id: 'MitraJaya.view.InternalData.VendorPayment.MainForm-LinkBackToList',
 				html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 					+ '<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.InternalData.VendorPayment.MainForm\').BackToList()">'
-					+ '<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Vendor Payment List') + '</a></li></div>'
+					+ '<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Vendor Payment List' + '</a></li></div>'
 			}]
 		}, {
 			html: '<br />'

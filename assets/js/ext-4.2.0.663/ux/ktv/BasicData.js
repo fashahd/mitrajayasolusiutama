@@ -91,7 +91,7 @@ Ext.define('Ext.ux.ktv.BasicData', {
                 xtype: 'toolbar',
                 items: [{
                     xtype: 'textfield',
-                    fieldLabel: lang('Key'),
+                    fieldLabel: 'Key',
                     name: 'farmerKey',
                     id: 'farmerKey'
                 }, {
@@ -140,7 +140,7 @@ Ext.define('Ext.ux.ktv.BasicData', {
                 align: 'center',
                 items: [{
                     icon: m_url + '/images/icons/silk/page_white_edit.png',
-                    tooltip: lang('Copy'),
+                    tooltip: 'Copy',
                     handler: function(grid, rowIndex, colIndex) {
                         var rec = grid.getStore().getAt(rowIndex);
                         var farmerID = rec.get('farmerID');

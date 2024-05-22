@@ -1,7 +1,7 @@
 Ext.define('MitraJaya.view.Finance.Invoice.WinFormImportInvoice', {
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Finance.Invoice.WinFormImportInvoice',
-    title: lang('Import Form'),
+    title: 'Import Form',
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -33,7 +33,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.WinFormImportInvoice', {
                         xtype: 'button',
                         id: 'MitraJaya.view.Finance.Invoice.WinFormImportInvoice-DownloadTemplate',
                         style: 'margin-top:15px;',
-                        text: lang('Download Template Excel'),
+                        text: 'Download Template Excel',
                         handler: function () {
                             Ext.MessageBox.show({
                                 msg: 'Please wait...',
@@ -56,7 +56,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.WinFormImportInvoice', {
                                     window.location = m_api + '/v1/finance/order/download_template' + "?url=" + text.url + '&namaFile=template_invoice.xlsx'
                                 },
                                 failure: function (response) {
-                                    Ext.MessageBox.alert(lang('Warning'), lang('Failed to generate template !'));
+                                    Ext.MessageBox.alert('Warning', 'Failed to generate template !');
                                 }
                             });
                             Ext.MessageBox.hide();
@@ -116,7 +116,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.WinFormImportInvoice', {
                                                     if (o.result.message != undefined) {
                                                         msg = o.result.message;
                                                     } else {
-                                                        msg = lang('Connection error');
+                                                        msg = 'Connection error';
                                                     }
                                                     Ext.getCmp('MitraJaya.view.Finance.Invoice.WinFormImportInvoice-Form-FileName').setValue(null)
                                                     Ext.MessageBox.show({
@@ -132,7 +132,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.WinFormImportInvoice', {
                                         } else {
                                             Ext.MessageBox.show({
                                                 title: 'Attention',
-                                                msg: lang('Form not complete yet'),
+                                                msg: 'Form not complete yet',
                                                 buttons: Ext.MessageBox.OK,
                                                 animateTarget: 'mb9',
                                                 icon: 'ext-mb-info'
@@ -150,7 +150,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.WinFormImportInvoice', {
                                     xtype: 'button',
                                     id: 'MitraJaya.view.Finance.Invoice.WinFormImportInvoice-ClearData',
                                     style: 'margin-top:18px;margin-left:20px',
-                                    text: lang('Clear'),
+                                    text: 'Clear',
                                     handler: function () {
                                         Ext.Ajax.request({
                                             url: m_api + '/v1/finance/invoice/clear_data',
@@ -160,7 +160,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.WinFormImportInvoice', {
 												storeGridFailed.load();
                                             },
                                             failure: function(response) {
-                                                Ext.MessageBox.alert(lang('Warning'), lang('Failed to generate template !'));
+                                                Ext.MessageBox.alert('Warning', 'Failed to generate template !');
                                             }
                                         });
                                     }
@@ -180,12 +180,12 @@ Ext.define('MitraJaya.view.Finance.Invoice.WinFormImportInvoice', {
                     overflowX: 'scroll',
                     overflowY: 'scroll',
                     selType: 'rowmodel',
-                    title: lang('Failed Data'),
+                    title: 'Failed Data',
                     store: storeGridFailed,
                     minHeight: 500,
                     viewConfig: {
                         deferEmptyText: false,
-                        emptyText: lang('No data Available'),
+                        emptyText: 'No data Available',
                     },
                     dockedItems: [{
                         xtype: 'pagingtoolbar',
@@ -198,35 +198,35 @@ Ext.define('MitraJaya.view.Finance.Invoice.WinFormImportInvoice', {
                         flex: 0.2,
                         xtype: 'rownumberer'
                     }, {
-                        text: lang('InvoiceID'),
+                        text: 'InvoiceID',
                         dataIndex: 'InvoiceID',
                         hidden: true
                     }, {
-                        text: lang('Invoice Number'),
+                        text: 'Invoice Number',
                         dataIndex: 'InvoiceNumber',
                         flex: 1.5
                     }, {
-                        text: lang('Month'),
+                        text: 'Month',
                         dataIndex: 'InvoicePeriodMonth',
                         flex: 1.5
                     }, {
-                        text: lang('Year'),
+                        text: 'Year',
                         dataIndex: 'InvoicePeriodYear',
                         flex: 2
                     }, {
-                        text: lang('PO Number'),
+                        text: 'PO Number',
                         dataIndex: 'ContractNumber',
                         flex: 2
                     }, {
-                        text: lang('Tax Number'),
+                        text: 'Tax Number',
                         dataIndex: 'TaxNumber',
                         flex: 2
                     }, {
-                        text: lang('Description'),
+                        text: 'Description',
                         dataIndex: 'Description',
                         flex: 1
                     }, {
-                        text: lang('Amount'),
+                        text: 'Amount',
                         dataIndex: 'InvoiceAmount',
                         flex: 2
                     }, {
@@ -241,7 +241,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.WinFormImportInvoice', {
         this.callParent(arguments);
     },
     buttons: [{
-        text: lang('Close'),
+        text: 'Close',
         margin: '5px',
         scale: 'large',
         ui: 's-button',

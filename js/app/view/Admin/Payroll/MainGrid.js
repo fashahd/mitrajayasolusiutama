@@ -92,7 +92,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 							items: [{
 								xtype: 'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text: lang('Search'),
+								text: 'Search',
 								style: 'margin-left:20px; margin-top:30px',
 								cls: 'Sfr_BtnFormCyan',
 								overCls: 'Sfr_BtnFormCyan-Hover',
@@ -135,7 +135,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/signature.svg',
-					text: lang('Setting Payroll'),
+					text: 'Setting Payroll',
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					hidden: m_act_update,
@@ -156,7 +156,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-					text: lang('Update'),
+					text: 'Update',
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					hidden: m_act_update,
@@ -203,7 +203,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/paperclip.svg',
-					text: lang('Slip Gaji'),
+					text: 'Slip Gaji',
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					hidden: m_act_update,
@@ -238,7 +238,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-					text: lang('Share'),
+					text: 'Share',
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					style: 'margin-top:25px',
@@ -290,7 +290,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 								Ext.Ajax.request({
 									url: m_api + '/v1/admin/payroll/share_payroll',
 									method: 'GET',
-									waitMsg: lang('Please Wait'),
+									waitMsg: 'Please Wait',
 									params: {
 										month: month,
 										year: year,
@@ -322,7 +322,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-					text: lang('Share to All'),
+					text: 'Share to All',
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					style: 'margin-top:25px',
@@ -356,7 +356,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 								Ext.Ajax.request({
 									url: m_api + '/v1/admin/payroll/share_payroll_all',
 									method: 'GET',
-									waitMsg: lang('Please Wait'),
+									waitMsg: 'Please Wait',
 									params: {
 										month: month,
 										year: year
@@ -396,7 +396,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 				}]
 			}],
 			columns: [{
-				text: lang('Employee ID'),
+				text: 'Employee ID',
 				dataIndex: 'people_id',
 				hidden: true,
 				flex: 1
@@ -405,15 +405,15 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 				flex: 0.1,
 				xtype: 'rownumberer'
 			}, {
-				text: lang('Employee ID'),
+				text: 'Employee ID',
 				dataIndex: 'people_ext_id',
 				flex: 1
 			}, {
-				text: lang('Employee Name'),
+				text: 'Employee Name',
 				dataIndex: 'people_name',
 				flex: 1
 			}, {
-				text: lang('Bruto Salary'),
+				text: 'Bruto Salary',
 				dataIndex: 'salary',
 				flex: 1,
 				renderer: function (t, meta, record) {
@@ -424,7 +424,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 					return RetVal;
 				}
 			}, {
-				text: lang('Incentive'),
+				text: 'Incentive',
 				dataIndex: 'incentive',
 				hidden:true,
 				flex: 1,
@@ -436,7 +436,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 					return RetVal;
 				}
 			}, {
-				text: lang('Deduction'),
+				text: 'Deduction',
 				dataIndex: 'deduction',
 				flex: 1,
 				renderer: function (t, meta, record) {
@@ -447,7 +447,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 					return RetVal;
 				}
 			}, {
-				text: lang('Nett Salary'),
+				text: 'Nett Salary',
 				dataIndex: 'net_salary',
 				flex: 1,
 				renderer: function (t, meta, record) {

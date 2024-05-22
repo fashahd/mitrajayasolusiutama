@@ -39,7 +39,7 @@ Ext.define('MitraJaya.view.Project.MainGrid', {
 			cls: 'Sfr_ConMenu',
 			items: [{
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-				text: lang('View'),
+				text: 'View',
 				cls: 'Sfr_BtnConMenuWhite',
 				itemId: 'MitraJaya.view.Project.MainGrid-ContextMenuView',
 				handler: function () {
@@ -69,7 +69,7 @@ Ext.define('MitraJaya.view.Project.MainGrid', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-				text: lang('Update'),
+				text: 'Update',
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_update,
 				itemId: 'MitraJaya.view.Project.MainGrid-ContextMenuUpdate',
@@ -100,7 +100,7 @@ Ext.define('MitraJaya.view.Project.MainGrid', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-				text: lang('Delete'),
+				text: 'Delete',
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_delete,
 				itemId: 'MitraJaya.view.Project.MainGrid-ContextMenuDelete',
@@ -184,7 +184,7 @@ Ext.define('MitraJaya.view.Project.MainGrid', {
 								baseCls: 'Sfr_TxtfieldSearchGrid',
 								fieldLabel: 'Project Name',
 								labelAlign: 'top',
-								emptyText: lang('Search by Project Name')
+								emptyText: 'Search by Project Name'
 							}]
 						}, {
 							columnWidth: 0.2,
@@ -208,7 +208,7 @@ Ext.define('MitraJaya.view.Project.MainGrid', {
 							items: [{
 								xtype: 'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text: lang('Search'),
+								text: 'Search',
 								style: 'margin-left:20px; margin-top:30px',
 								cls: 'Sfr_BtnFormCyan',
 								overCls: 'Sfr_BtnFormCyan-Hover',
@@ -241,14 +241,14 @@ Ext.define('MitraJaya.view.Project.MainGrid', {
 				store: thisObj.StoreGridMain,
 				dock: 'bottom',
 				displayInfo: true,
-				displayMsg: lang('Showing') + ' {0} ' + lang('to') + ' {1} ' + lang('of') + ' {2} ' + lang('data')
+				displayMsg: 'Showing' + ' {0} ' + 'to' + ' {1} ' + 'of' + ' {2} ' + 'data'
 			}, {
 				xtype: 'toolbar',
 				dock: 'top',
 				items: [{
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-					text: lang('Add'),
+					text: 'Add',
 					hidden: m_act_add,
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
@@ -279,7 +279,7 @@ Ext.define('MitraJaya.view.Project.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-					text: lang('Export'),
+					text: 'Export',
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					hidden: m_act_export_excel,
@@ -302,7 +302,7 @@ Ext.define('MitraJaya.view.Project.MainGrid', {
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/order/export_order',
 									method: 'POST',
-									waitMsg: lang('Please Wait'),
+									waitMsg: 'Please Wait',
 									params: {
 										keySearch: keySearch,
 										StartDate: StartDate,
@@ -350,7 +350,7 @@ Ext.define('MitraJaya.view.Project.MainGrid', {
 				}, {
 					icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
 					cls: 'Sfr_BtnGridPaleBlue',
-					text: lang('Advanced Filter'),
+					text: 'Advanced Filter',
 					hidden: true,
 					handler: function () {
 						//advanced search
@@ -388,23 +388,23 @@ Ext.define('MitraJaya.view.Project.MainGrid', {
 				flex: 0.2,
 				xtype: 'rownumberer'
 			}, {
-				text: lang('ProjectID'),
+				text: 'ProjectID',
 				dataIndex: 'ProjectID',
 				hidden: true
 			}, {
-				text: lang('Project Name'),
+				text: 'Project Name',
 				dataIndex: 'ProjectName',
 				flex: 1.5
 			}, {
-				text: lang('Customer Name'),
+				text: 'Customer Name',
 				dataIndex: 'CustomerName',
 				flex: 1
 			}, {
-				text: lang('Total PO'),
+				text: 'Total PO',
 				dataIndex: 'TotalPO',
 				flex: 2
 			}, {
-				text: lang('Total Invoice'),
+				text: 'Total Invoice',
 				dataIndex: 'TotalInvoice',
 				flex: 2
 			}]

@@ -1,7 +1,7 @@
 Ext.define('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction', {
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction',
-    title: lang('Import Form'),
+    title: 'Import Form',
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -33,7 +33,7 @@ Ext.define('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction',
                         xtype: 'button',
                         id: 'MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction-DownloadTemplate',
                         style: 'margin-top:15px;',
-                        text: lang('Download Template Excel'),
+                        text: 'Download Template Excel',
                         handler: function () {
                             Ext.MessageBox.show({
                                 msg: 'Please wait...',
@@ -56,7 +56,7 @@ Ext.define('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction',
                                     window.location = m_api + '/v1/finance/order/download_template' + "?url=" + text.url + '&namaFile=template_bank_transaction.xlsx'
                                 },
                                 failure: function (response) {
-                                    Ext.MessageBox.alert(lang('Warning'), lang('Failed to generate template !'));
+                                    Ext.MessageBox.alert('Warning', 'Failed to generate template !');
                                 }
                             });
                             Ext.MessageBox.hide();
@@ -116,7 +116,7 @@ Ext.define('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction',
                                                     if (o.result.message != undefined) {
                                                         msg = o.result.message;
                                                     } else {
-                                                        msg = lang('Connection error');
+                                                        msg = 'Connection error';
                                                     }
                                                     Ext.getCmp('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction-Form-FileName').setValue(null)
                                                     Ext.MessageBox.show({
@@ -132,7 +132,7 @@ Ext.define('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction',
                                         } else {
                                             Ext.MessageBox.show({
                                                 title: 'Attention',
-                                                msg: lang('Form not complete yet'),
+                                                msg: 'Form not complete yet',
                                                 buttons: Ext.MessageBox.OK,
                                                 animateTarget: 'mb9',
                                                 icon: 'ext-mb-info'
@@ -150,7 +150,7 @@ Ext.define('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction',
                                     xtype: 'button',
                                     id: 'MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction-ClearData',
                                     style: 'margin-top:18px;margin-left:20px',
-                                    text: lang('Clear'),
+                                    text: 'Clear',
                                     handler: function () {
                                         Ext.Ajax.request({
                                             url: m_api + '/v1/report/bank_transaction/clear_data',
@@ -160,7 +160,7 @@ Ext.define('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction',
 												storeGridFailed.load();
                                             },
                                             failure: function(response) {
-                                                Ext.MessageBox.alert(lang('Warning'), lang('Failed to generate template !'));
+                                                Ext.MessageBox.alert('Warning', 'Failed to generate template !');
                                             }
                                         });
                                     }
@@ -180,12 +180,12 @@ Ext.define('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction',
                     overflowX: 'scroll',
                     overflowY: 'scroll',
                     selType: 'rowmodel',
-                    title: lang('Failed Data'),
+                    title: 'Failed Data',
                     store: storeGridFailed,
                     minHeight: 500,
                     viewConfig: {
                         deferEmptyText: false,
-                        emptyText: lang('No data Available'),
+                        emptyText: 'No data Available',
                     },
                     dockedItems: [{
                         xtype: 'pagingtoolbar',
@@ -198,43 +198,43 @@ Ext.define('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction',
                         flex: 0.2,
                         xtype: 'rownumberer'
                     }, {
-						text: lang('BankTransactionID'),
+						text: 'BankTransactionID',
 						dataIndex: 'BankTransactionID',
 						hidden: true
 					},{
-						text: lang('Date Transaction'),
+						text: 'Date Transaction',
 						dataIndex: 'DateTransaction',
 						flex: 10
 					},{
-						text: lang('Checking Account'),
+						text: 'Checking Account',
 						dataIndex: 'CheckingAccount',
 						flex: 10
 					},{
-						text: lang('Transaction No'),
+						text: 'Transaction No',
 						dataIndex: 'NoVoucher',
 						flex: 10
 					},{
-						text: lang('Cost Element'),
+						text: 'Cost Element',
 						dataIndex: 'CostElement',
 						flex: 10
 					},{
-						text: lang('Description'),
+						text: 'Description',
 						dataIndex: 'Description',
 						flex: 20
 					},{
-						text: lang('Debit'),
+						text: 'Debit',
 						dataIndex: 'TransactionAmountDebit',
 						flex: 15
 					},{
-						text: lang('Credit'),
+						text: 'Credit',
 						dataIndex: 'TransactionAmountCredit',
 						flex: 15
 					},{
-						text: lang('Project'),
+						text: 'Project',
 						dataIndex: 'Project',
 						flex: 15
 					},{
-						text: lang('Error'),
+						text: 'Error',
 						dataIndex: 'ErrorMessages',
 						flex: 15
 					}]
@@ -245,7 +245,7 @@ Ext.define('MitraJaya.view.Report.BankTransaction.WinFormImportBankTransaction',
         this.callParent(arguments);
     },
     buttons: [{
-        text: lang('Close'),
+        text: 'Close',
         margin: '5px',
         scale: 'large',
         ui: 's-button',

@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll', {
 	extend: 'Ext.window.Window',
 	id: 'MitraJaya.view.Admin.Payroll.WinFormSettingPayroll',
 	cls: 'Sfr_LayoutPopupWindows',
-	title: lang('Payroll Setting'),
+	title: 'Payroll Setting',
 	closable: true,
 	modal: true,
 	closeAction: 'destroy',
@@ -59,7 +59,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll', {
 									labelAlign: 'top',
 									id: 'MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData-signatrue_name',
 									name: 'MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData-signatrue_name',
-									fieldLabel: lang('Name')
+									fieldLabel: 'Name'
 								}]
 							}, {
 								columnWidth: 0.5,
@@ -73,21 +73,21 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll', {
 									xtype: 'fileuploadfield',
 									labelWidth: 125,
 									labelAlign: 'top',
-									fieldLabel: lang('Attachment') + ' <sup style="color:#FF0000;">(Max:10MB)</sup>' + ' *',
+									fieldLabel: 'Attachment' + ' <sup style="color:#FF0000;">(Max:10MB)</sup>' + ' *',
 									id: 'MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData-document',
 									name: 'MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData-document',
-									buttonText: lang('Browse'),
+									buttonText: 'Browse',
 									listeners: {
 										'change': function (fb, v) {
 
 											if (Math.floor(fb.fileInputEl.dom.files[0].size / 1000000) > 10) { //maksimal 10MB
-												alert(lang("file size more than 10MB"));
+												alert("file size more than 10MB");
 												Ext.getCmp('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData-document').reset(true);
 											} else {
 												Ext.getCmp('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData').getForm().submit({
 													url: m_api + '/v1/admin/payroll/signature_upload',
 													clientValidation: false,
-													waitMsg: lang('Sending Image'),
+													waitMsg: 'Sending Image',
 													success: function (fp, o) {
 														Ext.getCmp('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData-document_old').setValue(o.result.FilePath);
 														Ext.getCmp('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData-FileDocument').update('<a href="' + o.result.file + '" title="Download File" target="_blank"><img src="' + o.result.file + '" height="200" /></a>');
@@ -95,7 +95,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll', {
 													},
 													failure: function (fp, o) {
 														Ext.MessageBox.show({
-															title: lang('Attention'),
+															title: 'Attention',
 															msg: o.result.message,
 															buttons: Ext.MessageBox.OK,
 															animateTarget: 'mb9',
@@ -110,7 +110,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll', {
 									id: 'MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-FormBasicData-FileDocument',
 									html: '<img src="' + m_api_base_url + '/assets/images/no-images.png" height="200" />'
 								}, {
-									html: '<div style="margin-top:5px;font-size:10px;font-style:italic;">' + lang('File must Image') + '</div>'
+									html: '<div style="margin-top:5px;font-size:10px;font-style:italic;">' + 'File must Image' + '</div>'
 								}]
 							}]
 						}]
@@ -123,7 +123,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll', {
 		//buttons -------------------------------------------------------------- (begin)
 		thisObj.buttons = [{
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-			text: lang('Save'),
+			text: 'Save',
 			cls: 'Sfr_BtnFormBlue',
 			overCls: 'Sfr_BtnFormBlue-Hover',
 			id: 'MitraJaya.view.Admin.Payroll.WinFormSettingPayroll-BtnSave',
@@ -161,7 +161,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll', {
 								var r = Ext.decode(o.response.responseText);
 
 								Ext.MessageBox.show({
-									title: lang('Error'),
+									title: 'Error',
 									msg: r.message,
 									buttons: Ext.MessageBox.OK,
 									animateTarget: 'mb9',
@@ -169,7 +169,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll', {
 								});
 							} catch (err) {
 								Ext.MessageBox.show({
-									title: lang('Error'),
+									title: 'Error',
 									msg: 'Connection Error',
 									buttons: Ext.MessageBox.OK,
 									animateTarget: 'mb9',
@@ -181,8 +181,8 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll', {
 
 				} else {
 					// Ext.MessageBox.show({
-					// 	title: lang('Attention'),
-					// 	msg: lang('Form not complete yet'),
+					// 	title: 'Attention',
+					// 	msg: 'Form not complete yet',
 					// 	buttons: Ext.MessageBox.OK,
 					// 	animateTarget: 'mb9',
 					// 	icon: 'ext-mb-info'
@@ -198,7 +198,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormSettingPayroll', {
 			}
 		}, {
 			icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: lang('Close'),
+			text: 'Close',
 			cls: 'Sfr_BtnFormGrey',
 			overCls: 'Sfr_BtnFormGrey-Hover',
 			handler: function () {

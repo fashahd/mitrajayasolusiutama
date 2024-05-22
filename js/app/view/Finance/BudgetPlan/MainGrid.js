@@ -46,7 +46,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: lang('View'),
+                text: 'View',
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Finance.BudgetPlan.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -75,7 +75,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: lang('Update'),
+                text: 'Update',
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Finance.BudgetPlan.MainGrid-ContextMenuUpdate',
@@ -158,7 +158,7 @@
 							items: [{
 								xtype:'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text:lang('Search'),
+								text:'Search',
 								style:'margin-left:20px; margin-top:30px',
 								cls:'Sfr_BtnFormCyan',
 								overCls:'Sfr_BtnFormCyan-Hover',
@@ -173,7 +173,7 @@
 							items: [{
 								xtype:'button',
 								icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-								text: lang('Export'),
+								text: 'Export',
 								cls:'Sfr_BtnGridNewWhite',
 								overCls:'Sfr_BtnGridNewWhite-Hover',
 								style:'margin-top:25px',
@@ -194,7 +194,7 @@
 											Ext.Ajax.request({
 												url: m_api + '/v1/finance/budgetplan/export_data',
 												method: 'GET',
-												waitMsg: lang('Please Wait'),
+												waitMsg: 'Please Wait',
 												params: {
 													Year : Year,
 													Month : Month
@@ -264,7 +264,7 @@
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-                    text: lang('Export'),
+                    text: 'Export',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -284,7 +284,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/invoice/export_invoice',
 									method: 'POST',
-									waitMsg: lang('Please Wait'),
+									waitMsg: 'Please Wait',
 									params: {
 										keySearch : keySearch,
 										Month : Month,
@@ -334,7 +334,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: lang('Add'),
+                    text: 'Add',
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -355,7 +355,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                    text: lang('Update'),
+                    text: 'Update',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_update,
@@ -403,7 +403,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                    text: lang('Delete'),
+                    text: 'Delete',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_delete,
@@ -492,11 +492,11 @@
                 }]
             }],
             columns:[{
-                text: lang(''),
+                text: '',
                 dataIndex: 'Item',
                 flex: 1
             },{
-                text: lang('Budget'),
+                text: 'Budget',
                 dataIndex: 'Budget',
                 flex: 1,
 				renderer: function (t, meta, record) {
@@ -507,7 +507,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Actual'),
+                text: 'Actual',
                 dataIndex: 'Actual',
                 flex: 1,
 				renderer: function (t, meta, record) {
@@ -518,7 +518,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Outstanding'),
+                text: 'Outstanding',
                 dataIndex: 'Outstanding',
                 flex: 1,
 				renderer: function (t, meta, record) {
@@ -621,7 +621,7 @@
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-                    text: lang('Export'),
+                    text: 'Export',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -641,7 +641,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/invoice/export_invoice',
 									method: 'POST',
-									waitMsg: lang('Please Wait'),
+									waitMsg: 'Please Wait',
 									params: {
 										keySearch : keySearch,
 										Month : Month,
@@ -691,7 +691,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: lang('Add'),
+                    text: 'Add',
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -712,7 +712,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                    text: lang('Update'),
+                    text: 'Update',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_update,
@@ -763,7 +763,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                    text: lang('Delete'),
+                    text: 'Delete',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_delete,
@@ -852,15 +852,15 @@
                 }]
             }],
             columns:[{
-                text: lang(''),
+                text: '',
                 dataIndex: 'Item',
                 flex: 1
             },{
-                text: lang('Category'),
+                text: 'Category',
                 dataIndex: 'Category',
                 flex: 1
             },{
-                text: lang('Budget'),
+                text: 'Budget',
                 dataIndex: 'Budget',
                 flex: 1,
 				renderer: function (t, meta, record) {
@@ -871,7 +871,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Actual'),
+                text: 'Actual',
                 dataIndex: 'Actual',
                 flex: 1,
 				renderer: function (t, meta, record) {
@@ -882,7 +882,7 @@
                     return RetVal;
                 }
             },{
-                text: lang('Outstanding'),
+                text: 'Outstanding',
                 dataIndex: 'Outstanding',
                 flex: 1,
 				renderer: function (t, meta, record) {
