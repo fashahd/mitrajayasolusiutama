@@ -96,7 +96,7 @@ Ext.define('MitraJaya.view.Admin.CostElement.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: lang('Form CostElement'),
+            title: 'Form CostElement',
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Finance.CostElement-FormGeneralData',
@@ -134,20 +134,20 @@ Ext.define('MitraJaya.view.Admin.CostElement.MainForm', {
                                     baseCls: 'Sfr_FormInputMandatory',
                                     id: 'MitraJaya.view.Admin.CostElement.MainForm-FormBasicData-Code',
                                     name: 'MitraJaya.view.Admin.CostElement.MainForm-FormBasicData-Code',
-                                    fieldLabel: lang('Code')
+                                    fieldLabel: 'Code'
                                 }, {
                                     xtype: 'textfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.CostElement.MainForm-FormBasicData-Description',
                                     name: 'MitraJaya.view.Admin.CostElement.MainForm-FormBasicData-Description',
-                                    fieldLabel: lang('Description')
+                                    fieldLabel: 'Description'
                                 }]
                             }]
                         }],
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: lang('Save'),
+                            text: 'Save',
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Admin.CostElement.MainForm-FormBasicData-BtnSave',
@@ -231,14 +231,14 @@ Ext.define('MitraJaya.view.Admin.CostElement.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Admin.CostElement.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + lang('CostElement Data') + '</div>'
+                html: '<div id="header_title_farmer">' + CostElement Data') + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Admin.CostElement.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Admin.CostElement.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to CostElement List') + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to CostElement List' + '</a></li></div>'
             }]
         }, {
             html: '<br />'

@@ -47,7 +47,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: lang('View'),
+                text: 'View',
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Warehouse.Product.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -77,7 +77,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: lang('Update'),
+                text: 'Update',
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Warehouse.Product.MainGrid-ContextMenuUpdate',
@@ -108,7 +108,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: lang('Delete'),
+                text: 'Delete',
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Warehouse.Product.MainGrid-ContextMenuDelete',
@@ -191,7 +191,7 @@
 								baseCls: 'Sfr_TxtfieldSearchGrid',
 								fieldLabel:'Product Code',
 								labelAlign:'top',
-								emptyText: lang('Search by Product Code')
+								emptyText: 'Search by Product Code'
 							}]
 						},{
 							columnWidth: 0.15,
@@ -214,7 +214,7 @@
 							items: [{
 								xtype:'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text:lang('Search'),
+								text:'Search',
 								style:'margin-left:20px; margin-top:30px',
 								cls:'Sfr_BtnFormCyan',
 								overCls:'Sfr_BtnFormCyan-Hover',
@@ -247,14 +247,14 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
+                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: lang('Add'),
+                    text: 'Add',
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -285,7 +285,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-                    text: lang('Export'),
+                    text: 'Export',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -308,7 +308,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/Warehouse/Product/export_Product',
 									method: 'POST',
-									waitMsg: lang('Please Wait'),
+									waitMsg: 'Please Wait',
 									params: {
 										keySearch : keySearch,
 										Month : Month,
@@ -356,7 +356,7 @@
                 },{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: lang('Advanced Filter'),
+                    text: 'Advanced Filter',
 					hidden:true,
                     handler: function () {
                         //advanced search
@@ -394,19 +394,19 @@
                 flex: 0.4,
                 xtype: 'rownumberer'
             },{
-                text: lang('Product ID'),
+                text: 'Product ID',
                 dataIndex: 'ProductID',
                 hidden: true
             },{
-                text: lang('Product Code'),
+                text: 'Product Code',
                 dataIndex: 'ProductCode',
                 flex:15
             },{
-                text: lang('Product Name'),
+                text: 'Product Name',
                 dataIndex: 'ProductName',
                 flex: 20
             },{
-                text: lang('Product Brand'),
+                text: 'Product Brand',
                 dataIndex: 'ProductBrand',
                 flex: 20
             }]

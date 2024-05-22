@@ -40,7 +40,7 @@ function runSearch() {
 			console.log(chartOmset);
 
 			//build chart
-			line(chartOmset,'chart_laba', lang('Laba (Rugi) '+quartalname+' Tahun '+fyear+''),'PT.Mitrajaya Solusi Utama', null, month, 'total', 2, true);
+			line(chartOmset,'chart_laba', 'Laba (Rugi '+quartalname+' Tahun '+fyear+''),'PT.Mitrajaya Solusi Utama', null, month, 'total', 2, true);
 
 			$("#aktiva_lancar").html(r.data.TotalAktivaLancar);
 			$("#aktiva_tetap").html(r.data.TotalAktivTetap);
@@ -49,8 +49,8 @@ function runSearch() {
 
 			//build chart
 			plot([
-				[lang('Aktiva Lancar'), r.data.AktivaLancar],
-				[lang('Aktiva Tetap'), r.data.AktivaTetap]
+				['Aktiva Lancar', r.data.AktivaLancar],
+				['Aktiva Tetap', r.data.AktivaTetap]
 			],'chart_aktiva', r.data.Aktiva,'1', 'Aktiva', 0);
 		
 			plot([
@@ -75,8 +75,8 @@ function runSearch() {
 
 $(document).on('change', '#fcountry', function(e) {
     if(e.target.value == 'all_country') {
-        $('#fprovince').find('option').remove().end().append('<option value="all_province">'+lang('All')+' '+lang(m_label_prov)+'</option>');
-        $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+lang('All')+' '+lang(m_label_dis)+'</option>');
+        $('#fprovince').find('option').remove().end().append('<option value="all_province">'+'All'+' '+m_label_prov+'</option>');
+        $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+'All'+' '+m_label_dis+'</option>');
     } else {
         Ext.Ajax.request({
             url: m_api+'/common/combo_filter_province',
@@ -88,14 +88,14 @@ $(document).on('change', '#fcountry', function(e) {
                 var r = Ext.decode(rp.responseText);
                 //console.log(r);
     
-                $('#fprovince').find('option').remove().end().append('<option value="all_province">'+lang('All')+' '+lang(m_label_prov)+'</option>');
+                $('#fprovince').find('option').remove().end().append('<option value="all_province">'+'All'+' '+m_label_prov+'</option>');
                 $.each(r, function(index, val) {
                     $('#fprovince').append('<option value="'+val.id+'">'+val.label+'</option>');
                 });
             },
             failure: function(rp, o) {
-                $('#fprovince').find('option').remove().end().append('<option value="all_province">'+lang('All')+' '+lang(m_label_prov)+'</option>');
-                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+lang('All')+' '+lang(m_label_dis)+'</option>');
+                $('#fprovince').find('option').remove().end().append('<option value="all_province">'+'All'+' '+m_label_prov+'</option>');
+                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+'All'+' '+m_label_dis+'</option>');
             }
         });
     }
@@ -103,7 +103,7 @@ $(document).on('change', '#fcountry', function(e) {
 
 $(document).on('change', '#fprovince', function(e) {
     if(e.target.value == 'all_province') {
-        $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+lang('All')+' '+lang(m_label_dis)+'</option>');
+        $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+'All'+' '+m_label_dis+'</option>');
     } else {
         Ext.Ajax.request({
             url: m_api+'/common/combo_filter_district',
@@ -115,13 +115,13 @@ $(document).on('change', '#fprovince', function(e) {
                 var r = Ext.decode(rp.responseText);
                 //console.log(r);
     
-                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+lang('All')+' '+lang(m_label_dis)+'</option>');
+                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+'All'+' '+m_label_dis+'</option>');
                 $.each(r, function(index, val) {
                     $('#fdistrict').append('<option value="'+val.id+'">'+val.label+'</option>');
                 });
             },
             failure: function(rp, o) {
-                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+lang('All')+' '+lang(m_label_dis)+'</option>');
+                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+'All'+' '+m_label_dis+'</option>');
             }
         });
     }

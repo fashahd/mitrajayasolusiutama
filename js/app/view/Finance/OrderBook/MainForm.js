@@ -123,7 +123,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: lang('Order Book Data'),
+            title: 'Order Book Data',
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Finance.OrderBook-FormGeneralData',
@@ -156,13 +156,13 @@ Ext.define('MitraJaya.view.Finance.OrderBook.MainForm', {
 								},{
 									xtype: 'textfield',
 									labelAlign:'top',
-									fieldLabel: lang('PO Number'),
+									fieldLabel: 'PO Number',
 									id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-ContractNumber',
 									name: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-ContractNumber'
 								},{
 									xtype: 'textfield',
 									labelAlign:'top',
-									fieldLabel: lang('JO Number'),
+									fieldLabel: 'JO Number',
 									allowBlank: false,
 									baseCls: 'Sfr_FormInputMandatory',
 									id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-JONumber',
@@ -184,7 +184,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.MainForm', {
 									id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-ContractDate',
 									name: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-ContractDate',
 									labelAlign:'top',
-									fieldLabel: lang('PO Date'),
+									fieldLabel: 'PO Date',
 									format: 'Y-m-d',
 									value: new Date(),
 									allowBlank: false,
@@ -237,7 +237,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.MainForm', {
 									labelAlign:'top',
 									id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-ContractAmount',
 									name: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-ContractAmount',
-									fieldLabel: lang('PO (Exc. PPN)'),
+									fieldLabel: 'PO (Exc. PPN'),
 									listeners: {
 										change:function(o,val,a){
 											var ppn = Ext.getCmp('MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-PPN').getValue();
@@ -253,7 +253,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.MainForm', {
 									labelAlign:'top',
 									id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-PPN',
 									name: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-PPN',
-									fieldLabel: lang('PPN %'),
+									fieldLabel: 'PPN %',
 									value:11,
 									listeners: {
 										change:function(o,val,a){
@@ -271,27 +271,27 @@ Ext.define('MitraJaya.view.Finance.OrderBook.MainForm', {
 									readOnly:true,
 									id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-ContractAmountPPN',
 									name: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-ContractAmountPPN',
-									fieldLabel: lang('PPN'),
+									fieldLabel: 'PPN',
 								}, {
 									xtype: 'numericfield',
 									labelAlign:'top',
 									readOnly:true,
 									id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-TotalContactAmount',
 									name: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-TotalContactAmount',
-									fieldLabel: lang('PO (Inc. PPN)')
+									fieldLabel: 'PO (Inc. PPN')
 								}, {
 									xtype: 'textareafield',
 									labelAlign:'top',
 									id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-Description',
 									name: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-Description',
-									fieldLabel: lang('Description')
+									fieldLabel: 'Description'
 								}]
 							}]
 						}],
 						buttons: [{
 							xtype: 'button',
 							icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-							text: lang('Save'),
+							text: 'Save',
 							cls: 'Sfr_BtnFormBlue',
 							overCls: 'Sfr_BtnFormBlue-Hover',
 							id: 'MitraJaya.view.Finance.OrderBook.MainForm-FormBasicData-BtnSave',
@@ -310,7 +310,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.MainForm', {
 										success: function (fp, o) {
 											// Ext.MessageBox.show({
 											// 	title: 'Information',
-											// 	msg: lang('Data saved'),
+											// 	msg: 'Data saved',
 											// 	buttons: Ext.MessageBox.OK,
 											// 	animateTarget: 'mb9',
 											// 	icon: 'ext-mb-success',
@@ -402,8 +402,8 @@ Ext.define('MitraJaya.view.Finance.OrderBook.MainForm', {
 
 								} else {
 									// Ext.MessageBox.show({
-									// 	title: lang('Attention'),
-									// 	msg: lang('Form not complete yet'),
+									// 	title: 'Attention',
+									// 	msg: 'Form not complete yet',
 									// 	buttons: Ext.MessageBox.OK,
 									// 	animateTarget: 'mb9',
 									// 	icon: 'ext-mb-info'
@@ -448,14 +448,14 @@ Ext.define('MitraJaya.view.Finance.OrderBook.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Finance.OrderBook.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + lang('Order Book Data') + '</div>'
+                html: '<div id="header_title_farmer">' + 'Order Book Data' + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Finance.OrderBook.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Finance.OrderBook.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Order Book List') + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Order Book List' + '</a></li></div>'
             }]
         }, {
             html: '<br />'

@@ -32,7 +32,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: lang('View'),
+                text: 'View',
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Admin.Golongan.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -62,7 +62,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: lang('Update'),
+                text: 'Update',
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Admin.Golongan.MainGrid-ContextMenuUpdate',
@@ -93,7 +93,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: lang('Delete'),
+                text: 'Delete',
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Admin.Golongan.MainGrid-ContextMenuDelete',
@@ -170,14 +170,14 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
+                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: lang('Add'),
+                    text: 'Add',
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -208,7 +208,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-                    text: lang('Export'),
+                    text: 'Export',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -231,7 +231,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/invoice/export_invoice',
 									method: 'POST',
-									waitMsg: lang('Please Wait'),
+									waitMsg: 'Please Wait',
 									params: {
 										keySearch : keySearch,
 										StartDate : StartDate,
@@ -276,7 +276,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/upload.svg',
-                    text: lang('Import'),
+                    text: 'Import',
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -299,14 +299,14 @@
 					xtype: 'textfield',
 					baseCls: 'Sfr_TxtfieldSearchGrid',
 					width:340,
-					emptyText: lang('Search by Code, Press Enter to Search'),
+					emptyText: 'Search by Code, Press Enter to Search',
 					listeners: {
 						specialkey: thisObj.submitOnEnterGrid
 					}
 				},{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: lang('Advanced Filter'),
+                    text: 'Advanced Filter',
 					hidden:true,
                     handler: function () {
                         //advanced search
@@ -344,15 +344,15 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: lang('gol_id'),
+                text: 'gol_id',
                 dataIndex: 'gol_id',
                 hidden: true
             },{
-                text: lang('Golongan ID'),
+                text: 'Golongan ID',
                 dataIndex: 'gol_code',
                 flex:10
             },{
-                text: lang('Golongan Name'),
+                text: 'Golongan Name',
                 dataIndex: 'gol_name',
                 flex:20
             }]

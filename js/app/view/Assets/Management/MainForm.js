@@ -49,19 +49,19 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 						var r = Ext.decode(action.response.responseText);
 						
 						if(r.data.File1){
-							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File1Preview').update('    <img src="' + r.data.File1 + '" height="200" /><br><a href="' + r.data.File1 + '" title="Download File" target="_blank">' + lang('Download File') + '</a>');
+							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File1Preview').update('    <img src="' + r.data.File1 + '" height="200" /><br><a href="' + r.data.File1 + '" title="Download File" target="_blank">' + 'Download File' + '</a>');
 							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File1Preview').doLayout();
 						}
 						if(r.data.File2){
-							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File2Preview').update('    <img src="' + r.data.File2 + '" height="200" /><br><a href="' + r.data.File2 + '" title="Download File" target="_blank">' + lang('Download File') + '</a>');
+							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File2Preview').update('    <img src="' + r.data.File2 + '" height="200" /><br><a href="' + r.data.File2 + '" title="Download File" target="_blank">' + 'Download File' + '</a>');
 							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File2Preview').doLayout();
 						}
 						if(r.data.File3){
-							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File3Preview').update('    <img src="' + r.data.File3 + '" height="200" /><br><a href="' + r.data.File3 + '" title="Download File" target="_blank">' + lang('Download File') + '</a>');
+							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File3Preview').update('    <img src="' + r.data.File3 + '" height="200" /><br><a href="' + r.data.File3 + '" title="Download File" target="_blank">' + 'Download File' + '</a>');
 							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File3Preview').doLayout();
 						}
 						if(r.data.File4){
-							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File4Preview').update('    <img src="' + r.data.File4 + '" height="200" /><br><a href="' + r.data.File4 + '" title="Download File" target="_blank">' + lang('Download File') + '</a>');
+							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File4Preview').update('    <img src="' + r.data.File4 + '" height="200" /><br><a href="' + r.data.File4 + '" title="Download File" target="_blank">' + 'Download File' + '</a>');
 							Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File4Preview').doLayout();
 						}
 
@@ -114,7 +114,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 
 		//Panel Basic ==================================== (Begin)
 		thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-			title: lang('Form Invoice'),
+			title: 'Form Invoice',
 			frame: true,
 			cls: 'Sfr_PanelLayoutForm',
 			id: 'MitraJaya.view.Finance.Invoice-FormGeneralData',
@@ -150,7 +150,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 									labelAlign: 'top',
 									id: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-AssetCode',
 									name: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-AssetCode',
-									fieldLabel: lang('ID Asset'),
+									fieldLabel: 'ID Asset',
 									readOnly: true
 								}, {
 									xtype: 'combobox',
@@ -193,7 +193,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 									labelAlign: 'top',
 									id: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-AssetExternalID',
 									name: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-AssetExternalID',
-									fieldLabel: lang('Serial Number'),
+									fieldLabel: 'Serial Number',
 									allowBlank: false,
 									baseCls: 'Sfr_FormInputMandatory'
 								}, {
@@ -201,7 +201,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 									labelAlign: 'top',
 									id: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-AssetName',
 									name: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-AssetName',
-									fieldLabel: lang('Asset Name'),
+									fieldLabel: 'Asset Name',
 									allowBlank: false,
 									baseCls: 'Sfr_FormInputMandatory'
 								}, {
@@ -209,7 +209,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 									labelAlign: 'top',
 									id: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-HPP',
 									name: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-HPP',
-									fieldLabel: lang('HPP'),
+									fieldLabel: 'HPP',
 									allowBlank: false,
 									baseCls: 'Sfr_FormInputMandatory'
 								}]
@@ -232,16 +232,16 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 									xtype: 'fileuploadfield',
 									labelWidth: 125,
 									labelAlign: 'top',
-									fieldLabel: lang('Attachment') + ' <sup style="color:#FF0000;">(Max:10MB)</sup>',
+									fieldLabel: 'Attachment' + ' <sup style="color:#FF0000;">(Max:10MB)</sup>',
 									id: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-File2',
 									name: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-File2',
-									buttonText: lang('Browse'),
+									buttonText: 'Browse',
 									listeners: {
 										'change': function (fb, v) {
 											Ext.MessageBox.confirm('Message', 'Do you want to upload this data ?', function (btn) {
 												if (btn == 'yes') {
 													if (Math.floor(fb.fileInputEl.dom.files[0].size / 1000000) > 10) { //maksimal 10MB
-														alert(lang("file size more than 10MB"));
+														alert("file size more than 10MB");
 														Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File2').reset(true);
 													} else {
 														Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData').getForm().submit({
@@ -252,16 +252,16 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 																FileSource: 'File2',
 																AssetID: Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-AssetID').getValue()
 															},
-															waitMsg: lang('Sending Image'),
+															waitMsg: 'Sending Image',
 															success: function (fp, o) {
 
 																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File2_old').setValue(o.result.FilePath);
-																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File2Preview').update('    <img src="' + o.result.file + '" height="200" /><br><a href="' + o.result.file + '" title="Download File" target="_blank">' + lang('Download File') + '</a>');
+																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File2Preview').update('    <img src="' + o.result.file + '" height="200" /><br><a href="' + o.result.file + '" title="Download File" target="_blank">' + 'Download File' + '</a>');
 																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File2Preview').doLayout();
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: lang('Attention'),
+																	title: 'Attention',
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -285,16 +285,16 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 									xtype: 'fileuploadfield',
 									labelWidth: 125,
 									labelAlign: 'top',
-									fieldLabel: lang('Attachment') + ' <sup style="color:#FF0000;">(Max:10MB)</sup>',
+									fieldLabel: 'Attachment' + ' <sup style="color:#FF0000;">(Max:10MB)</sup>',
 									id: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-File3',
 									name: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-File3',
-									buttonText: lang('Browse'),
+									buttonText: 'Browse',
 									listeners: {
 										'change': function (fb, v) {
 											Ext.MessageBox.confirm('Message', 'Do you want to upload this data ?', function (btn) {
 												if (btn == 'yes') {
 													if (Math.floor(fb.fileInputEl.dom.files[0].size / 1000000) > 10) { //maksimal 10MB
-														alert(lang("file size more than 10MB"));
+														alert("file size more than 10MB");
 														Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File3').reset(true);
 													} else {
 														Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData').getForm().submit({
@@ -305,16 +305,16 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 																FileSource: 'File3',
 																AssetID: Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-AssetID').getValue()
 															},
-															waitMsg: lang('Sending Image'),
+															waitMsg: 'Sending Image',
 															success: function (fp, o) {
 
 																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File3_old').setValue(o.result.FilePath);
-																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File3Preview').update('    <img src="' + o.result.file + '" height="200" /><br><a href="' + o.result.file + '" title="Download File" target="_blank">' + lang('Download File') + '</a>');
+																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File3Preview').update('    <img src="' + o.result.file + '" height="200" /><br><a href="' + o.result.file + '" title="Download File" target="_blank">' + 'Download File' + '</a>');
 																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File3Preview').doLayout();
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: lang('Attention'),
+																	title: 'Attention',
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -347,16 +347,16 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 									xtype: 'fileuploadfield',
 									labelWidth: 125,
 									labelAlign: 'top',
-									fieldLabel: lang('Attachment') + ' <sup style="color:#FF0000;">(Max:10MB)</sup>',
+									fieldLabel: 'Attachment' + ' <sup style="color:#FF0000;">(Max:10MB)</sup>',
 									id: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-File1',
 									name: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-File1',
-									buttonText: lang('Browse'),
+									buttonText: 'Browse',
 									listeners: {
 										'change': function (fb, v) {
 											Ext.MessageBox.confirm('Message', 'Do you want to upload this data ?', function (btn) {
 												if (btn == 'yes') {
 													if (Math.floor(fb.fileInputEl.dom.files[0].size / 1000000) > 10) { //maksimal 10MB
-														alert(lang("file size more than 10MB"));
+														alert("file size more than 10MB");
 														Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File1').reset(true);
 													} else {
 														Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData').getForm().submit({
@@ -367,16 +367,16 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 																FileSource: 'File1',
 																AssetID: Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-AssetID').getValue()
 															},
-															waitMsg: lang('Sending Image'),
+															waitMsg: 'Sending Image',
 															success: function (fp, o) {
 
 																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File1_old').setValue(o.result.FilePath);
-																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File1Preview').update('    <img src="' + o.result.file + '" height="200" /><br><a href="' + o.result.file + '" title="Download File" target="_blank">' + lang('Download File') + '</a>');
+																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File1Preview').update('    <img src="' + o.result.file + '" height="200" /><br><a href="' + o.result.file + '" title="Download File" target="_blank">' + 'Download File' + '</a>');
 																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File1Preview').doLayout();
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: lang('Attention'),
+																	title: 'Attention',
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -400,16 +400,16 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 									xtype: 'fileuploadfield',
 									labelWidth: 125,
 									labelAlign: 'top',
-									fieldLabel: lang('Attachment') + ' <sup style="color:#FF0000;">(Max:10MB)</sup>',
+									fieldLabel: 'Attachment' + ' <sup style="color:#FF0000;">(Max:10MB)</sup>',
 									id: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-File4',
 									name: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-File4',
-									buttonText: lang('Browse'),
+									buttonText: 'Browse',
 									listeners: {
 										'change': function (fb, v) {
 											Ext.MessageBox.confirm('Message', 'Do you want to upload this data ?', function (btn) {
 												if (btn == 'yes') {
 													if (Math.floor(fb.fileInputEl.dom.files[0].size / 1000000) > 10) { //maksimal 10MB
-														alert(lang("file size more than 10MB"));
+														alert("file size more than 10MB");
 														Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File4').reset(true);
 													} else {
 														Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData').getForm().submit({
@@ -420,17 +420,17 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 																FileSource: 'File4',
 																AssetID: Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-AssetID').getValue()
 															},
-															waitMsg: lang('Sending Image'),
+															waitMsg: 'Sending Image',
 															success: function (fp, o) {
 																console.log(o);
 
 																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File4_old').setValue(o.result.FilePath);
-																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File4Preview').update('    <img src="' + o.result.file + '" height="200" /><br><a href="' + o.result.file + '" title="Download File" target="_blank">' + lang('Download File') + '</a>');
+																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File4Preview').update('    <img src="' + o.result.file + '" height="200" /><br><a href="' + o.result.file + '" title="Download File" target="_blank">' + 'Download File' + '</a>');
 																Ext.getCmp('MitraJaya.view.Assets.Management.MainForm-FormBasicData-File4Preview').doLayout();
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: lang('Attention'),
+																	title: 'Attention',
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -449,7 +449,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 						buttons: [{
 							xtype: 'button',
 							icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-							text: lang('Save'),
+							text: 'Save',
 							cls: 'Sfr_BtnFormBlue',
 							overCls: 'Sfr_BtnFormBlue-Hover',
 							id: 'MitraJaya.view.Assets.Management.MainForm-FormBasicData-BtnSave',
@@ -529,7 +529,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 			cls: 'Sfr_ConMenu',
 			items: [{
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-				text: lang('View'),
+				text: 'View',
 				cls: 'Sfr_BtnConMenuWhite',
 				itemId: 'MitraJaya.view.Assets.Management.GridAssetHistory-ContextMenuView',
 				handler: function () {
@@ -549,7 +549,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-				text: lang('Update'),
+				text: 'Update',
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_update,
 				itemId: 'MitraJaya.view.Assets.Management.GridAssetHistory-ContextMenuUpdate',
@@ -570,7 +570,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-				text: lang('Delete'),
+				text: 'Delete',
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_delete,
 				itemId: 'MitraJaya.view.Assets.Management.GridAssetHistory-ContextMenuDelete',
@@ -629,7 +629,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 		});
 
 		thisObj.ObjPanelTransaction = Ext.create('Ext.panel.Panel', {
-			title: lang('List of Historical Asset'),
+			title: 'List of Historical Asset',
 			frame: false,
 			collapsible: false,
 			margin: '0 0 40 0',
@@ -649,7 +649,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 					cls: 'Sfr_BtnGridNewWhite',
 					style: 'margin: 10px 0px 10px 0px',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
-					text: lang('Add'),
+					text: 'Add',
 					id: 'MitraJaya.view.Assets.Management.Mainform-PanelAssetTransaction-BtnAdd',
 					handler: function () {
 						var WinFormHistory = Ext.create('MitraJaya.view.Assets.Management.WinFormHistory');
@@ -680,7 +680,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 				},
 				minHeight: 125,
 				columns: [{
-					text: lang('Action'),
+					text: 'Action',
 					xtype: 'actioncolumn',
 					flex: 0.5,
 					items: [{
@@ -695,11 +695,11 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 					flex: 0.1,
 					xtype: 'rownumberer'
 				}, {
-					text: lang('HistoryID'),
+					text: 'HistoryID',
 					dataIndex: 'HistoryID',
 					hidden: true
 				}, {
-					text: lang('Employee'),
+					text: 'Employee',
 					dataIndex: 'EmployeeName',
 					flex: 1,
 					renderer: function (t, meta, record) {
@@ -710,15 +710,15 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 						return RetVal;
 					}
 				}, {
-					text: lang('Date of Submission'),
+					text: 'Date of Submission',
 					dataIndex: 'StartDate',
 					flex: 1
 				}, {
-					text: lang('Date of Return'),
+					text: 'Date of Return',
 					dataIndex: 'EndDate',
 					flex: 1
 				}, {
-					text: lang('Status'),
+					text: 'Status',
 					dataIndex: 'Status',
 					flex: 1
 				}]
@@ -736,14 +736,14 @@ Ext.define('MitraJaya.view.Assets.Management.MainForm', {
 			},
 			items: [{
 				id: 'MitraJaya.view.Assets.Management.MainForm-labelInfoInsert',
-				html: '<div id="header_title_farmer">' + lang('Asset Data') + '</div>'
+				html: '<div id="header_title_farmer">' + 'Asset Data' + '</div>'
 			}]
 		}, {
 			items: [{
 				id: 'MitraJaya.view.Assets.Management.MainForm-LinkBackToList',
 				html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 					+ '<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Assets.Management.MainForm\').BackToList()">'
-					+ '<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Assets List') + '</a></li></div>'
+					+ '<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Assets List' + '</a></li></div>'
 			}]
 		}, {
 			html: '<br />'

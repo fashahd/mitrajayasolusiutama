@@ -56,7 +56,7 @@
     loadInfoFilter: function() {
         Ext.Ajax.request({
             url: m_api + '/page/information_grid',
-            waitMsg: lang('Please Wait'),
+            waitMsg: 'Please Wait',
             success: function(data) {
                 // document.getElementById('Sfr_IdBoxInfoDataGrid').innerHTML = data.responseText;
             }

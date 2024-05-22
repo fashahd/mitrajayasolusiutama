@@ -116,7 +116,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: lang('Form Product'),
+            title: 'Form Product',
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Warehouse.Product-FormGeneralData',
@@ -152,7 +152,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-ProductCode',
                                     name: 'MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-ProductCode',
-                                    fieldLabel: lang('Product Code'),
+                                    fieldLabel: 'Product Code',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                 }, {
@@ -160,7 +160,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-ProductName',
                                     name: 'MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-ProductName',
-                                    fieldLabel: lang('Product Name'),
+                                    fieldLabel: 'Product Name',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                 }, {
@@ -199,7 +199,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.MainForm', {
                                             xtype: 'fileuploadfield',
                                             id: 'MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-PhotoInput2',
                                             name: 'MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-PhotoInput2',
-                                            buttonText: lang('Browse'),
+                                            buttonText: 'Browse',
                                             cls: 'Sfr_FormBrowseBtn',
                                             listeners: {
                                                 'change': function (fb, v) {
@@ -216,7 +216,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.MainForm', {
                                                         },
                                                         failure: function (fp, o) {
                                                             Ext.MessageBox.show({
-                                                                title: lang('Error'),
+                                                                title: 'Error',
                                                                 msg: o.result.message,
                                                                 buttons: Ext.MessageBox.OK,
                                                                 animateTarget: 'mb9',
@@ -257,7 +257,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.MainForm', {
                                             xtype: 'fileuploadfield',
                                             id: 'MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-PhotoInput',
                                             name: 'MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-PhotoInput',
-                                            buttonText: lang('Browse'),
+                                            buttonText: 'Browse',
                                             cls: 'Sfr_FormBrowseBtn',
                                             listeners: {
                                                 'change': function (fb, v) {
@@ -274,7 +274,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.MainForm', {
                                                         },
                                                         failure: function (fp, o) {
                                                             Ext.MessageBox.show({
-                                                                title: lang('Error'),
+                                                                title: 'Error',
                                                                 msg: o.result.message,
                                                                 buttons: Ext.MessageBox.OK,
                                                                 animateTarget: 'mb9',
@@ -297,7 +297,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.MainForm', {
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: lang('Save'),
+                            text: 'Save',
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Warehouse.Product.MainForm-FormBasicData-BtnSave',
@@ -402,14 +402,14 @@ Ext.define('MitraJaya.view.Warehouse.Product.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Warehouse.Product.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + lang('Product Data') + '</div>'
+                html: '<div id="header_title_farmer">' + 'Product Data' + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Warehouse.Product.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Product.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Product List') + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Product List' + '</a></li></div>'
             }]
         }, {
             html: '<br />'

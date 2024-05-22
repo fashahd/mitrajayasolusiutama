@@ -98,7 +98,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: lang('Form Invoice'),
+            title: 'Form Invoice',
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Finance.Invoice-FormGeneralData',
@@ -134,7 +134,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceNumber',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceNumber',
-                                    fieldLabel: lang('Invoice Number'),
+                                    fieldLabel: 'Invoice Number',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                 }, {
@@ -196,20 +196,20 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-people_name',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-people_name',
-                                    fieldLabel: lang('Invoice PJ'),
+                                    fieldLabel: 'Invoice PJ',
                                     readOnly: true
                                 }, {
                                     xtype: 'textfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-TaxNumber',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-TaxNumber',
-                                    fieldLabel: lang('Tax Number'),
+                                    fieldLabel: 'Tax Number',
                                 }, {
                                     xtype: 'textareafield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-Description',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-Description',
-                                    fieldLabel: lang('Description'),
+                                    fieldLabel: 'Description',
                                     allowBlank: false,
                                 }]
                             }, {
@@ -225,7 +225,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceAmount',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceAmount',
-                                    fieldLabel: lang('Amount'),
+                                    fieldLabel: 'Amount',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                     listeners: {
@@ -252,7 +252,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
 									labelAlign:'top',
 									id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-VATPercent',
 									name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-VATPercent',
-									fieldLabel: lang('VAT %'),
+									fieldLabel: 'VAT %',
 									value:11,
                                     listeners: {
 										change:function(o,val,a){
@@ -272,41 +272,41 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceVAT',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceVAT',
-                                    fieldLabel: lang('VAT Amount'),
+                                    fieldLabel: 'VAT Amount',
                                     readOnly: true,
                                 }, {
                                     xtype: 'numericfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceTotal',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceTotal',
-                                    fieldLabel: lang('Total'),
+                                    fieldLabel: 'Total',
                                     readOnly: true,
                                 }, {
                                     xtype: 'datefield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceGR',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceGR',
-                                    fieldLabel: lang('Invoice GR Date'),
+                                    fieldLabel: 'Invoice GR Date',
                                     format: 'Y-m-d'
                                 }, {
                                     xtype: 'datefield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceReceived',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-InvoiceReceived',
-                                    fieldLabel: lang('Invoice Received Date'),
+                                    fieldLabel: 'Invoice Received Date',
                                     format: 'Y-m-d'
                                 }, {
                                     xtype: 'textfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-VendorInvoiceNumber',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-VendorInvoiceNumber',
-                                    fieldLabel: lang('Vendor Invoice Number'),
+                                    fieldLabel: 'Vendor Invoice Number',
                                 }, {
                                     xtype: 'textfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-VendorTaxNumber',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-VendorTaxNumber',
-                                    fieldLabel: lang('Vendor Tax Number'),
+                                    fieldLabel: 'Vendor Tax Number',
                                 }]
                             }, {
                                 columnWidth: 0.3,
@@ -319,11 +319,11 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                 items: [{
                                     xtype: 'radiogroup',
                                     labelAlign:'top',
-                                    fieldLabel: lang('Due Date Period'),
+                                    fieldLabel: 'Due Date Period',
                                     msgTarget: 'side',
                                     columns: 2,
                                     items: [{
-                                        boxLabel: lang('30 Days'),
+                                        boxLabel: '30 Days',
                                         name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-DueDatePeriod',
                                         inputValue: '30',
                                         id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-DueDatePeriod30',
@@ -356,7 +356,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                             }
                                         }
                                     }, {
-                                        boxLabel: lang('45 Days'),
+                                        boxLabel: '45 Days',
                                         name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-DueDatePeriod',
                                         inputValue: '45',
                                         id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-DuteDatePeriod45',
@@ -386,7 +386,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-DueDate',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-DueDate',
-                                    fieldLabel: lang('Due Date'),
+                                    fieldLabel: 'Due Date',
                                     readOnly: true,
                                     format: 'Y-m-d'
                                 }, {
@@ -394,14 +394,14 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-Paid',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-Paid',
-                                    fieldLabel: lang('Paid'),
+                                    fieldLabel: 'Paid',
                                     format: 'Y-m-d'
                                 }, {
                                     xtype: 'numericfield',
 									labelAlign:'top',
 									id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-PPH23Option',
 									name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-PPH23Option',
-									fieldLabel: lang('PPH23 %'),
+									fieldLabel: 'PPH23 %',
 									value:2,
 									listeners: {
 										change:function(o,val,a){
@@ -419,7 +419,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-PPH23Value',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-PPH23Value',
                                     readOnly: true,
-                                    fieldLabel: lang('PPH 23 Value'),
+                                    fieldLabel: 'PPH 23 Value',
 									listeners:{
 										change:function(){
 											thisObj.CalcluateGrossNetIncome();
@@ -431,13 +431,13 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-GrossIncome',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-GrossIncome',
                                     readOnly: true,
-                                    fieldLabel: lang('Gross Income'),
+                                    fieldLabel: 'Gross Income',
                                 }, {
                                     xtype: 'numericfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-NettIncome',
                                     name: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-NettIncome',
-                                    fieldLabel: lang('Nett Income'),
+                                    fieldLabel: 'Nett Income',
                                     readOnly: true,
                                 }]
                             }]
@@ -445,7 +445,7 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: lang('Save'),
+                            text: 'Save',
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Finance.Invoice.MainForm-FormBasicData-BtnSave',
@@ -529,14 +529,14 @@ Ext.define('MitraJaya.view.Finance.Invoice.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Finance.Invoice.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + lang('Invoice Data') + '</div>'
+                html: '<div id="header_title_farmer">' + 'Invoice Data' + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Finance.Invoice.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Finance.Invoice.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Invoice List') + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Invoice List' + '</a></li></div>'
             }]
         }, {
             html: '<br />'

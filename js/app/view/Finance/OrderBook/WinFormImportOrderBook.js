@@ -1,7 +1,7 @@
 Ext.define('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook', {
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook',
-    title: lang('Import Form'),
+    title: 'Import Form',
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -33,7 +33,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook', {
                         xtype: 'button',
                         id: 'MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook-DownloadTemplate',
                         style: 'margin-top:15px;',
-                        text: lang('Download Template Excel'),
+                        text: 'Download Template Excel',
                         handler: function () {
                             Ext.MessageBox.show({
                                 msg: 'Please wait...',
@@ -56,7 +56,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook', {
                                     window.location = m_api + '/v1/finance/order/download_template' + "?url=" + text.url + '&namaFile=template_order_book.xlsx'
                                 },
                                 failure: function (response) {
-                                    Ext.MessageBox.alert(lang('Warning'), lang('Failed to generate template !'));
+                                    Ext.MessageBox.alert('Warning', 'Failed to generate template !');
                                 }
                             });
                             Ext.MessageBox.hide();
@@ -116,7 +116,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook', {
                                                     if (o.result.message != undefined) {
                                                         msg = o.result.message;
                                                     } else {
-                                                        msg = lang('Connection error');
+                                                        msg = 'Connection error';
                                                     }
                                                     Ext.getCmp('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook-Form-FileName').setValue(null)
                                                     Ext.MessageBox.show({
@@ -132,7 +132,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook', {
                                         } else {
                                             Ext.MessageBox.show({
                                                 title: 'Attention',
-                                                msg: lang('Form not complete yet'),
+                                                msg: 'Form not complete yet',
                                                 buttons: Ext.MessageBox.OK,
                                                 animateTarget: 'mb9',
                                                 icon: 'ext-mb-info'
@@ -150,7 +150,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook', {
                                     xtype: 'button',
                                     id: 'MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook-ClearData',
                                     style: 'margin-top:18px;margin-left:20px',
-                                    text: lang('Clear'),
+                                    text: 'Clear',
                                     handler: function () {
                                         Ext.Ajax.request({
                                             url: m_api + '/v1/finance/order/clear_data',
@@ -160,7 +160,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook', {
 												storeGridFailed.load();
                                             },
                                             failure: function(response) {
-                                                Ext.MessageBox.alert(lang('Warning'), lang('Failed to generate template !'));
+                                                Ext.MessageBox.alert('Warning', 'Failed to generate template !');
                                             }
                                         });
                                     }
@@ -180,12 +180,12 @@ Ext.define('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook', {
                     overflowX: 'scroll',
                     overflowY: 'scroll',
                     selType: 'rowmodel',
-                    title: lang('Failed Data'),
+                    title: 'Failed Data',
                     store: storeGridFailed,
                     minHeight: 500,
                     viewConfig: {
                         deferEmptyText: false,
-                        emptyText: lang('No data Available'),
+                        emptyText: 'No data Available',
                     },
                     dockedItems: [{
                         xtype: 'pagingtoolbar',
@@ -198,35 +198,35 @@ Ext.define('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook', {
                         flex: 0.2,
                         xtype: 'rownumberer'
                     }, {
-                        text: lang('OrderBookID'),
+                        text: 'OrderBookID',
                         dataIndex: 'OrderBookID',
                         hidden: true
                     }, {
-                        text: lang('PO Number'),
+                        text: 'PO Number',
                         dataIndex: 'ContractNumber',
                         flex: 1.5
                     }, {
-                        text: lang('PO Date'),
+                        text: 'PO Date',
                         dataIndex: 'ContractDate',
                         flex: 1.5
                     }, {
-                        text: lang('Description'),
+                        text: 'Description',
                         dataIndex: 'Description',
                         flex: 2
                     }, {
-                        text: lang('Project'),
+                        text: 'Project',
                         dataIndex: 'ProjectName',
                         flex: 2
                     }, {
-                        text: lang('Customer'),
+                        text: 'Customer',
                         dataIndex: 'CustomerName',
                         flex: 2
                     }, {
-                        text: lang('Dept'),
+                        text: 'Dept',
                         dataIndex: 'DeptName',
                         flex: 1
                     }, {
-                        text: lang('Total Amount'),
+                        text: 'Total Amount',
                         dataIndex: 'TotalContactAmount',
                         flex: 2
                     }, {
@@ -241,7 +241,7 @@ Ext.define('MitraJaya.view.Finance.OrderBook.WinFormImportOrderBook', {
         this.callParent(arguments);
     },
     buttons: [{
-        text: lang('Close'),
+        text: 'Close',
         margin: '5px',
         scale: 'large',
         ui: 's-button',

@@ -1,7 +1,7 @@
 Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormImport', {
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.InternalData.VendorPayment.WinFormImport',
-    title: lang('Import Form'),
+    title: 'Import Form',
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -33,7 +33,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormImport', {
                         xtype: 'button',
                         id: 'MitraJaya.view.InternalData.VendorPayment.WinFormImport-DownloadTemplate',
                         style: 'margin-top:15px;',
-                        text: lang('Download Template Excel'),
+                        text: 'Download Template Excel',
                         handler: function () {
                             Ext.MessageBox.show({
                                 msg: 'Please wait...',
@@ -56,7 +56,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormImport', {
                                     window.location = m_api + '/v1/finance/order/download_template' + "?url=" + text.url + '&namaFile=template_vendor_subcont_payment.xlsx'
                                 },
                                 failure: function (response) {
-                                    Ext.MessageBox.alert(lang('Warning'), lang('Failed to generate template !'));
+                                    Ext.MessageBox.alert('Warning', 'Failed to generate template !');
                                 }
                             });
                             Ext.MessageBox.hide();
@@ -116,7 +116,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormImport', {
                                                     if (o.result.message != undefined) {
                                                         msg = o.result.message;
                                                     } else {
-                                                        msg = lang('Connection error');
+                                                        msg = 'Connection error';
                                                     }
                                                     Ext.getCmp('MitraJaya.view.InternalData.VendorPayment.WinFormImport-Form-FileName').setValue(null)
                                                     Ext.MessageBox.show({
@@ -132,7 +132,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormImport', {
                                         } else {
                                             Ext.MessageBox.show({
                                                 title: 'Attention',
-                                                msg: lang('Form not complete yet'),
+                                                msg: 'Form not complete yet',
                                                 buttons: Ext.MessageBox.OK,
                                                 animateTarget: 'mb9',
                                                 icon: 'ext-mb-info'
@@ -150,7 +150,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormImport', {
                                     xtype: 'button',
                                     id: 'MitraJaya.view.InternalData.VendorPayment.WinFormImport-ClearData',
                                     style: 'margin-top:18px;margin-left:20px',
-                                    text: lang('Clear'),
+                                    text: 'Clear',
                                     handler: function () {
                                         Ext.Ajax.request({
                                             url: m_api + '/v1/internaldata/vendorpayment/clear_data',
@@ -160,7 +160,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormImport', {
 												storeGridFailed.load();
                                             },
                                             failure: function(response) {
-                                                Ext.MessageBox.alert(lang('Warning'), lang('Failed to generate template !'));
+                                                Ext.MessageBox.alert('Warning', 'Failed to generate template !');
                                             }
                                         });
                                     }
@@ -180,12 +180,12 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormImport', {
                     overflowX: 'scroll',
                     overflowY: 'scroll',
                     selType: 'rowmodel',
-                    title: lang('Failed Data'),
+                    title: 'Failed Data',
                     store: storeGridFailed,
                     minHeight: 500,
                     viewConfig: {
                         deferEmptyText: false,
-                        emptyText: lang('No data Available'),
+                        emptyText: 'No data Available',
                     },
                     dockedItems: [{
                         xtype: 'pagingtoolbar',
@@ -200,75 +200,75 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormImport', {
 						xtype: 'rownumberer'
 					},
 					{
-						text: lang('Document No'),
+						text: 'Document No',
 						dataIndex: 'DocumentNo',
 					},
 					{
-						text: lang('PO Number'),
+						text: 'PO Number',
 						dataIndex: 'ProjectID',
 					},
 					{
-						text: lang('Name'),
+						text: 'Name',
 						dataIndex: 'MitraName',
 					},
 					{
-						text: lang('Description'),
+						text: 'Description',
 						dataIndex: 'Description',
 					},
 					{
-						text: lang('Inv Date'),
+						text: 'Inv Date',
 						dataIndex: 'InvoiceComplete',
 					},
 					{
-						text: lang('Due Date'),
+						text: 'Due Date',
 						dataIndex: 'DueDate',
 					},
 					{
-						text: lang('Amount'),
+						text: 'Amount',
 						dataIndex: 'Amount',
 					},
 					{
-						text: lang('Insurance'),
+						text: 'Insurance',
 						dataIndex: 'Insurance',
 					},
 					{
-						text: lang('PPH23'),
+						text: 'PPH23',
 						dataIndex: 'PPH23Option',
 					},
 					{
-						text: lang('PPH'),
+						text: 'PPH',
 						dataIndex: 'PPHValue',
 					},
 					{
-						text: lang('Cashbon Document No'),
+						text: 'Cashbon Document No',
 						dataIndex: 'CashbonDocumentNumber',
 					},
 					{
-						text: lang('Cashbon Amount'),
+						text: 'Cashbon Amount',
 						dataIndex: 'CashbonAmount',
 					},
 					{
-						text: lang('SIOK3Name'),
+						text: 'SIOK3Name',
 						dataIndex: 'SIOK3Name',
 					},
 					{
-						text: lang('SIOK3 Amount'),
+						text: 'SIOK3 Amount',
 						dataIndex: 'SIOK3Amount',
 					},
 					{
-						text: lang('Outstanding'),
+						text: 'Outstanding',
 						dataIndex: 'Outstanding',
 					},
 					{
-						text: lang('Paid Date'),
+						text: 'Paid Date',
 						dataIndex: 'PaidDate',
 					},
 					{
-						text: lang('Paid Amount'),
+						text: 'Paid Amount',
 						dataIndex: 'PaidAmount',
 					},
 					{
-						text: lang('Error'),
+						text: 'Error',
 						dataIndex: 'ErrorMessages'	
 					}]
                 }]
@@ -278,7 +278,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormImport', {
         this.callParent(arguments);
     },
     buttons: [{
-        text: lang('Close'),
+        text: 'Close',
         margin: '5px',
         scale: 'large',
         ui: 's-button',
