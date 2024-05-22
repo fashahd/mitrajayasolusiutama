@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail', {
 	extend: 'Ext.window.Window',
 	id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail',
 	cls: 'Sfr_LayoutPopupWindows',
-	title: 'Loan Detail Form',
+	title: lang('Loan Detail Form'),
 	closable: true,
 	modal: true,
 	closeAction: 'destroy',
@@ -112,10 +112,10 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail', {
 									xtype: 'hiddenfield',
 									id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-LoanDetailID',
 									name: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-LoanDetailID',
-									fieldLabel: 'Loan Detail ID'
+									fieldLabel: lang('Loan Detail ID')
 								}, {
 									xtype: 'combobox',
-									fieldLabel: 'Cost Element',
+									fieldLabel: lang('Cost Element'),
 									labelAlign: "top",
 									allowBlank: false,
 									baseCls: 'Sfr_FormInputMandatory',
@@ -133,7 +133,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail', {
 									xtype: 'fileuploadfield',
 									id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-PhotoInput2',
 									name: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-PhotoInput2',
-									buttonText: 'Browse',
+									buttonText: lang('Browse'),
 									cls: 'Sfr_FormBrowseBtn',
 									listeners: {
 										'change': function (fb, v) {
@@ -150,7 +150,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail', {
 												},
 												failure: function (fp, o) {
 													Ext.MessageBox.show({
-														title: 'Error',
+														title: lang('Error'),
 														msg: o.result.message,
 														buttons: Ext.MessageBox.OK,
 														animateTarget: 'mb9',
@@ -174,13 +174,13 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail', {
 									xtype: 'numericfield',
 									id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-Qty',
 									name: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-Qty',
-									fieldLabel: 'Qty',
+									fieldLabel: lang('Qty'),
 									labelAlign: "top"
 								}, {
 									xtype: 'numericfield',
 									id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-Amount',
 									name: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-Amount',
-									fieldLabel: 'Amount',
+									fieldLabel: lang('Amount'),
 									labelAlign: "top",
 									allowBlank: false,
 									baseCls: 'Sfr_FormInputMandatory',
@@ -189,7 +189,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail', {
 									labelAlign: 'top',
 									id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-Description',
 									name: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-Description',
-									fieldLabel: 'Description'
+									fieldLabel: lang('Description')
 								}]
 							}]
 						}]
@@ -204,7 +204,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail', {
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
 			cls: 'Sfr_BtnFormBlue',
 			overCls: 'Sfr_BtnFormBlue-Hover',
-			text: 'Save',
+			text: lang('Save'),
 			id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form-BtnSave',
 			handler: function () {
 				var FormNya = Ext.getCmp('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail-Form').getForm();
@@ -221,7 +221,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail', {
 						success: function (fp, o) {
 							Ext.MessageBox.show({
 								title: 'Information',
-								msg: 'Data saved',
+								msg: lang('Data saved'),
 								buttons: Ext.MessageBox.OK,
 								animateTarget: 'mb9',
 								icon: 'ext-mb-success'
@@ -281,7 +281,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail', {
 				} else {
 					Ext.MessageBox.show({
 						title: 'Attention',
-						msg: 'Form not valid yet',
+						msg: lang('Form not valid yet'),
 						buttons: Ext.MessageBox.OK,
 						animateTarget: 'mb9',
 						icon: 'ext-mb-info'
@@ -290,7 +290,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanDetail', {
 			}
 		}, {
 			icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: 'Close',
+			text: lang('Close'),
 			cls: 'Sfr_BtnFormGrey',
 			overCls: 'Sfr_BtnFormGrey-Hover',
 			handler: function () {

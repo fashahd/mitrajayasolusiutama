@@ -100,7 +100,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: 'Form Sparepart',
+            title: lang('Form Sparepart'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Warehouse.Sparepart-FormGeneralData',
@@ -148,7 +148,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartNumberCode',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartNumberCode',
-                                    fieldLabel: 'Sparepart Number Code',
+                                    fieldLabel: lang('Sparepart Number Code'),
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                 }, {
@@ -156,7 +156,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartName',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartName',
-                                    fieldLabel: 'Sparepart Name',
+                                    fieldLabel: lang('Sparepart Name'),
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                 }, {
@@ -164,27 +164,27 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartNo',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartNo',
-                                    fieldLabel: 'Sparepart No'
+                                    fieldLabel: lang('Sparepart No')
                                 }, {
                                     xtype: 'radiogroup',
                                     labelAlign:'top',
-                                    fieldLabel: 'Sparepart Type',
+                                    fieldLabel: lang('Sparepart Type'),
                                     msgTarget: 'side',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                     columns: 3,
                                     items: [{
-                                        boxLabel: 'Mech.',
+                                        boxLabel: lang('Mech.'),
                                         name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartType',
                                         inputValue: 'mech',
                                         id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartTypeMech',
                                     }, {
-                                        boxLabel: 'Elect.',
+                                        boxLabel: lang('Elect.'),
                                         name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartType',
                                         inputValue: 'elect',
                                         id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartTypeElect',
                                     }, {
-                                        boxLabel: 'PCBs',
+                                        boxLabel: lang('PCBs'),
                                         name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartType',
                                         inputValue: 'pcbs',
                                         id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartTypePCBs',
@@ -192,23 +192,23 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                 }, {
                                     xtype: 'radiogroup',
                                     labelAlign:'top',
-                                    fieldLabel: 'Category',
+                                    fieldLabel: lang('Category'),
                                     msgTarget: 'side',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                     columns: 3,
                                     items: [{
-                                        boxLabel: 'C',
+                                        boxLabel: lang('C'),
                                         name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategory',
                                         inputValue: 'c',
                                         id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategoryCritical',
                                     }, {
-                                        boxLabel: 'F',
+                                        boxLabel: lang('F'),
                                         name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategory',
                                         inputValue: 'f',
                                         id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategoryFastMoving',
                                     }, {
-                                        boxLabel: 'S',
+                                        boxLabel: lang('S'),
                                         name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategory',
                                         inputValue: 's',
                                         id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartCategoryStandard',
@@ -223,7 +223,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartQty',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartQty',
-                                    fieldLabel: 'Base Qty'
+                                    fieldLabel: lang('Base Qty')
                                 }, {
                                     xtype: 'combobox',
 									id:'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-RackID',
@@ -239,28 +239,28 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartBasicPrice',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartBasicPrice',
-                                    fieldLabel: 'Basic Price'
+                                    fieldLabel: lang('Basic Price')
                                 }, {
                                     xtype: 'numericfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartSellingPrice',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartSellingPrice',
-                                    fieldLabel: 'Selling Price'
+                                    fieldLabel: lang('Selling Price')
                                 }, {
                                     xtype: 'radiogroup',
                                     labelAlign:'top',
-                                    fieldLabel: 'Sparepart Status',
+                                    fieldLabel: lang('Sparepart Status'),
                                     msgTarget: 'side',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                     columns: 2,
                                     items: [{
-                                        boxLabel: 'Ready',
+                                        boxLabel: lang('Ready'),
                                         name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartStatus',
                                         inputValue: 'ready',
                                         id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartStatusReady',
                                     }, {
-                                        boxLabel: 'Indent',
+                                        boxLabel: lang('Indent'),
                                         name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartStatus',
                                         inputValue: 'indent',
                                         id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartStatusIndent',
@@ -270,7 +270,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartRemark',
                                     name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-SparepartRemark',
-                                    fieldLabel: 'Remarks / Vendor'
+                                    fieldLabel: lang('Remarks / Vendor')
                                 }]
                             }, {
                                 columnWidth: 0.2,
@@ -295,7 +295,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                             xtype: 'fileuploadfield',
                                             id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput2',
                                             name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput2',
-                                            buttonText: 'Browse',
+                                            buttonText: lang('Browse'),
                                             cls: 'Sfr_FormBrowseBtn',
                                             listeners: {
                                                 'change': function (fb, v) {
@@ -312,7 +312,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                                         },
                                                         failure: function (fp, o) {
                                                             Ext.MessageBox.show({
-                                                                title: 'Error',
+                                                                title: lang('Error'),
                                                                 msg: o.result.message,
                                                                 buttons: Ext.MessageBox.OK,
                                                                 animateTarget: 'mb9',
@@ -353,7 +353,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                             xtype: 'fileuploadfield',
                                             id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput',
                                             name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput',
-                                            buttonText: 'Browse',
+                                            buttonText: lang('Browse'),
                                             cls: 'Sfr_FormBrowseBtn',
                                             listeners: {
                                                 'change': function (fb, v) {
@@ -370,7 +370,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                                         },
                                                         failure: function (fp, o) {
                                                             Ext.MessageBox.show({
-                                                                title: 'Error',
+                                                                title: lang('Error'),
                                                                 msg: o.result.message,
                                                                 buttons: Ext.MessageBox.OK,
                                                                 animateTarget: 'mb9',
@@ -411,7 +411,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                             xtype: 'fileuploadfield',
                                             id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput3',
                                             name: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-PhotoInput3',
-                                            buttonText: 'Browse',
+                                            buttonText: lang('Browse'),
                                             cls: 'Sfr_FormBrowseBtn',
                                             listeners: {
                                                 'change': function (fb, v) {
@@ -428,7 +428,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                                                         },
                                                         failure: function (fp, o) {
                                                             Ext.MessageBox.show({
-                                                                title: 'Error',
+                                                                title: lang('Error'),
                                                                 msg: o.result.message,
                                                                 buttons: Ext.MessageBox.OK,
                                                                 animateTarget: 'mb9',
@@ -451,7 +451,7 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: 'Save',
+                            text: lang('Save'),
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-FormBasicData-BtnSave',
@@ -535,14 +535,14 @@ Ext.define('MitraJaya.view.Warehouse.Sparepart.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + 'Sparepart Data' + '</div>'
+                html: '<div id="header_title_farmer">' + lang('Sparepart Data') + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Warehouse.Sparepart.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Sparepart.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Sparepart List' + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Sparepart List') + '</a></li></div>'
             }]
         }, {
             html: '<br />'

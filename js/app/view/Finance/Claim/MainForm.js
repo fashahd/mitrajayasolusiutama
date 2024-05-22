@@ -114,7 +114,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainForm', {
 
 		//Panel Basic ==================================== (Begin)
 		thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-			title: 'Claim Data',
+			title: lang('Claim Data'),
 			frame: true,
 			cls: 'Sfr_PanelLayoutForm',
 			id: 'MitraJaya.view.Finance.Claim.MainForm-Panel',
@@ -155,7 +155,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainForm', {
 									id: 'MitraJaya.view.Finance.Claim.MainForm-FormBasicData-ClaimDate',
 									name: 'MitraJaya.view.Finance.Claim.MainForm-FormBasicData-ClaimDate',
 									labelAlign: 'top',
-									fieldLabel: 'Claim Date',
+									fieldLabel: lang('Claim Date'),
 									format: 'Y-m-d',
 									value: new Date(),
 									allowBlank: false,
@@ -184,7 +184,7 @@ Ext.define('MitraJaya.view.Finance.Claim.MainForm', {
 									labelAlign: 'top',
 									id: 'MitraJaya.view.Finance.Claim.MainForm-FormBasicData-Location',
 									name: 'MitraJaya.view.Finance.Claim.MainForm-FormBasicData-Location',
-									fieldLabel: 'Location'
+									fieldLabel: lang('Location')
 								}, {
 									xtype: 'combobox',
 									id: 'MitraJaya.view.Finance.Claim.MainForm-FormBasicData-ProjectID',
@@ -200,14 +200,14 @@ Ext.define('MitraJaya.view.Finance.Claim.MainForm', {
 									labelAlign: 'top',
 									id: 'MitraJaya.view.Finance.Claim.MainForm-FormBasicData-TotalAmount',
 									name: 'MitraJaya.view.Finance.Claim.MainForm-FormBasicData-TotalAmount',
-									fieldLabel: 'Total Amount'
+									fieldLabel: lang('Total Amount')
 								}, ]
 							}]
 						}],
 						buttons: [{
 							xtype: 'button',
 							icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-							text: 'Save',
+							text: lang('Save'),
 							cls: 'Sfr_BtnFormBlue',
 							overCls: 'Sfr_BtnFormBlue-Hover',
 							id: 'MitraJaya.view.Finance.Claim.MainForm-FormBasicData-BtnSave',
@@ -310,14 +310,14 @@ Ext.define('MitraJaya.view.Finance.Claim.MainForm', {
 			},
 			items: [{
 				id: 'MitraJaya.view.Finance.Claim.MainForm-labelInfoInsert',
-				html: '<div id="header_title_farmer">' + 'Claim Data' + '</div>'
+				html: '<div id="header_title_farmer">' + lang('Claim Data') + '</div>'
 			}]
 		}, {
 			items: [{
 				id: 'MitraJaya.view.Finance.Claim.MainForm-LinkBackToList',
 				html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 					+ '<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Finance.Claim.MainForm\').BackToList()">'
-					+ '<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Claim List' + '</a></li></div>'
+					+ '<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Claim List') + '</a></li></div>'
 			}]
 		}, {
 			html: '<br />'

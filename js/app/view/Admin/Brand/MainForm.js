@@ -81,7 +81,7 @@ Ext.define('MitraJaya.view.Admin.Brand.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: 'Form Brand',
+            title: lang('Form Brand'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Finance.Brand-FormGeneralData',
@@ -117,7 +117,7 @@ Ext.define('MitraJaya.view.Admin.Brand.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.Brand.MainForm-FormBasicData-BrandName',
                                     name: 'MitraJaya.view.Admin.Brand.MainForm-FormBasicData-BrandName',
-                                    fieldLabel: 'Brand Name',
+                                    fieldLabel: lang('Brand Name'),
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                 }]
@@ -126,7 +126,7 @@ Ext.define('MitraJaya.view.Admin.Brand.MainForm', {
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: 'Save',
+                            text: lang('Save'),
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Admin.Brand.MainForm-FormBasicData-BtnSave',
@@ -210,14 +210,14 @@ Ext.define('MitraJaya.view.Admin.Brand.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Admin.Brand.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + 'Brand Data' + '</div>'
+                html: '<div id="header_title_farmer">' + lang('Brand Data') + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Admin.Brand.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Admin.Brand.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Brand List' + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Brand List') + '</a></li></div>'
             }]
         }, {
             html: '<br />'

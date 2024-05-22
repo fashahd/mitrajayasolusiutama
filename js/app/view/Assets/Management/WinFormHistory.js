@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Assets.Management.WinFormHistory', {
 	extend: 'Ext.window.Window',
 	id: 'MitraJaya.view.Assets.Management.WinFormHistory',
 	cls: 'Sfr_LayoutPopupWindows',
-	title: 'Transaction Form',
+	title: lang('Transaction Form'),
 	closable: true,
 	modal: true,
 	closeAction: 'destroy',
@@ -57,7 +57,7 @@ Ext.define('MitraJaya.view.Assets.Management.WinFormHistory', {
 						var r = Ext.decode(action.response.responseText);
 
 						if (r.data.File != '') {
-							Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form-FileDocument').update('<img src="' + r.data.File + '" height="200" /><br><a href="' + r.data.File + '" title="Download File" target="_blank">' + 'Download File' + '</a>');
+							Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form-FileDocument').update('<img src="' + r.data.File + '" height="200" /><br><a href="' + r.data.File + '" title="Download File" target="_blank">' + lang('Download File') + '</a>');
 							Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form-FileDocument').doLayout();
 						}
 					},
@@ -94,16 +94,16 @@ Ext.define('MitraJaya.view.Assets.Management.WinFormHistory', {
 						xtype: 'hiddenfield',
 						id: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-HistoryID',
 						name: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-HistoryID',
-						fieldLabel: 'History ID'
+						fieldLabel: lang('History ID')
 					}, {
 						xtype: 'hiddenfield',
 						id: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-AssetID',
 						name: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-AssetID',
-						fieldLabel: 'AssetID'
+						fieldLabel: lang('AssetID')
 					}, {
 						xtype: 'combobox',
 						labelAlign: 'top',
-						fieldLabel: 'Employee Name',
+						fieldLabel: lang('Employee Name'),
 						id: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-PeopleID',
 						name: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-PeopleID',
 						store: thisObj.combo_employee,
@@ -121,19 +121,19 @@ Ext.define('MitraJaya.view.Assets.Management.WinFormHistory', {
 						allowBlank: false,
 						baseCls: 'Sfr_FormInputMandatory',
 						name: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-StartDate',
-						fieldLabel: 'Date of Submission'
+						fieldLabel: lang('Date of Submission')
 					}, {
 						xtype: 'datefield',
 						format: 'Y-m-d',
 						id: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-EndDate',
 						labelAlign: "top",
 						name: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-EndDate',
-						fieldLabel: 'Date of Return'
+						fieldLabel: lang('Date of Return')
 					}, {
 						xtype: 'textareafield',
 						id: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-Description',
 						name: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-Description',
-						fieldLabel: 'Description',
+						fieldLabel: lang('Description'),
 						labelAlign: "top"
 					}]
 				}, {
@@ -148,15 +148,15 @@ Ext.define('MitraJaya.view.Assets.Management.WinFormHistory', {
 						xtype: 'fileuploadfield',
 						labelWidth: 125,
 						labelAlign: 'top',
-						fieldLabel: 'Attachment' + ' <sup style="color:#FF0000;">(Max:10MB)</sup>' + ' *',
+						fieldLabel: lang('Attachment') + ' <sup style="color:#FF0000;">(Max:10MB)</sup>' + ' *',
 						id: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-File',
 						name: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-File',
-						buttonText: 'Browse',
+						buttonText: lang('Browse'),
 						listeners: {
 							'change': function (fb, v) {
 
 								if (Math.floor(fb.fileInputEl.dom.files[0].size / 1000000) > 10) { //maksimal 10MB
-									alert("file size more than 10MB");
+									alert(lang("file size more than 10MB"));
 									Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form-File').reset(true);
 								} else {
 									Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form').getForm().submit({
@@ -166,17 +166,17 @@ Ext.define('MitraJaya.view.Assets.Management.WinFormHistory', {
 											OpsiDisplay: thisObj.viewVar.OpsiDisplay,
 											HistoryID: Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form-HistoryID').getValue()
 										},
-										waitMsg: 'Sending Image',
+										waitMsg: lang('Sending Image'),
 										success: function (fp, o) {
 											if (o.result.file != '') {
 												Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form-File_old').setValue(o.result.FilePath);
-												Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form-FileDocument').update('<img src="' + o.result.file + '" height="200" /><br><a href="' + o.result.file + '" title="Download File" target="_blank">' + 'Download File' + '</a>');
+												Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form-FileDocument').update('<img src="' + o.result.file + '" height="200" /><br><a href="' + o.result.file + '" title="Download File" target="_blank">' + lang('Download File') + '</a>');
 												Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form-FileDocument').doLayout();
 											}
 										},
 										failure: function (fp, o) {
 											Ext.MessageBox.show({
-												title: 'Attention',
+												title: lang('Attention'),
 												msg: o.result.message,
 												buttons: Ext.MessageBox.OK,
 												animateTarget: 'mb9',
@@ -201,7 +201,7 @@ Ext.define('MitraJaya.view.Assets.Management.WinFormHistory', {
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
 			cls: 'Sfr_BtnFormBlue',
 			overCls: 'Sfr_BtnFormBlue-Hover',
-			text: 'Save',
+			text: lang('Save'),
 			id: 'MitraJaya.view.Assets.Management.WinFormHistory-Form-BtnSave',
 			handler: function () {
 				var FormNya = Ext.getCmp('MitraJaya.view.Assets.Management.WinFormHistory-Form').getForm();
@@ -216,7 +216,7 @@ Ext.define('MitraJaya.view.Assets.Management.WinFormHistory', {
 						success: function (fp, o) {
 							Ext.MessageBox.show({
 								title: 'Information',
-								msg: 'Data saved',
+								msg: lang('Data saved'),
 								buttons: Ext.MessageBox.OK,
 								animateTarget: 'mb9',
 								icon: 'ext-mb-success'
@@ -255,7 +255,7 @@ Ext.define('MitraJaya.view.Assets.Management.WinFormHistory', {
 				} else {
 					Ext.MessageBox.show({
 						title: 'Attention',
-						msg: 'Form not valid yet',
+						msg: lang('Form not valid yet'),
 						buttons: Ext.MessageBox.OK,
 						animateTarget: 'mb9',
 						icon: 'ext-mb-info'
@@ -264,7 +264,7 @@ Ext.define('MitraJaya.view.Assets.Management.WinFormHistory', {
 			}
 		}, {
 			icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: 'Close',
+			text: lang('Close'),
 			cls: 'Sfr_BtnFormGrey',
 			overCls: 'Sfr_BtnFormGrey-Hover',
 			handler: function () {

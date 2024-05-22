@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Finance.Pajak.WinPajak' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Finance.Pajak.WinPajak',
     cls: 'Sfr_LayoutPopupWindows',
-    title: 'Pajak Form',
+    title: lang('Pajak Form'),
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -77,34 +77,34 @@ Ext.define('MitraJaya.view.Finance.Pajak.WinPajak' ,{
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Pajak.WinPajak-FormBasicData-Period',
                                     name: 'MitraJaya.view.Finance.Pajak.WinPajak-FormBasicData-Period',
-                                    fieldLabel: 'Period',
+                                    fieldLabel: lang('Period'),
 									readOnly:true
                                 }, {
                                     xtype: 'hiddenfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Pajak.WinPajak-FormBasicData-VATAmount',
                                     name: 'MitraJaya.view.Finance.Pajak.WinPajak-FormBasicData-VATAmount',
-                                    fieldLabel: 'Amount'
+                                    fieldLabel: lang('Amount')
                                 }, {
                                     xtype: 'textfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Pajak.WinPajak-FormBasicData-Amount',
                                     name: 'MitraJaya.view.Finance.Pajak.WinPajak-FormBasicData-Amount',
-                                    fieldLabel: 'Amount',
+                                    fieldLabel: lang('Amount'),
 									readOnly:true
                                 }, {
                                     xtype: 'textfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.Pajak.WinPajak-FormBasicData-PaidAmount',
                                     name: 'MitraJaya.view.Finance.Pajak.WinPajak-FormBasicData-PaidAmount',
-                                    fieldLabel: 'Paid Amount'
+                                    fieldLabel: lang('Paid Amount')
                                 },{
                                     xtype: 'checkbox',
                                     labelAlign:'top',
 									inputValue: '1',
                                     id: 'MitraJaya.view.Finance.Pajak.WinPajak-FormBasicData-ReportStatus',
                                     name: 'MitraJaya.view.Finance.Pajak.WinPajak-FormBasicData-ReportStatus',
-                                    fieldLabel: 'Report'
+                                    fieldLabel: lang('Report')
                                 }]
                             }]
                         }]
@@ -117,7 +117,7 @@ Ext.define('MitraJaya.view.Finance.Pajak.WinPajak' ,{
         //buttons -------------------------------------------------------------- (begin)
         thisObj.buttons = [{
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-			text: 'Save',
+			text: lang('Save'),
 			cls: 'Sfr_BtnFormBlue',
 			overCls: 'Sfr_BtnFormBlue-Hover',
 			id: 'MitraJaya.view.Finance.Pajak.WinPajak-BtnSave',
@@ -169,8 +169,8 @@ Ext.define('MitraJaya.view.Finance.Pajak.WinPajak' ,{
 
 				} else {
 					// Ext.MessageBox.show({
-					// 	title: 'Attention',
-					// 	msg: 'Form not complete yet',
+					// 	title: lang('Attention'),
+					// 	msg: lang('Form not complete yet'),
 					// 	buttons: Ext.MessageBox.OK,
 					// 	animateTarget: 'mb9',
 					// 	icon: 'ext-mb-info'
@@ -186,7 +186,7 @@ Ext.define('MitraJaya.view.Finance.Pajak.WinPajak' ,{
 			}
 		},{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-            text: 'Close',
+            text: lang('Close'),
             cls:'Sfr_BtnFormGrey',
             overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {

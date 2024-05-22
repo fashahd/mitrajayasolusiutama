@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 	extend: 'Ext.window.Window',
 	id: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail',
 	cls: 'Sfr_LayoutPopupWindows',
-	title: 'Claim Form',
+	title: lang('Claim Form'),
 	closable: true,
 	modal: true,
 	closeAction: 'destroy',
@@ -112,10 +112,10 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 									xtype: 'hiddenfield',
 									id: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-ClaimDetailID',
 									name: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-ClaimDetailID',
-									fieldLabel: 'Loan Payment Amount'
+									fieldLabel: lang('Loan Payment Amount')
 								}, {
 									xtype: 'combobox',
-									fieldLabel: 'Cost Element',
+									fieldLabel: lang('Cost Element'),
 									labelAlign: "top",
 									allowBlank: false,
 									baseCls: 'Sfr_FormInputMandatory',
@@ -129,7 +129,7 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 									xtype: 'datefield',
 									id: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-ClaimDetailDate',
 									name: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-ClaimDetailDate',
-									fieldLabel: 'Date',
+									fieldLabel: lang('Date'),
 									labelAlign: "top",
 									allowBlank: false,
 									baseCls: 'Sfr_FormInputMandatory',
@@ -142,7 +142,7 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 									xtype: 'fileuploadfield',
 									id: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-PhotoInput2',
 									name: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-PhotoInput2',
-									buttonText: 'Browse',
+									buttonText: lang('Browse'),
 									cls: 'Sfr_FormBrowseBtn',
 									listeners: {
 										'change': function (fb, v) {
@@ -159,7 +159,7 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 												},
 												failure: function (fp, o) {
 													Ext.MessageBox.show({
-														title: 'Error',
+														title: lang('Error'),
 														msg: o.result.message,
 														buttons: Ext.MessageBox.OK,
 														animateTarget: 'mb9',
@@ -183,7 +183,7 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 									xtype: 'numericfield',
 									id: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-Amount',
 									name: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-Amount',
-									fieldLabel: 'Amount',
+									fieldLabel: lang('Amount'),
 									labelAlign: "top",
 									allowBlank: false,
 									baseCls: 'Sfr_FormInputMandatory',
@@ -192,7 +192,7 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 									labelAlign: 'top',
 									id: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-Description',
 									name: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-Description',
-									fieldLabel: 'Description'
+									fieldLabel: lang('Description')
 								}]
 							}]
 						}]
@@ -207,7 +207,7 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
 			cls: 'Sfr_BtnFormBlue',
 			overCls: 'Sfr_BtnFormBlue-Hover',
-			text: 'Save',
+			text: lang('Save'),
 			id: 'MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form-BtnSave',
 			handler: function () {
 				var FormNya = Ext.getCmp('MitraJaya.view.Finance.Claim.WinFormClaimDetail-Form').getForm();
@@ -224,7 +224,7 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 						success: function (fp, o) {
 							Ext.MessageBox.show({
 								title: 'Information',
-								msg: 'Data saved',
+								msg: lang('Data saved'),
 								buttons: Ext.MessageBox.OK,
 								animateTarget: 'mb9',
 								icon: 'ext-mb-success'
@@ -284,7 +284,7 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 				} else {
 					Ext.MessageBox.show({
 						title: 'Attention',
-						msg: 'Form not valid yet',
+						msg: lang('Form not valid yet'),
 						buttons: Ext.MessageBox.OK,
 						animateTarget: 'mb9',
 						icon: 'ext-mb-info'
@@ -293,7 +293,7 @@ Ext.define('MitraJaya.view.Finance.Claim.WinFormClaimDetail', {
 			}
 		}, {
 			icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: 'Close',
+			text: lang('Close'),
 			cls: 'Sfr_BtnFormGrey',
 			overCls: 'Sfr_BtnFormGrey-Hover',
 			handler: function () {

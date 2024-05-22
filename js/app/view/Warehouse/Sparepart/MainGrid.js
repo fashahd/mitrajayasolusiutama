@@ -51,7 +51,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'View',
+                text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Warehouse.Sparepart.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -75,7 +75,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: 'Update',
+                text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Warehouse.Sparepart.MainGrid-ContextMenuUpdate',
@@ -100,7 +100,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: 'Delete',
+                text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Warehouse.Sparepart.MainGrid-ContextMenuDelete',
@@ -178,14 +178,14 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
+                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: 'Add',
+                    text: lang('Add'),
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -209,7 +209,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-                    text: 'Export',
+                    text: lang('Export'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -230,7 +230,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/Warehouse/sparepart/export_sparepart',
 									method: 'POST',
-									waitMsg: 'Please Wait',
+									waitMsg: lang('Please Wait'),
 									params: {
 										keySearch : keySearch,
 										keySearch2 : keySearch2
@@ -276,7 +276,7 @@
                 },{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: 'Advanced Filter',
+                    text: lang('Advanced Filter'),
 					hidden:true,
                     handler: function () {
                         //advanced search
@@ -314,35 +314,35 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: 'Sparepart ID',
+                text: lang('Sparepart ID'),
                 dataIndex: 'SparepartID',
                 hidden: true
             },{
-                text: 'Sparepart Code',
+                text: lang('Sparepart Code'),
                 dataIndex: 'SparepartCode',
                 flex:5
             },{
-                text: 'Sparepart Name',
+                text: lang('Sparepart Name'),
                 dataIndex: 'SparepartName',
                 flex: 10
             },{
-                text: 'Sparepart No',
+                text: lang('Sparepart No'),
                 dataIndex: 'SparepartNo',
                 flex: 5
             },{
-                text: 'Sparepart Type',
+                text: lang('Sparepart Type'),
                 dataIndex: 'SparepartType',
                 flex: 8
             },{
-                text: 'Category',
+                text: lang('Category'),
                 dataIndex: 'SparepartCategory',
                 flex: 5
             },{
-                text: 'Qty',
+                text: lang('Qty'),
                 dataIndex: 'SparepartQty',
                 flex: 3
             },{
-                text: 'Basic Price',
+                text: lang('Basic Price'),
                 dataIndex: 'SparepartBasicPrice',
                 flex: 5,
 				renderer: function (t, meta, record) {
@@ -353,7 +353,7 @@
                     return RetVal;
                 }
             },{
-                text: 'Selling Price',
+                text: lang('Selling Price'),
                 dataIndex: 'SparepartSellingPrice',
                 flex: 5,
 				renderer: function (t, meta, record) {
@@ -364,7 +364,7 @@
                     return RetVal;
                 }
             },{
-                text: 'Status',
+                text: lang('Status'),
                 dataIndex: 'SparepartStatus',
                 flex: 5
             }]

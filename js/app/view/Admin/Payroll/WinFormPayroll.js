@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 	extend: 'Ext.window.Window',
 	id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll',
 	cls: 'Sfr_LayoutPopupWindows',
-	title: 'Payroll Form',
+	title: lang('Payroll Form'),
 	closable: true,
 	modal: true,
 	closeAction: 'destroy',
@@ -84,7 +84,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 									labelAlign: 'top',
 									id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-salary',
 									name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-salary',
-									fieldLabel: 'Bruto Salary'
+									fieldLabel: lang('Bruto Salary')
 								}]
 							}, {
 								columnWidth: 0.5,
@@ -113,7 +113,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 								}, {
 									xtype: 'button',
 									icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-									text: 'Prefill Data From Before',
+									text: lang('Prefill Data From Before'),
 									cls: 'Sfr_BtnGridNewWhite',
 									overCls: 'Sfr_BtnGridNewWhite-Hover',
 									style: 'margin-top:25px',
@@ -166,7 +166,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 								style: 'padding:10px 15px 0px 5px;',
 								items: [{
 									xtype: 'panel',
-									title: 'Insentif',
+									title: lang('Insentif'),
 									frame: false,
 									id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-SectionInsentif',
 									style: 'margin-top:12px;',
@@ -187,19 +187,19 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_transportasi',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_transportasi',
-												fieldLabel: 'Transportasi'
+												fieldLabel: lang('Transportasi')
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_komunikasi',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_komunikasi',
-												fieldLabel: 'Komunikasi'
+												fieldLabel: lang('Komunikasi')
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_lembur',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_lembur',
-												fieldLabel: 'Lembur'
+												fieldLabel: lang('Lembur')
 											}]
 										}, {
 											columnWidth: 0.5,
@@ -214,13 +214,13 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_bonus',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_bonus',
-												fieldLabel: 'Bonus'
+												fieldLabel: lang('Bonus')
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_thr',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_thr',
-												fieldLabel: 'THR'
+												fieldLabel: lang('THR')
 											}]
 										}]
 									}]
@@ -231,7 +231,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 								style: 'padding:0px 15px 10px 5px;',
 								items: [{
 									xtype: 'panel',
-									title: 'Deduction',
+									title: lang('Deduction'),
 									frame: false,
 									id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-SectionDeduction',
 									style: 'margin-top:12px;',
@@ -252,19 +252,19 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_bpjs_tk',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_bpjs_tk',
-												fieldLabel: 'BPJS TK'
+												fieldLabel: lang('BPJS TK')
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_bpjs_kesehatan',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_bpjs_kesehatan',
-												fieldLabel: 'BPJS Kesehatan'
+												fieldLabel: lang('BPJS Kesehatan')
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_kasbon',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_kasbon',
-												fieldLabel: 'Kasbon'
+												fieldLabel: lang('Kasbon')
 											}]
 										}, {
 											columnWidth: 0.5,
@@ -279,25 +279,25 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21_insentif',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21_insentif',
-												fieldLabel: 'PPH 21 Insentif'
+												fieldLabel: lang('PPH 21 Insentif')
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21',
-												fieldLabel: 'PPH 21 Gaji'
+												fieldLabel: lang('PPH 21 Gaji')
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21_kompensasi',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21_kompensasi',
-												fieldLabel: 'PPH 21 Kompensasi'
+												fieldLabel: lang('PPH 21 Kompensasi')
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21_thr',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-deduction_pph_21_thr',
-												fieldLabel: 'PPH 21 THR'
+												fieldLabel: lang('PPH 21 THR')
 											}]
 										}]
 									}]
@@ -308,7 +308,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 								style: 'padding:0px 15px 10px 5px;',
 								items: [{
 									xtype: 'panel',
-									title: 'Note',
+									title: lang('Note'),
 									frame: false,
 									id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-SectionNote',
 									style: 'margin-top:12px;',
@@ -329,7 +329,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-notes',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-notes',
-												fieldLabel: 'Notes'
+												fieldLabel: lang('Notes')
 											}]
 										}]
 									}]
@@ -345,7 +345,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 		//buttons -------------------------------------------------------------- (begin)
 		thisObj.buttons = [{
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-			text: 'Save',
+			text: lang('Save'),
 			cls: 'Sfr_BtnFormBlue',
 			overCls: 'Sfr_BtnFormBlue-Hover',
 			id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-BtnSave',
@@ -383,7 +383,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 								var r = Ext.decode(o.response.responseText);
 
 								Ext.MessageBox.show({
-									title: 'Error',
+									title: lang('Error'),
 									msg: r.message,
 									buttons: Ext.MessageBox.OK,
 									animateTarget: 'mb9',
@@ -391,7 +391,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 								});
 							} catch (err) {
 								Ext.MessageBox.show({
-									title: 'Error',
+									title: lang('Error'),
 									msg: 'Connection Error',
 									buttons: Ext.MessageBox.OK,
 									animateTarget: 'mb9',
@@ -403,8 +403,8 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 
 				} else {
 					// Ext.MessageBox.show({
-					// 	title: 'Attention',
-					// 	msg: 'Form not complete yet',
+					// 	title: lang('Attention'),
+					// 	msg: lang('Form not complete yet'),
 					// 	buttons: Ext.MessageBox.OK,
 					// 	animateTarget: 'mb9',
 					// 	icon: 'ext-mb-info'
@@ -420,7 +420,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 			}
 		}, {
 			icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: 'Close',
+			text: lang('Close'),
 			cls: 'Sfr_BtnFormGrey',
 			overCls: 'Sfr_BtnFormGrey-Hover',
 			handler: function () {

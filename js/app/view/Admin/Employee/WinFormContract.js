@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Admin.Employee.WinFormContract',
     cls: 'Sfr_LayoutPopupWindows',
-    title:'Contract Form',
+    title:lang('Contract Form'),
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -55,7 +55,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                         var r = Ext.decode(action.response.responseText);
 
 						if(r.data.document != ''){
-							Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-FileDocument').update('<a href="'+r.data.document+'" title="Download File" target="_blank">'+'Download File'+'    <img src="'+m_api_base_url+'/assets/images/pdf-icon.png" height="24" /></a>');
+							Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-FileDocument').update('<a href="'+r.data.document+'" title="Download File" target="_blank">'+lang('Download File')+'    <img src="'+m_api_base_url+'/assets/images/pdf-icon.png" height="24" /></a>');
 							Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-FileDocument').doLayout();
 						}
                     },
@@ -92,12 +92,12 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                     	xtype: 'hiddenfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_id',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_id',
-                        fieldLabel: 'Contract ID'
+                        fieldLabel: lang('Contract ID')
                     },{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_number',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_number',
-                        fieldLabel: 'Contract Number',
+                        fieldLabel: lang('Contract Number'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -105,7 +105,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                     	xtype: 'combobox',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-position',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-position',
-                        fieldLabel: 'Position',
+                        fieldLabel: lang('Position'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -123,7 +123,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                     	xtype: 'combobox',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-gol',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-gol',
-                        fieldLabel: 'Gol',
+                        fieldLabel: lang('Gol'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -141,7 +141,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                     	xtype: 'numericfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_wage',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_wage',
-                        fieldLabel: 'Salary per Month',
+                        fieldLabel: lang('Salary per Month'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -153,10 +153,10 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                         xtype: 'fileuploadfield',
                         labelWidth: 125,
 						labelAlign:'top',
-                        fieldLabel: 'Attachment' + ' <sup style="color:#FF0000;">(Max:10MB)</sup>' + ' *',
+                        fieldLabel: lang('Attachment') + ' <sup style="color:#FF0000;">(Max:10MB)</sup>' + ' *',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-document',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-document',
-                        buttonText: 'Browse',
+                        buttonText: lang('Browse'),
                         listeners: {
 							afterrender: function (cmp) {
 								cmp.fileInputEl.set({
@@ -166,7 +166,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                             'change': function (fb, v) {
 
                                 if (Math.floor(fb.fileInputEl.dom.files[0].size / 1000000) > 10) { //maksimal 10MB
-                                    alert("file size more than 10MB");
+                                    alert(lang("file size more than 10MB"));
                                     Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-document').reset(true);
                                 } else {
                                     Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form').getForm().submit({
@@ -177,15 +177,15 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
 											people_id: thisObj.viewVar.people_id,
                                             contract_id: Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_id').getValue()
                                         },
-                                        waitMsg: 'Sending Image',
+                                        waitMsg: lang('Sending Image'),
                                         success: function (fp, o) {
                                             Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-document_old').setValue(o.result.FilePath);
-											Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-FileDocument').update('<a href="'+o.result.file+'" title="Download File" target="_blank">'+'Download File'+'    <img src="'+m_api_base_url+'/assets/images/pdf-icon.png" height="24" /></a>');
+											Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-FileDocument').update('<a href="'+o.result.file+'" title="Download File" target="_blank">'+lang('Download File')+'    <img src="'+m_api_base_url+'/assets/images/pdf-icon.png" height="24" /></a>');
 											Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form-FileDocument').doLayout();
                                         },
                                         failure: function (fp, o) {
                                             Ext.MessageBox.show({
-                                                title: 'Attention',
+                                                title: lang('Attention'),
                                                 msg: o.result.message,
                                                 buttons: Ext.MessageBox.OK,
                                                 animateTarget: 'mb9',
@@ -200,14 +200,14 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                         id:'MitraJaya.view.Admin.Employee.WinFormContract-Form-FileDocument',
                         html:'<img src="'+m_api_base_url+'/assets/images/no-images.png" height="200" />'        
                     },{
-                        html:'<div style="margin-top:5px;font-size:10px;font-style:italic;">'+'File must PDF'+'</div>'
+                        html:'<div style="margin-top:5px;font-size:10px;font-style:italic;">'+lang('File must PDF')+'</div>'
                     }]
                 },{
                     columnWidth: 0.5,
                     layout:'form',
 					style:'margin-left:20px',
                     items:[{
-						fieldLabel: 'Employment Status',
+						fieldLabel: lang('Employment Status'),
 						xtype: 'radiogroup',
 						allowBlank: false,
 						labelAlign:'top',
@@ -216,7 +216,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
 						msgTarget: 'side',
 						columns: 3,
 						items: [{
-							boxLabel: 'Contract',
+							boxLabel: lang('Contract'),
 							name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status',
 							inputValue: 'contract',
 							id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status1',
@@ -231,7 +231,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
 								}
 							}
 						}, {
-							boxLabel: 'Permanent',
+							boxLabel: lang('Permanent'),
 							name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status',
 							inputValue: 'permanent',
 							id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status2',
@@ -245,7 +245,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
 								}
 							}
 						}, {
-							boxLabel: 'Probation',
+							boxLabel: lang('Probation'),
 							name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status',
 							inputValue: 'probation',
 							id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-contract_status3',
@@ -268,22 +268,22 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-start_date',
-                        fieldLabel: 'Join Date'
+                        fieldLabel: lang('Join Date')
                     },{
                     	xtype: 'datefield',
 						format:'Y-m-d',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date',
                         labelAlign: "top",
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-end_date',
-                        fieldLabel: 'End of Employment Date'
+                        fieldLabel: lang('End of Employment Date')
                     },{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-location',
                         name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-location',
-                        fieldLabel: 'Work Location',
+                        fieldLabel: lang('Work Location'),
                         labelAlign: "top"
                     },{
-						fieldLabel: 'Contract Status',
+						fieldLabel: lang('Contract Status'),
 						xtype: 'radiogroup',
 						allowBlank: false,
 						labelAlign:'top',
@@ -292,12 +292,12 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
 						msgTarget: 'side',
 						columns: 2,
 						items: [{
-							boxLabel: 'Active',
+							boxLabel: lang('Active'),
 							name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-employee_status',
 							inputValue: '1',
 							id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-employee_status1'
 						}, {
-							boxLabel: 'Inactie',
+							boxLabel: lang('Inactie'),
 							name: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-employee_status',
 							inputValue: '2',
 							id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-employee_status2'
@@ -313,7 +313,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
             cls:'Sfr_BtnFormBlue',
             overCls:'Sfr_BtnFormBlue-Hover',
-            text: 'Save',
+            text: lang('Save'),
             id: 'MitraJaya.view.Admin.Employee.WinFormContract-Form-BtnSave',
             handler: function () {
             	var FormNya = Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormContract-Form').getForm();
@@ -329,7 +329,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                         success: function(fp, o) {
                             Ext.MessageBox.show({
                                 title: 'Information',
-                                msg: 'Data saved',
+                                msg: lang('Data saved'),
                                 buttons: Ext.MessageBox.OK,
                                 animateTarget: 'mb9',
                                 icon: 'ext-mb-success'
@@ -367,7 +367,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
                 }else{
                     Ext.MessageBox.show({
                         title: 'Attention',
-                        msg: 'Form not valid yet',
+                        msg: lang('Form not valid yet'),
                         buttons: Ext.MessageBox.OK,
                         animateTarget: 'mb9',
                         icon: 'ext-mb-info'
@@ -376,7 +376,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormContract' ,{
             }
         },{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: 'Close',
+			text: lang('Close'),
 			cls:'Sfr_BtnFormGrey',
 			overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {

@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment',
     cls: 'Sfr_LayoutPopupWindows',
-    title:'Loan Payment Form',
+    title:lang('Loan Payment Form'),
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -90,7 +90,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment' ,{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment-Form-DocumentNo',
                         name: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment-Form-DocumentNo',
-                        fieldLabel: 'Document Number',
+                        fieldLabel: lang('Document Number'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -98,7 +98,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment' ,{
                     	xtype: 'numericfield',
                         id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment-Form-LoanPaymentAmount',
                         name: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment-Form-LoanPaymentAmount',
-                        fieldLabel: 'Loan Payment Amount',
+                        fieldLabel: lang('Loan Payment Amount'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -107,7 +107,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment' ,{
                     	xtype: 'datefield',
                         id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment-Form-LoanPaymentDate',
                         name: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment-Form-LoanPaymentDate',
-                        fieldLabel: 'Loan Payment Date',
+                        fieldLabel: lang('Loan Payment Date'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -117,7 +117,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment' ,{
                         labelAlign:'top',
                         id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment-Form-PaymentLoanDescription',
                         name: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment-Form-PaymentLoanDescription',
-                        fieldLabel: 'Payment Loan Description'
+                        fieldLabel: lang('Payment Loan Description')
                     }]
                 }]
             }]
@@ -129,7 +129,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment' ,{
             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
             cls:'Sfr_BtnFormBlue',
             overCls:'Sfr_BtnFormBlue-Hover',
-            text: 'Save',
+            text: lang('Save'),
             id: 'MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment-Form-BtnSave',
             handler: function () {
             	var FormNya = Ext.getCmp('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment-Form').getForm();
@@ -146,7 +146,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment' ,{
                         success: function(fp, o) {
                             Ext.MessageBox.show({
                                 title: 'Information',
-                                msg: 'Data saved',
+                                msg: lang('Data saved'),
                                 buttons: Ext.MessageBox.OK,
                                 animateTarget: 'mb9',
                                 icon: 'ext-mb-success'
@@ -207,7 +207,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment' ,{
                 }else{
                     Ext.MessageBox.show({
                         title: 'Attention',
-                        msg: 'Form not valid yet',
+                        msg: lang('Form not valid yet'),
                         buttons: Ext.MessageBox.OK,
                         animateTarget: 'mb9',
                         icon: 'ext-mb-info'
@@ -216,7 +216,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.WinFormLoanPayment' ,{
             }
         },{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: 'Close',
+			text: lang('Close'),
 			cls:'Sfr_BtnFormGrey',
 			overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {

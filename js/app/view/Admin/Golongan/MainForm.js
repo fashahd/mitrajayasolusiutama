@@ -81,7 +81,7 @@ Ext.define('MitraJaya.view.Admin.Golongan.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: 'Form Golongan',
+            title: lang('Form Golongan'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Finance.Golongan-FormGeneralData',
@@ -119,20 +119,20 @@ Ext.define('MitraJaya.view.Admin.Golongan.MainForm', {
                                     baseCls: 'Sfr_FormInputMandatory',
                                     id: 'MitraJaya.view.Admin.Golongan.MainForm-FormBasicData-gol_code',
                                     name: 'MitraJaya.view.Admin.Golongan.MainForm-FormBasicData-gol_code',
-                                    fieldLabel: 'Golongan ID'
+                                    fieldLabel: lang('Golongan ID')
                                 }, {
                                     xtype: 'textfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.Golongan.MainForm-FormBasicData-gol_name',
                                     name: 'MitraJaya.view.Admin.Golongan.MainForm-FormBasicData-gol_name',
-                                    fieldLabel: 'Golongan Name'
+                                    fieldLabel: lang('Golongan Name')
                                 }]
                             }]
                         }],
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: 'Save',
+                            text: lang('Save'),
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Admin.Golongan.MainForm-FormBasicData-BtnSave',
@@ -216,14 +216,14 @@ Ext.define('MitraJaya.view.Admin.Golongan.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Admin.Golongan.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + 'Golongan Data' + '</div>'
+                html: '<div id="header_title_farmer">' + lang('Golongan Data') + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Admin.Golongan.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Admin.Golongan.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Golongan List' + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Golongan List') + '</a></li></div>'
             }]
         }, {
             html: '<br />'

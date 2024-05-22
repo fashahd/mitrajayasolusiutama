@@ -53,7 +53,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'View',
+                text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Report.BankTransaction.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -83,7 +83,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: 'Update',
+                text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Report.BankTransaction.MainGrid-ContextMenuUpdate',
@@ -114,7 +114,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: 'Delete',
+                text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Report.BankTransaction.MainGrid-ContextMenuDelete',
@@ -181,7 +181,7 @@
 				cls: 'Sfr_PanelLayoutFormContainer',
 				items: [{
 					xtype: 'panel',
-					title: 'Bank Transaction Form',
+					title: lang('Bank Transaction Form'),
 					frame: true,
                     hidden: m_act_add,
 					cls: 'Sfr_PanelLayoutForm',
@@ -216,7 +216,7 @@
 											xtype: 'datefield',
 											format:'Y-m-d',
 											value: new Date(),
-											fieldLabel: 'Date Transaction',
+											fieldLabel: lang('Date Transaction'),
 											labelWidth:180,
 											allowBlank: false,
 											baseCls: 'Sfr_FormInputMandatory',
@@ -233,7 +233,7 @@
 											xtype: 'datefield',
 											format:'Y-m-d',
 											value: new Date(),
-											fieldLabel: 'Checking Account',
+											fieldLabel: lang('Checking Account'),
 											labelWidth:180,
 											id: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-CheckingAccount',
 											name: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-CheckingAccount',
@@ -246,14 +246,14 @@
 											html:'<div style="margin-bottom:5px"></div>'
 										},{
 											xtype: 'textfield',
-											fieldLabel: 'Transaction No',
+											fieldLabel: lang('Transaction No'),
 											id: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-NoVoucher',
 											name: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-NoVoucher'
 										},{
 											html:'<div style="margin-bottom:5px"></div>'
 										},{
 											xtype: 'combobox',
-											fieldLabel: 'Cost Element',
+											fieldLabel: lang('Cost Element'),
 											store:thisObj.cost_element,
 											queryMode:'local',
 											displayField:'label',
@@ -267,14 +267,14 @@
 										style: 'padding:10px 20px 10px 5px; margin-right: 20px; border-right: 1px dotted #666',
 										items: [{
 											xtype: 'radiogroup',
-											fieldLabel: 'Transaction Type',
+											fieldLabel: lang('Transaction Type'),
 											msgTarget: 'side',
 											labelWidth:180,
 											allowBlank:false,
 											baseCls: 'Sfr_FormInputMandatory',
 											columns: 2,
 											items: [{
-												boxLabel: 'Debet',
+												boxLabel: lang('Debet'),
 												name: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-TransactionType',
 												inputValue: 'debit',
 												id: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-TransactionTypeDebit',
@@ -284,7 +284,7 @@
 													}
 												}
 											}, {
-												boxLabel: 'Credit',
+												boxLabel: lang('Credit'),
 												name: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-TransactionType',
 												inputValue: 'credit',
 												id: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-TransactionTypeKredit',
@@ -298,7 +298,7 @@
 											html:'<div style="margin-bottom:5px"></div>'
 										},{
 											xtype: 'numberfield',
-											fieldLabel: 'Amount',
+											fieldLabel: lang('Amount'),
 											allowBlank:false,
 											baseCls: 'Sfr_FormInputMandatory',
 											id: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-TransactionAmount',
@@ -321,7 +321,7 @@
 										style: 'padding:10px 20px 10px 5px; margin-right: 20px; border-right: 1px dotted #666',
 										items: [{
 											xtype: 'textareafield',
-											fieldLabel: 'Description',
+											fieldLabel: lang('Description'),
 											labelAlign:'top',
 											id: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-Description',
 											name: 'MitraJaya.view.Report.BankTransaction.MainGrid-FormBasicData-Description'
@@ -334,7 +334,7 @@
 					buttons: [{
 						xtype: 'button',
 						icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-						text: 'Save Transaction',
+						text: lang('Save Transaction'),
 						cls: 'Sfr_BtnFormBlue',
 						overCls: 'Sfr_BtnFormBlue-Hover',
 						id: 'MitraJaya.view.Report.BankTransaction.MainForm-FormBasicData-BtnSave',
@@ -392,7 +392,7 @@
 						}
 					},{
 						xtype: 'button',
-						text: 'Cancel',
+						text: lang('Cancel'),
 						cls: 'Sfr_BtnFormBlue',
 						overCls: 'Sfr_BtnFormBlue-Hover',
 						id: 'MitraJaya.view.Report.BankTransaction.MainForm-FormBasicData-BtnCancel',
@@ -423,14 +423,14 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
+                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                    text: 'Update',
+                    text: lang('Update'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_update,
@@ -467,7 +467,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                    text: 'Delete',
+                    text: lang('Delete'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_delete,
@@ -557,7 +557,7 @@
 					value:m_year
 				},{
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: 'Apply',
+                    text: lang('Apply'),
 					cls: 'Sfr_BtnFormBlue',
 					overCls: 'Sfr_BtnFormBlue-Hover',
 					style:'margin-right:20px',
@@ -567,7 +567,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-                    text: 'Export',
+                    text: lang('Export'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     id: 'MitraJaya.view.Report.BankTransaction.MainGrid-BtnExport',
@@ -588,7 +588,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/report/bank_transaction/export_excel',
 									method: 'POST',
-									waitMsg: 'Please Wait',
+									waitMsg: lang('Please Wait'),
 									params: {
 										Month 	: Month,
 										Year 	: Year
@@ -631,7 +631,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-import.svg',
-                    text: 'Import',
+                    text: lang('Import'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_add,
@@ -661,43 +661,43 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: 'BankTransactionID',
+                text: lang('BankTransactionID'),
                 dataIndex: 'BankTransactionID',
                 hidden: true
             },{
-                text: 'Date Transaction',
+                text: lang('Date Transaction'),
                 dataIndex: 'DateTransaction',
                 flex: 10
             },{
-                text: 'Checking Account',
+                text: lang('Checking Account'),
                 dataIndex: 'CheckingAccount',
                 flex: 10
             },{
-                text: 'Transaction No',
+                text: lang('Transaction No'),
                 dataIndex: 'NoVoucher',
                 flex: 10
             },{
-                text: 'Cost Element',
+                text: lang('Cost Element'),
                 dataIndex: 'CostElement',
                 flex: 10
             },{
-                text: 'Description',
+                text: lang('Description'),
                 dataIndex: 'Description',
                 flex: 20
             },{
-                text: 'Debit',
+                text: lang('Debit'),
                 dataIndex: 'TransactionAmountDebit',
                 flex: 15
             },{
-                text: 'Credit',
+                text: lang('Credit'),
                 dataIndex: 'TransactionAmountCredit',
                 flex: 15
             },{
-                text: 'Balance',
+                text: lang('Balance'),
                 dataIndex: 'Balance',
                 flex: 15
             },{
-                text: 'Project',
+                text: lang('Project'),
                 dataIndex: 'Project',
                 flex: 15
             }]

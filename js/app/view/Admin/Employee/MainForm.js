@@ -159,7 +159,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 			cls: 'Sfr_ConMenu',
 			items: [{
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-				text: 'View',
+				text: lang('View'),
 				cls: 'Sfr_BtnConMenuWhite',
 				itemId: 'MitraJaya.view.Admin.Employee.GridCertification-ContextMenuView',
 				handler: function () {
@@ -180,7 +180,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-				text: 'Update',
+				text: lang('Update'),
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_update,
 				itemId: 'MitraJaya.view.Admin.Employee.GridCertification-ContextMenuUpdate',
@@ -202,7 +202,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-				text: 'Delete',
+				text: lang('Delete'),
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_delete,
 				itemId: 'MitraJaya.view.Admin.Employee.GridCertification-ContextMenuDelete',
@@ -364,7 +364,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 		var contextMenuGridContract = Ext.create('Ext.menu.Menu', {
 			items: [{
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-				text: 'View',
+				text: lang('View'),
 				handler: function () {
 					var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-gridContract').getSelectionModel().getSelection()[0];
 
@@ -384,7 +384,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-				text: 'Update',
+				text: lang('Update'),
 				hidden: m_act_update,
 				handler: function () {
 					var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-gridContract').getSelectionModel().getSelection()[0];
@@ -406,7 +406,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-				text: 'Delete',
+				text: lang('Delete'),
 				hidden: m_act_delete,
 				handler: function () {
 					var sm = Ext.getCmp('MitraJaya.view.Admin.Employee.MainForm-gridContract').getSelectionModel().getSelection()[0];
@@ -423,7 +423,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 								success: function (response, opts) {
 									Ext.MessageBox.show({
 										title: 'Information',
-										msg: 'Data deleted',
+										msg: lang('Data deleted'),
 										buttons: Ext.MessageBox.OK,
 										animateTarget: 'mb9',
 										icon: 'ext-mb-success'
@@ -437,7 +437,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 									if (o.result.message != undefined) {
 										pesanNya = o.result.message;
 									} else {
-										pesanNya = 'Connection error';
+										pesanNya = lang('Connection error');
 									}
 									Ext.MessageBox.show({
 										title: 'Error',
@@ -455,7 +455,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 		});
 
 		var objPanelStaff = Ext.create('Ext.panel.Panel', {
-			title: 'List of Staff Contract',
+			title: lang('List of Staff Contract'),
 			frame: false,
 			collapsible: false,
 			margin: '0 0 40 0',
@@ -475,7 +475,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 					cls: 'Sfr_BtnGridNewWhite',
 					style: 'margin: 10px 0px 10px 0px',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
-					text: 'Add',
+					text: lang('Add'),
 					id: 'MitraJaya.view.Admin.Employee.MainForm-gridContract-BtnAdd',
 					hidden: m_act_add,
 					handler: function () {
@@ -507,7 +507,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 				},
 				minHeight: 125,
 				columns: [{
-					text: 'Action',
+					text: lang('Action'),
 					xtype: 'actioncolumn',
 					flex: 0.5,
 					items: [{
@@ -518,31 +518,31 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 						}
 					}]
 				}, {
-					text: 'ContractID',
+					text: lang('ContractID'),
 					dataIndex: 'contract_id',
 					hidden: true
 				}, {
-					text: 'Contract No',
+					text: lang('Contract No'),
 					dataIndex: 'contract_number',
 					flex: 1,
 				}, {
-					text: 'Position',
+					text: lang('Position'),
 					dataIndex: 'position',
 					flex: 1,
 				}, {
-					text: 'Gol',
+					text: lang('Gol'),
 					dataIndex: 'gol',
 					flex: 1,
 				}, {
-					text: 'Employment Status',
+					text: lang('Employment Status'),
 					dataIndex: 'contract_status',
 					flex: 1,
 				}, {
-					text: 'Employement Date',
+					text: lang('Employement Date'),
 					dataIndex: 'employment_date',
 					flex: 1,
 				}, {
-					text: 'Contract Status',
+					text: lang('Contract Status'),
 					dataIndex: 'employee_status',
 					flex: 1,
 				}]
@@ -550,7 +550,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 		});
 
 		var objPanelDokumen = Ext.create('Ext.panel.Panel', {
-			title: 'List of Staff Document',
+			title: lang('List of Staff Document'),
 			frame: false,
 			collapsible: false,
 			margin: '0 0 40 0',
@@ -570,7 +570,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 					cls: 'Sfr_BtnGridNewWhite',
 					style: 'margin: 10px 0px 10px 0px',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
-					text: 'Add Document',
+					text: lang('Add Document'),
 					id: 'MitraJaya.view.Admin.Employee.MainForm-gridDocument-BtnAdd',
 					hidden: m_act_add,
 					handler: function () {
@@ -602,7 +602,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 				},
 				minHeight: 125,
 				columns: [{
-					text: 'Action',
+					text: lang('Action'),
 					xtype: 'actioncolumn',
 					flex: 0.5,
 					items: [{
@@ -613,23 +613,23 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 						}
 					}]
 				}, {
-					text: 'DocID',
+					text: lang('DocID'),
 					dataIndex: 'doc_id',
 					hidden: true
 				}, {
-					text: 'Document Type',
+					text: lang('Document Type'),
 					dataIndex: 'doc_type',
 					flex: 1,
 				}, {
-					text: 'Document No',
+					text: lang('Document No'),
 					dataIndex: 'doc_number',
 					flex: 1,
 				}, {
-					text: 'Expired Date',
+					text: lang('Expired Date'),
 					dataIndex: 'expired_date',
 					flex: 1,
 				}, {
-					text: 'File',
+					text: lang('File'),
 					dataIndex: 'file',
 					flex: 1,
 					renderer: function (t, meta, record) {
@@ -644,7 +644,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 		});
 
 		var objPanelStaffCertification = Ext.create('Ext.panel.Panel', {
-			title: 'List of Staff Training & Certification',
+			title: lang('List of Staff Training & Certification'),
 			frame: false,
 			collapsible: false,
 			margin: '0 0 40 0',
@@ -664,7 +664,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 					cls: 'Sfr_BtnGridNewWhite',
 					style: 'margin: 10px 0px 10px 0px',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
-					text: 'Add',
+					text: lang('Add'),
 					id: 'MitraJaya.view.Admin.Employee.MainForm-PanelCertification-BtnAdd',
 					hidden: m_act_add,
 					handler: function () {
@@ -696,7 +696,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 				},
 				minHeight: 125,
 				columns: [{
-					text: 'Action',
+					text: lang('Action'),
 					xtype: 'actioncolumn',
 					flex: 0.5,
 					items: [{
@@ -711,23 +711,23 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 					flex: 0.1,
 					xtype: 'rownumberer'
 				}, {
-					text: 'cert_id',
+					text: lang('cert_id'),
 					dataIndex: 'cert_id',
 					hidden: true
 				}, {
-					text: 'Certificate Number',
+					text: lang('Certificate Number'),
 					dataIndex: 'cert_code',
 					flex: 1
 				}, {
-					text: 'Name',
+					text: lang('Name'),
 					dataIndex: 'cert_name',
 					flex: 1
 				}, {
-					text: 'Start',
+					text: lang('Start'),
 					dataIndex: 'start_date',
 					flex: 1
 				}, {
-					text: 'End',
+					text: lang('End'),
 					dataIndex: 'end_date',
 					flex: 1
 				}]
@@ -766,7 +766,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 							id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData',
 							fileUpload: true,
 							buttonAlign: 'center',
-							title: 'Employee Data',
+							title: lang('Employee Data'),
 							cls: 'Sfr_PanelSubLayoutForm',
 							items: [{
 								layout: 'column',
@@ -812,7 +812,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													},
 													failure: function (fp, o) {
 														Ext.MessageBox.show({
-															title: 'Error',
+															title: lang('Error'),
 															msg: o.result.message,
 															buttons: Ext.MessageBox.OK,
 															animateTarget: 'mb9',
@@ -834,7 +834,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 									style: 'padding:10px 5px 10px 20px;',
 									items: [{
 										xtype: 'panel',
-										title: 'Personal Data',
+										title: lang('Personal Data'),
 										frame: false,
 										id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-SectionFarmerProfile',
 										style: 'margin-top:12px;',
@@ -859,7 +859,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													xtype: 'textfield',
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_ext_id',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_ext_id',
-													fieldLabel: 'Staff ID',
+													fieldLabel: lang('Staff ID'),
 													readOnly: m_act_update,
 													allowBlank: false,
 													baseCls: 'Sfr_FormInputMandatory',
@@ -869,14 +869,14 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													xtype: 'textfield',
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_name',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_name',
-													fieldLabel: 'Full Name',
+													fieldLabel: lang('Full Name'),
 													readOnly: m_act_update,
 													allowBlank: false,
 													baseCls: 'Sfr_FormInputMandatory',
 												}, {
 													html: '<div style="margin-bottom:10px"></div>'
 												}, {
-													fieldLabel: 'Gender',
+													fieldLabel: lang('Gender'),
 													xtype: 'radiogroup',
 													allowBlank: false,
 													baseCls: 'Sfr_FormInputMandatory',
@@ -884,7 +884,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													msgTarget: 'side',
 													columns: 2,
 													items: [{
-														boxLabel: 'Male',
+														boxLabel: lang('Male'),
 														name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_gender',
 														inputValue: 'male',
 														id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_gender1',
@@ -894,7 +894,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 															}
 														}
 													}, {
-														boxLabel: 'Female',
+														boxLabel: lang('Female'),
 														name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_gender',
 														inputValue: 'female',
 														id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_gender2',
@@ -914,7 +914,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													readOnly: m_act_update,
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-birth_date',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-birth_date',
-													fieldLabel: 'Date of Birth'
+													fieldLabel: lang('Date of Birth')
 												}, {
 													html: '<div style="margin-bottom:10px"></div>'
 												}, {
@@ -922,14 +922,14 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													readOnly: m_act_update,
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-birth_place',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-birth_place',
-													fieldLabel: 'Place of Birth'
+													fieldLabel: lang('Place of Birth')
 												}, {
 													html: '<div style="margin-bottom:10px"></div>'
 												}, {
 													xtype: 'combobox',
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-religion',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-religion',
-													fieldLabel: 'Religion',
+													fieldLabel: lang('Religion'),
 													readOnly: m_act_update,
 													store: thisObj.combo_religion,
 													queryMode: 'local',
@@ -945,7 +945,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 									style: 'padding:10px 5px 10px 20px;',
 									items: [{
 										xtype: 'panel',
-										title: 'Address & Location',
+										title: lang('Address & Location'),
 										frame: false,
 										id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-SectionAddress',
 										style: 'margin-top:12px;',
@@ -966,7 +966,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-province_id',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-province_id',
 													store: cmb_province,
-													fieldLabel: 'Province',
+													fieldLabel: lang('Province'),
 													labelAlign: 'top',
 													queryMode: 'local',
 													displayField: 'label',
@@ -988,7 +988,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-district_id',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-district_id',
 													store: cmb_district,
-													fieldLabel: 'District',
+													fieldLabel: lang('District'),
 													labelAlign: 'top',
 													queryMode: 'local',
 													displayField: 'label',
@@ -1009,7 +1009,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-subdistrict_id',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-subdistrict_id',
 													store: cmb_subdistrict,
-													fieldLabel: 'Sub District',
+													fieldLabel: lang('Sub District'),
 													labelAlign: 'top',
 													queryMode: 'local',
 													displayField: 'label',
@@ -1028,7 +1028,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													xtype: 'combobox',
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-village_id',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-village_id',
-													fieldLabel: 'Village',
+													fieldLabel: lang('Village'),
 													store: cmb_village,
 													labelAlign: 'top',
 													queryMode: 'local',
@@ -1044,7 +1044,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													readOnly: m_act_update,
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-address',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-address',
-													fieldLabel: 'Address'
+													fieldLabel: lang('Address')
 												}]
 											}]
 										}]
@@ -1055,7 +1055,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 									style: 'padding:10px 5px 10px 20px;',
 									items: [{
 										xtype: 'panel',
-										title: 'Communication',
+										title: lang('Communication'),
 										frame: false,
 										id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-SectionCommunication',
 										style: 'margin-top:12px;',
@@ -1076,7 +1076,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													readOnly: m_act_update,
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_email',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-people_email',
-													fieldLabel: 'Email'
+													fieldLabel: lang('Email')
 												}, {
 													html: '<div style="margin-bottom:10px"></div>'
 												},{
@@ -1086,7 +1086,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
                                                     style: 'margin-bottom:3px;',
                                                     items: [{
                                                         xtype: 'textfield',
-                                                        fieldLabel: 'Handphone',
+                                                        fieldLabel: lang('Handphone'),
                                                         labelAlign: 'top',
                                                         style: 'margin-right:5px;',
                                                         width: 80,
@@ -1105,7 +1105,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 										}]
 									}, {
 										xtype: 'panel',
-										title: 'Bank Information',
+										title: lang('Bank Information'),
 										frame: false,
 										id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-SectionBank',
 										style: 'margin-top:12px;',
@@ -1126,7 +1126,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													readOnly: m_act_update,
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-bank',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-bank',
-													fieldLabel: 'Bank Name'
+													fieldLabel: lang('Bank Name')
 												}, {
 													html: '<div style="margin-bottom:10px"></div>'
 												}, {
@@ -1134,7 +1134,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													readOnly: m_act_update,
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-account_no',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-account_no',
-													fieldLabel: 'Account Number'
+													fieldLabel: lang('Account Number')
 												}, {
 													html: '<div style="margin-bottom:10px"></div>'
 												}, {
@@ -1142,7 +1142,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 													readOnly: m_act_update,
 													id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-account_beneficiary',
 													name: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-account_beneficiary',
-													fieldLabel: 'Account Number Beneficiary'
+													fieldLabel: lang('Account Number Beneficiary')
 												}]
 											}]
 										}]
@@ -1151,7 +1151,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 							}]
 						}, {
 							xtype: 'panel',
-							title: 'Employee Information',
+							title: lang('Employee Information'),
 							id: 'Koltiva.view.Farmer.MainForm-FormBasicData-TabPayrollInformation',
 							disabled: true,
 							items: [{
@@ -1166,7 +1166,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 							}]
 						}, {
 							xtype: 'panel',
-							title: 'Staff Contract',
+							title: lang('Staff Contract'),
 							id: 'Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffInformation',
 							disabled: true,
 							items: [{
@@ -1181,7 +1181,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 							}]
 						}, {
 							xtype: 'panel',
-							title: 'Training & Certification',
+							title: lang('Training & Certification'),
 							id: 'Koltiva.view.Farmer.MainForm-FormBasicData-TabStaffCertification',
 							disabled: true,
 							items: [{
@@ -1198,7 +1198,7 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 						buttons: [{
 							xtype: 'button',
 							icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-							text: 'Save',
+							text: lang('Save'),
 							cls: 'Sfr_BtnFormBlue',
 							overCls: 'Sfr_BtnFormBlue-Hover',
 							id: 'MitraJaya.view.Admin.Employee.MainForm-FormBasicData-BtnSave',
@@ -1315,14 +1315,14 @@ Ext.define('MitraJaya.view.Admin.Employee.MainForm', {
 			},
 			items: [{
 				id: 'MitraJaya.view.Admin.Employee.MainForm-labelInfoInsert',
-				html: '<div id="header_title_farmer">' + 'Employee Data' + '</div>'
+				html: '<div id="header_title_farmer">' + lang('Employee Data') + '</div>'
 			}]
 		}, {
 			items: [{
 				id: 'MitraJaya.view.Admin.Employee.MainForm-LinkBackToList',
 				html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 					+ '<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Admin.Employee.MainForm\').BackToList()">'
-					+ '<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Employee List' + '</a></li></div>'
+					+ '<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Employee List') + '</a></li></div>'
 			}]
 		}, {
 			html: '<br />'

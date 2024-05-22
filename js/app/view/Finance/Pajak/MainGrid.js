@@ -41,7 +41,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'View',
+                text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Finance.Pajak.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -70,7 +70,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: 'Update',
+                text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Finance.Pajak.MainGrid-ContextMenuUpdate',
@@ -137,7 +137,7 @@
 							items: [{
 								xtype:'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text:'Search',
+								text:lang('Search'),
 								style:'margin-left:20px; margin-top:30px',
 								cls:'Sfr_BtnFormCyan',
 								overCls:'Sfr_BtnFormCyan-Hover',
@@ -174,7 +174,7 @@
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-                    text: 'Export',
+                    text: lang('Export'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -194,7 +194,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/invoice/export_invoice',
 									method: 'POST',
-									waitMsg: 'Please Wait',
+									waitMsg: lang('Please Wait'),
 									params: {
 										keySearch : keySearch,
 										Month : Month,
@@ -244,7 +244,7 @@
                 },{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: 'Advanced Filter',
+                    text: lang('Advanced Filter'),
 					hidden:true,
                     handler: function () {
                         //advanced search
@@ -282,18 +282,18 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: 'PajakID',
+                text: lang('PajakID'),
                 dataIndex: 'PajakID',
                 hidden: true
             },{
-                text: 'Period',
+                text: lang('Period'),
                 dataIndex: 'Period',
                 flex:10,
 				summaryRenderer: function(value, summaryData, dataIndex) {
 					return 'Total'; 
 				}
             },{
-                text: 'Amount',
+                text: lang('Amount'),
                 dataIndex: 'VATAmount',
                 flex: 15,
 				summaryType: 'sum',
@@ -305,7 +305,7 @@
                     return RetVal;
                 }
             },{
-                text: 'Paid Amount',
+                text: lang('Paid Amount'),
                 dataIndex: 'PaidAmountVal',
                 flex: 15,
 				summaryType: 'sum',
@@ -317,7 +317,7 @@
                     return RetVal;
                 }
             },{
-                text: 'Over Paid',
+                text: lang('Over Paid'),
                 dataIndex: 'OverpaidVal',
                 flex: 10,
 				summaryType: 'sum',
@@ -337,7 +337,7 @@
 				// 	return totals[0];
 				// }
             },{
-                text: 'Report Status',
+                text: lang('Report Status'),
                 dataIndex: 'ReportStatus',
                 flex: 10,
                 renderer: function (t, meta, record) {
@@ -375,7 +375,7 @@
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-                    text: 'Export',
+                    text: lang('Export'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -395,7 +395,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/invoice/export_invoice',
 									method: 'POST',
-									waitMsg: 'Please Wait',
+									waitMsg: lang('Please Wait'),
 									params: {
 										keySearch : keySearch,
 										Month : Month,
@@ -445,7 +445,7 @@
                 },{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: 'Advanced Filter',
+                    text: lang('Advanced Filter'),
 					hidden:true,
                     handler: function () {
                         //advanced search
@@ -473,18 +473,18 @@
                 flex: 0.5,
                 xtype: 'rownumberer'
             },{
-                text: 'PajakID',
+                text: lang('PajakID'),
                 dataIndex: 'PajakID',
                 hidden: true
             },{
-                text: 'Period',
+                text: lang('Period'),
                 dataIndex: 'Period',
                 flex:15,
 				summaryRenderer: function(value, summaryData, dataIndex) {
 					return 'Total'; 
 				}
             },{
-                text: 'Amount',
+                text: lang('Amount'),
                 dataIndex: 'VATAmount',
                 flex: 15,
 				summaryType: 'sum',

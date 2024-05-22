@@ -358,12 +358,12 @@ function AlertNotification(objPanelBasicData){
     for(var i=0; i< contentForm.length; i++){
         if(contentForm[i].fieldLabel){
             var split = contentForm[i].fieldLabel.split('<');
-            validation += split[0] + ', ';
+            validation += lang(split[0]) + ', ';
         }
     }
     Ext.MessageBox.show({
-        title: 'Attention',
-        msg: 'The field' + ' ' + validation + ' ' + 'is required'+ ' !',
+        title: lang('Attention'),
+        msg: lang('The field') + ' ' + validation + ' ' + lang('is required')+ ' !',
         buttons: Ext.MessageBox.OK,
         animateTarget: 'mb9',
         icon: 'ext-mb-info'
@@ -398,7 +398,7 @@ function changeSaveStatus(data){
 
 function GetDefaultContentNoData(){
     var HtmlReturn;
-    HtmlReturn = '<div class="Sfr_ContDataNotFound"><img src="'+varjs.config.base_url+'/assets/icons/nodata-search.png" width="48" /><p style="margin-top:6px;">'+'No Data Available'+'</p></div>';
+    HtmlReturn = '<div class="Sfr_ContDataNotFound"><img src="'+varjs.config.base_url+'/assets/icons/nodata-search.png" width="48" /><p style="margin-top:6px;">'+lang('No Data Available')+'</p></div>';
     return HtmlReturn;
 }
 
@@ -411,7 +411,7 @@ function downloadFile(url, filename) {
     $.extend($.gritter.options, { position: 'bottom-right' });
     var id = $.gritter.add({
         title: filename,
-        text: 'Downloading file, please wait',
+        text: lang('Downloading file, please wait'),
         image: App.conf.assetsPath + '/' +  App.conf.imgPath + '/download.png',
         class_name: 'clean',
         sticky: true, 
@@ -428,7 +428,7 @@ function downloadFile(url, filename) {
                 if (response.success == true) {
                     $.gritter.add({
                         title: filename,
-                        text: 'Download success, here is your <a href="'+response.url+'" target="_blank">file</a>',
+                        text: lang('Download success, here is your <a href="'+response.url+'" target="_blank">file</a>'),
                         image: App.conf.assetsPath + '/' +  App.conf.imgPath + '/download.png',
                         class_name: 'clean',
                         sticky: true, 
@@ -437,7 +437,7 @@ function downloadFile(url, filename) {
                 } else {
                     $.gritter.add({
                         title: filename,
-                        text: 'Download fail'+'. '+response.message,
+                        text: lang('Download fail')+'. '+response.message,
                         image: App.conf.assetsPath + '/' +  App.conf.imgPath + '/download.png',
                         class_name: 'clean',
                         sticky: true, 
@@ -447,7 +447,7 @@ function downloadFile(url, filename) {
             } else {
                 $.gritter.add({
                     title: filename,
-                    text: 'Download fail'+'.',
+                    text: lang('Download fail')+'.',
                     image: App.conf.assetsPath + '/' +  App.conf.imgPath + '/download.png',
                     class_name: 'clean',
                     sticky: true, 
@@ -459,7 +459,7 @@ function downloadFile(url, filename) {
             $.gritter.remove(id);
                 $.gritter.add({
                     title: filename,
-                    text: 'Download fail'+'. ',
+                    text: lang('Download fail')+'. ',
                     image: App.conf.assetsPath + '/' +  App.conf.imgPath + '/download.png',
                     class_name: 'clean',
                     sticky: true, 
