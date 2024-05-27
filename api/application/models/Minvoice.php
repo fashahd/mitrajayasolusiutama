@@ -305,7 +305,7 @@ class Minvoice extends CI_Model {
 	public function form_invoice($InvoiceID){
 
 		$this->db->where("a.InvoiceID", $InvoiceID);
-		$this->db->join("mj_order_book b", " b.OrderBookID = a.ContractNumber", "left");
+		$this->db->join("mj_order_book b", " b.ContractNumber = a.ContractNumber", "left");
 		$this->db->join("mj_project_new d", " d.OrderBookID = b.OrderBookID", "left");
 		$this->db->join("mj_people c", " c.people_id = b.PeopleID", "left");
 		$this->db->join("mj_customer e", " e.CustomerID = a.CustomerID", "left");
@@ -341,6 +341,7 @@ class Minvoice extends CI_Model {
 			a.NettIncome, 
 		');
 		$query = $this->db->get('mj_invoice a')->row_array();
+		// echo "<pre>";print_r($this->db->last_query());die;
 
 		$result = array();
         foreach($query as $row => $value){
