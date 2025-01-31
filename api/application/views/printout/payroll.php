@@ -92,6 +92,11 @@ $net_salary = $PayrollData["salary"] + $PayrollData["total_insentif"] - $Payroll
 				<td>:</td>
 				<td>Rp <?= number_format($PayrollData["insentif_thr"], 2) ?></td>
 			</tr>
+			<tr>
+				<td>Kompensasi</td>
+				<td>:</td>
+				<td>Rp <?= number_format($PayrollData["insentif_bonus"], 2) ?></td>
+			</tr>
 		</table>
 		<table width="100%" border="0" cellpadding="2" style="border:none;margin-top:40px;font-weight:600;font-size:9pt">
 			<tr>

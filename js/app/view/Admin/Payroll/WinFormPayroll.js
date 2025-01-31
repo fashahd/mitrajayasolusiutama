@@ -214,7 +214,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.WinFormPayroll', {
 												labelAlign: 'top',
 												id: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_bonus',
 												name: 'MitraJaya.view.Admin.Payroll.WinFormPayroll-FormBasicData-insentif_bonus',
-												fieldLabel: 'Bonus'
+												fieldLabel: 'Kompensasi'
 											}, {
 												xtype: 'numericfield',
 												labelAlign: 'top',
