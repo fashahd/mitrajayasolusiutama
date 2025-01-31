@@ -89,7 +89,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: 'Form Toolkit',
+            title: lang('Form Toolkit'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Warehouse.Toolkit-FormGeneralData',
@@ -125,7 +125,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-ToolkitCode',
                                     name: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-ToolkitCode',
-                                    fieldLabel: 'Toolkit Code',
+                                    fieldLabel: lang('Toolkit Code'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }, {
@@ -133,7 +133,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-ToolkitName',
                                     name: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-ToolkitName',
-                                    fieldLabel: 'Toolkit Name',
+                                    fieldLabel: lang('Toolkit Name'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }, {
@@ -141,7 +141,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-ToolkitQty',
                                     name: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-ToolkitQty',
-                                    fieldLabel: 'Base Toolkit Qty'
+                                    fieldLabel: lang('Base Toolkit Qty')
                                 },{
                                     xtype: 'combobox',
 									id:'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-RackID',
@@ -176,7 +176,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
 											xtype: 'fileuploadfield',
 											id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-PhotoInput',
 											name: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-PhotoInput',
-											buttonText: 'Browse',
+											buttonText: lang('Browse'),
 											cls: 'Sfr_FormBrowseBtn',
 											listeners: {
 												'change': function (fb, v) {
@@ -193,7 +193,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
 														},
 														failure: function (fp, o) {
 															Ext.MessageBox.show({
-																title: 'Error',
+																title: lang('Error'),
 																msg: o.result.message,
 																buttons: Ext.MessageBox.OK,
 																animateTarget: 'mb9',
@@ -216,7 +216,7 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: 'Save',
+                            text: lang('Save'),
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-FormBasicData-BtnSave',
@@ -300,14 +300,14 @@ Ext.define('MitraJaya.view.Warehouse.Toolkit.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + 'Toolkit Data' + '</div>'
+                html: '<div id="header_title_farmer">' + lang('Toolkit Data') + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Warehouse.Toolkit.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.Toolkit.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Toolkit List' + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Toolkit List') + '</a></li></div>'
             }]
         }, {
             html: '<br />'

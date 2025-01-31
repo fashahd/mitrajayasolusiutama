@@ -133,7 +133,7 @@ class Neraca extends REST_Controller {
 
 		if (!in_array($ExtNya, array('pdf', 'xls', 'xlsx'))) {
 			$result['success'] = false;
-			$result['message'] = 'File types not allowed';
+			$result['message'] = lang('File types not allowed');
 			$this->response($result, 400);
 		} else {
 			if ($_FILES['MitraJaya_view_Report_Balance_MainForm-FormBasicData-File'.$_POST["type"]]['name'] != '') {
@@ -189,7 +189,7 @@ class Neraca extends REST_Controller {
 
 			if (!in_array($ExtNya, array('pdf', 'xls', 'xlsx'))) {
 				$result['success'] = false;
-				$result['message'] = 'File types not allowed';
+				$result['message'] = lang('File types not allowed');
 				$this->response($result, 400);
 			} else {
 				if ($_FILES['MitraJaya_view_Report_Balance_MainForm-FormBasicData-File'.$_POST["type"]]['name'] != '') {
@@ -242,7 +242,7 @@ class Neraca extends REST_Controller {
 			
 		// 	if (!in_array($ExtNya, array('pdf', 'xls', 'xlsx'))) {
 		// 		$result['success'] = false;
-		// 		$result['message'] = 'File types not allowed';
+		// 		$result['message'] = lang('File types not allowed');
 		// 		$this->response($result, 400);
 		// 	} else {
 		// 		if ($_FILES['MitraJaya_view_Report_Balance_MainForm-FormBasicData-PhotoInput']['name'] != '') {

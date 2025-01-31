@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormEducation' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Admin.Employee.WinFormEducation',
     cls: 'Sfr_LayoutPopupWindows',
-    title:'Education Form',
+    title:lang('Education Form'),
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -88,12 +88,12 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormEducation' ,{
                     	xtype: 'hiddenfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-education_id',
                         name: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-education_id',
-                        fieldLabel: 'Education ID'
+                        fieldLabel: lang('Education ID')
                     },{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-school_name',
                         name: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-school_name',
-                        fieldLabel: 'School Name',
+                        fieldLabel: lang('School Name'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -105,7 +105,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormEducation' ,{
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
                         name: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-start_year',
-                        fieldLabel: 'Start Date'
+                        fieldLabel: lang('Start Date')
                     },{
                     	xtype: 'datefield',
 						format:'Y-m-d',
@@ -114,7 +114,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormEducation' ,{
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
                         name: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-end_year',
-                        fieldLabel: 'End Date'
+                        fieldLabel: lang('End Date')
                     }]
                 },{
                     columnWidth: 0.5,
@@ -124,7 +124,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormEducation' ,{
 						xtype: 'combobox',
 						id: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-education_level',
 						name: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-education_level',
-						fieldLabel: 'Education Level',
+						fieldLabel: lang('Education Level'),
                         labelAlign: "top",
 						readOnly: m_act_update,
                         allowBlank: false,
@@ -137,13 +137,13 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormEducation' ,{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-gpa',
                         name: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-gpa',
-                        fieldLabel: 'GPA',
+                        fieldLabel: lang('GPA'),
                         labelAlign: "top"
                     },{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-gpa_from',
                         name: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-gpa_from',
-                        fieldLabel: 'GPA FROM',
+                        fieldLabel: lang('GPA FROM'),
                         labelAlign: "top"
                     }]
 				}]
@@ -156,7 +156,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormEducation' ,{
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
             cls:'Sfr_BtnFormBlue',
             overCls:'Sfr_BtnFormBlue-Hover',
-            text: 'Save',
+            text: lang('Save'),
             id: 'MitraJaya.view.Admin.Employee.WinFormEducation-Form-BtnSave',
             handler: function () {
             	var FormNya = Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormEducation-Form').getForm();
@@ -172,7 +172,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormEducation' ,{
                         success: function(fp, o) {
                             Ext.MessageBox.show({
                                 title: 'Information',
-                                msg: 'Data saved',
+                                msg: lang('Data saved'),
                                 buttons: Ext.MessageBox.OK,
                                 animateTarget: 'mb9',
                                 icon: 'ext-mb-success'
@@ -233,7 +233,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormEducation' ,{
                 }else{
                     Ext.MessageBox.show({
                         title: 'Attention',
-                        msg: 'Form not valid yet',
+                        msg: lang('Form not valid yet'),
                         buttons: Ext.MessageBox.OK,
                         animateTarget: 'mb9',
                         icon: 'ext-mb-info'
@@ -242,7 +242,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormEducation' ,{
             }
         },{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: 'Close',
+			text: lang('Close'),
 			cls:'Sfr_BtnFormGrey',
 			overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {

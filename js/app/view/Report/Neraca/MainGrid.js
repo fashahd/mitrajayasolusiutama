@@ -212,7 +212,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                     items: [{
                         xtype:'button',
                         // icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-                        text:'Search',
+                        text:lang('Search'),
                         style:'margin-left:20px; margin-top:30px',
                         cls:'Sfr_BtnGridPaleBlueNew',
                         overCls:'Sfr_BtnGridPaleBlueNew-Hover',
@@ -226,7 +226,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
         }];
 
 		thisObj.FormNeraca = Ext.create('Ext.panel.Panel', {
-            title: 'Form Neraca',
+            title: lang('Form Neraca'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Report.Neraca.MainGrid-FormNeraca',
@@ -245,7 +245,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                         cls: 'Sfr_PanelLayoutFormContainer',
                         items: [{
                             xtype: 'panel',
-                            title: 'AKTIVA LANCAR',
+                            title: lang('AKTIVA LANCAR'),
                             frame: false,
                             id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionGeneralData',
                             style: 'margin-top:5px;',
@@ -262,7 +262,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                                         xtype: 'numericfield',
                                         id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-Kas',
                                         name: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-Kas',
-                                        fieldLabel: 'Kas',
+                                        fieldLabel: lang('Kas'),
                                         readOnly:m_act_update,
                                         labelWidth:200,
                                         // Remove spinner buttons, and arrow key and mouse wheel listeners
@@ -292,7 +292,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileKas',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileKas',
-												buttonText: 'Upload Kas',
+												buttonText: lang('Upload Kas'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -309,7 +309,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -318,7 +318,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -336,7 +336,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownload',
 											items: [{
 												xtype: 'button',
-												text: 'Download Kas Detail',
+												text: lang('Download Kas Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownload',
@@ -356,7 +356,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -433,7 +433,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileKasKecil',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileKasKecil',
-												buttonText: 'Upload Kas Kecil',
+												buttonText: lang('Upload Kas Kecil'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -450,7 +450,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -459,7 +459,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -477,7 +477,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownloadKasKecil',
 											items: [{
 												xtype: 'button',
-												text: 'Download Kas Kecil Detail',
+												text: lang('Download Kas Kecil Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownloadKasKecil',
@@ -497,7 +497,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -573,7 +573,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileBankBCA1',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileBankBCA1',
-												buttonText: 'Upload Bank BCA 1',
+												buttonText: lang('Upload Bank BCA 1'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -590,7 +590,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -599,7 +599,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -617,7 +617,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownloadBankBCA1',
 											items: [{
 												xtype: 'button',
-												text: 'Download Bank BCA 1 Detail',
+												text: lang('Download Bank BCA 1 Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownloadBankBCA1',
@@ -637,7 +637,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -713,7 +713,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileBankBCA2',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileBankBCA2',
-												buttonText: 'Upload Bank BCA 2',
+												buttonText: lang('Upload Bank BCA 2'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -730,7 +730,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -739,7 +739,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -757,7 +757,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownloadBankBCA2',
 											items: [{
 												xtype: 'button',
-												text: 'Download Bank BCA 2 Detail',
+												text: lang('Download Bank BCA 2 Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownloadBankBCA2',
@@ -777,7 +777,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -853,7 +853,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePiutangKaryawan',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePiutangKaryawan',
-												buttonText: 'Upload Piutang Karyawan',
+												buttonText: lang('Upload Piutang Karyawan'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -870,7 +870,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -879,7 +879,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -897,7 +897,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownloadPiutangKaryawan',
 											items: [{
 												xtype: 'button',
-												text: 'Download Piutang Karyawan',
+												text: lang('Download Piutang Karyawan'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownloadPiutangKaryawan',
@@ -917,7 +917,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -993,7 +993,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePersediaan',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePersediaan',
-												buttonText: 'Upload Persediaan',
+												buttonText: lang('Upload Persediaan'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -1010,7 +1010,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1019,7 +1019,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1037,7 +1037,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownloadPersediaan',
 											items: [{
 												xtype: 'button',
-												text: 'Download Persediaan Detail',
+												text: lang('Download Persediaan Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownloadPersediaan',
@@ -1057,7 +1057,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -1133,7 +1133,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePiutangDagang',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePiutangDagang',
-												buttonText: 'Upload Piutang Dagang',
+												buttonText: lang('Upload Piutang Dagang'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -1150,7 +1150,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1159,7 +1159,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1177,7 +1177,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownloadPiutangDagang',
 											items: [{
 												xtype: 'button',
-												text: 'Download Piutang Dagang Detail',
+												text: lang('Download Piutang Dagang Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownloadPiutangDagang',
@@ -1197,7 +1197,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -1273,7 +1273,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePajakDimuka',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePajakDimuka',
-												buttonText: 'Upload Pajak Dimuka',
+												buttonText: lang('Upload Pajak Dimuka'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -1290,7 +1290,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1299,7 +1299,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1317,7 +1317,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownloadPajakDimuka',
 											items: [{
 												xtype: 'button',
-												text: 'Download Pajak Dimuka Detail',
+												text: lang('Download Pajak Dimuka Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownloadPajakDimuka',
@@ -1337,7 +1337,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -1404,7 +1404,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'AKTIVA TETAP',
+                            title: lang('AKTIVA TETAP'),
                             frame: false,
                             id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionActivaTetap',
                             style: 'margin-top:12px;',
@@ -1421,7 +1421,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                                         xtype: 'numericfield',
                                         id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-PerlengkapanKantor',
                                         name: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-PerlengkapanKantor',
-                                        fieldLabel: 'Perlengkapan Kantor',
+                                        fieldLabel: lang('Perlengkapan Kantor'),
                                         labelWidth:200,
                                         // Remove spinner buttons, and arrow key and mouse wheel listeners
                                         hideTrigger: true,
@@ -1441,7 +1441,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                                         xtype: 'numericfield',
                                         id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-Akumulasi',
                                         name: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-Akumulasi',
-                                        fieldLabel: 'Akumulasi',
+                                        fieldLabel: lang('Akumulasi'),
                                         labelWidth:200,
                                         // Remove spinner buttons, and arrow key and mouse wheel listeners
                                         hideTrigger: true,
@@ -1482,7 +1482,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Total',
+                            title: lang('Total'),
                             frame: false,
                             id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionTotal',
                             style: 'margin-top:12px;',
@@ -1517,7 +1517,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                         cls: 'Sfr_PanelLayoutFormContainer',
                         items: [{
                             xtype: 'panel',
-                            title: 'PASIVA',
+                            title: lang('PASIVA'),
                             frame: false,
                             id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionPasiva',
                             style: 'margin-top:5px;',
@@ -1534,7 +1534,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                                         xtype: 'numericfield',
                                         id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-HutangDireksi',
                                         name: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-HutangDireksi',
-                                        fieldLabel: 'Hutang Direksi',
+                                        fieldLabel: lang('Hutang Direksi'),
                                         readOnly:m_act_update,
                                         labelWidth:200,
                                         // Remove spinner buttons, and arrow key and mouse wheel listeners
@@ -1560,7 +1560,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileHutangDireksi',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileHutangDireksi',
-												buttonText: 'Upload Pajak Dimuka',
+												buttonText: lang('Upload Pajak Dimuka'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -1577,7 +1577,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1586,7 +1586,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1604,7 +1604,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownloadHutangDireksi',
 											items: [{
 												xtype: 'button',
-												text: 'Download Pajak Dimuka Detail',
+												text: lang('Download Pajak Dimuka Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownloadHutangDireksi',
@@ -1624,7 +1624,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -1698,7 +1698,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileHutangPajak',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileHutangPajak',
-												buttonText: 'Upload Pajak Dimuka',
+												buttonText: lang('Upload Pajak Dimuka'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -1715,7 +1715,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1724,7 +1724,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1742,7 +1742,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownloadHutangPajak',
 											items: [{
 												xtype: 'button',
-												text: 'Download Pajak Dimuka Detail',
+												text: lang('Download Pajak Dimuka Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownloadHutangPajak',
@@ -1762,7 +1762,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -1810,7 +1810,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                                         xtype: 'numericfield',
                                         id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-Modal',
                                         name: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-Modal',
-                                        fieldLabel: 'Modal',
+                                        fieldLabel: lang('Modal'),
                                         labelWidth:200,
                                         // Remove spinner buttons, and arrow key and mouse wheel listeners
                                         hideTrigger: true,
@@ -1828,7 +1828,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                                         xtype: 'numericfield',
                                         id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-LabaRugiBertahan',
                                         name: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-LabaRugiBertahan',
-                                        fieldLabel: 'Laba/Rugi Bertahan',
+                                        fieldLabel: lang('Laba/Rugi Bertahan'),
                                         labelWidth:200,
                                         // Remove spinner buttons, and arrow key and mouse wheel listeners
                                         hideTrigger: true,
@@ -1846,7 +1846,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                                         xtype: 'numericfield',
                                         id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-LabaRugiBerjalan',
                                         name: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-LabaRugiBerjalan',
-                                        fieldLabel: 'Laba Rugi Berjalan',
+                                        fieldLabel: lang('Laba Rugi Berjalan'),
                                         labelWidth:200,
                                         // Remove spinner buttons, and arrow key and mouse wheel listeners
                                         hideTrigger: true,
@@ -1872,7 +1872,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileLabaRugiBerjalan',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileLabaRugiBerjalan',
-												buttonText: 'Upload Laba Rugi',
+												buttonText: lang('Upload Laba Rugi'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -1889,7 +1889,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1898,7 +1898,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -1916,7 +1916,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionDownloadLabaRugiBerjalan',
 											items: [{
 												xtype: 'button',
-												text: 'Download Laba Rugi Detail',
+												text: lang('Download Laba Rugi Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-BtnDownloadLabaRugiBerjalan',
@@ -1936,7 +1936,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -1985,7 +1985,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 							html:"<div style='margin-top:433px'></div>"
 						},{
                             xtype: 'panel',
-                            title: 'Total',
+                            title: lang('Total'),
                             frame: false,
                             id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormNeraca-SectionTotalPasiva',
                             style: 'margin-top:12px;',
@@ -2015,7 +2015,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
             buttons: [{
                 xtype: 'button',
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                text: 'Save',
+                text: lang('Save'),
                 hidden:m_act_update,
                 cls: 'Sfr_BtnFormBlue',
                 overCls: 'Sfr_BtnFormBlue-Hover',
@@ -2067,7 +2067,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
             },{
                 xtype: 'button',
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/print.svg',
-                text: 'Cetak',
+                text: lang('Cetak'),
                 cls: 'Sfr_BtnFormBlue',
                 overCls: 'Sfr_BtnFormBlue-Hover',
                 id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-BtnCetak',
@@ -2079,7 +2079,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
         });
 
         thisObj.FormLabaRugi = Ext.create('Ext.panel.Panel', {
-            title: 'Form Laba Rugi',
+            title: lang('Form Laba Rugi'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Report.Neraca.MainGrid-FormLabaRugi',
@@ -2102,7 +2102,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 							text:'Bulan Ini',
 						},{
                             xtype: 'panel',
-                            title: 'Pendapatan',
+                            title: lang('Pendapatan'),
                             frame: false,
                             style: 'margin-top:5px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -2117,7 +2117,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                                         xtype: 'numericfield',
                                         id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-Pendapatan',
                                         name: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-Pendapatan',
-                                        fieldLabel: 'Pendapatan',
+                                        fieldLabel: lang('Pendapatan'),
                                         readOnly:m_act_update,
                                         labelWidth:200,
                                         // Remove spinner buttons, and arrow key and mouse wheel listeners
@@ -2144,7 +2144,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePendapatan',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePendapatan',
-												buttonText: 'Upload Pendapatan',
+												buttonText: lang('Upload Pendapatan'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -2161,7 +2161,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2170,7 +2170,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2188,7 +2188,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadPendapatan',
 											items: [{
 												xtype: 'button',
-												text: 'Download Pendapatan Detail',
+												text: lang('Download Pendapatan Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadPendapatan',
@@ -2208,7 +2208,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -2255,7 +2255,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Biaya Operasional',
+                            title: lang('Biaya Operasional'),
                             frame: false,
                             style: 'margin-top:5px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -2297,7 +2297,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileProyek',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileProyek',
-												buttonText: 'Upload Proyek',
+												buttonText: lang('Upload Proyek'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -2314,7 +2314,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2323,7 +2323,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2341,7 +2341,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadProyek',
 											items: [{
 												xtype: 'button',
-												text: 'Download Proyek Detail',
+												text: lang('Download Proyek Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadProyek',
@@ -2361,7 +2361,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -2434,7 +2434,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileTransport',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileTransport',
-												buttonText: 'Upload Transport',
+												buttonText: lang('Upload Transport'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -2451,7 +2451,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2460,7 +2460,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2478,7 +2478,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadTransport',
 											items: [{
 												xtype: 'button',
-												text: 'Download Transport Detail',
+												text: lang('Download Transport Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadTransport',
@@ -2498,7 +2498,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -2571,7 +2571,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileAntigen',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileAntigen',
-												buttonText: 'Upload Antigen',
+												buttonText: lang('Upload Antigen'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -2588,7 +2588,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2597,7 +2597,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2615,7 +2615,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadAntigen',
 											items: [{
 												xtype: 'button',
-												text: 'Download Antigen Detail',
+												text: lang('Download Antigen Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadAntigen',
@@ -2635,7 +2635,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -2708,7 +2708,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileATK',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileATK',
-												buttonText: 'Upload ATK',
+												buttonText: lang('Upload ATK'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -2725,7 +2725,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2734,7 +2734,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2752,7 +2752,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadATK',
 											items: [{
 												xtype: 'button',
-												text: 'Download ATK Detail',
+												text: lang('Download ATK Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadATK',
@@ -2772,7 +2772,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -2845,7 +2845,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileEntertain',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileEntertain',
-												buttonText: 'Upload Entertain',
+												buttonText: lang('Upload Entertain'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -2862,7 +2862,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2871,7 +2871,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -2889,7 +2889,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadEntertain',
 											items: [{
 												xtype: 'button',
-												text: 'Download Entertain Detail',
+												text: lang('Download Entertain Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadEntertain',
@@ -2909,7 +2909,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -2982,7 +2982,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileMaterai',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileMaterai',
-												buttonText: 'Upload Materai',
+												buttonText: lang('Upload Materai'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -2999,7 +2999,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3008,7 +3008,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3026,7 +3026,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadMaterai',
 											items: [{
 												xtype: 'button',
-												text: 'Download Materai Detail',
+												text: lang('Download Materai Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadMaterai',
@@ -3046,7 +3046,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -3119,7 +3119,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileADM',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileADM',
-												buttonText: 'Upload ADM',
+												buttonText: lang('Upload ADM'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -3136,7 +3136,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3145,7 +3145,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3163,7 +3163,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadADM',
 											items: [{
 												xtype: 'button',
-												text: 'Download ADM Detail',
+												text: lang('Download ADM Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadADM',
@@ -3183,7 +3183,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -3256,7 +3256,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileART',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileART',
-												buttonText: 'Upload ART',
+												buttonText: lang('Upload ART'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -3273,7 +3273,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3282,7 +3282,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3300,7 +3300,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadART',
 											items: [{
 												xtype: 'button',
-												text: 'Download ART Detail',
+												text: lang('Download ART Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadART',
@@ -3320,7 +3320,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -3393,7 +3393,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePengirimanBarang',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePengirimanBarang',
-												buttonText: 'Upload Pengiriman Barang',
+												buttonText: lang('Upload Pengiriman Barang'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -3410,7 +3410,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3419,7 +3419,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3437,7 +3437,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadPengirimanBarang',
 											items: [{
 												xtype: 'button',
-												text: 'Download Pengiriman Barang',
+												text: lang('Download Pengiriman Barang'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadPengirimanBarang',
@@ -3457,7 +3457,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -3530,7 +3530,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileIuran',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileIuran',
-												buttonText: 'Upload Iuran',
+												buttonText: lang('Upload Iuran'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -3547,7 +3547,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3556,7 +3556,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3574,7 +3574,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadIuran',
 											items: [{
 												xtype: 'button',
-												text: 'Download Iuran Detail',
+												text: lang('Download Iuran Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadIuran',
@@ -3594,7 +3594,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -3667,7 +3667,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePengobatan',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FilePengobatan',
-												buttonText: 'Upload Pengobatan',
+												buttonText: lang('Upload Pengobatan'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -3684,7 +3684,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3693,7 +3693,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3711,7 +3711,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadPengobatan',
 											items: [{
 												xtype: 'button',
-												text: 'Download Pengobatan Detail',
+												text: lang('Download Pengobatan Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadPengobatan',
@@ -3731,7 +3731,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -3804,7 +3804,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileART2',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileART2',
-												buttonText: 'Upload ART',
+												buttonText: lang('Upload ART'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -3821,7 +3821,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3830,7 +3830,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3848,7 +3848,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadART2',
 											items: [{
 												xtype: 'button',
-												text: 'Download ART Detail',
+												text: lang('Download ART Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadART2',
@@ -3868,7 +3868,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -3941,7 +3941,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileBPJS',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileBPJS',
-												buttonText: 'Upload BPJS',
+												buttonText: lang('Upload BPJS'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -3958,7 +3958,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3967,7 +3967,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -3985,7 +3985,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadBPJS',
 											items: [{
 												xtype: 'button',
-												text: 'Download BPJS Detail',
+												text: lang('Download BPJS Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadBPJS',
@@ -4005,7 +4005,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -4078,7 +4078,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileListrikInternet',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileListrikInternet',
-												buttonText: 'Upload Listrik & Internet',
+												buttonText: lang('Upload Listrik & Internet'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -4095,7 +4095,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -4104,7 +4104,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -4122,7 +4122,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadListrikInternet',
 											items: [{
 												xtype: 'button',
-												text: 'Download Listrik Detail',
+												text: lang('Download Listrik Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadListrikInternet',
@@ -4142,7 +4142,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -4215,7 +4215,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileInsentive',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileInsentive',
-												buttonText: 'Upload Insentive',
+												buttonText: lang('Upload Insentive'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -4232,7 +4232,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -4241,7 +4241,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -4259,7 +4259,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadInsentive',
 											items: [{
 												xtype: 'button',
-												text: 'Download Insentive Detail',
+												text: lang('Download Insentive Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadInsentive',
@@ -4279,7 +4279,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -4352,7 +4352,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileSalary',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileSalary',
-												buttonText: 'Upload Salary',
+												buttonText: lang('Upload Salary'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -4369,7 +4369,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -4378,7 +4378,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -4396,7 +4396,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadSalary',
 											items: [{
 												xtype: 'button',
-												text: 'Download Salary Detail',
+												text: lang('Download Salary Detail'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadSalary',
@@ -4416,7 +4416,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -4489,7 +4489,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 												buttonOnly: true,
 												id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileBiayaPenyusutan',
 												name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-FileBiayaPenyusutan',
-												buttonText: 'Upload Biaya Penyusutan',
+												buttonText: lang('Upload Biaya Penyusutan'),
 												cls: 'Sfr_FormBrowseBtn',
 												listeners: {
 													'change': function (fb, v) {
@@ -4506,7 +4506,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 																var r = Ext.decode(o.response.responseText);
 																
 																Ext.MessageBox.show({
-																	title: 'Success',
+																	title: lang('Success'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -4515,7 +4515,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															},
 															failure: function (fp, o) {
 																Ext.MessageBox.show({
-																	title: 'Error',
+																	title: lang('Error'),
 																	msg: o.result.message,
 																	buttons: Ext.MessageBox.OK,
 																	animateTarget: 'mb9',
@@ -4533,7 +4533,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 											id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-SectionDownloadBiayaPenyusutan',
 											items: [{
 												xtype: 'button',
-												text: 'Download Biaya Penyusutan',
+												text: lang('Download Biaya Penyusutan'),
 												cls: 'Sfr_FormBrowseBtn',
 												style:'float:right',
 												id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnDownloadBiayaPenyusutan',
@@ -4553,7 +4553,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 															Ext.Ajax.request({
 																url: m_api + '/v1/report/Neraca/download_excel',
 																method: 'GET',
-																waitMsg: 'Please Wait',
+																waitMsg: lang('Please Wait'),
 																params: {
 																	month : month,
 																	year : year,
@@ -4600,7 +4600,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Pendapatan / Biaya Lain Lain',
+                            title: lang('Pendapatan / Biaya Lain Lain'),
                             frame: false,
                             style: 'margin-top:12px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -4633,7 +4633,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Total Biaya Operasinal',
+                            title: lang('Total Biaya Operasinal'),
                             frame: false,
                             style: 'margin-top:5px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -4661,7 +4661,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Total Pendapatan / Biaya Lain',
+                            title: lang('Total Pendapatan / Biaya Lain'),
                             frame: false,
                             style: 'margin-top:5px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -4684,7 +4684,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Laba (Rugi'),
+                            title: lang('Laba (Rugi)'),
                             frame: false,
                             style: 'margin-top:5px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -4717,7 +4717,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
 							text:'Bulan Ini',
 						},{
                             xtype: 'panel',
-                            title: 'Pendapatan',
+                            title: lang('Pendapatan'),
                             frame: false,
                             style: 'margin-top:5px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -4752,7 +4752,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Biaya Operasional',
+                            title: lang('Biaya Operasional'),
                             frame: false,
                             style: 'margin-top:5px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -5123,7 +5123,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Pendapatan / Biaya Lain Lain',
+                            title: lang('Pendapatan / Biaya Lain Lain'),
                             frame: false,
                             style: 'margin-top:12px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -5159,7 +5159,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Total Biaya Operasinal',
+                            title: lang('Total Biaya Operasinal'),
                             frame: false,
                             style: 'margin-top:5px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -5187,7 +5187,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Total Pendapatan / Biaya Lain',
+                            title: lang('Total Pendapatan / Biaya Lain'),
                             frame: false,
                             style: 'margin-top:5px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -5215,7 +5215,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
                             }]
                         },{
                             xtype: 'panel',
-                            title: 'Laba (Rugi'),
+                            title: lang('Laba (Rugi)'),
                             frame: false,
                             style: 'margin-top:5px;',
                             cls: 'Sfr_PanelSubLayoutFormRoundedGray',
@@ -5248,7 +5248,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
             buttons: [{
                 xtype: 'button',
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                text: 'Save',
+                text: lang('Save'),
                 hidden:m_act_update,
                 cls: 'Sfr_BtnFormBlue',
                 overCls: 'Sfr_BtnFormBlue-Hover',
@@ -5300,7 +5300,7 @@ Ext.extend(Ext.ux.NumericField, Ext.form.NumberField,
             },{
                 xtype: 'button',
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/print.svg',
-                text: 'Cetak',
+                text: lang('Cetak'),
                 cls: 'Sfr_BtnFormBlue',
                 overCls: 'Sfr_BtnFormBlue-Hover',
                 id: 'MitraJaya.view.Report.Neraca.MainGrid.Form-FormLabaRugi-BtnCetak',

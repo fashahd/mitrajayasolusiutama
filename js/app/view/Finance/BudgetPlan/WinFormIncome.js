@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Finance.BudgetPlan.WinFormIncome' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Finance.BudgetPlan.WinFormIncome',
     cls: 'Sfr_LayoutPopupWindows',
-    title: 'Income Form',
+    title: lang('Income Form'),
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -64,7 +64,7 @@ Ext.define('MitraJaya.view.Finance.BudgetPlan.WinFormIncome' ,{
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.BudgetPlan.WinFormIncome-FormBasicData-BudgetItem',
                                     name: 'MitraJaya.view.Finance.BudgetPlan.WinFormIncome-FormBasicData-BudgetItem',
-                                    fieldLabel: 'Item',
+                                    fieldLabel: lang('Item'),
 									allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory',
                                 }, {
@@ -73,7 +73,7 @@ Ext.define('MitraJaya.view.Finance.BudgetPlan.WinFormIncome' ,{
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.BudgetPlan.WinFormIncome-FormBasicData-BudgetDate',
                                     name: 'MitraJaya.view.Finance.BudgetPlan.WinFormIncome-FormBasicData-BudgetDate',
-                                    fieldLabel: 'Date',
+                                    fieldLabel: lang('Date'),
 									allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }, {
@@ -81,13 +81,13 @@ Ext.define('MitraJaya.view.Finance.BudgetPlan.WinFormIncome' ,{
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.BudgetPlan.WinFormIncome-FormBasicData-BudgetAmount',
                                     name: 'MitraJaya.view.Finance.BudgetPlan.WinFormIncome-FormBasicData-BudgetAmount',
-                                    fieldLabel: 'Budget Amount'
+                                    fieldLabel: lang('Budget Amount')
                                 },{
                                     xtype: 'numericfield',
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Finance.BudgetPlan.WinFormIncome-FormBasicData-BudgetActual',
                                     name: 'MitraJaya.view.Finance.BudgetPlan.WinFormIncome-FormBasicData-BudgetActual',
-                                    fieldLabel: 'Budget Actual'
+                                    fieldLabel: lang('Budget Actual')
                                 }]
                             }]
                         }]
@@ -100,7 +100,7 @@ Ext.define('MitraJaya.view.Finance.BudgetPlan.WinFormIncome' ,{
         //buttons -------------------------------------------------------------- (begin)
         thisObj.buttons = [{
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-			text: 'Save',
+			text: lang('Save'),
 			cls: 'Sfr_BtnFormBlue',
 			overCls: 'Sfr_BtnFormBlue-Hover',
 			id: 'MitraJaya.view.Finance.BudgetPlan.WinFormIncome-BtnSave',
@@ -138,7 +138,7 @@ Ext.define('MitraJaya.view.Finance.BudgetPlan.WinFormIncome' ,{
 								var r = Ext.decode(o.response.responseText);
 								
 								Ext.MessageBox.show({
-                                    title: 'Error',
+                                    title: lang('Error'),
                                     msg: r.message,
                                     buttons: Ext.MessageBox.OK,
                                     animateTarget: 'mb9',
@@ -146,7 +146,7 @@ Ext.define('MitraJaya.view.Finance.BudgetPlan.WinFormIncome' ,{
                                 });
 							} catch (err) {
 								Ext.MessageBox.show({
-                                    title: 'Error',
+                                    title: lang('Error'),
                                     msg: 'Connection Error',
                                     buttons: Ext.MessageBox.OK,
                                     animateTarget: 'mb9',
@@ -158,8 +158,8 @@ Ext.define('MitraJaya.view.Finance.BudgetPlan.WinFormIncome' ,{
 
 				} else {
 					// Ext.MessageBox.show({
-					// 	title: 'Attention',
-					// 	msg: 'Form not complete yet',
+					// 	title: lang('Attention'),
+					// 	msg: lang('Form not complete yet'),
 					// 	buttons: Ext.MessageBox.OK,
 					// 	animateTarget: 'mb9',
 					// 	icon: 'ext-mb-info'
@@ -175,7 +175,7 @@ Ext.define('MitraJaya.view.Finance.BudgetPlan.WinFormIncome' ,{
 			}
 		},{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-            text: 'Close',
+            text: lang('Close'),
             cls:'Sfr_BtnFormGrey',
             overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {

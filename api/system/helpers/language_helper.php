@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CodeIgniter
  *
@@ -36,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * CodeIgniter Language Helpers
@@ -50,7 +49,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('lang')) {
+if ( ! function_exists('lang'))
+{
 	/**
 	 * Lang
 	 *
@@ -65,8 +65,9 @@ if (!function_exists('lang')) {
 	{
 		$line = get_instance()->lang->line($line);
 
-		if ($for !== '') {
-			$line = '<label for="' . $for . '"' . _stringify_attributes($attributes) . '>' . $line . '</label>';
+		if ($for !== '')
+		{
+			$line = '<label for="'.$for.'"'._stringify_attributes($attributes).'>'.$line.'</label>';
 		}
 
 		return $line;

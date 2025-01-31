@@ -96,7 +96,7 @@ Ext.define('MitraJaya.view.Admin.Vendor.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: 'Form Vendor',
+            title: lang('Form Vendor'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Finance.Vendor-FormGeneralData',
@@ -132,7 +132,7 @@ Ext.define('MitraJaya.view.Admin.Vendor.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorDisplayID',
                                     name: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorDisplayID',
-                                    fieldLabel: 'ID'
+                                    fieldLabel: lang('ID')
                                 },{
                                     html:'<div style="margin-bottom:5px"></div>'
                                 }, {
@@ -140,14 +140,14 @@ Ext.define('MitraJaya.view.Admin.Vendor.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorName',
                                     name: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorName',
-                                    fieldLabel: 'Name',
+                                    fieldLabel: lang('Name'),
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
                                 },{
                                     html:'<div style="margin-bottom:5px"></div>'
                                 },{
                                     xtype: 'radiogroup',
-                                    fieldLabel: 'Type',
+                                    fieldLabel: lang('Type'),
                                     msgTarget: 'side',
                                     labelWidth:180,
                                     allowBlank:false,
@@ -155,7 +155,7 @@ Ext.define('MitraJaya.view.Admin.Vendor.MainForm', {
                                     baseCls: 'Sfr_FormInputMandatory',
                                     columns: 2,
                                     items: [{
-                                        boxLabel: 'Vendor',
+                                        boxLabel: lang('Vendor'),
                                         name: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorType',
                                         inputValue: 'vendor',
                                         id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorTypeVendor',
@@ -165,7 +165,7 @@ Ext.define('MitraJaya.view.Admin.Vendor.MainForm', {
                                             }
                                         }
                                     }, {
-                                        boxLabel: 'Subcont',
+                                        boxLabel: lang('Subcont'),
                                         name: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorType',
                                         inputValue: 'subcont',
                                         id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorTypeSubcont',
@@ -182,7 +182,7 @@ Ext.define('MitraJaya.view.Admin.Vendor.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorPhone',
                                     name: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorPhone',
-                                    fieldLabel: 'Phone Number'
+                                    fieldLabel: lang('Phone Number')
                                 },{
                                     html:'<div style="margin-bottom:5px"></div>'
                                 }, {
@@ -191,7 +191,7 @@ Ext.define('MitraJaya.view.Admin.Vendor.MainForm', {
 									vtype: 'email',
                                     id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorEmail',
                                     name: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorEmail',
-                                    fieldLabel: 'Email',
+                                    fieldLabel: lang('Email'),
                                 },{
                                     html:'<div style="margin-bottom:5px"></div>'
                                 }, {
@@ -199,14 +199,14 @@ Ext.define('MitraJaya.view.Admin.Vendor.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorAddress',
                                     name: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-VendorAddress',
-                                    fieldLabel: 'Address'
+                                    fieldLabel: lang('Address')
                                 }]
                             }]
                         }],
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: 'Save',
+                            text: lang('Save'),
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-BtnSave',
@@ -290,14 +290,14 @@ Ext.define('MitraJaya.view.Admin.Vendor.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Admin.Vendor.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + 'Vendor Data' + '</div>'
+                html: '<div id="header_title_farmer">' + lang('Vendor Data') + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Admin.Vendor.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Admin.Vendor.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Vendor List' + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Vendor List') + '</a></li></div>'
             }]
         }, {
             html: '<br />'

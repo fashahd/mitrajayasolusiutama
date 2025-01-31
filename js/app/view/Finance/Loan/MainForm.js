@@ -124,7 +124,7 @@ Ext.define('MitraJaya.view.Finance.Loan.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: 'Loan Data',
+            title: lang('Loan Data'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Finance.Loan-FormGeneralData',
@@ -165,7 +165,7 @@ Ext.define('MitraJaya.view.Finance.Loan.MainForm', {
 									id: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-LoanDate',
 									name: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-LoanDate',
 									labelAlign:'top',
-									fieldLabel: 'Loan Date',
+									fieldLabel: lang('Loan Date'),
 									format: 'Y-m-d',
 									value: new Date(),
 									allowBlank: false,
@@ -173,7 +173,7 @@ Ext.define('MitraJaya.view.Finance.Loan.MainForm', {
 								}, {
 									xtype: 'combobox',
 									labelAlign:'top',
-									fieldLabel: 'Employee Name',
+									fieldLabel: lang('Employee Name'),
 									id: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-PeopleID',
 									name: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-PeopleID',
 									store:thisObj.combo_employee_project,
@@ -188,7 +188,7 @@ Ext.define('MitraJaya.view.Finance.Loan.MainForm', {
 									labelAlign:'top',
 									id: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-LoanAmount',
 									name: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-LoanAmount',
-									fieldLabel: 'Loan Amount',
+									fieldLabel: lang('Loan Amount'),
 									allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'										
 								}]
@@ -205,18 +205,18 @@ Ext.define('MitraJaya.view.Finance.Loan.MainForm', {
 									id: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-LoanTransferDate',
 									name: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-LoanTransferDate',
 									labelAlign:'top',
-									fieldLabel: 'Loan Transfer Date',
+									fieldLabel: lang('Loan Transfer Date'),
 									format: 'Y-m-d'
 								}, {
 									xtype: 'textareafield',
 									labelAlign:'top',
 									id: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-LoanDescription',
 									name: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-LoanDescription',
-									fieldLabel: 'Loan Description'
+									fieldLabel: lang('Loan Description')
 								}, {
 									xtype: 'textfield',
 									labelAlign:'top',
-									fieldLabel: 'Loan Remaining',
+									fieldLabel: lang('Loan Remaining'),
 									readOnly: true,
 									id: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-LoanRemaining',
 									name: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-LoanRemaining'									
@@ -226,7 +226,7 @@ Ext.define('MitraJaya.view.Finance.Loan.MainForm', {
 						buttons: [{
 							xtype: 'button',
 							icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-							text: 'Save',
+							text: lang('Save'),
 							cls: 'Sfr_BtnFormBlue',
 							overCls: 'Sfr_BtnFormBlue-Hover',
 							id: 'MitraJaya.view.Finance.Loan.MainForm-FormBasicData-BtnSave',
@@ -335,14 +335,14 @@ Ext.define('MitraJaya.view.Finance.Loan.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Finance.Loan.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + 'Loan Data' + '</div>'
+                html: '<div id="header_title_farmer">' + lang('Loan Data') + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Finance.Loan.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Finance.Loan.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Loan List' + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Loan List') + '</a></li></div>'
             }]
         }, {
             html: '<br />'

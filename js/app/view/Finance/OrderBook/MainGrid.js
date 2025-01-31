@@ -42,7 +42,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'View',
+                text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Finance.OrderBook.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -72,7 +72,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: 'Update',
+                text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Finance.OrderBook.MainGrid-ContextMenuUpdate',
@@ -103,7 +103,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: 'Delete',
+                text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Finance.OrderBook.MainGrid-ContextMenuDelete',
@@ -187,7 +187,7 @@
 								baseCls: 'Sfr_TxtfieldSearchGrid',
 								fieldLabel:'PO Number',
 								labelAlign:'top',
-								emptyText: 'Search by PO Number'
+								emptyText: lang('Search by PO Number')
 							}]
 						},{
 							columnWidth: 0.15,
@@ -249,7 +249,7 @@
 							items: [{
 								xtype:'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text:'Search',
+								text:lang('Search'),
 								style:'margin-left:20px; margin-top:30px',
 								cls:'Sfr_BtnFormCyan',
 								overCls:'Sfr_BtnFormCyan-Hover',
@@ -282,14 +282,14 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
+                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: 'Add',
+                    text: lang('Add'),
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -320,7 +320,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-                    text: 'Export',
+                    text: lang('Export'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -343,7 +343,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/order/export_order',
 									method: 'POST',
-									waitMsg: 'Please Wait',
+									waitMsg: lang('Please Wait'),
 									params: {
 										keySearch : keySearch,
 										StartDate : StartDate,
@@ -388,7 +388,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-import.svg',
-                    text: 'Import',
+                    text: lang('Import'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_add,
@@ -408,7 +408,7 @@
                 },{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: 'Advanced Filter',
+                    text: lang('Advanced Filter'),
 					hidden:true,
                     handler: function () {
                         //advanced search
@@ -446,43 +446,43 @@
                 flex: 0.2,
                 xtype: 'rownumberer'
             },{
-                text: 'OrderBookID',
+                text: lang('OrderBookID'),
                 dataIndex: 'OrderBookID',
                 hidden: true
             },{
-                text: 'PO Number',
+                text: lang('PO Number'),
                 dataIndex: 'ContractNumber',
                 flex: 1.5
             },{
-                text: 'PO Date',
+                text: lang('PO Date'),
                 dataIndex: 'ContractDate',
                 flex: 1
             },{
-                text: 'Description',
+                text: lang('Description'),
                 dataIndex: 'Description',
                 flex: 2
             },{
-                text: 'Project',
+                text: lang('Project'),
                 dataIndex: 'ProjectName',
                 flex: 2
             },{
-                text: 'Customer',
+                text: lang('Customer'),
                 dataIndex: 'CustomerName',
                 flex: 2
             },{
-                text: 'Dept',
+                text: lang('Dept'),
                 dataIndex: 'DeptName',
                 flex: 2
             },{
-                text: 'Total Amount',
+                text: lang('Total Amount'),
                 dataIndex: 'TotalContactAmount',
                 flex: 2
             },{
-                text: 'Total Paid',
+                text: lang('Total Paid'),
                 dataIndex: 'TotalPaid',
                 flex: 2
             },{
-                text: 'Potential Paid',
+                text: lang('Potential Paid'),
                 dataIndex: 'TotalUnpaid',
                 flex: 2
             }]
