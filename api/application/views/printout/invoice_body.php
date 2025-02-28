@@ -276,8 +276,8 @@ $percentage_total = number_format($percentage_current+$total_history,2);
 			<tr>
 				<td colspan="5" style="border:none;padding:10px">
 					Note : <br>
-					- Bank Account 	: BCA<br>
-					- Acc Name 		: PT. Mitrajaya Solusi Utama<br>
+					- Bank Account 	: Bank Central Asia (BCA) KCP Penjerniha<br>
+					- Acc Name 		: Mitrajaya Solusi Utama PT<br>
 					- Acc No (IDR)  : 111-045-6456<br>
 					Please, Transfer in " Full Amount"<br>
 				</td>
