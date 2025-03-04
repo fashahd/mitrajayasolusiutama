@@ -154261,16 +154261,16 @@ Ext.define('Ext.grid.header.Container', {
      */
 
     //<locale>
-    //sortAscText: 'Sort Ascending',
+    //sortAscText: lang('Sort Ascending'),
     //</locale>
     //<locale>
-    sortDescText: 'Sort Descending',
+    sortDescText: lang('Sort Descending'),
     //</locale>
     //<locale>
-    sortClearText: 'Clear Sort',
+    sortClearText: lang('Clear Sort'),
     //</locale>
     //<locale>
-    columnsText: 'Columns',
+    columnsText: lang('Columns'),
     //</locale>
 
     headerOpenCls: Ext.baseCSSPrefix + 'column-header-open',
@@ -154963,7 +154963,7 @@ Ext.define('Ext.grid.header.Container', {
         for (; i < itemsLn; i++) {
             item = items[i];
             menuItem = new Ext.menu.CheckItem({
-                text: item.menuText || item.text,
+                text: lang(item.menuText) || lang(item.text),
                 checked: !item.hidden,
                 hideOnClick: false,
                 headerId: item.id,

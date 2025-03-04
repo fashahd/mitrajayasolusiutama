@@ -48,14 +48,14 @@ Ext.define('MitraJaya.view.Finance.Claim.GridClaimDetail', {
 				store: thisObj.StoreGridMain,
 				dock: 'bottom',
 				displayInfo: true,
-				displayMsg: 'Showing' + ' {0} ' + 'to' + ' {1} ' + 'of' + ' {2} ' + 'data'
+				displayMsg: lang('Showing') + ' {0} ' + lang('to') + ' {1} ' + lang('of') + ' {2} ' + lang('data')
 			}, {
 				xtype: 'toolbar',
 				dock: 'top',
 				items: [{
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-					text: 'Add',
+					text: lang('Add'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					id: 'MitraJaya.view.Finance.Claim.GridClaimDetail-Grid-BtnAdd',
@@ -76,7 +76,7 @@ Ext.define('MitraJaya.view.Finance.Claim.GridClaimDetail', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-					text: 'View',
+					text: lang('View'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					id: 'MitraJaya.view.Finance.Claim.GridClaimDetail-Grid-BtnView',
@@ -121,7 +121,7 @@ Ext.define('MitraJaya.view.Finance.Claim.GridClaimDetail', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-					text: 'Update',
+					text: lang('Update'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					hidden: m_act_update,
@@ -167,7 +167,7 @@ Ext.define('MitraJaya.view.Finance.Claim.GridClaimDetail', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-					text: 'Delete',
+					text: lang('Delete'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					hidden: m_act_delete,
@@ -274,19 +274,19 @@ Ext.define('MitraJaya.view.Finance.Claim.GridClaimDetail', {
 				flex: 1,
 				xtype: 'rownumberer'
 			}, {
-				text: 'ClaimDetailID',
+				text: lang('ClaimDetailID'),
 				dataIndex: 'ClaimDetailID',
 				hidden: true
 			}, {
-				text: 'Cost Element',
+				text: lang('Cost Element'),
 				dataIndex: 'CostElement',
 				flex: 10
 			}, {
-				text: 'Date',
+				text: lang('Date'),
 				dataIndex: 'ClaimDetailDate',
 				flex: 10
 			}, {
-				text: 'Description',
+				text: lang('Description'),
 				dataIndex: 'Description',
 				flex: 20
 			}, {

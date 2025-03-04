@@ -74,7 +74,7 @@ Ext.define('MitraJaya.view.Report.Balance.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: 'Balance',
+            title: lang('Balance'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Report.Balance.MainForm-FormGeneralData',
@@ -107,7 +107,7 @@ Ext.define('MitraJaya.view.Report.Balance.MainForm', {
 									xtype: 'fileuploadfield',
 									id: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-PhotoInput',
 									name: 'MitraJaya.view.Report.Balance.MainForm-FormBasicData-PhotoInput',
-									buttonText: 'Browse',
+									buttonText: lang('Browse'),
 									cls: 'Sfr_FormBrowseBtn',
 									listeners: {
 										'change': function (fb, v) {
@@ -126,7 +126,7 @@ Ext.define('MitraJaya.view.Report.Balance.MainForm', {
 												},
 												failure: function (fp, o) {
 													Ext.MessageBox.show({
-														title: 'Error',
+														title: lang('Error'),
 														msg: o.result.message,
 														buttons: Ext.MessageBox.OK,
 														animateTarget: 'mb9',
@@ -147,7 +147,7 @@ Ext.define('MitraJaya.view.Report.Balance.MainForm', {
 						buttons: [{
 							xtype: 'button',
 							icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-							text: 'Save',
+							text: lang('Save'),
 							hidden: m_act_update,
 							cls: 'Sfr_BtnFormBlue',
 							overCls: 'Sfr_BtnFormBlue-Hover',
@@ -218,8 +218,8 @@ Ext.define('MitraJaya.view.Report.Balance.MainForm', {
 
 								} else {
 									Ext.MessageBox.show({
-										title: 'Attention',
-										msg: 'Form not complete yet',
+										title: lang('Attention'),
+										msg: lang('Form not complete yet'),
 										buttons: Ext.MessageBox.OK,
 										animateTarget: 'mb9',
 										icon: 'ext-mb-info'

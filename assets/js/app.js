@@ -76,8 +76,8 @@ Ext.util.Observable.observe(Ext.data.Connection, {
                     failure: function(response) {
                         win.close();
                         Ext.MessageBox.show({
-                            title: 'Failed',
-                            msg: 'Relog failed, Please relogin',
+                            title: lang('Failed'),
+                            msg: lang('Relog failed, Please relogin'),
                             buttons: Ext.MessageBox.OK,
                             animateTarget: 'mb9',
                             icon: 'ext-mb-error'

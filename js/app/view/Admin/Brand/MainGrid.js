@@ -32,7 +32,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'View',
+                text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Admin.Brand.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -62,7 +62,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: 'Update',
+                text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Admin.Brand.MainGrid-ContextMenuUpdate',
@@ -93,7 +93,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: 'Delete',
+                text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Admin.Brand.MainGrid-ContextMenuDelete',
@@ -180,14 +180,14 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
+                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: 'Add',
+                    text: lang('Add'),
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -218,7 +218,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-                    text: 'Export',
+                    text: lang('Export'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -241,7 +241,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/invoice/export_invoice',
 									method: 'POST',
-									waitMsg: 'Please Wait',
+									waitMsg: lang('Please Wait'),
 									params: {
 										keySearch : keySearch,
 										StartDate : StartDate,
@@ -286,7 +286,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/upload.svg',
-                    text: 'Import',
+                    text: lang('Import'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -309,14 +309,14 @@
 					xtype: 'textfield',
 					baseCls: 'Sfr_TxtfieldSearchGrid',
 					width:340,
-					emptyText: 'Search by Brand Name, Press Enter to Search',
+					emptyText: lang('Search by Brand Name, Press Enter to Search'),
 					listeners: {
 						specialkey: thisObj.submitOnEnterGrid
 					}
 				},{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: 'Advanced Filter',
+                    text: lang('Advanced Filter'),
 					hidden:true,
                     handler: function () {
                         //advanced search
@@ -355,11 +355,11 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: 'Brand ID',
+                text: lang('Brand ID'),
                 dataIndex: 'BrandID',
                 hidden: true
             },{
-                text: 'Brand Name',
+                text: lang('Brand Name'),
                 dataIndex: 'BrandName',
                 flex:10
             }]

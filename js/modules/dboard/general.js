@@ -40,7 +40,7 @@ function runSearch() {
 			}]
 
 			//build chart
-			line(chartOmset,'chart_income_invoice_quartal', 'Total Omset '+quartalname+' Tahun '+fyear+'','PT.Mitrajaya Solusi Utama', null, month, 'total', 2, true);
+			line(chartOmset,'chart_income_invoice_quartal', lang('Total Omset '+quartalname+' Tahun '+fyear+''),'PT.Mitrajaya Solusi Utama', null, month, 'total', 2, true);
 			// === Chart Omset === (End)//
 
 			let ArrLabelCustomer = [];
@@ -53,7 +53,7 @@ function runSearch() {
                 ArrOmsetCustomer.push({'name':[val.name], 'data': val.data});
             });
 
-			column(ArrOmsetCustomer, 'chart_income_invoice_quartal_by_client', 'Omset Quartal '+quartalname+' Tahun '+fyear+' Based on Customer', 'PT.Mitrajaya Solusi Utama', null, ArrLabelCustomer, false,2,true);
+			column(ArrOmsetCustomer, 'chart_income_invoice_quartal_by_client', lang('Omset Quartal '+quartalname+' Tahun '+fyear+' Based on Customer'), lang('PT.Mitrajaya Solusi Utama'), null, ArrLabelCustomer, false,2,true);
 		}
 	});
 	
@@ -104,7 +104,7 @@ function runSearch() {
 	// 		}]
 
     //         //build chart
-    //         line(chartOmset,'chart_income_invoice_quartal', 'Total Omset','1', 'Jumlah');
+    //         line(chartOmset,'chart_income_invoice_quartal', lang('Total Omset'),'1', lang('Jumlah'));
             
 
     //         $('#ContentDash').css('display', '');
@@ -122,7 +122,7 @@ function runSearch() {
     //         try {
     //             var r = Ext.decode(rp.responseText);
     //             Ext.MessageBox.show({
-    //                 title: 'Error',
+    //                 title: lang('Error'),
     //                 msg: r.message,
     //                 buttons: Ext.MessageBox.OK,
     //                 animateTarget: 'mb9',
@@ -131,8 +131,8 @@ function runSearch() {
     //         }
     //         catch(err) {
     //             Ext.MessageBox.show({
-    //                 title: 'Error',
-    //                 msg: 'Connection Error',
+    //                 title: lang('Error'),
+    //                 msg: lang('Connection Error'),
     //                 buttons: Ext.MessageBox.OK,
     //                 animateTarget: 'mb9',
     //                 icon: 'ext-mb-error'
@@ -145,8 +145,8 @@ function runSearch() {
 
 $(document).on('change', '#fcountry', function(e) {
     if(e.target.value == 'all_country') {
-        $('#fprovince').find('option').remove().end().append('<option value="all_province">'+'All'+' '+m_label_prov+'</option>');
-        $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+'All'+' '+m_label_dis+'</option>');
+        $('#fprovince').find('option').remove().end().append('<option value="all_province">'+lang('All')+' '+lang(m_label_prov)+'</option>');
+        $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+lang('All')+' '+lang(m_label_dis)+'</option>');
     } else {
         Ext.Ajax.request({
             url: m_api+'/common/combo_filter_province',
@@ -158,14 +158,14 @@ $(document).on('change', '#fcountry', function(e) {
                 var r = Ext.decode(rp.responseText);
                 //console.log(r);
     
-                $('#fprovince').find('option').remove().end().append('<option value="all_province">'+'All'+' '+m_label_prov+'</option>');
+                $('#fprovince').find('option').remove().end().append('<option value="all_province">'+lang('All')+' '+lang(m_label_prov)+'</option>');
                 $.each(r, function(index, val) {
                     $('#fprovince').append('<option value="'+val.id+'">'+val.label+'</option>');
                 });
             },
             failure: function(rp, o) {
-                $('#fprovince').find('option').remove().end().append('<option value="all_province">'+'All'+' '+m_label_prov+'</option>');
-                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+'All'+' '+m_label_dis+'</option>');
+                $('#fprovince').find('option').remove().end().append('<option value="all_province">'+lang('All')+' '+lang(m_label_prov)+'</option>');
+                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+lang('All')+' '+lang(m_label_dis)+'</option>');
             }
         });
     }
@@ -173,7 +173,7 @@ $(document).on('change', '#fcountry', function(e) {
 
 $(document).on('change', '#fprovince', function(e) {
     if(e.target.value == 'all_province') {
-        $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+'All'+' '+m_label_dis+'</option>');
+        $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+lang('All')+' '+lang(m_label_dis)+'</option>');
     } else {
         Ext.Ajax.request({
             url: m_api+'/common/combo_filter_district',
@@ -185,13 +185,13 @@ $(document).on('change', '#fprovince', function(e) {
                 var r = Ext.decode(rp.responseText);
                 //console.log(r);
     
-                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+'All'+' '+m_label_dis+'</option>');
+                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+lang('All')+' '+lang(m_label_dis)+'</option>');
                 $.each(r, function(index, val) {
                     $('#fdistrict').append('<option value="'+val.id+'">'+val.label+'</option>');
                 });
             },
             failure: function(rp, o) {
-                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+'All'+' '+m_label_dis+'</option>');
+                $('#fdistrict').find('option').remove().end().append('<option value="all_district">'+lang('All')+' '+lang(m_label_dis)+'</option>');
             }
         });
     }

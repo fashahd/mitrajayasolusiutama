@@ -86,7 +86,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: 'Form Pengeluaran Barang',
+            title: lang('Form Pengeluaran Barang'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Warehouse.PengeluaranBarang-FormGeneralData',
@@ -119,7 +119,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                                     name: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-PengeluaranBarangID'
                                 }, {
                                     xtype: 'radiogroup',
-                                    fieldLabel: 'Type',
+                                    fieldLabel: lang('Type'),
                                     msgTarget: 'side',
                                     labelWidth:180,
                                     allowBlank:false,
@@ -127,7 +127,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                                     baseCls: 'Sfr_FormInputMandatory',
                                     columns: 2,
                                     items: [{
-                                        boxLabel: 'Toolkit',
+                                        boxLabel: lang('Toolkit'),
                                         name: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-Type',
                                         inputValue: 'toolkit',
                                         id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-TypeToolkit',
@@ -144,7 +144,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                                             }
                                         }
                                     }, {
-                                        boxLabel: 'Product',
+                                        boxLabel: lang('Product'),
                                         name: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-Type',
                                         inputValue: 'product',
                                         id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-TypeProduct',
@@ -186,13 +186,13 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                                 }, {
                                     xtype: 'radiogroup',
                                     labelAlign:'top',
-                                    fieldLabel: 'Category',
+                                    fieldLabel: lang('Category'),
                                     msgTarget: 'side',
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory',
                                     columns: 2,
                                     items: [{
-                                        boxLabel: 'Peminjaman',
+                                        boxLabel: lang('Peminjaman'),
                                         name: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-PartCategory',
                                         inputValue: 'peminjaman',
                                         id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-PartCategoryPeminjaman',
@@ -200,7 +200,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                                             
                                         }
                                     }, {
-                                        boxLabel: 'Barang Keluar',
+                                        boxLabel: lang('Barang Keluar'),
                                         name: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-PartCategory',
                                         inputValue: 'barangkeluar',
                                         id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-PartCategoryBarangKeluar',
@@ -213,7 +213,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-TanggalPengeluaran',
                                     name: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-TanggalPengeluaran',
-                                    fieldLabel: 'Tanggal Pengeluaran',
+                                    fieldLabel: lang('Tanggal Pengeluaran'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory',
                                     format: 'Y-m-d',
@@ -234,7 +234,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-DocNo',
                                     name: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-DocNo',
-                                    fieldLabel: 'Document No',
+                                    fieldLabel: lang('Document No'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }, {
@@ -242,7 +242,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-Qty',
                                     name: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-Qty',
-                                    fieldLabel: 'Qty',
+                                    fieldLabel: lang('Qty'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }, {
@@ -262,7 +262,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-RowNumber',
                                     name: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-RowNumber',
-                                    fieldLabel: 'Baris No',
+                                    fieldLabel: lang('Baris No'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }, {
@@ -270,7 +270,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-ColumnNumber',
                                     name: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-ColumnNumber',
-                                    fieldLabel: 'Kolom No',
+                                    fieldLabel: lang('Kolom No'),
                                     allowBlank:false,
 									baseCls: 'Sfr_FormInputMandatory'
                                 }]
@@ -279,7 +279,7 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
                         buttons: [{
                             xtype: 'button',
                             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-                            text: 'Save',
+                            text: lang('Save'),
                             cls: 'Sfr_BtnFormBlue',
                             overCls: 'Sfr_BtnFormBlue-Hover',
                             id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-FormBasicData-BtnSave',
@@ -363,14 +363,14 @@ Ext.define('MitraJaya.view.Warehouse.PengeluaranBarang.MainForm', {
             },
             items: [{
                 id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-labelInfoInsert',
-                html: '<div id="header_title_farmer">' + 'Pengeluaran Barang Data' + '</div>'
+                html: '<div id="header_title_farmer">' + lang('Pengeluaran Barang Data') + '</div>'
             }]
         }, {
             items: [{
                 id: 'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm-LinkBackToList',
                 html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 				+'<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Warehouse.PengeluaranBarang.MainForm\').BackToList()">'
-				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Pengeluaran Barang List' + '</a></li></div>'
+				+'<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Pengeluaran Barang List') + '</a></li></div>'
             }]
         }, {
             html: '<br />'

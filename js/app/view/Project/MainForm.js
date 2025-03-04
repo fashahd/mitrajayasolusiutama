@@ -113,7 +113,7 @@ Ext.define('MitraJaya.view.Project.MainForm', {
 
 		//Panel Basic ==================================== (Begin)
 		thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-			title: 'Project Data',
+			title: lang('Project Data'),
 			frame: true,
 			cls: 'Sfr_PanelLayoutForm',
 			id: 'MitraJaya.view.Finance.OrderBook-FormGeneralData',
@@ -148,7 +148,7 @@ Ext.define('MitraJaya.view.Project.MainForm', {
 									labelAlign: 'top',
 									allowBlank: false,
 									baseCls: 'Sfr_FormInputMandatory',
-									fieldLabel: 'Project Name',
+									fieldLabel: lang('Project Name'),
 									id: 'MitraJaya.view.Project.MainForm-FormBasicData-ProjectName',
 									name: 'MitraJaya.view.Project.MainForm-FormBasicData-ProjectName'
 								}, {
@@ -169,7 +169,7 @@ Ext.define('MitraJaya.view.Project.MainForm', {
 						buttons: [{
 							xtype: 'button',
 							icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-							text: 'Save',
+							text: lang('Save'),
 							cls: 'Sfr_BtnFormBlue',
 							overCls: 'Sfr_BtnFormBlue-Hover',
 							id: 'MitraJaya.view.Project.MainForm-FormBasicData-BtnSave',
@@ -188,7 +188,7 @@ Ext.define('MitraJaya.view.Project.MainForm', {
 										success: function (fp, o) {
 											// Ext.MessageBox.show({
 											// 	title: 'Information',
-											// 	msg: 'Data saved',
+											// 	msg: lang('Data saved'),
 											// 	buttons: Ext.MessageBox.OK,
 											// 	animateTarget: 'mb9',
 											// 	icon: 'ext-mb-success',
@@ -280,8 +280,8 @@ Ext.define('MitraJaya.view.Project.MainForm', {
 
 								} else {
 									// Ext.MessageBox.show({
-									// 	title: 'Attention',
-									// 	msg: 'Form not complete yet',
+									// 	title: lang('Attention'),
+									// 	msg: lang('Form not complete yet'),
 									// 	buttons: Ext.MessageBox.OK,
 									// 	animateTarget: 'mb9',
 									// 	icon: 'ext-mb-info'
@@ -326,14 +326,14 @@ Ext.define('MitraJaya.view.Project.MainForm', {
 			},
 			items: [{
 				id: 'MitraJaya.view.Project.MainForm-labelInfoInsert',
-				html: '<div id="header_title_farmer">' + 'Project Data' + '</div>'
+				html: '<div id="header_title_farmer">' + lang('Project Data') + '</div>'
 			}]
 		}, {
 			items: [{
 				id: 'MitraJaya.view.Project.MainForm-LinkBackToList',
 				html: '<div id="Sfr_IdBoxInfoDataGrid" class="Sfr_BoxInfoDataGridForm"><ul class="Sft_UlListInfoDataGrid">'
 					+ '<li class="Sft_ListInfoDataGrid"><a href="javascript:Ext.getCmp(\'MitraJaya.view.Project.MainForm\').BackToList()">'
-					+ '<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + 'Back to Project List' + '</a></li></div>'
+					+ '<img class="Sft_ListIconInfoDataGrid" src="' + varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/circle-chevron-left.svg" width="20" />&nbsp;&nbsp;' + lang('Back to Project List') + '</a></li></div>'
 			}]
 		}, {
 			html: '<br />'

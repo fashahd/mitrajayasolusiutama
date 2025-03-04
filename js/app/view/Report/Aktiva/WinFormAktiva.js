@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Report.Aktiva.WinFormAktiva' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Report.Aktiva.WinFormAktiva',
     cls: 'Sfr_LayoutPopupWindows',
-    title: 'Aktiva Form',
+    title: lang('Aktiva Form'),
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -196,7 +196,7 @@ Ext.define('MitraJaya.view.Report.Aktiva.WinFormAktiva' ,{
         //buttons -------------------------------------------------------------- (begin)
         thisObj.buttons = [{
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-			text: 'Save',
+			text: lang('Save'),
 			cls: 'Sfr_BtnFormBlue',
 			overCls: 'Sfr_BtnFormBlue-Hover',
 			id: 'MitraJaya.view.Report.Aktiva.WinFormAktiva-BtnSave',
@@ -234,7 +234,7 @@ Ext.define('MitraJaya.view.Report.Aktiva.WinFormAktiva' ,{
 								var r = Ext.decode(o.response.responseText);
 								
 								Ext.MessageBox.show({
-                                    title: 'Error',
+                                    title: lang('Error'),
                                     msg: r.message,
                                     buttons: Ext.MessageBox.OK,
                                     animateTarget: 'mb9',
@@ -242,7 +242,7 @@ Ext.define('MitraJaya.view.Report.Aktiva.WinFormAktiva' ,{
                                 });
 							} catch (err) {
 								Ext.MessageBox.show({
-                                    title: 'Error',
+                                    title: lang('Error'),
                                     msg: 'Connection Error',
                                     buttons: Ext.MessageBox.OK,
                                     animateTarget: 'mb9',
@@ -254,8 +254,8 @@ Ext.define('MitraJaya.view.Report.Aktiva.WinFormAktiva' ,{
 
 				} else {
 					// Ext.MessageBox.show({
-					// 	title: 'Attention',
-					// 	msg: 'Form not complete yet',
+					// 	title: lang('Attention'),
+					// 	msg: lang('Form not complete yet'),
 					// 	buttons: Ext.MessageBox.OK,
 					// 	animateTarget: 'mb9',
 					// 	icon: 'ext-mb-info'
@@ -271,7 +271,7 @@ Ext.define('MitraJaya.view.Report.Aktiva.WinFormAktiva' ,{
 			}
 		},{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-            text: 'Close',
+            text: lang('Close'),
             cls:'Sfr_BtnFormGrey',
             overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {
