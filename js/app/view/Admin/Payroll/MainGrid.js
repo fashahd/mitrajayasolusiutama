@@ -323,6 +323,7 @@ Ext.define('MitraJaya.view.Admin.Payroll.MainGrid', {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
 					text: 'Share to All',
+					hidden:true,
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					style: 'margin-top:25px',
