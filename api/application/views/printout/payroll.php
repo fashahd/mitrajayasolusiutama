@@ -116,26 +116,26 @@ $net_salary = $PayrollData["salary"] + $PayrollData["total_insentif"] - $Payroll
 				<td>:</td>
 				<td>Rp <?= number_format($PayrollData["deduction_bpjs_kesehatan"], 2) ?></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td>PPh 21 Gaji</td>
 				<td>:</td>
 				<td>Rp <?= number_format($PayrollData["deduction_pph_21"], 2) ?></td>
-			</tr>
+			</tr> -->
 			<tr>
-				<td>PPh 21 Insentif</td>
+				<td>PPH Sesuai Tarif TER</td>
 				<td>:</td>
 				<td>Rp <?= number_format($PayrollData["deduction_pph_21_insentif"], 2) ?></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td>PPh 21 Kompensasi</td>
 				<td>:</td>
 				<td>Rp <?= number_format($PayrollData["deduction_pph_21_kompensasi"], 2) ?></td>
-			</tr>
-			<tr>
+			</tr> -->
+			<!-- <tr>
 				<td>PPh 21 THR</td>
 				<td>:</td>
 				<td>Rp <?= number_format($PayrollData["deduction_pph_21_thr"], 2) ?></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td>Kasbon</td>
 				<td>:</td>
