@@ -36,7 +36,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'View',
+                text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Finance.PinjamanSubCont.GridLoanPayment-ContextMenuView',
 	            handler: function() {
@@ -56,7 +56,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: 'Update',
+                text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Finance.PinjamanSubCont.GridLoanPayment-ContextMenuUpdate',
@@ -78,7 +78,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: 'Delete',
+                text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Finance.PinjamanSubCont.GridLoanPayment-ContextMenuDelete',
@@ -175,7 +175,7 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
+                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
             },{
                 xtype: 'toolbar',
                 dock:'top',
@@ -183,7 +183,7 @@
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: 'Add',
+                    text: lang('Add'),
                     hidden: true,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -209,19 +209,19 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: 'LoanPaymentID',
+                text: lang('LoanPaymentID'),
                 dataIndex: 'LoanPaymentID',
                 hidden: true
             },{
-                text: 'Doc No',
+                text: lang('Doc No'),
                 dataIndex: 'DocumentNo',
                 flex: 20
             },{
-                text: 'Paid Amount',
+                text: lang('Paid Amount'),
                 dataIndex: 'LoanPaymentAmount',
                 flex: 20
             },{
-                text: 'Paid Date',
+                text: lang('Paid Date'),
                 dataIndex: 'LoanPaymentDate',
                 flex: 20
             },{

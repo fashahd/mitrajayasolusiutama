@@ -33,7 +33,7 @@ Ext.define('MitraJaya.view.Admin.ChangePassword.MainForm', {
 
         //Panel Basic ==================================== (Begin)
         thisObj.ObjPanelBasicData = Ext.create('Ext.panel.Panel', {
-            title: 'Change Password',
+            title: lang('Change Password'),
             frame: true,
             cls: 'Sfr_PanelLayoutForm',
             id: 'MitraJaya.view.Admin.ChangePassword.MainForm-FormGeneralData',
@@ -63,7 +63,7 @@ Ext.define('MitraJaya.view.Admin.ChangePassword.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-OldPassword',
                                     name: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-OldPassword',
-                                    fieldLabel: 'Old Password',
+                                    fieldLabel: lang('Old Password'),
             						inputType: 'password',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
@@ -74,7 +74,7 @@ Ext.define('MitraJaya.view.Admin.ChangePassword.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-NewPassword',
                                     name: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-NewPassword',
-                                    fieldLabel: 'New Password',
+                                    fieldLabel: lang('New Password'),
             						inputType: 'password',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
@@ -85,7 +85,7 @@ Ext.define('MitraJaya.view.Admin.ChangePassword.MainForm', {
                                     labelAlign:'top',
                                     id: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-ReNewPassword',
                                     name: 'MitraJaya.view.Admin.Vendor.MainForm-FormBasicData-ReNewPassword',
-                                    fieldLabel: 'Retype New Password',
+                                    fieldLabel: lang('Retype New Password'),
             						inputType: 'password',
                                     allowBlank: false,
                                     baseCls: 'Sfr_FormInputMandatory',
@@ -95,7 +95,7 @@ Ext.define('MitraJaya.view.Admin.ChangePassword.MainForm', {
 						buttons: [{
 							xtype: 'button',
 							icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
-							text: 'Save',
+							text: lang('Save'),
 							hidden: m_act_update,
 							cls: 'Sfr_BtnFormBlue',
 							overCls: 'Sfr_BtnFormBlue-Hover',
@@ -193,8 +193,8 @@ Ext.define('MitraJaya.view.Admin.ChangePassword.MainForm', {
 
 								} else {
 									Ext.MessageBox.show({
-										title: 'Attention',
-										msg: 'Form not complete yet',
+										title: lang('Attention'),
+										msg: lang('Form not complete yet'),
 										buttons: Ext.MessageBox.OK,
 										animateTarget: 'mb9',
 										icon: 'ext-mb-info'

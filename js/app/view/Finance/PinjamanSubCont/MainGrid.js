@@ -49,7 +49,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid', {
 			cls: 'Sfr_ConMenu',
 			items: [{
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-				text: 'View',
+				text: lang('View'),
 				cls: 'Sfr_BtnConMenuWhite',
 				itemId: 'MitraJaya.view.Finance.PinjamanSubCont.MainGrid-ContextMenuView',
 				handler: function () {
@@ -81,7 +81,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-				text: 'Update',
+				text: lang('Update'),
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_update,
 				itemId: 'MitraJaya.view.Finance.PinjamanSubCont.MainGrid-ContextMenuUpdate',
@@ -114,7 +114,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-				text: 'Delete',
+				text: lang('Delete'),
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_delete,
 				itemId: 'MitraJaya.view.Finance.PinjamanSubCont.MainGrid-ContextMenuDelete',
@@ -274,7 +274,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid', {
 							items: [{
 								xtype: 'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text: 'Search',
+								text: lang('Search'),
 								style: 'margin-left:20px; margin-top:30px',
 								cls: 'Sfr_BtnFormCyan',
 								overCls: 'Sfr_BtnFormCyan-Hover',
@@ -307,14 +307,14 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid', {
 				store: thisObj.StoreGridMain,
 				dock: 'bottom',
 				displayInfo: true,
-				displayMsg: 'Showing' + ' {0} ' + 'to' + ' {1} ' + 'of' + ' {2} ' + 'data'
+				displayMsg: lang('Showing') + ' {0} ' + lang('to') + ' {1} ' + lang('of') + ' {2} ' + lang('data')
 			}, {
 				xtype: 'toolbar',
 				dock: 'top',
 				items: [{
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-					text: 'Add',
+					text: lang('Add'),
 					hidden: m_act_add,
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
@@ -345,7 +345,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-export.svg',
-					text: 'Export',
+					text: lang('Export'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					hidden: m_act_export_excel,
@@ -366,7 +366,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid', {
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/loan/export_loan',
 									method: 'POST',
-									waitMsg: 'Please Wait',
+									waitMsg: lang('Please Wait'),
 									params: {
 										VendorID: VendorID,
 										ProjectID: ProjectID
@@ -409,7 +409,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/upload.svg',
-					text: 'Import',
+					text: lang('Import'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					id: 'MitraJaya.view.Finance.PinjamanSubCont.MainGrid-BtnImport',
@@ -428,7 +428,7 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid', {
 				}, {
 					icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
 					cls: 'Sfr_BtnGridPaleBlue',
-					text: 'Advanced Filter',
+					text: lang('Advanced Filter'),
 					hidden: true,
 					handler: function () {
 						//advanced search
@@ -466,43 +466,43 @@ Ext.define('MitraJaya.view.Finance.PinjamanSubCont.MainGrid', {
 				flex: 1,
 				xtype: 'rownumberer'
 			}, {
-				text: 'LoanID',
+				text: lang('LoanID'),
 				dataIndex: 'LoanID',
 				hidden: true
 			}, {
-				text: 'Doc Number',
+				text: lang('Doc Number'),
 				dataIndex: 'DocNumber',
 				flex: 8
 			}, {
-				text: 'Type',
+				text: lang('Type'),
 				dataIndex: 'LoanType',
 				flex: 8
 			}, {
-				text: 'Name',
+				text: lang('Name'),
 				dataIndex: 'VendorNameDisplay',
 				flex: 15
 			}, {
-				text: 'Project',
+				text: lang('Project'),
 				dataIndex: 'ProjectName',
 				flex: 10
 			}, {
-				text: 'Loan Amount',
+				text: lang('Loan Amount'),
 				dataIndex: 'LoanAmount',
 				flex: 10
 			}, {
-				text: 'Loan Date',
+				text: lang('Loan Date'),
 				dataIndex: 'LoanDate',
 				flex: 10
 			}, {
-				text: 'Total Payment',
+				text: lang('Total Payment'),
 				dataIndex: 'TotalPayment',
 				flex: 10
 			}, {
-				text: 'Loan Remaining',
+				text: lang('Loan Remaining'),
 				dataIndex: 'LoanRemaining',
 				flex: 10
 			}, {
-				text: 'Status',
+				text: lang('Status'),
 				dataIndex: 'Status',
 				flex: 10
 			}]

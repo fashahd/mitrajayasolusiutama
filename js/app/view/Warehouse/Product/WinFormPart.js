@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormPart' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.Warehouse.Product.WinFormPart',
     cls: 'Sfr_LayoutPopupWindows',
-    title:'Actual Location Form',
+    title:lang('Actual Location Form'),
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -88,7 +88,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormPart' ,{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.Warehouse.Product.WinFormPart-Form-PartCategoryCode',
                         name: 'MitraJaya.view.Warehouse.Product.WinFormPart-Form-PartCategoryCode',
-                        fieldLabel: 'Part Code',
+                        fieldLabel: lang('Part Code'),
                         labelAlign: "top",
                         readOnly:true,
                         allowBlank: false,
@@ -97,7 +97,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormPart' ,{
                     	xtype: 'numberfield',
                         id: 'MitraJaya.view.Warehouse.Product.WinFormPart-Form-StartRangePartCode',
                         name: 'MitraJaya.view.Warehouse.Product.WinFormPart-Form-StartRangePartCode',
-                        fieldLabel: 'Start Range',
+                        fieldLabel: lang('Start Range'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -106,7 +106,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormPart' ,{
                     	xtype: 'numberfield',
                         id: 'MitraJaya.view.Warehouse.Product.WinFormPart-Form-EndRangePartCode',
                         name: 'MitraJaya.view.Warehouse.Product.WinFormPart-Form-EndRangePartCode',
-                        fieldLabel: 'End Range Code',
+                        fieldLabel: lang('End Range Code'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -115,7 +115,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormPart' ,{
                         labelAlign:'top',
                         id: 'MitraJaya.view.Warehouse.Product.WinFormPart-Form-ActualLocation',
                         name: 'MitraJaya.view.Warehouse.Product.WinFormPart-Form-ActualLocation',
-                        fieldLabel: 'Actual Location',
+                        fieldLabel: lang('Actual Location'),
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
                     }]
@@ -129,7 +129,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormPart' ,{
             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
             cls:'Sfr_BtnFormBlue',
             overCls:'Sfr_BtnFormBlue-Hover',
-            text: 'Save',
+            text: lang('Save'),
             id: 'MitraJaya.view.Warehouse.Product.WinFormPart-Form-BtnSave',
             handler: function () {
             	var FormNya = Ext.getCmp('MitraJaya.view.Warehouse.Product.WinFormPart-Form').getForm();
@@ -146,7 +146,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormPart' ,{
                         success: function(fp, o) {
                             Ext.MessageBox.show({
                                 title: 'Information',
-                                msg: 'Data saved',
+                                msg: lang('Data saved'),
                                 buttons: Ext.MessageBox.OK,
                                 animateTarget: 'mb9',
                                 icon: 'ext-mb-success'
@@ -207,7 +207,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormPart' ,{
                 }else{
                     Ext.MessageBox.show({
                         title: 'Attention',
-                        msg: 'Form not valid yet',
+                        msg: lang('Form not valid yet'),
                         buttons: Ext.MessageBox.OK,
                         animateTarget: 'mb9',
                         icon: 'ext-mb-info'
@@ -216,7 +216,7 @@ Ext.define('MitraJaya.view.Warehouse.Product.WinFormPart' ,{
             }
         },{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: 'Close',
+			text: lang('Close'),
 			cls:'Sfr_BtnFormGrey',
 			overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {

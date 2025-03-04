@@ -213,7 +213,7 @@ Ext.onReady(function () {
 			xtype: 'combobox',
 			width: 100,
 			allowBlank: true,
-			fieldLabel: 'Role',
+			fieldLabel: lang('Role'),
 			store: mc_role,
 			readOnly: false,
 			displayField: 'label',
@@ -234,7 +234,7 @@ Ext.onReady(function () {
 			xtype: 'combobox',
 			width: 100,
 			allowBlank: true,
-			fieldLabel: 'Partner',
+			fieldLabel: lang('Partner'),
 			store: mc_partner,
 			readOnly: false,
 			displayField: 'label',
@@ -374,7 +374,7 @@ Ext.onReady(function () {
 				} else {
 					Ext.MessageBox.show({
 						title: 'Attention',
-						msg: 'Form not valid yet',
+						msg: lang('Form not valid yet'),
 						buttons: Ext.MessageBox.OK,
 						animateTarget: 'mb9',
 						icon: 'ext-mb-info'
@@ -473,7 +473,7 @@ Ext.onReady(function () {
 
 				var win = Ext.create('Ext.Window', {
 					id: 'winGroupProgram',
-					title: 'Group Questioner Access',
+					title: lang('Group Questioner Access'),
 					modal: true,
 					constraint: true,
 					width: 1050,
@@ -503,12 +503,12 @@ Ext.onReady(function () {
 						}),
 						columns: [
 							{
-								text: 'Available Questioner',
+								text: lang('Available Questioner'),
 								flex: 1,
 								dataIndex: 'text'
 							},
 							{
-								text: 'Status',
+								text: lang('Status'),
 								width: 75,
 								align: 'center',
 								dataIndex: 'program_status',
@@ -581,7 +581,7 @@ Ext.onReady(function () {
 								margin: '10 5',
 								disabled: true,
 								id: 'checkbox-program-group-access',
-								boxLabel: 'PROGRAM GROUP ACCESS',
+								boxLabel: lang('PROGRAM GROUP ACCESS'),
 								listeners: {
 									change: function (c, v) {
 										var rec = Ext.getCmp('grid-group-mw_program').getSelectionModel().getSelection();
@@ -606,7 +606,7 @@ Ext.onReady(function () {
 							},
 							{
 								xtype: 'fieldset',
-								title: 'Program Configuration',
+								title: lang('Program Configuration'),
 								layout: 'column',
 								margin: 5,
 								padding: 10,
@@ -617,7 +617,7 @@ Ext.onReady(function () {
 										columnWidth: .6,
 										height: 300,
 										disabled: false,
-										title: 'Program Regional Access',
+										title: lang('Program Regional Access'),
 										style: 'border:none;background:none;',
 										store: Ext.create('Ext.data.TreeStore', {
 											autoLoad: true,
@@ -667,7 +667,7 @@ Ext.onReady(function () {
 														}
 													}
 												},
-												boxLabel: 'USE JSON DATA' + '<div style="color:#666;margin-top:-5px;padding-left:20px;">' + 'Survey Data will be saved in json format' + '</div>'
+												boxLabel: lang('USE JSON DATA') + '<div style="color:#666;margin-top:-5px;padding-left:20px;">' + lang('Survey Data will be saved in json format') + '</div>'
 											},
 											{
 												id: 'cmb-main-program-table',
@@ -685,13 +685,13 @@ Ext.onReady(function () {
 														}
 													}
 												}),
-												fieldLabel: 'Parent Program Table',
+												fieldLabel: lang('Parent Program Table'),
 												labelAlign: 'top',
 												width: 250,
 												displayField: 'table_name',
 												valueField: 'table_name',
 												queryMode: 'local',
-												emptyText: 'Select Program Table',
+												emptyText: lang('Select Program Table'),
 												submitEmptyText: false,
 												listeners: {
 													select: function (c, v) {
@@ -729,7 +729,7 @@ Ext.onReady(function () {
 														}
 													}
 												}),
-												fieldLabel: 'Object UID Field',
+												fieldLabel: lang('Object UID Field'),
 												labelAlign: 'top',
 												width: 250,
 												displayField: 'column_name',
@@ -763,7 +763,7 @@ Ext.onReady(function () {
 														}
 													}
 												}),
-												fieldLabel: 'Object UID Reference',
+												fieldLabel: lang('Object UID Reference'),
 												labelAlign: 'top',
 												width: 250,
 												displayField: 'column_name',
@@ -788,7 +788,7 @@ Ext.onReady(function () {
 						]
 					}],
 					buttons: [{
-						text: 'Save',
+						text: lang('Save'),
 						margin: '5px',
 						scale: 'large',
 						ui: 's-button',
@@ -922,7 +922,7 @@ Ext.onReady(function () {
 				});
 				displayGroupUserWindow();
 				if (sm.get('IsLocked') == 1)
-					Ext.MessageBox.alert('Warning', 'This group has been locked');
+					Ext.MessageBox.alert(lang('Warning'), lang('This group has been locked'));
 			}
 		}, {
 			icon: varjs.config.base_url + 'images/icons/new/view.png',
@@ -960,7 +960,7 @@ Ext.onReady(function () {
 					}
 				});
 				if (sm.get('IsLocked') == 1)
-					Ext.MessageBox.alert('Warning', 'This group has been locked');
+					Ext.MessageBox.alert(lang('Warning'), lang('This group has been locked'));
 			}
 		}, {
 			icon: varjs.config.base_url + 'images/icons/new/update.png',
@@ -998,7 +998,7 @@ Ext.onReady(function () {
 					}
 				});
 				if (sm.get('IsLocked') == 1)
-					Ext.MessageBox.alert('Warning', 'This group has been locked');
+					Ext.MessageBox.alert(lang('Warning'), lang('This group has been locked'));
 			}
 		}, {
 			icon: varjs.config.base_url + 'images/icons/new/delete.png',
@@ -1008,8 +1008,8 @@ Ext.onReady(function () {
 				let additionalMsg = "";
 				var smb = Ext.getCmp('grid').getSelectionModel().getSelection()[0];
 				if (smb.get('IsLocked') == 1)
-					additionalMsg = "This group has been locked" + ", ";
-				Ext.MessageBox.confirm('Message', additionalMsg + 'Yakin hapus data?', function (btn) {
+					additionalMsg = lang("This group has been locked") + ", ";
+				Ext.MessageBox.confirm('Message', additionalMsg + lang('Yakin hapus data?'), function (btn) {
 					if (btn == 'yes') {
 						Ext.Ajax.request({
 							waitMsg: 'Please Wait',
@@ -1132,9 +1132,9 @@ Ext.onReady(function () {
 				dataIndex: 'IsLocked',
 				renderer: function (value) {
 					if (value == 1) {
-						return 'Yes';
+						return lang('Yes');
 					}
-					return 'No';
+					return lang('No');
 				}
 			}]
 	});

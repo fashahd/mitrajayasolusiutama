@@ -115533,16 +115533,16 @@ Ext.define('Ext.grid.header.Container', {
      */
 
     //<locale>
-    //sortAscText: 'Sort Ascending',
+    //sortAscText: lang('Sort Ascending'),
     //</locale>
     //<locale>
-    sortDescText: 'Sort Descending',
+    sortDescText: lang('Sort Descending'),
     //</locale>
     //<locale>
-    sortClearText: 'Clear Sort',
+    sortClearText: lang('Clear Sort'),
     //</locale>
     //<locale>
-    columnsText: 'Columns',
+    columnsText: lang('Columns'),
     //</locale>
 
     headerOpenCls: Ext.baseCSSPrefix + 'column-header-open',

@@ -197,7 +197,7 @@ class Payroll extends REST_Controller
 		$ExtNya = GetFileExt($_FILES['MitraJaya_view_Admin_Payroll_WinFormSettingPayroll-FormBasicData-document']['name']);
 		if (!in_array($ExtNya, array('png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG'))) {
 			$result['success'] = false;
-			$result['message'] = 'File types not allowed';
+			$result['message'] = lang('File types not allowed');
 			$this->response($result, 400);
 		} else {
 			if ($_FILES['MitraJaya_view_Admin_Payroll_WinFormSettingPayroll-FormBasicData-document']['name'] != '') {

@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment' ,{
     extend: 'Ext.window.Window',
     id: 'MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment',
     cls: 'Sfr_LayoutPopupWindows',
-    title:'Vendor Payment Form',
+    title:lang('Vendor Payment Form'),
     closable: true,
     modal: true,
     closeAction: 'destroy',
@@ -87,7 +87,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment' ,{
                     	xtype: 'textfield',
                         id: 'MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment-Form-DocumentNo',
                         name: 'MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment-Form-DocumentNo',
-                        fieldLabel: 'Document Number',
+                        fieldLabel: lang('Document Number'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -95,7 +95,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment' ,{
                     	xtype: 'numberfield',
                         id: 'MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment-Form-VendorPaymentAmount',
                         name: 'MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment-Form-VendorPaymentAmount',
-                        fieldLabel: 'Payment Amount',
+                        fieldLabel: lang('Payment Amount'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -104,7 +104,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment' ,{
                     	xtype: 'datefield',
                         id: 'MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment-Form-VendorPaymentDate',
                         name: 'MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment-Form-VendorPaymentDate',
-                        fieldLabel: 'Payment Date',
+                        fieldLabel: lang('Payment Date'),
                         labelAlign: "top",
                         allowBlank: false,
                         baseCls: 'Sfr_FormInputMandatory',
@@ -114,7 +114,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment' ,{
                         labelAlign:'top',
                         id: 'MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment-Form-VendorPaymentDescription',
                         name: 'MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment-Form-VendorPaymentDescription',
-                        fieldLabel: 'Vendor Payment Description'
+                        fieldLabel: lang('Vendor Payment Description')
                     }]
                 }]
             }]
@@ -126,7 +126,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment' ,{
             icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
             cls:'Sfr_BtnFormBlue',
             overCls:'Sfr_BtnFormBlue-Hover',
-            text: 'Save',
+            text: lang('Save'),
             id: 'MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment-Form-BtnSave',
             handler: function () {
             	var FormNya = Ext.getCmp('MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment-Form').getForm();
@@ -143,7 +143,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment' ,{
                         success: function(fp, o) {
                             Ext.MessageBox.show({
                                 title: 'Information',
-                                msg: 'Data saved',
+                                msg: lang('Data saved'),
                                 buttons: Ext.MessageBox.OK,
                                 animateTarget: 'mb9',
                                 icon: 'ext-mb-success'
@@ -204,7 +204,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment' ,{
                 }else{
                     Ext.MessageBox.show({
                         title: 'Attention',
-                        msg: 'Form not valid yet',
+                        msg: lang('Form not valid yet'),
                         buttons: Ext.MessageBox.OK,
                         animateTarget: 'mb9',
                         icon: 'ext-mb-info'
@@ -213,7 +213,7 @@ Ext.define('MitraJaya.view.InternalData.VendorPayment.WinFormVendorPayment' ,{
             }
         },{
             icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: 'Close',
+			text: lang('Close'),
 			cls:'Sfr_BtnFormGrey',
 			overCls:'Sfr_BtnFormGrey-Hover',
             handler: function() {

@@ -44,7 +44,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 			cls: 'Sfr_ConMenu',
 			items: [{
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-				text: 'View',
+				text: lang('View'),
 				cls: 'Sfr_BtnConMenuWhite',
 				itemId: 'MitraJaya.view.Assets.Management.MainGrid-ContextMenuView',
 				handler: function () {
@@ -74,7 +74,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-				text: 'Update',
+				text: lang('Update'),
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_update,
 				itemId: 'MitraJaya.view.Assets.Management.MainGrid-ContextMenuUpdate',
@@ -105,7 +105,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-				text: 'Delete',
+				text: lang('Delete'),
 				cls: 'Sfr_BtnConMenuWhite',
 				hidden: m_act_delete,
 				itemId: 'MitraJaya.view.Assets.Management.MainGrid-ContextMenuDelete',
@@ -162,7 +162,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 				}
 			}, {
 				icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-				text: 'Print QR Code',
+				text: lang('Print QR Code'),
 				hidden:true,
 				cls: 'Sfr_BtnConMenuWhite',
 				itemId: 'MitraJaya.view.Assets.Management.MainGrid-ContextMenuPrint',
@@ -215,7 +215,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 								baseCls: 'Sfr_TxtfieldSearchGrid',
 								fieldLabel: 'Asset Number',
 								labelAlign: 'top',
-								emptyText: 'Search by Asset/Serial Number',
+								emptyText: lang('Search by Asset/Serial Number'),
 								enableKeyEvents: true,
 								listeners: {
 									specialkey: function (f, e) {
@@ -275,7 +275,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 							items: [{
 								xtype: 'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text: 'Search',
+								text: lang('Search'),
 								style: 'margin-left:20px; margin-top:30px',
 								cls: 'Sfr_BtnFormCyan',
 								overCls: 'Sfr_BtnFormCyan-Hover',
@@ -307,14 +307,14 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 				store: thisObj.StoreGridMain,
 				dock: 'bottom',
 				displayInfo: true,
-				displayMsg: 'Showing' + ' {0} ' + 'to' + ' {1} ' + 'of' + ' {2} ' + 'data'
+				displayMsg: lang('Showing') + ' {0} ' + lang('to') + ' {1} ' + lang('of') + ' {2} ' + lang('data')
 			}, {
 				xtype: 'toolbar',
 				dock: 'top',
 				items: [{
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-					text: 'Add',
+					text: lang('Add'),
 					hidden: m_act_add,
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
@@ -345,7 +345,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-					text: 'Export',
+					text: lang('Export'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					id: 'MitraJaya.view.Assets.Management.MainGrid-BtnExport',
@@ -367,7 +367,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 								Ext.Ajax.request({
 									url: m_api + '/v1/assets/management/export_assets',
 									method: 'POST',
-									waitMsg: 'Please Wait',
+									waitMsg: lang('Please Wait'),
 									params: {
 										keySearch: keySearch,
 										CategoryID: CategoryID,
@@ -412,7 +412,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 				}, {
 					xtype: 'button',
 					icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-import.svg',
-					text: 'Import',
+					text: lang('Import'),
 					cls: 'Sfr_BtnGridNewWhite',
 					overCls: 'Sfr_BtnGridNewWhite-Hover',
 					hidden: m_act_add,
@@ -432,7 +432,7 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 				}, {
 					icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
 					cls: 'Sfr_BtnGridPaleBlue',
-					text: 'Advanced Filter',
+					text: lang('Advanced Filter'),
 					hidden: true,
 					handler: function () {
 						//advanced search
@@ -470,35 +470,35 @@ Ext.define('MitraJaya.view.Assets.Management.MainGrid', {
 				flex: 1,
 				xtype: 'rownumberer'
 			}, {
-				text: 'AssetID',
+				text: lang('AssetID'),
 				dataIndex: 'AssetID',
 				hidden: true
 			}, {
-				text: 'Asset Number',
+				text: lang('Asset Number'),
 				dataIndex: 'AssetCode',
 				flex: 15
 			}, {
-				text: 'Serial Number',
+				text: lang('Serial Number'),
 				dataIndex: 'AssetExternalID',
 				flex: 15
 			}, {
-				text: 'Type',
+				text: lang('Type'),
 				dataIndex: 'CategoryName',
 				flex: 10
 			}, {
-				text: 'Brand',
+				text: lang('Brand'),
 				dataIndex: 'BrandName',
 				flex: 10
 			}, {
-				text: 'Asset Name',
+				text: lang('Asset Name'),
 				dataIndex: 'AssetName',
 				flex: 10
 			}, {
-				text: 'Year',
+				text: lang('Year'),
 				dataIndex: 'Year',
 				flex: 10
 			}, {
-				text: 'HPP',
+				text: lang('HPP'),
 				dataIndex: 'HPP',
 				flex: 10,
 				renderer: function (t, meta, record) {

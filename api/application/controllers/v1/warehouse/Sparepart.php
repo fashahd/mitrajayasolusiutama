@@ -95,7 +95,7 @@ class Sparepart extends REST_Controller {
         $ExtNya = GetFileExt($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput']['name']);
         if (!in_array($ExtNya, array('png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG'))) {
             $result['success'] = false;
-            $result['message'] = 'File types not allowed';
+            $result['message'] = lang('File types not allowed');
             $this->response($result, 400);
         } else {
 			if($_POST["OpsiDisplay"] == "insert"){
@@ -145,7 +145,7 @@ class Sparepart extends REST_Controller {
         $ExtNya = GetFileExt($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput2']['name']);
         if (!in_array($ExtNya, array('png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG'))) {
             $result['success'] = false;
-            $result['message'] = 'File types not allowed';
+            $result['message'] = lang('File types not allowed');
             $this->response($result, 400);
         } else {
 			if($_POST["OpsiDisplay"] == "insert"){
@@ -195,7 +195,7 @@ class Sparepart extends REST_Controller {
         $ExtNya = GetFileExt($_FILES['MitraJaya_view_Warehouse_Sparepart_MainForm-FormBasicData-PhotoInput3']['name']);
         if (!in_array($ExtNya, array('png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG'))) {
             $result['success'] = false;
-            $result['message'] = 'File types not allowed';
+            $result['message'] = lang('File types not allowed');
             $this->response($result, 400);
         } else {
 			if($_POST["OpsiDisplay"] == "insert"){

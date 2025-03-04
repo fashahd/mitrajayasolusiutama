@@ -49,7 +49,7 @@
             cls:'Sfr_ConMenu',
 	        items:[{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'View',
+                text: lang('View'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Finance.Invoice.MainGrid-ContextMenuView',
 	            handler: function() {
@@ -79,7 +79,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/pen-to-square.svg',
-                text: 'Update',
+                text: lang('Update'),
                 cls:'Sfr_BtnConMenuWhite',
                 hidden: m_act_update,
                 itemId: 'MitraJaya.view.Finance.Invoice.MainGrid-ContextMenuUpdate',
@@ -110,7 +110,7 @@
 	            }
 	        },{
 	            icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eraser.svg',
-                text: 'Delete',
+                text: lang('Delete'),
                 cls:'Sfr_BtnConMenuWhite',
 	            hidden: m_act_delete,
                 itemId: 'MitraJaya.view.Finance.Invoice.MainGrid-ContextMenuDelete',
@@ -168,7 +168,7 @@
 	            }
 	        },{
                 icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/eye.svg',
-                text: 'Print Invoice',
+                text: lang('Print Invoice'),
                 cls:'Sfr_BtnConMenuWhite',
                 itemId: 'MitraJaya.view.Finance.Invoice.MainGrid-ContextMenuPrint',
 	            handler: function() {
@@ -220,7 +220,7 @@
 								baseCls: 'Sfr_TxtfieldSearchGrid',
 								fieldLabel:'Invoice / Contract Number',
 								labelAlign:'top',
-								emptyText: 'Search by Invoice / Contract Number'
+								emptyText: lang('Search by Invoice / Contract Number')
 							}]
 						},{
 							columnWidth: 0.15,
@@ -274,7 +274,7 @@
 							items: [{
 								xtype:'button',
 								// icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
-								text:'Search',
+								text:lang('Search'),
 								style:'margin-left:20px; margin-top:30px',
 								cls:'Sfr_BtnFormCyan',
 								overCls:'Sfr_BtnFormCyan-Hover',
@@ -307,14 +307,14 @@
                 store: thisObj.StoreGridMain,
                 dock: 'bottom',
                 displayInfo: true,
-                displayMsg: 'Showing'+' {0} '+'to'+' {1} '+'of'+' {2} '+'data'
+                displayMsg: lang('Showing')+' {0} '+lang('to')+' {1} '+lang('of')+' {2} '+lang('data')
             },{
                 xtype: 'toolbar',
                 dock:'top',
                 items: [{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/square-plus.svg',
-                    text: 'Add',
+                    text: lang('Add'),
                     hidden: m_act_add,
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
@@ -345,7 +345,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/download.svg',
-                    text: 'Export',
+                    text: lang('Export'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_export_excel,
@@ -368,7 +368,7 @@
 								Ext.Ajax.request({
 									url: m_api + '/v1/finance/invoice/export_invoice',
 									method: 'POST',
-									waitMsg: 'Please Wait',
+									waitMsg: lang('Please Wait'),
 									params: {
 										keySearch : keySearch,
 										Month : Month,
@@ -413,7 +413,7 @@
                 },{
                     xtype:'button',
                     icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/solid/file-import.svg',
-                    text: 'Import',
+                    text: lang('Import'),
                     cls:'Sfr_BtnGridNewWhite',
                     overCls:'Sfr_BtnGridNewWhite-Hover',
                     hidden: m_act_add,
@@ -433,7 +433,7 @@
                 },{
                     icon: varjs.config.base_url + 'images/icons/new/add-filter.png',
                     cls: 'Sfr_BtnGridPaleBlue',
-                    text: 'Advanced Filter',
+                    text: lang('Advanced Filter'),
 					hidden:true,
                     handler: function () {
                         //advanced search
@@ -471,35 +471,35 @@
                 flex: 1,
                 xtype: 'rownumberer'
             },{
-                text: 'Invoice ID',
+                text: lang('Invoice ID'),
                 dataIndex: 'InvoiceID',
                 hidden: true
             },{
-                text: 'Invoice Number',
+                text: lang('Invoice Number'),
                 dataIndex: 'InvoiceNumber',
                 flex:10
             },{
-                text: 'Contract Number',
+                text: lang('Contract Number'),
                 dataIndex: 'ContractNumber',
                 flex: 15
             },{
-                text: 'Customer Name',
+                text: lang('Customer Name'),
                 dataIndex: 'CustomerName',
                 flex: 15
             },{
-                text: 'Invoice Period Month',
+                text: lang('Invoice Period Month'),
                 dataIndex: 'InvoicePeriodMonth',
                 flex: 10
             },{
-                text: 'Invoice Period Year',
+                text: lang('Invoice Period Year'),
                 dataIndex: 'InvoicePeriodYear',
                 flex: 10
             },{
-                text: 'Gross Income',
+                text: lang('Gross Income'),
                 dataIndex: 'GrossIncome',
                 flex: 15
             },{
-                text: 'Nett Income',
+                text: lang('Nett Income'),
                 dataIndex: 'NettIncome',
                 flex: 15 
             }]

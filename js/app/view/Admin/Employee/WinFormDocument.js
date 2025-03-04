@@ -16,7 +16,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 	extend: 'Ext.window.Window',
 	id: 'MitraJaya.view.Admin.Employee.WinFormDocument',
 	cls: 'Sfr_LayoutPopupWindows',
-	title: 'Document Form',
+	title: lang('Document Form'),
 	closable: true,
 	modal: true,
 	closeAction: 'destroy',
@@ -63,7 +63,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 								icon = m_api_base_url + '/assets/images/no-images.png';
 							}
 
-							Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form-FileDocument').update('<a href="' + r.data.document + '" title="Download File" target="_blank">' + 'Download File' + '    <img src="' + icon + '" height="24" /></a>');
+							Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form-FileDocument').update('<a href="' + r.data.document + '" title="Download File" target="_blank">' + lang('Download File') + '    <img src="' + icon + '" height="24" /></a>');
 							Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form-FileDocument').doLayout();
 						}
 					},
@@ -98,12 +98,12 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 						xtype: 'hiddenfield',
 						id: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-doc_id',
 						name: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-doc_id',
-						fieldLabel: 'Doc ID'
+						fieldLabel: lang('Doc ID')
 					}, {
 						xtype: 'combobox',
 						id: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-doc_type',
 						name: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-doc_type',
-						fieldLabel: 'Document Type',
+						fieldLabel: lang('Document Type'),
 						labelAlign: "top",
 						allowBlank: false,
 						baseCls: 'Sfr_FormInputMandatory',
@@ -125,16 +125,16 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 						xtype: 'fileuploadfield',
 						labelWidth: 125,
 						labelAlign: 'top',
-						fieldLabel: 'Attachment' + ' <sup style="color:#FF0000;">(Max:10MB)</sup>' + ' *',
+						fieldLabel: lang('Attachment') + ' <sup style="color:#FF0000;">(Max:10MB)</sup>' + ' *',
 						id: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-document',
 						name: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-document',
-						buttonText: 'Browse',
+						buttonText: lang('Browse'),
 						listeners: {
 							'change': function (fb, v) {
 								Ext.MessageBox.confirm('Message', 'Do you want to upload this data ?', function (btn) {
 									if (btn == 'yes') {
 										if (Math.floor(fb.fileInputEl.dom.files[0].size / 1000000) > 10) { //maksimal 10MB
-											alert("file size more than 10MB");
+											alert(lang("file size more than 10MB"));
 											Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form-document').reset(true);
 										} else {
 											Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form').getForm().submit({
@@ -145,7 +145,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 													people_id: thisObj.viewVar.people_id,
 													doc_id: Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form-doc_id').getValue()
 												},
-												waitMsg: 'Sending Image',
+												waitMsg: lang('Sending Image'),
 												success: function (fp, o) {
 													if (o.result.mimetype == 'pdf') {
 														icon = m_api_base_url + '/assets/images/pdf-icon.png';
@@ -154,12 +154,12 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 													}
 
 													Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form-document_old').setValue(o.result.FilePath);
-													Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form-FileDocument').update('<a href="' + o.result.file + '" title="Download File" target="_blank">' + 'Download File' + '    <img src="' + icon + '" height="24" /></a>');
+													Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form-FileDocument').update('<a href="' + o.result.file + '" title="Download File" target="_blank">' + lang('Download File') + '    <img src="' + icon + '" height="24" /></a>');
 													Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form-FileDocument').doLayout();
 												},
 												failure: function (fp, o) {
 													Ext.MessageBox.show({
-														title: 'Attention',
+														title: lang('Attention'),
 														msg: o.result.message,
 														buttons: Ext.MessageBox.OK,
 														animateTarget: 'mb9',
@@ -184,7 +184,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 						xtype: 'textfield',
 						id: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-doc_number',
 						name: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-doc_number',
-						fieldLabel: 'Document Number',
+						fieldLabel: lang('Document Number'),
 						labelAlign: "top",
 						allowBlank: false,
 						baseCls: 'Sfr_FormInputMandatory',
@@ -194,7 +194,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 						id: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-expired_date',
 						labelAlign: "top",
 						name: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-expired_date',
-						fieldLabel: 'Expired Date'
+						fieldLabel: lang('Expired Date')
 					}]
 				}]
 			}]
@@ -206,7 +206,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 			icon: varjs.config.base_url + 'assets/icons/font-awesome/svgs/regular/floppy-disk.svg',
 			cls: 'Sfr_BtnFormBlue',
 			overCls: 'Sfr_BtnFormBlue-Hover',
-			text: 'Save',
+			text: lang('Save'),
 			id: 'MitraJaya.view.Admin.Employee.WinFormDocument-Form-BtnSave',
 			handler: function () {
 				var FormNya = Ext.getCmp('MitraJaya.view.Admin.Employee.WinFormDocument-Form').getForm();
@@ -222,7 +222,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 						success: function (fp, o) {
 							Ext.MessageBox.show({
 								title: 'Information',
-								msg: 'Data saved',
+								msg: lang('Data saved'),
 								buttons: Ext.MessageBox.OK,
 								animateTarget: 'mb9',
 								icon: 'ext-mb-success'
@@ -260,7 +260,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 				} else {
 					Ext.MessageBox.show({
 						title: 'Attention',
-						msg: 'Form not valid yet',
+						msg: lang('Form not valid yet'),
 						buttons: Ext.MessageBox.OK,
 						animateTarget: 'mb9',
 						icon: 'ext-mb-info'
@@ -269,7 +269,7 @@ Ext.define('MitraJaya.view.Admin.Employee.WinFormDocument', {
 			}
 		}, {
 			icon: varjs.config.base_url + 'images/icons/new/close.png',
-			text: 'Close',
+			text: lang('Close'),
 			cls: 'Sfr_BtnFormGrey',
 			overCls: 'Sfr_BtnFormGrey-Hover',
 			handler: function () {
