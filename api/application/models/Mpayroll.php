@@ -33,7 +33,7 @@ class Mpayroll extends CI_Model
 			, c.notes
 			, msp.position_name
 			, (c.insentif_thr) total_insentif
-			, (c.deduction_bpjs_tk + c.deduction_bpjs_kesehatan + c.deduction_kasbon + c.deduction_pph_21_insentif + c.deduction_pph_21 + c.deduction_pph_21_kompensasi + c.deduction_pph_21_thr) total_deduction
+			, (c.deduction_bpjs_tk + c.deduction_bpjs_kesehatan + c.deduction_kasbon + c.deduction_pph_21_insentif) total_deduction
 		FROM
 			`mj_people` a
 		LEFT JOIN
@@ -197,8 +197,8 @@ class Mpayroll extends CI_Model
 			, c.deduction_pph_21_insentif
 			, c.deduction_pph_21
 			, (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus) incentive
-			, (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_kompensasi+c.deduction_pph_21_thr+c.deduction_pph_21_insentif+c.deduction_pph_21) deduction
-			, (c.salary + (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus)) - (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif+c.deduction_pph_21+c.deduction_pph_21_kompensasi+c.deduction_pph_21_thr) net_salary
+			, (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif) deduction
+			, (c.salary + (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus)) - (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif) net_salary
 		FROM
 			mj_people a
 		INNER JOIN
@@ -248,8 +248,8 @@ class Mpayroll extends CI_Model
 			, c.deduction_pph_21 AS 'PPH 21'
 			, c.salary AS 'Gross Salary'
 			, (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus) AS 'Total Insentif'
-			, (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif+c.deduction_pph_21+c.deduction_pph_21_kompensasi+c.deduction_pph_21_thr) AS 'Total Pengurangan'
-			, (c.salary + (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus)) - (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif+c.deduction_pph_21+c.deduction_pph_21_kompensasi+c.deduction_pph_21_thr) AS 'Net Salary'
+			, (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif) AS 'Total Pengurangan'
+			, (c.salary + (c.insentif_thr + c.insentif_transportasi + c.insentif_komunikasi + c.insentif_lembur + c.insentif_bonus)) - (c.deduction_bpjs_tk+c.deduction_bpjs_kesehatan+c.deduction_kasbon+c.deduction_pph_21_insentif) AS 'Net Salary'
 		FROM
 			mj_people a
 		INNER JOIN
